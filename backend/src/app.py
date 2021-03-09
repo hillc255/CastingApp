@@ -1,16 +1,22 @@
 import os
-from flask import Flask
+from flask import Flask, request, abort, jsonify
+from flask_sqlalchemy import SQLAlchemy
+from flask_cors import CORS
 from database.models import setup_db
 
 def create_app(test_config=None):
 
     app = Flask(__name__)
     setup_db(app)
-    CORS(app)
+    # create and configure the app
+    #CORS(app)
+
+    #set envrionmental variable
+    os.environ['EXCITED'] = 'true' 
 
     @app.route('/')
     def get_greeting():
-        excited = os.environ['EXCITED']
+        excited = os.getenv('EXCITED')
         greeting = "Hello" 
         if excited == 'true': greeting = greeting + "!!!!!"
         return greeting
@@ -24,4 +30,5 @@ def create_app(test_config=None):
 app = create_app()
 
 if __name__ == '__main__':
-    app.run()
+    app.run(host='0.0.0.0', port=8080, debug=True)
+    #app.run()
