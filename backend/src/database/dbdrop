@@ -1,0 +1,10 @@
+-- drop table if exists movies cascade;
+-- drop table if exists actors cascade;
+-- drop table if exists dbmovies cascade;
+-- drop table alembic_version;
+
+DROP DATABASE IF EXISTS castapp;
+-- REVOKE ALL PRIVILEGES ON castapp.* FROM 'castapp'@'localhost';
+-- DROP USER 'postgres'@'localhost';
+-- FLUSH PRIVILEGES;
+

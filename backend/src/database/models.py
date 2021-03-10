@@ -9,6 +9,7 @@ from flask_sqlalchemy.model import DefaultMeta
 # from sqlalchemy.ext.declarative import DeclarativeMeta
 
 db = SQLAlchemy()
+#db = SQLAlchemy(app)
 
 BaseModel: DefaultMeta = db.Model
 
@@ -36,7 +37,7 @@ def setup_db(app):
 db_drop_and_create_all()
     drops the database tables and starts fresh
     can be used to initialize a clean database
-    !!NOTE you can change the database_filename variable to have multiple verisons of a database
+    !!NOTE you can change the database_filename variable to have multiple versions of a database
 '''
 
 def db_drop_and_create_all():
@@ -52,6 +53,7 @@ You are an Executive Producer within the company and are creating a
 system to simplify and streamline your process.
 
 Models:
+Association table for movies and actors table
 Movies with attributes title and release date
 Actors with attributes name, age and gender
 '''
@@ -70,7 +72,6 @@ class Movie(db.Model):
     title = db.Column(db.String(128), nullable=False)
     release_date = db.Column(db.DATE, nullable=False) 
     actors = relationship("Actor", secondary="movies")
-
 
     def __init__(self, title, release_date):
         self.title = title
@@ -111,6 +112,17 @@ class Actor(db.Model):
         self.birth_date = birth_date
         self.gender = gender
 
+    def insert(self):
+        db.session.add(self)
+        db.session.commit()
+  
+    def update(self):
+        db.session.commit()
+
+    def delete(self):
+        db.session.delete(self)
+        db.session.commit()
+
     def format(self):
         return {
           'id': self.id,
@@ -118,5 +130,26 @@ class Actor(db.Model):
           'last_name': self.last_name,
           'birth_date': self.birth_date,
           'gender': self.gender}
+
+# insert default data
+
+movie1 = Movie(title='Steamboat Willie', release_date='1928')
+movie2 = Movie(title='Wise Little Hen', release_date='1934')
+movie3 = Movie(title='Fantasia', release_date='1940')
+db.session.add_all([movie1, movie2, movie3]) 
+db.session.commit()
+
+artist1 = Artist(first_name='Mickey', last_name='Mouse', gender='m', birth_date='1928-11-18')
+artist2 = Artist(first_name='Minney', last_name='Mouse', gender='f', birth_date='1928-11-18')
+artist3 = Artist(first_name='Donald', last_name='Duck', gender='m', birth_date='1934-06-09')
+db.session.add_all([artist1, artist2, artist3]) 
+db.session.commit()
+
+movieactor1 = Dbmovie(movie_id=1, actor_id=1)
+movieactor2 = DbMovie(movie_id=1, actor_id=2)
+movieactor3 = DbMovie(movie_id=2, actor_id=3)
+movieactor4 = DbMovie(movie_id=3, actor_id=1)
+db.session.add_all([movieactor1, movieactor2, movieactor3,movieactor4]) 
+db.session.commit()
 
 
