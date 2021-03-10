@@ -1,11 +1,14 @@
-from sqlalchemy import Column, String, Integer, create_engine
-from flask_sqlalchemy import SQLAlchemy
-import os
 import json
+import os
+from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.orm import relationship, backref
+from sqlalchemy import Column, String, Integer, Date, create_engine
+from app import db
+from flask_sqlalchemy.model import DefaultMeta
+# from flask_migrate import Migrate
+# from sqlalchemy.ext.declarative import DeclarativeMeta
 
-
-#database_path = os.environ['DATABASE_URL']
-#database_path = os.environ['postgres']
+BaseModel: DefaultMeta = db.Model
 
 DB_HOST = os.getenv('DB_HOST', 'localhost:5432')
 DB_USER = os.getenv('DB_USER', 'postgres')
@@ -14,7 +17,7 @@ DB_NAME = os.getenv('DB_NAME', 'castapp')
 database_path = 'postgresql+psycopg2://{}:{}@{}/{}'.format(DB_USER, DB_PASSWORD, DB_HOST, DB_NAME)
 
 db = SQLAlchemy()
-#migrate = Migrate(app, db)
+# migrate = Migrate(app, db)
 
 '''
 setup_db(app)
@@ -22,34 +25,85 @@ setup_db(app)
 '''
 
 def setup_db(app, database_path=database_path):  
-    pass
-
-'''
     app.config["SQLALCHEMY_DATABASE_URI"] = database_path
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
     db.app = app
     db.init_app(app)
     db.create_all()
-'''
 
 '''
-Person
-Have title and release year
+Casting Agency Specifications
+The Casting Agency models a company that is responsible for creating 
+movies and managing and assigning actors to those movies. 
+You are an Executive Producer within the company and are creating a 
+system to simplify and streamline your process.
 
-class Person(db.Model):  
-  __tablename__ = 'People'
+Models:
+Movies with attributes title and release date
+Actors with attributes name, age and gender
+'''
+class Dbmovie(BaseModel):
+    __tablename__ = 'dbmovies'
+    id = db.Column(db.Integer, primary_key=True)
+    movie_id = db.Column(db.Integer, ForeignKey('movies.id'))
+    actor_id = db.Column(db.Integer, ForeignKey('actors.id'))
+    movie = relationship(User, backref=backref("dbmovies", cascade="all, delete-orphan"))
+    actor = relationship(Product, backref=backref("dbmovies", cascade="all, delete-orphan"))
 
-  id = Column(Integer, primary_key=True)
-  name = Column(String)
-  catchphrase = Column(String)
+class Movie(db.Model):
+    __tablename__ = 'movies'
 
-  def __init__(self, name, catchphrase=""):
-    self.name = name
-    self.catchphrase = catchphrase
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(128), nullable=False)
+    release_date = db.Column(db.DATE, nullable=False) 
+    actors = relationship("Actor", secondary="movies")
 
-  def format(self):
-    return {
-      'id': self.id,
-      'name': self.name,
-      'catchphrase': self.catchphrase}
-'''      
+
+    def __init__(self, title, release_date):
+        self.title = title
+        self.release_date = release_date
+
+    def insert(self):
+        db.session.add(self)
+        db.session.commit()
+  
+    def update(self):
+        db.session.commit()
+
+    def delete(self):
+        db.session.delete(self)
+        db.session.commit()
+
+
+    def format(self):
+        return {
+           'id': self.id,
+           'title': self.title,
+           'release_date': self.release_date
+        }
+
+class Actor(db.Model):  
+    __tablename__ = 'actors'
+
+    id = db.Column(db.Integer, primary_key=True)
+    first_name = db.Column(db.String(25), nullable=False)
+    last_name = db.Column(db.String(25), nullable=False)
+    birth_date = db.Column(db.Date, nullable=False)
+    gender = db.Column(db.String(1), nullable=False)
+    movies = relationship("Movie", secondary="actors")
+
+    def __init__(self, first_name, last_name, birth_date, gender):
+        self.first_name = first_name
+        self.last_name = last_name
+        self.birth_date = birth_date
+        self.gender = gender
+
+    def format(self):
+        return {
+          'id': self.id,
+          'first_name': self.first_name,
+          'last_name': self.last_name,
+          'birth_date': self.birth_date,
+          'gender': self.gender}
+
+
