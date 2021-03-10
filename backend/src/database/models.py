@@ -2,11 +2,13 @@ import json
 import os
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import relationship, backref
-from sqlalchemy import Column, String, Integer, Date, create_engine
-from app import db
+from sqlalchemy import Column, String, Integer, Date, ForeignKey, create_engine
+#from app import db
 from flask_sqlalchemy.model import DefaultMeta
 # from flask_migrate import Migrate
 # from sqlalchemy.ext.declarative import DeclarativeMeta
+
+db = SQLAlchemy()
 
 BaseModel: DefaultMeta = db.Model
 
@@ -16,7 +18,6 @@ DB_PASSWORD = os.getenv('DB_PASSWORD', 'picasso0')
 DB_NAME = os.getenv('DB_NAME', 'castapp')
 database_path = 'postgresql+psycopg2://{}:{}@{}/{}'.format(DB_USER, DB_PASSWORD, DB_HOST, DB_NAME)
 
-db = SQLAlchemy()
 # migrate = Migrate(app, db)
 
 '''
@@ -24,12 +25,24 @@ setup_db(app)
     binds a flask application and a SQLAlchemy service
 '''
 
-def setup_db(app, database_path=database_path):  
+#def setup_db(app, database_path=database_path):
+def setup_db(app): 
     app.config["SQLALCHEMY_DATABASE_URI"] = database_path
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
     db.app = app
     db.init_app(app)
+
+'''
+db_drop_and_create_all()
+    drops the database tables and starts fresh
+    can be used to initialize a clean database
+    !!NOTE you can change the database_filename variable to have multiple verisons of a database
+'''
+
+def db_drop_and_create_all():
+    db.drop_all()
     db.create_all()
+
 
 '''
 Casting Agency Specifications
@@ -47,8 +60,8 @@ class Dbmovie(BaseModel):
     id = db.Column(db.Integer, primary_key=True)
     movie_id = db.Column(db.Integer, ForeignKey('movies.id'))
     actor_id = db.Column(db.Integer, ForeignKey('actors.id'))
-    movie = relationship(User, backref=backref("dbmovies", cascade="all, delete-orphan"))
-    actor = relationship(Product, backref=backref("dbmovies", cascade="all, delete-orphan"))
+    movie = relationship("Actor", backref=backref("dbmovies", cascade="all, delete-orphan"))
+    actor = relationship("Movie", backref=backref("dbmovies", cascade="all, delete-orphan"))
 
 class Movie(db.Model):
     __tablename__ = 'movies'

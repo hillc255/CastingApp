@@ -5,13 +5,14 @@ from flask_cors import CORS, cross_origin
 #from flask_migrate import Migrate
 #from flask_moment import Moment
 
-#from database.models import setup_db, Dbmovie, Movie, Actor
-from database import models
+from .database.models import db_drop_and_create_all, setup_db, Dbmovie, Movie, Actor
+from .auth.auth import AuthError, requires_auth
+#from database import models
 
 def create_app(test_config=None):
     app = Flask(__name__)
     #moment = Moment(app)
-    # models.setup_db(app)
+    setup_db(app)
     db = SQLAlchemy(app)
     # migrate = Migrate(app, db)
     # create and configure the app
@@ -29,6 +30,8 @@ def create_app(test_config=None):
         response.headers.add('Access-Control-Allow-Origin', '*')
         return response
 
+    db_drop_and_create_all()
+
     #set envrionmental variable
     #os.environ['EXCITED'] = 'true' 
 
@@ -38,16 +41,6 @@ def create_app(test_config=None):
             'success': True,
             'message': 'Home page'
         }), 200
-
-    # def get_greeting():
-    #     excited = os.getenv('EXCITED')
-    #     greeting = "Hello" 
-    #     if excited == 'true': greeting = greeting + "!!!!!"
-    #     return greeting
-
-    @app.route('/coolkids')
-    def be_cool():
-        return "Be cool, man, be coooool! You're almost a FSND grad!"
 
     return app
 
