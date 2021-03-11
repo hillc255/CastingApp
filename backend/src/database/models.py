@@ -3,24 +3,36 @@ import os
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import relationship, backref
 from sqlalchemy import Column, String, Integer, Date, ForeignKey, create_engine
-#from app import db
+from sqlalchemy_utils import database_exists, create_database, drop_database
 from flask_sqlalchemy.model import DefaultMeta
 # from flask_migrate import Migrate
-# from sqlalchemy.ext.declarative import DeclarativeMeta
 from sqlalchemy.ext.declarative import declarative_base
 Base = declarative_base()
 from sqlalchemy.orm import relationship
 
 db = SQLAlchemy()
-#db = SQLAlchemy(app)
 
 BaseModel: DefaultMeta = db.Model
+
 
 DB_HOST = os.getenv('DB_HOST', 'localhost:5432')
 DB_USER = os.getenv('DB_USER', 'postgres')
 DB_PASSWORD = os.getenv('DB_PASSWORD', 'picasso0')
 DB_NAME = os.getenv('DB_NAME', 'castapp')
+
 database_path = 'postgresql+psycopg2://{}:{}@{}/{}'.format(DB_USER, DB_PASSWORD, DB_HOST, DB_NAME)
+
+engine = create_engine(database_path)
+
+if database_exists(engine.url):
+    drop_database(engine.url)
+    create_database(engine.url)
+
+#if not database_exists(engine.url):
+else:
+    create_database(engine.url)
+
+print(database_exists(engine.url))
 
 # migrate = Migrate(app, db)
 
@@ -178,7 +190,6 @@ movie3 = Movie(title='Fantasia', release_date='1940')
 actor1 = Actor(first_name='Mickey', last_name='Mouse', gender='m', birth_date='1928-11-18')
 actor2 = Actor(first_name='Minney', last_name='Mouse', gender='f', birth_date='1928-11-18')
 actor3 = Actor(first_name='Donald', last_name='Duck', gender='m', birth_date='1934-06-09')
-
 
 movieactor1 = MovieActorLink(movie_id=1, actor_id=1)
 movieactor2 = MovieActorLink(movie_id=1, actor_id=2)
