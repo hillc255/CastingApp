@@ -1,14 +1,15 @@
 import json
 import os
+import sys
+
+from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import relationship, backref
 from sqlalchemy import Column, String, Integer, Date, ForeignKey, create_engine
 from sqlalchemy_utils import database_exists, create_database, drop_database
 from flask_sqlalchemy.model import DefaultMeta
-# from flask_migrate import Migrate
 from sqlalchemy.ext.declarative import declarative_base
 Base = declarative_base()
-from sqlalchemy.orm import relationship
 
 db = SQLAlchemy()
 
@@ -22,19 +23,19 @@ DB_NAME = os.getenv('DB_NAME', 'castapp')
 
 database_path = 'postgresql+psycopg2://{}:{}@{}/{}'.format(DB_USER, DB_PASSWORD, DB_HOST, DB_NAME)
 
+# create database
 engine = create_engine(database_path)
-
 if database_exists(engine.url):
-    drop_database(engine.url)
-    create_database(engine.url)
+    pass
+    #drop_database(engine.url)
+    #sys.exit("Drop database - exit")
+    #create_database(engine.url)
 
 #if not database_exists(engine.url):
 else:
     create_database(engine.url)
 
 print(database_exists(engine.url))
-
-# migrate = Migrate(app, db)
 
 '''
 setup_db(app)
@@ -60,12 +61,11 @@ def db_drop_and_create_all():
     db.create_all()
     db.session.execute("ALTER SEQUENCE movies_id_seq RESTART WITH 1")
     db.session.execute("ALTER SEQUENCE actors_id_seq RESTART WITH 1")
-    db.session.add_all([movie1, movie2, movie3]) 
-    db.session.add_all([actor1, actor2, actor3]) 
+    db.session.add_all([movie1, movie2, movie3, movie4]) 
+    db.session.add_all([actor1, actor2, actor3, actor4]) 
     db.session.commit()
-    db.session.add_all([movieactor1, movieactor2, movieactor3, movieactor4]) 
+    db.session.add_all([movieactor1, movieactor2, movieactor3, movieactor4, movieactor5, movieactor6, movieactor7, movieactor8]) 
     db.session.commit()
-
 
 '''
 Models
@@ -186,12 +186,18 @@ class MovieActorLink(db.Model):
 movie1 = Movie(title='Steamboat Willie', release_date='1928')
 movie2 = Movie(title='Wise Little Hen', release_date='1934')
 movie3 = Movie(title='Fantasia', release_date='1940')
+movie4 = Movie(title='Mickey, Donald, Goofy: The Three Musketeers', release_date='2004')
 
 actor1 = Actor(first_name='Mickey', last_name='Mouse', gender='m', birth_date='1928-11-18')
 actor2 = Actor(first_name='Minney', last_name='Mouse', gender='f', birth_date='1928-11-18')
 actor3 = Actor(first_name='Donald', last_name='Duck', gender='m', birth_date='1934-06-09')
+actor4 = Actor(first_name='Daisy', last_name='Duck', gender='f', birth_date='1940-06-07')
 
 movieactor1 = MovieActorLink(movie_id=1, actor_id=1)
 movieactor2 = MovieActorLink(movie_id=1, actor_id=2)
 movieactor3 = MovieActorLink(movie_id=2, actor_id=3)
 movieactor4 = MovieActorLink(movie_id=3, actor_id=1)
+movieactor5 = MovieActorLink(movie_id=4, actor_id=1)
+movieactor6 = MovieActorLink(movie_id=4, actor_id=2)
+movieactor7 = MovieActorLink(movie_id=4, actor_id=3)
+movieactor8 = MovieActorLink(movie_id=4, actor_id=4)
