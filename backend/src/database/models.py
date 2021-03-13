@@ -1,4 +1,3 @@
-import json
 import os
 import sys
 
@@ -9,6 +8,7 @@ from sqlalchemy import Column, String, Integer, Date, ForeignKey, create_engine
 from sqlalchemy_utils import database_exists, create_database, drop_database
 from flask_sqlalchemy.model import DefaultMeta
 from sqlalchemy.ext.declarative import declarative_base
+import json
 Base = declarative_base()
 
 db = SQLAlchemy()
@@ -26,10 +26,10 @@ database_path = 'postgresql+psycopg2://{}:{}@{}/{}'.format(DB_USER, DB_PASSWORD,
 # create database
 engine = create_engine(database_path)
 if database_exists(engine.url):
-    pass
-    #drop_database(engine.url)
+    #pass
+    drop_database(engine.url)
     #sys.exit("Drop database - exit")
-    #create_database(engine.url)
+    create_database(engine.url)
 
 #if not database_exists(engine.url):
 else:
@@ -112,8 +112,10 @@ class Movie(db.Model):
         return {
            'id': self.id,
            'title': self.title,
-           'release_date': self.release_date
+           'release_date': self.release_date,
+           'movie_img': self.movie_img
         }
+
 
 class Actor(db.Model):  
     __tablename__ = 'actors'
