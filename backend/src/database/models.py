@@ -61,10 +61,10 @@ def db_drop_and_create_all():
     db.create_all()
     db.session.execute("ALTER SEQUENCE movies_id_seq RESTART WITH 1")
     db.session.execute("ALTER SEQUENCE actors_id_seq RESTART WITH 1")
-    db.session.add_all([movie1, movie2, movie3, movie4]) 
-    db.session.add_all([actor1, actor2, actor3, actor4]) 
+    db.session.add_all([movie1, movie2, movie3, movie4, movie5, movie6]) 
+    db.session.add_all([actor1, actor2, actor3, actor4, actor5, actor6, actor7]) 
     db.session.commit()
-    db.session.add_all([movieactor1, movieactor2, movieactor3, movieactor4, movieactor5, movieactor6, movieactor7, movieactor8]) 
+    db.session.add_all([movieactor1, movieactor2, movieactor3, movieactor4, movieactor5, movieactor6, movieactor7, movieactor8, movieactor9]) 
     db.session.commit()
 
 '''
@@ -87,12 +87,14 @@ class Movie(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(128), nullable=False)
-    release_date = db.Column(db.String(4), nullable=False) 
+    release_date = db.Column(db.Date, nullable=False) 
+    movie_img = db.Column(db.String(500), nullable=False)
     actors = relationship('Actor', secondary='movie_actor_link')
 
-    def __init__(self, title, release_date):
+    def __init__(self, title, release_date, movie_img):
         self.title = title
         self.release_date = release_date
+        self.movie_img = movie_img
 
     def insert(self):
         db.session.add(self)
@@ -117,17 +119,19 @@ class Actor(db.Model):
     __tablename__ = 'actors'
 
     id = db.Column(db.Integer, primary_key=True)
-    first_name = db.Column(db.String(25), nullable=False)
-    last_name = db.Column(db.String(25), nullable=False)
+    first_name = db.Column(db.String(30), nullable=False)
+    last_name = db.Column(db.String(30), nullable=False)
     birth_date = db.Column(db.Date, nullable=False)
-    gender = db.Column(db.String(1), nullable=False)
+    gender = db.Column(db.String(10), nullable=False)
+    actor_img = db.Column(db.String(500), nullable=False)
     movies = relationship('Movie', secondary='movie_actor_link')
 
-    def __init__(self, first_name, last_name, birth_date, gender):
+    def __init__(self, first_name, last_name, birth_date, gender, actor_img):
         self.first_name = first_name
         self.last_name = last_name
         self.birth_date = birth_date
         self.gender = gender
+        self.actor_img = actor_img
 
     def insert(self):
         db.session.add(self)
@@ -146,7 +150,9 @@ class Actor(db.Model):
           'first_name': self.first_name,
           'last_name': self.last_name,
           'birth_date': self.birth_date,
-          'gender': self.gender}
+          'gender': self.gender,
+          'actor_img': self.actor_img
+        }
 
 class MovieActorLink(db.Model):
     __tablename__ = 'movie_actor_link'
@@ -179,25 +185,31 @@ class MovieActorLink(db.Model):
            'actor_id': self.actor_id
         }
 
-
+IMG_URL = 'https://i.ibb.co/'
 
 # insert default data
 
-movie1 = Movie(title='Steamboat Willie', release_date='1928')
-movie2 = Movie(title='Wise Little Hen', release_date='1934')
-movie3 = Movie(title='Fantasia', release_date='1940')
-movie4 = Movie(title='Mickey, Donald, Goofy: The Three Musketeers', release_date='2004')
+movie1 = Movie(title='Black Panther', release_date='2018-01-29', movie_img=IMG_URL+'xgNj30x/blackpanther.jpg')
+movie2 = Movie(title='Jetsons: The Movie', release_date='1990-06-07', movie_img=IMG_URL+'w44pmy7/jetsons.jpg')
+movie3 = Movie(title='Star Wars', release_date='1977-03-25', movie_img=IMG_URL+'0ryBFpX/starwars.jpg')
+movie4 = Movie(title='Star Wars: The Force Awakens', release_date='2015-01-18', movie_img=IMG_URL+'87VCXRQ/forceawakens.jpg')
+movie5 = Movie(title='WALL-E', release_date='2008-06-23', movie_img=IMG_URL+'brXh4kZ/wallefilm.jpg')
+movie6 = Movie(title='Futurama', release_date='1999-03-28', movie_img=IMG_URL+'jVnjtz4/futurama.jpg')
 
-actor1 = Actor(first_name='Mickey', last_name='Mouse', gender='m', birth_date='1928-11-18')
-actor2 = Actor(first_name='Minney', last_name='Mouse', gender='f', birth_date='1928-11-18')
-actor3 = Actor(first_name='Donald', last_name='Duck', gender='m', birth_date='1934-06-09')
-actor4 = Actor(first_name='Daisy', last_name='Duck', gender='f', birth_date='1940-06-07')
+actor1 = Actor(first_name='Panther', last_name='Robot', gender='robot', birth_date='1992-01-01', actor_img=IMG_URL+'zSwNG40/panther.jpg')
+actor2 = Actor(first_name='Rosie', last_name='Robot', gender='gynoid', birth_date='2062-01-01', actor_img=IMG_URL+'60pLw3C/rosie.jpg')
+actor3 = Actor(first_name='C-3PO', last_name='Droid', gender='droid', birth_date='7977-02-01', actor_img=IMG_URL+'GHGpcgf/c-3po.png')
+actor4 = Actor(first_name='R2-D2', last_name='Droid', gender='droid', birth_date='7977-06-07', actor_img=IMG_URL+'NFvghgx/r2-d2.png')
+actor5 = Actor(first_name='BB-8', last_name='Droid', gender='droid', birth_date='8006-01-01', actor_img=IMG_URL+'fVWFXSq/bb-8.jpg')
+actor6 = Actor(first_name='WALL-E', last_name='Droid', gender='droid', birth_date='2805-12-31', actor_img=IMG_URL+'w4Qt7fG/wall-e.jpg')
+actor7 = Actor(first_name='Bender', last_name='Bending Rodriguez', gender='other', birth_date='2996-09-24', actor_img=IMG_URL+'fpP8TDn/bender.jpg')
 
 movieactor1 = MovieActorLink(movie_id=1, actor_id=1)
-movieactor2 = MovieActorLink(movie_id=1, actor_id=2)
-movieactor3 = MovieActorLink(movie_id=2, actor_id=3)
-movieactor4 = MovieActorLink(movie_id=3, actor_id=1)
-movieactor5 = MovieActorLink(movie_id=4, actor_id=1)
-movieactor6 = MovieActorLink(movie_id=4, actor_id=2)
-movieactor7 = MovieActorLink(movie_id=4, actor_id=3)
-movieactor8 = MovieActorLink(movie_id=4, actor_id=4)
+movieactor2 = MovieActorLink(movie_id=2, actor_id=2)
+movieactor3 = MovieActorLink(movie_id=3, actor_id=3)
+movieactor4 = MovieActorLink(movie_id=3, actor_id=4)
+movieactor5 = MovieActorLink(movie_id=4, actor_id=3)
+movieactor6 = MovieActorLink(movie_id=4, actor_id=4)
+movieactor7 = MovieActorLink(movie_id=4, actor_id=5)
+movieactor8 = MovieActorLink(movie_id=5, actor_id=6)
+movieactor9 = MovieActorLink(movie_id=6, actor_id=7)
