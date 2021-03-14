@@ -219,36 +219,35 @@ def create_app(test_config=None):
     #         --Note: changed return array from drink to drinks as the array
     # '''
 
-    # @app.route('/actors/<int:actor_id>', methods=['PATCH'])
-    # #@requires_auth('patch:actors')
-    # def update_actor(payload, actor_id):
+    @app.route('/actors/<int:actor_id>', methods=['PATCH'])
+    #@requires_auth('patch:actors')
+    def update_actor(actor_id):
 
-    #     if actor_id is None:
-    #         abort(404)
+        if actor_id is None:
+            abort(404)
 
-    #     actor = Actor.query.get(actor_id)
+        actor = Actor.query.get(actor_id)
 
-    #     if actor is None:
-    #         abort(404)
+        if actor is None:
+            abort(404)
 
-    #     request_json = request.get_json()
-    #     actor.first_name = request.json.get('first_name')
-    #     actor.last_name = request.json.get('last_name')
-    #     actor.birth_date = request.json.get('birth_date')
-    #     actor.gender = request.json.get('gendre')
-    #     actor.actor_img = request.json.get('actor_img')
-    #     #actor.last_name = json.dumps(request_json.get('recipe'))
+        request_json = request.get_json()
+        actor.first_name = request.json.get('first_name')
+        actor.last_name = request.json.get('last_name')
+        actor.birth_date = request.json.get('birth_date')
+        actor.gender = request.json.get('gender')
+        actor.actor_img = request.json.get('actor_img')
+        #actor.last_name = json.dumps(request_json.get('recipe'))
 
-    #     actor.update()
-    #     # actors = []
-    #     # actors.append(drink.long())
+        actor.update()
+        # actors = []
+        #actors.append(drink.long())
 
-    #     return jsonify({
-    #         "success": True,
-    #         "drinks": actors
-    #         }), 200
+        return jsonify({
+            "success": True
+            }), 200
 
-
+#curl --header "Content-Type: application/json" --request PATCH --data "{\"first_name\":\"Claudia\",\"last_name\":\"Robot\",\"birth_date\":\"19601206\",\"gender\":\"robot\",\"actor_img\":\"https://github.com/hillc255/\"}" http://127.0.0.1:5000/actors/8
 
     # '''
     #  @TODO - Done:
@@ -266,33 +265,31 @@ def create_app(test_config=None):
     # '''
 
 
-    # @app.route('/movies/<int:movie_id>', methods=['PATCH'])
-    # #@requires_auth('patch:movies')
-    # def update_movie(payload, movie_id):
+    @app.route('/movies/<int:movie_id>', methods=['PATCH'])
+    #@requires_auth('patch:movies')
+    def update_movie(movie_id):
 
-    #     if movie_id is None:
-    #         abort(404)
+        if movie_id is None:
+            abort(404)
 
-    #     movie = Movie.query.get(movie_id)
+        movie = Movie.query.get(movie_id)
 
-    #     if movie is None:
-    #         abort(404)
-    8
-    #     request_json = request.get_json()
-    #     movie.title = request.json.get('title')
-    #     movie.release_date = request.json.get('release_date')
+        if movie is None:
+            abort(404)
 
-    #     movie.update()
-    #     # movies = []
-    #     # drinks.append(drink.long())
+        request_json = request.get_json()
+        movie.title = request.json.get('title')
+        movie.release_date = request.json.get('release_date')
+        movie.movie_img = request.json.get('movie_img')
 
-    #     return jsonify({
-    #         "success": True,
-    #         "movies": movies
-    #         }), 200
+        movie.update()
 
+        return jsonify({
+            "success": True
+            }), 200
+ 
+ # curl --header "Content-Type: application/json" --request PATCH --data "{\"title\":\"New movie\",\"release_date\":\"2021-03-14\",\"movie_img\":\"https://github.com/hillc255/YelpCamp\"}" http://127.0.0.1:5000/movies/7
 
-    # '''
 
     # '''
     # Delete actors
