@@ -132,39 +132,37 @@ def create_app(test_config=None):
 
     # '''
 
-    # @app.route('/actors/add', methods=['POST'])
-    # def add_actor():
+    @app.route('/actors/add', methods=['POST'])
+    def add_actor():
 
-    #     try:
-    #         data = {
-    #             'first_name': request.get_json()['first_name'],
-    #             'last_name': request.get_json()['last_name'],
-    #             'birth_date': request.get_json()['birth_date'],
-    #             'gender': request.get_json()['gender']
-    #          }
+        try:
 
-    #         if not ('first_name' in data and 'last_name' in data and
-    #                 'birth_date' in data and 'gender' in data
-    #                 ):
-    #                 abort(422)
+            data = {
+                'first_name': request.get_json()['first_name'],
+                'last_name': request.get_json()['last_name'],
+                'birth_date': request.get_json()['birth_date'],
+                'gender': request.get_json()['gender'],
+                'actor_img': request.get_json()['actor_img']
+            }
 
-    #             # data_category = int(data['category'])
-    #             # data_difficulty = int(data['difficulty'])
+            if not ('first_name' in data and 'last_name' in data and
+                    'birth_date' in data and 'gender' in data and 
+                    'actor_img' in data
+                    ):
+                    abort(422)
 
-    #             # if not (1 <= data_category <= 6) and (1 <= data_difficulty <= 4):
-    #             #     abort(422)
+            actor = Actor(**data)
+            actor.insert()
 
-    #         actor = Actor(**data)
-    #         actor.insert()
+            return jsonify({
+                'success': True
+            }), 200
 
-    #         return jsonify({
-    #             'success': True
-    #         }), 200
+        except Exception as e:
+            print('\n'+'Error adding actor record: ', e)
+            abort(422)
 
-    #     except Exception as e:
-    #         print('\n'+'Error adding actor record: ', e)
-    #         abort(422)
-
+    # curl --header "Content-Type: application/json" --request POST --data "{\"first_name\":\"Claudia\",\"last_name\":\"Hill\",\"birth_date\":\"19601206\",\"gender\":\"robot\",\"actor_img\":\"https://github.com/hillc255/\"}" http://127.0.0.1:5000/actors/add
 
 
     # '''
@@ -178,35 +176,32 @@ def create_app(test_config=None):
     # of the last page of the questions list in the "List" tab.
 
     # '''
-    # @app.route('/movies/add', methods=['POST'])
-    # def add_movie():
+    @app.route('/movies/add', methods=['POST'])
+    def add_movie():
 
-    #     try:
-    #         data = {
-    #               'title': request.get_json()['title'],
-    #               'release_date': request.get_json()['release_date']
-    #         }
+        try:
+            data = {
+                  'title': request.get_json()['title'],
+                  'release_date': request.get_json()['release_date'],
+                  'movie_img': request.get_json()['movie_img']
+            }
 
-    #         if not ('title' in data and 'release_date' in data):
-    #             abort(422)
+            if not ('title' in data and 'release_date' in data \
+                and 'movie_img' in data):
+                abort(422)
 
-    #             # data_category = int(data['category'])
-    #             # data_difficulty = int(data['difficulty'])
+            movie = Movie(**data)
+            movie.insert()
 
-    #             # if not (1 <= data_category <= 6) and (1 <= data_difficulty <= 4):
-    #             #     abort(422)
+            return jsonify({
+                'success': True
+            }), 200
 
-    #         movie = Movie(**data)
-    #         movie.insert()
+        except Exception as e:
+            print('\n'+'Error adding movie record: ', e)
+            abort(422)
 
-    #         return jsonify({
-    #             'success': True
-    #         }), 200
-
-    #     except Exception as e:
-    #         print('\n'+'Error adding movie record: ', e)
-    #         abort(422)
-
+    # curl --header "Content-Type: application/json" --request POST --data "{\"title\":\"Great movie\",\"release_date\":\"2021-03-14\",\"movie_img\":\"https://github.com/hillc255/YelpCamp\"}" http://127.0.0.1:5000/movies/add
 
     # '''
     # update actor
@@ -241,6 +236,7 @@ def create_app(test_config=None):
     #     actor.last_name = request.json.get('last_name')
     #     actor.birth_date = request.json.get('birth_date')
     #     actor.gender = request.json.get('gendre')
+    #     actor.actor_img = request.json.get('actor_img')
     #     #actor.last_name = json.dumps(request_json.get('recipe'))
 
     #     actor.update()
