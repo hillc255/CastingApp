@@ -1,8 +1,13 @@
 import os
+
 from flask import Flask, request, abort, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import exc
+
 import json
+import simplejson
+from simplejson import dumps
+
 from flask_cors import CORS, cross_origin
 from flask_migrate import Migrate
 from flask_moment import Moment
@@ -48,7 +53,7 @@ def create_app(test_config=None):
 
 
     # uncomment if want to drop and create database
-    db_drop_and_create_all() 
+    #db_drop_and_create_all() 
 
    
     # return app
@@ -72,8 +77,7 @@ def create_app(test_config=None):
         if len(actors_all) == 0:
             abort(404)
 
-        actors = json.dumps(actors_all)
-        print(actors)
+        actors = [a.to_json() for a in actors_all]
 
         try:
             return jsonify({
@@ -95,23 +99,25 @@ def create_app(test_config=None):
     #         or appropriate status code indicating reason for failure
     # '''
 
-    # @app.route('/movies', methods=['GET'])
-    # def get_movies():
+    @app.route('/movies', methods=['GET'])
+    def get_movies():
 
-    #     movies = Movie.query.all()
+        movies_all = Movie.query.all()
 
-    #     if len(movies) == 0:
-    #         abort(404)
+        if len(movies_all) == 0:
+            abort(404)
 
-    #     try:
-    #         return jsonify({
-    #             'success': True,
-    #             'movies': movies
-    #         }), 200
+        movies = [a.to_json() for a in movies_all]
 
-    #     except Exception as e:
-    #         print('\n'+'Error getting movies record: ', e)
-    #         abort(404)
+        try:
+            return jsonify({
+                'success': True,
+                'movies': movies
+            }), 200
+
+        except Exception as e:
+            print('\n'+'Error getting movies record: ', e)
+            abort(404)
 
 
     # '''

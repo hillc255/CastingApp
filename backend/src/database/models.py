@@ -1,19 +1,21 @@
 import os
 import sys
 
-from flask import Flask
+from flask import Flask, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import relationship, backref
 from sqlalchemy import Column, String, Integer, Date, ForeignKey, create_engine
 from sqlalchemy_utils import database_exists, create_database, drop_database
-from flask_sqlalchemy.model import DefaultMeta
-from sqlalchemy.ext.declarative import declarative_base
+#from flask_sqlalchemy.model import DefaultMeta
+#from sqlalchemy.ext.declarative import declarative_base
 import json
-Base = declarative_base()
+import simplejson
+from simplejson import dumps
+#Base = declarative_base()
 
 db = SQLAlchemy()
 
-BaseModel: DefaultMeta = db.Model
+#BaseModel: DefaultMeta = db.Model
 
 
 DB_HOST = os.getenv('DB_HOST', 'localhost:5432')
@@ -26,10 +28,10 @@ database_path = 'postgresql+psycopg2://{}:{}@{}/{}'.format(DB_USER, DB_PASSWORD,
 # create database
 engine = create_engine(database_path)
 if database_exists(engine.url):
-    #pass
-    drop_database(engine.url)
+    pass
+    #drop_database(engine.url)
     #sys.exit("Drop database - exit")
-    create_database(engine.url)
+    #create_database(engine.url)
 
 #if not database_exists(engine.url):
 else:
@@ -115,7 +117,14 @@ class Movie(db.Model):
            'release_date': self.release_date,
            'movie_img': self.movie_img
         }
-
+    
+    def to_json(self):
+        json_movie = dumps({
+            "title": self.title,
+            "release_date": self.release_date.strftime("%Y%m%d"),
+            "movie_img": self.movie_img
+        })
+        return json_movie
 
 class Actor(db.Model):  
     __tablename__ = 'actors'
@@ -156,6 +165,17 @@ class Actor(db.Model):
           'actor_img': self.actor_img
         }
 
+    def to_json(self):
+        json_actor = dumps({
+            "first_name": self.first_name,
+            "last_name": self.last_name,
+            "birth_date": self.birth_date.strftime("%Y%m%d"),
+            "gender": self.gender,
+            "actor_img": self.actor_img
+        })
+        return json_actor
+
+
 class MovieActorLink(db.Model):
     __tablename__ = 'movie_actor_link'
 
@@ -186,6 +206,12 @@ class MovieActorLink(db.Model):
            'movie_id': self.movie_id,
            'actor_id': self.actor_id
         }
+    
+    def to_json(self):
+        return {
+            "movie_id_int": int(self.movie_id_int),
+            "actor_id_int": int(self.actor_id_int)
+        }   
 
 IMG_URL = 'https://i.ibb.co/'
 
