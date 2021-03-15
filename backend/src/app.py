@@ -57,7 +57,6 @@ def create_app(test_config=None):
 
    
     # return app
-
     # app = create_app()
 
     # '''
@@ -237,11 +236,8 @@ def create_app(test_config=None):
         actor.birth_date = request.json.get('birth_date')
         actor.gender = request.json.get('gender')
         actor.actor_img = request.json.get('actor_img')
-        #actor.last_name = json.dumps(request_json.get('recipe'))
 
         actor.update()
-        # actors = []
-        #actors.append(drink.long())
 
         return jsonify({
             "success": True
@@ -290,7 +286,6 @@ def create_app(test_config=None):
  
  # curl --header "Content-Type: application/json" --request PATCH --data "{\"title\":\"New movie\",\"release_date\":\"2021-03-14\",\"movie_img\":\"https://github.com/hillc255/YelpCamp\"}" http://127.0.0.1:5000/movies/7
 
-
     # '''
     # Delete actors
 
@@ -299,29 +294,35 @@ def create_app(test_config=None):
     # will be removed.  This removal will persist in the database and when
     # you refresh the page.
     # '''
-    # @app.route('/actors/<int:id>', methods=['DELETE'])
-    # def delete_actor(id):
-    #     try:
-    #         actor = Actor.query.filter(Actor.id == id).one_or_none()
+    @app.route('/actors/<int:id>', methods=['DELETE'])
+    def delete_actor(id):
+        try:
+            actor = Actor.query.filter(Actor.id == id).one_or_none()
 
-    #         if actor is None:
-    #             abort(404)
+            if actor is None:
+                abort(404)
 
-    #         actor.delete()
+            actor.delete()
 
-    #         selection = Actor.query.order_by(Actor.id).all()
-    #         current_actors = paginate_actors(request, selection)
+            actors_all = Actor.query.all()
 
-    #         return jsonify({
-    #             'success': True,
-    #             'deleted': id,
-    #             'actor': actor,
-    #             'total_actors': len(Actor.query.all())
-    #         }), 200
+            if len(actors_all) == 0:
+                abort(404)
 
-    #     except Exception as e:
-    #         print('\n'+'Error deleting actor record: ', e)
-    #         abort(404)
+            actors = [a.to_json() for a in actors_all]
+
+            return jsonify({
+                'success': True,
+                'deleted': id,
+                'actor': actor,
+                'total_actors': len(actors_all)
+            }), 200
+
+        except Exception as e:
+            print('\n'+'Error deleting actor record: ', e)
+            abort(404)
+
+    # curl -X DELETE http://127.0.0.1:5000/actors/11
 
     # '''
     # Delete movie
