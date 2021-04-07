@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Actor } from 'src/app/models/actor.model';
+import { ActorService } from 'src/app/services/actor.service';
 
 @Component({
   selector: 'app-actors-list',
@@ -6,10 +8,61 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./actors-list.component.css']
 })
 export class ActorsListComponent implements OnInit {
+  actors?: Actor[];
+  currentActor?: Actor;
+  currentIndex = -1;
+  last_name = '';
 
-  constructor() { }
+  constructor(private actorService: ActorService) { }
 
   ngOnInit(): void {
+    this.retrieveActors();
   }
 
+  retrieveActors(): void {
+    this.actorService.getAll()
+      .subscribe(
+        data => {
+          this.actors = data;
+          console.log(data);
+        },
+        error => {
+          console.log(error);
+        });
+  }
+
+  refreshList(): void {
+    this.retrieveActors();
+    this.currentActor = undefined;
+    this.currentIndex = -1;
+  }
+8
+  setActiveActor(actor: Actor, index: number): void {
+    this.currentActor = actor;
+    this.currentIndex = index;
+  }
+
+  removeAllActors(): void {
+    this.actorService.deleteAll()
+      .subscribe(
+        response => {
+          console.log(response);
+          this.refreshList();
+        },
+        error => {
+          console.log(error);
+        });
+  }
+
+  searchLastName(): void {
+    this.actorService.findByLastName(this.last_name)
+      .subscribe(
+        data => {
+          this.actors = data;
+          console.log(data);
+        },
+        error => {
+          console.log(error);
+        });
+  }
 }

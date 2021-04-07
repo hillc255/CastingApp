@@ -13,15 +13,11 @@ const routes: Routes = [
   { path: '', redirectTo: 'movies', pathMatch: 'full' },
   { path: 'movies', component: MoviesListComponent },
   { path: 'movies/:id', component: MovieDetailsComponent },
-  { path: 'add', component: AddMovieComponent }
+  { path: 'add', component: AddMovieComponent },
+  { path: 'actors', component: ActorsListComponent },
+  { path: 'actors/:id', component: ActorDetailsComponent },
+  { path: 'add2', component: AddActorComponent }
 ];
-
-// const routes: Routes = [
-//   { path: '', redirectTo: 'actors', pathMatch: 'full' },
-//   { path: 'actors', component: ActorsListComponent },
-//   { path: 'actors/:id', component: ActorDetailsComponent },
-//   { path: 'add', component: AddActorComponent }
-// ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

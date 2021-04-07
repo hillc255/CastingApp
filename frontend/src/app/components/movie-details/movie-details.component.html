@@ -1,1 +1,79 @@
-<p>movie-details works!</p>
+<div>
+    <div *ngIf="currentMovie.id" class="edit-form">
+      <h4>Movie</h4>
+      <form>
+
+        <div class="form-group">
+          <label for="title">Title</label>
+          <input
+            type="text"
+            class="form-control"
+            id="title"
+            [(ngModel)]="currentMovie.title"
+            name="title"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="release_date">Release Date</label>
+          <input
+            type="text"
+            class="form-control"
+            id="release_date"
+            [(ngModel)]="currentMovie.release_date"
+            name="release_date"
+          />
+        </div>
+
+        <div class="form-group">
+            <label for="movie_img">Movie Image</label>
+            <input
+              type="text"
+              class="form-control"
+              id="movie_img"
+              [(ngModel)]="currentMovie.movie_img"
+              name="movie_img"
+            />
+        </div>
+  
+        <div class="form-group">
+          <label><strong>Status:</strong></label>
+          {{ currentMovie.published ? "Published" : "Pending" }}
+        </div>
+      </form>
+  
+      <button
+        class="badge badge-primary mr-2"
+        *ngIf="currentMovie.published"
+        (click)="updatePublished(false)"
+      >
+        UnPublish
+      </button>
+      <button
+        *ngIf="!currentMovie.published"
+        class="badge badge-primary mr-2"
+        (click)="updatePublished(true)"
+      >
+        Publish
+      </button>
+  
+      <button class="badge badge-danger mr-2" (click)="deleteMovie()">
+        Delete
+      </button>
+  
+      <button
+        type="submit"
+        class="badge badge-success mb-2"
+        (click)="updateMovie()"
+      >
+        Update
+      </button>
+      <p>{{ message }}</p>
+    </div>
+  
+    <div *ngIf="!currentMovie.id">
+      <br />
+      <p>Cannot access this Movie...</p>
+    </div>
+  </div>
+  

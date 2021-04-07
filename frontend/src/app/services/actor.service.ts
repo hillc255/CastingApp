@@ -36,7 +36,7 @@ export class ActorService {
     return this.http.delete(baseUrl);
   }
 
-  findByTitle(title: any): Observable<Actor[]> {
-    return this.http.get<Actor[]>(`${baseUrl}?title=${title}`);
+  findByLastName(last_name: any): Observable<Actor[]> {
+    return this.http.get<Actor[]>(`${baseUrl}?last_name=${last_name}`);
   }
 }
