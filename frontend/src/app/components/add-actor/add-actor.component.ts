@@ -13,9 +13,9 @@ export class AddActorComponent implements OnInit {
     last_name: '',
     birth_date: '',
     gender: '',
-    actor_img: ''
+    actor_img: '',
+    actor_publish: false
   };
-
   submitted = false;
 
   constructor(private actorService: ActorService) { }
@@ -50,7 +50,8 @@ export class AddActorComponent implements OnInit {
       last_name: '',
       birth_date: '',
       gender: '',
-      actor_img: ''
+      actor_img: '',
+      actor_publish: false
     };
   }
 }
