@@ -11,7 +11,8 @@ export class AddMovieComponent implements OnInit {
   movie: Movie = {
     title: '',
     release_date: '',
-    movie_img: ''
+    movie_img: '',
+    movie_publish: false
   };
   submitted = false;
 
@@ -43,7 +44,8 @@ export class AddMovieComponent implements OnInit {
     this.movie = {
       title: '',
       release_date: '',
-      movie_img: ''
+      movie_img: '',
+      movie_publish: false
     };
   }
 }
