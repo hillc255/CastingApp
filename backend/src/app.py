@@ -141,12 +141,13 @@ def create_app(test_config=None):
                 'last_name': request.get_json()['last_name'],
                 'birth_date': request.get_json()['birth_date'],
                 'gender': request.get_json()['gender'],
-                'actor_img': request.get_json()['actor_img']
+                'actor_img': request.get_json()['actor_img'],
+                'actor_publish': request.get_json()['actor_publish']
             }
 
             if not ('first_name' in data and 'last_name' in data and
                     'birth_date' in data and 'gender' in data and 
-                    'actor_img' in data
+                    'actor_img' in data and 'actor_publish' in data
                     ):
                     abort(422)
 
@@ -161,6 +162,7 @@ def create_app(test_config=None):
             print('\n'+'Error adding actor record: ', e)
             abort(422)
 
+    #curl --header "Content-Type: application/json" --request POST --data "{\"first_name\":\"Claudia\",\"last_name\":\"Hill\",\"birth_date\":\"19601206\",\"gender\":\"robot\",\"actor_img\":\"https://github.com/hillc255/\",\"actor_publish\": true}" http://127.0.0.1:5000/actors/add
     # curl --header "Content-Type: application/json" --request POST --data "{\"first_name\":\"Claudia\",\"last_name\":\"Hill\",\"birth_date\":\"19601206\",\"gender\":\"robot\",\"actor_img\":\"https://github.com/hillc255/\"}" http://127.0.0.1:5000/actors/add
 
 
@@ -182,11 +184,12 @@ def create_app(test_config=None):
             data = {
                   'title': request.get_json()['title'],
                   'release_date': request.get_json()['release_date'],
-                  'movie_img': request.get_json()['movie_img']
+                  'movie_img': request.get_json()['movie_img'],
+                  'movie_publish': request.get_json()['movie_publish']
             }
 
             if not ('title' in data and 'release_date' in data \
-                and 'movie_img' in data):
+                and 'movie_img' in data and 'movie_publish' in data):
                 abort(422)
 
             movie = Movie(**data)
@@ -200,6 +203,7 @@ def create_app(test_config=None):
             print('\n'+'Error adding movie record: ', e)
             abort(422)
 
+    # curl --header "Content-Type: application/json" --request POST --data "{\"title\":\"Great movie\",\"release_date\":\"2021-03-14\",\"movie_img\":\"https://github.com/hillc255/YelpCamp\",\"movie_publish\": true}" http://127.0.0.1:5000/movies/add 
     # curl --header "Content-Type: application/json" --request POST --data "{\"title\":\"Great movie\",\"release_date\":\"2021-03-14\",\"movie_img\":\"https://github.com/hillc255/YelpCamp\"}" http://127.0.0.1:5000/movies/add
 
     # '''
@@ -236,6 +240,7 @@ def create_app(test_config=None):
         actor.birth_date = request.json.get('birth_date')
         actor.gender = request.json.get('gender')
         actor.actor_img = request.json.get('actor_img')
+        actor.actor_publish = request.json.get('actor_publish')
 
         actor.update()
 
@@ -243,6 +248,7 @@ def create_app(test_config=None):
             "success": True
             }), 200
 
+#curl --header "Content-Type: application/json" --request PATCH --data "{\"first_name\":\"Claudia2\",\"last_name\":\"Robot2\",\"birth_date\":\"19601206\",\"gender\":\"robot\",\"actor_img\":\"https://github.com/hillc255/\",\"actor_publish\": true}" http://127.0.0.1:5000/actors/8
 #curl --header "Content-Type: application/json" --request PATCH --data "{\"first_name\":\"Claudia\",\"last_name\":\"Robot\",\"birth_date\":\"19601206\",\"gender\":\"robot\",\"actor_img\":\"https://github.com/hillc255/\"}" http://127.0.0.1:5000/actors/8
 
     # '''
@@ -277,6 +283,7 @@ def create_app(test_config=None):
         movie.title = request.json.get('title')
         movie.release_date = request.json.get('release_date')
         movie.movie_img = request.json.get('movie_img')
+        movie.movie_publish = request.json.get('movie_publish')
 
         movie.update()
 
@@ -284,6 +291,7 @@ def create_app(test_config=None):
             "success": True
             }), 200
  
+ # curl --header "Content-Type: application/json" --request PATCH --data "{\"title\":\"New movie2\",\"release_date\":\"2021-03-14\",\"movie_img\":\"https://github.com/hillc255/YelpCamp\",\"movie_publish\": true}" http://127.0.0.1:5000/movies/7
  # curl --header "Content-Type: application/json" --request PATCH --data "{\"title\":\"New movie\",\"release_date\":\"2021-03-14\",\"movie_img\":\"https://github.com/hillc255/YelpCamp\"}" http://127.0.0.1:5000/movies/7
 
     # '''
@@ -322,7 +330,7 @@ def create_app(test_config=None):
             print('\n'+'Error deleting actor record: ', e)
             abort(404)
 
-    # curl -X DELETE http://127.0.0.1:5000/actors/11
+    # curl -X DELETE http://127.0.0.1:5000/actors/8
 
     # '''
     # Delete movie
@@ -331,28 +339,28 @@ def create_app(test_config=None):
     #  will be removed.  This removal will persist in the database and when
     # you refresh the page.
     # '''
-    # @app.route('/movie/<int:id>', methods=['DELETE'])
-    # def delete_movie(id):
-    #     try:
-    #         movie = Movie.query.filter(Movie.id == id).one_or_none()
+    @app.route('/movie/<int:id>', methods=['DELETE'])
+    def delete_movie(id):
+        try:
+            movie = Movie.query.filter(Movie.id == id).one_or_none()
 
-    #         if movie is None:
-    #             abort(404)
+            if movie is None:
+                abort(404)
 
-    #         movie.delete()
-    #         selection = Movie.query.order_by(Movie.id).all()
-    #         current_movie = paginate_movies(request, selection)
+            movie.delete()
+            selection = Movie.query.order_by(Movie.id).all()
+            current_movie = paginate_movies(request, selection)
 
-    #         return jsonify({
-    #             'success': True,
-    #             'deleted': id,
-    #             'movies': current_movies,
-    #             'total_movies': len(Movie.query.all())
-    #         }), 200
+            return jsonify({
+                'success': True,
+                'deleted': id,
+                'movies': current_movies,
+                'total_movies': len(Movie.query.all())
+            }), 200
 
-    #     except Exception as e:
-    #         print('\n'+'Error deleting movie record: ', e)
-    #         abort(404)
+        except Exception as e:
+            print('\n'+'Error deleting movie record: ', e)
+            abort(404)
 
     '''
     Error handlers for all expected errors including 404 and 422.

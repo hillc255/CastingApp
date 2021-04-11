@@ -91,12 +91,14 @@ class Movie(db.Model):
     title = db.Column(db.String(128), nullable=False)
     release_date = db.Column(db.Date, nullable=False) 
     movie_img = db.Column(db.String(500), nullable=False)
+    movie_publish = db.Column(db.Boolean, nullable=False)
     actors = relationship('Actor', secondary='movie_actor_link')
 
-    def __init__(self, title, release_date, movie_img):
+    def __init__(self, title, release_date, movie_img, movie_publish):
         self.title = title
         self.release_date = release_date
         self.movie_img = movie_img
+        self.movie_publish = movie_publish
 
     def insert(self):
         db.session.add(self)
@@ -115,14 +117,16 @@ class Movie(db.Model):
            'id': self.id,
            'title': self.title,
            'release_date': self.release_date,
-           'movie_img': self.movie_img
+           'movie_img': self.movie_img,
+           'movie_publish': self.movie_publish
         }
     
     def to_json(self):
         json_movie = dumps({
-            "title": self.title,
-            "release_date": self.release_date.strftime("%Y%m%d"),
-            "movie_img": self.movie_img
+            'title': self.title,
+            'release_date': self.release_date.strftime("%Y%m%d"),
+            'movie_img': self.movie_img,
+            'movie_publish': self.movie_publish
         })
         return json_movie
 
@@ -135,14 +139,16 @@ class Actor(db.Model):
     birth_date = db.Column(db.Date, nullable=False)
     gender = db.Column(db.String(10), nullable=False)
     actor_img = db.Column(db.String(500), nullable=False)
+    actor_publish = db.Column(db.Boolean, nullable=False)
     movies = relationship('Movie', secondary='movie_actor_link')
 
-    def __init__(self, first_name, last_name, birth_date, gender, actor_img):
+    def __init__(self, first_name, last_name, birth_date, gender, actor_img, actor_publish):
         self.first_name = first_name
         self.last_name = last_name
         self.birth_date = birth_date
         self.gender = gender
         self.actor_img = actor_img
+        self.actor_publish = actor_publish
 
     def insert(self):
         db.session.add(self)
@@ -162,16 +168,18 @@ class Actor(db.Model):
           'last_name': self.last_name,
           'birth_date': self.birth_date,
           'gender': self.gender,
-          'actor_img': self.actor_img
+          'actor_img': self.actor_img,
+          'actor_publish': self.actor_publish
         }
 
     def to_json(self):
         json_actor = dumps({
-            "first_name": self.first_name,
-            "last_name": self.last_name,
-            "birth_date": self.birth_date.strftime("%Y%m%d"),
-            "gender": self.gender,
-            "actor_img": self.actor_img
+            'first_name': self.first_name,
+            'last_name': self.last_name,
+            'birth_date': self.birth_date.strftime("%Y%m%d"),
+            'gender': self.gender,
+            'actor_img': self.actor_img,
+            'actor_publish': self.actor_publish
         })
         return json_actor
 
@@ -217,20 +225,20 @@ IMG_URL = 'https://i.ibb.co/'
 
 # insert default data
 
-movie1 = Movie(title='Black Panther', release_date='2018-01-29', movie_img=IMG_URL+'xgNj30x/blackpanther.jpg')
-movie2 = Movie(title='Jetsons: The Movie', release_date='1990-06-07', movie_img=IMG_URL+'w44pmy7/jetsons.jpg')
-movie3 = Movie(title='Star Wars', release_date='1977-03-25', movie_img=IMG_URL+'0ryBFpX/starwars.jpg')
-movie4 = Movie(title='Star Wars: The Force Awakens', release_date='2015-01-18', movie_img=IMG_URL+'87VCXRQ/forceawakens.jpg')
-movie5 = Movie(title='WALL-E', release_date='2008-06-23', movie_img=IMG_URL+'brXh4kZ/wallefilm.jpg')
-movie6 = Movie(title='Futurama', release_date='1999-03-28', movie_img=IMG_URL+'jVnjtz4/futurama.jpg')
+movie1 = Movie(title='Black Panther', release_date='2018-01-29', movie_img=IMG_URL+'xgNj30x/blackpanther.jpg', movie_publish=True)
+movie2 = Movie(title='Jetsons: The Movie', release_date='1990-06-07', movie_img=IMG_URL+'w44pmy7/jetsons.jpg', movie_publish=True)
+movie3 = Movie(title='Star Wars', release_date='1977-03-25', movie_img=IMG_URL+'0ryBFpX/starwars.jpg', movie_publish=True)
+movie4 = Movie(title='Star Wars: The Force Awakens', release_date='2015-01-18', movie_img=IMG_URL+'87VCXRQ/forceawakens.jpg', movie_publish=True)
+movie5 = Movie(title='WALL-E', release_date='2008-06-23', movie_img=IMG_URL+'brXh4kZ/wallefilm.jpg', movie_publish=True)
+movie6 = Movie(title='Futurama', release_date='1999-03-28', movie_img=IMG_URL+'jVnjtz4/futurama.jpg', movie_publish=True)
 
-actor1 = Actor(first_name='Panther', last_name='Robot', gender='robot', birth_date='1992-01-01', actor_img=IMG_URL+'zSwNG40/panther.jpg')
-actor2 = Actor(first_name='Rosie', last_name='Robot', gender='gynoid', birth_date='2062-01-01', actor_img=IMG_URL+'60pLw3C/rosie.jpg')
-actor3 = Actor(first_name='C-3PO', last_name='Droid', gender='droid', birth_date='7977-02-01', actor_img=IMG_URL+'GHGpcgf/c-3po.png')
-actor4 = Actor(first_name='R2-D2', last_name='Droid', gender='droid', birth_date='7977-06-07', actor_img=IMG_URL+'NFvghgx/r2-d2.png')
-actor5 = Actor(first_name='BB-8', last_name='Droid', gender='droid', birth_date='8006-01-01', actor_img=IMG_URL+'fVWFXSq/bb-8.jpg')
-actor6 = Actor(first_name='WALL-E', last_name='Droid', gender='droid', birth_date='2805-12-31', actor_img=IMG_URL+'w4Qt7fG/wall-e.jpg')
-actor7 = Actor(first_name='Bender', last_name='Bending Rodriguez', gender='other', birth_date='2996-09-24', actor_img=IMG_URL+'fpP8TDn/bender.jpg')
+actor1 = Actor(first_name='Panther', last_name='Robot', gender='robot', birth_date='1992-01-01', actor_img=IMG_URL+'zSwNG40/panther.jpg', actor_publish=True)
+actor2 = Actor(first_name='Rosie', last_name='Robot', gender='gynoid', birth_date='2062-01-01', actor_img=IMG_URL+'60pLw3C/rosie.jpg', actor_publish=True)
+actor3 = Actor(first_name='C-3PO', last_name='Droid', gender='droid', birth_date='7977-02-01', actor_img=IMG_URL+'GHGpcgf/c-3po.png', actor_publish=True)
+actor4 = Actor(first_name='R2-D2', last_name='Droid', gender='droid', birth_date='7977-06-07', actor_img=IMG_URL+'NFvghgx/r2-d2.png', actor_publish=True)
+actor5 = Actor(first_name='BB-8', last_name='Droid', gender='droid', birth_date='8006-01-01', actor_img=IMG_URL+'fVWFXSq/bb-8.jpg', actor_publish=True)
+actor6 = Actor(first_name='WALL-E', last_name='Droid', gender='droid', birth_date='2805-12-31', actor_img=IMG_URL+'w4Qt7fG/wall-e.jpg', actor_publish=True)
+actor7 = Actor(first_name='Bender', last_name='Bending Rodriguez', gender='other', birth_date='2996-09-24', actor_img=IMG_URL+'fpP8TDn/bender.jpg', actor_publish=True)
 
 movieactor1 = MovieActorLink(movie_id=1, actor_id=1)
 movieactor2 = MovieActorLink(movie_id=2, actor_id=2)
