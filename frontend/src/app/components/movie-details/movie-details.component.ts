@@ -13,7 +13,8 @@ export class MovieDetailsComponent implements OnInit {
   currentMovie: Movie = {
     title: '',
     release_date: '',
-    movie_img: ''
+    movie_img: '',
+    movie_publish: false
   };
   message = '';
 
@@ -39,31 +40,35 @@ export class MovieDetailsComponent implements OnInit {
         });
   }
 
-  // updatePublished(status: boolean): void {
-  //   const data = {
-  //     title: this.currentMovie.title,
-  //     release_date: this.currentMovie.release_date,
-  //     movie_img: this.currentMovie.movie_img
-  //   };
+  updatePublished(status: boolean): void {
+    const data = {
+      title: this.currentMovie.title,
+      release_date: this.currentMovie.release_date,
+      movie_img: this.currentMovie.movie_img
+    };
 
-  //   this.movieService.update(this.currentMovie.id, data)
-  //     .subscribe(
-  //       response => {
-  //         this.currentMovie.published = status;
-  //         console.log(response);
-  //         this.message = response.message;
-  //       },
-  //       error => {
-  //         console.log(error);
-  //       });
-  // }
+    this.message = '';
+
+    this.movieService.update(this.currentMovie.id, data)
+      .subscribe(
+        response => {
+          this.currentMovie.movie_publish = status;
+          console.log(response);
+          this.message = response.message ? response.message : 'This movie was updated successfully!';
+        },
+        error => {
+          console.log(error);
+        });
+  }
 
   updateMovie(): void {
+    this.message = '';
+
     this.movieService.update(this.currentMovie.id, this.currentMovie)
       .subscribe(
         response => {
           console.log(response);
-          this.message = response.message;
+          this.message = response.message ? response.message : 'This movie was updated successfully!';
         },
         error => {
           console.log(error);

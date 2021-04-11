@@ -38,19 +38,19 @@
   
         <div class="form-group">
           <label><strong>Status:</strong></label>
-          {{ currentMovie.published ? "Published" : "Pending" }}
+          {{ currentMovie.movie_publish ? "Published" : "Pending" }}
         </div>
       </form>
   
       <button
         class="badge badge-primary mr-2"
-        *ngIf="currentMovie.published"
+        *ngIf="currentMovie.movie_publish"
         (click)="updatePublished(false)"
       >
         UnPublish
       </button>
       <button
-        *ngIf="!currentMovie.published"
+        *ngIf="!currentMovie.movie_publish"
         class="badge badge-primary mr-2"
         (click)="updatePublished(true)"
       >
