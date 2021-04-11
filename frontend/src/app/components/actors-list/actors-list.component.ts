@@ -11,7 +11,7 @@ export class ActorsListComponent implements OnInit {
   actors?: Actor[];
   currentActor?: Actor;
   currentIndex = -1;
-  last_name = '';
+  first_name = '';
 
   constructor(private actorService: ActorService) { }
 
@@ -54,8 +54,8 @@ export class ActorsListComponent implements OnInit {
         });
   }
 
-  searchLastName(): void {
-    this.actorService.findByLastName(this.last_name)
+  searchFirstName(): void {
+    this.actorService.findByFirstName(this.first_name)
       .subscribe(
         data => {
           this.actors = data;

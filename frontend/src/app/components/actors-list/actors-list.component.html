@@ -4,14 +4,14 @@
         <input
           type="text"
           class="form-control"
-          placeholder="Search by actor last name"
-          [(ngModel)]="last_name"
+          placeholder="Search by actor first name"
+          [(ngModel)]="first_name"
         />
         <div class="input-group-append">
           <button
             class="btn btn-outline-secondary"
             type="button"
-            (click)="searchLastName()"
+            (click)="searchFirstName()"
           >
             Search
           </button>
@@ -27,7 +27,7 @@
           [class.active]="i == currentIndex"
           (click)="setActiveActor(actor, i)"
         >
-          {{ actor.last_name }}
+          {{ actor.first_name }}
         </li>
       </ul>
   
@@ -42,12 +42,12 @@
           <label><strong>Actor:</strong></label> {{ currentActor.actor }}
         </div>
         <div>
-          <label><strong>Last Name:</strong></label>
-          {{ currentActor.last_name }}
+          <label><strong>First Name:</strong></label>
+          {{ currentActor.first_name }}
         </div>
         <div>
           <label><strong>Status:</strong></label>
-          {{ currentActor.published ? "Published" : "Pending" }}
+          {{ currentActor.actor_publish ? "Published" : "Pending" }}
         </div>
   
         <a class="badge badge-warning" routerLink="/actors/{{ currentActor.id }}">
