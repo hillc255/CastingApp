@@ -55,6 +55,9 @@ export class MoviesListComponent implements OnInit {
   }
 
   searchTitle(): void {
+    this.currentMovie = undefined;
+    this.currentIndex = -1;
+
     this.movieService.findByTitle(this.title)
       .subscribe(
         data => {

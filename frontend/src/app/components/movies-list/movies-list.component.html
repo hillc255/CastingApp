@@ -55,7 +55,7 @@
 
         <div>
           <label><strong>Status:</strong></label>
-          {{ currentMovie.published ? "Published" : "Pending" }}
+          {{ currentMovie.movie_publish ? "Published" : "Pending" }}
         </div>
   
         <a class="badge badge-warning" routerLink="/movies/{{ currentMovie.id }}">
