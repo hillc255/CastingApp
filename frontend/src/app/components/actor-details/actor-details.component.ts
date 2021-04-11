@@ -13,7 +13,8 @@ export class ActorDetailsComponent implements OnInit {
     first_name: '',
     last_name: '',
     birth_date: '',
-    actor_img: ''
+    actor_img: '',
+    actor_publish: false
   };
   message = '';
 
@@ -39,34 +40,38 @@ export class ActorDetailsComponent implements OnInit {
         });
   }
 
-  // updatePublished(status: boolean): void {
-  //   const data = {
-  //     first_name: this.currentActor.first_name,
-  //     last_name: this.currentActor.last_name,
-  //     birth_date: this.currentActor.birth_date,
-  //     gender: this.currentActor.gender,
-  //     actor_img: this.currentActor.actor_img,
-  //     published: status
-  //   };
+  updatePublished(status: boolean): void {
+    const data = {
+      first_name: this.currentActor.first_name,
+      last_name: this.currentActor.last_name,
+      birth_date: this.currentActor.birth_date,
+      gender: this.currentActor.gender,
+      actor_img: this.currentActor.actor_img,
+      actor_publish: status
+    };
 
-  //   this.actorService.update(this.currentActor.id, data)
-  //     .subscribe(
-  //       response => {
-  //         this.currentActor.published = status;
-  //         console.log(response);
-  //         this.message = response.message;
-  //       },
-  //       error => {
-  //         console.log(error);
-  //       });
-  //}
+    this.message = '';
+
+    this.actorService.update(this.currentActor.id, data)
+      .subscribe(
+        response => {
+          this.currentActor.actor_publish = status;
+          console.log(response);
+          this.message = this.message = response.message ? response.message : 'This actor was updated successfully!';
+        },
+        error => {
+          console.log(error);
+        });
+  }
 
   updateActor(): void {
+    this.message = '';
+
     this.actorService.update(this.currentActor.id, this.currentActor)
       .subscribe(
         response => {
           console.log(response);
-          this.message = response.message;
+          this.message = response.message ? response.message: 'This actor was updated successfully!';
         },
         error => {
           console.log(error);

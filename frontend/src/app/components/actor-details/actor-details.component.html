@@ -60,13 +60,13 @@
   
         <div class="form-group">
           <label><strong>Status:</strong></label>
-          {{ currentActor.published ? "Published" : "Pending" }}
+          {{ currentActor.actor_publish ? "Published" : "Pending" }}
         </div>
       </form>
   
       <button
         class="badge badge-primary mr-2"
-        *ngIf="currentActor.published"
+        *ngIf="currentActor.actor_publish"
         (click)="updatePublished(false)"
       >
         UnPublish

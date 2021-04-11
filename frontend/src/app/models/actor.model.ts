@@ -5,4 +5,5 @@ export class Actor {
     birth_date?: string;
     gender?: string;
     actor_img?: string;
+    actor_publish?: boolean;
   }
