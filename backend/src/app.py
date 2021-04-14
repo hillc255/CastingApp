@@ -88,6 +88,7 @@ def create_app(test_config=None):
             print('\n'+'Error getting actors record: ', e)
             abort(404)
 
+    # curl --request GET http://127.0.0.1:5000/actors
 
     # '''
     #     GET /movies
@@ -117,18 +118,17 @@ def create_app(test_config=None):
         except Exception as e:
             print('\n'+'Error getting movies record: ', e)
             abort(404)
-
+    
+    # curl --request GET http://127.0.0.1:5000/movies
 
     # '''
     # add actors
-
-    # Create an endpoint to POST a new question,
+    # This endpoint will POST a new actor,
     # which will require the question and answer text,
     # category, and difficulty score.
     # TEST: When you submit a question on the "Add" tab,
     # the form will clear and the question will appear at the end
-    #8 of the last page of the questions list in the "List" tab.
-
+    # of the last page of the questions list in the "List" tab.
     # '''
 
     @app.route('/actors/add', methods=['POST'])
@@ -168,15 +168,14 @@ def create_app(test_config=None):
 
     # '''
     # add movie
-
-    # Create an endpoint to POST a new question,
+    # This endpoint to POST a new movie
     # which will require the question and answer text,
     # category, and difficulty score.
     # TEST: When you submit a question on the "Add" tab,
     # the form will clear and the question will appear at the end
     # of the last page of the questions list in the "List" tab.
-
     # '''
+
     @app.route('/movies/add', methods=['POST'])
     def add_movie():
 
@@ -206,18 +205,93 @@ def create_app(test_config=None):
     # curl --header "Content-Type: application/json" --request POST --data "{\"title\":\"Great movie\",\"release_date\":\"2021-03-14\",\"movie_img\":\"https://github.com/hillc255/YelpCamp\",\"movie_publish\": true}" http://127.0.0.1:5000/movies/add 
     # curl --header "Content-Type: application/json" --request POST --data "{\"title\":\"Great movie\",\"release_date\":\"2021-03-14\",\"movie_img\":\"https://github.com/hillc255/YelpCamp\"}" http://127.0.0.1:5000/movies/add
 
+
+   # '''
+    # get one actor
+    # This endpoint will GET a specific actor
+    # '''
+
+    @app.route('/actors/<int:actor_id>', methods=['GET'])
+    #@requires_auth('get:actors')
+    def get_actor_detail(actor_id):
+
+        if actor_id is None:
+            abort(404)
+
+        actor_query = Actor.query.get(actor_id)
+
+        if actor_query is None:
+            abort(404)
+
+        data = {
+                "id": actor_query.id,
+                "first_name": actor_query.first_name,
+                "last_name": actor_query.last_name,
+                "birth_date": actor_query.birth_date,
+                "gender": actor_query.gender,
+                "actor_img": actor_query.actor_img,
+                "actor_publish": actor_query.actor_publish}
+
+        try:
+            return jsonify({
+                'success': True,
+                'actors': data
+            }), 200
+
+        except Exception as e:
+            print('\n'+'Error getting actor detail record: ', e)
+            abort(404)
+
+    # curl -X GET http://127.0.0.1:5000/actors/1
+
+
+    # '''
+    # get one movie
+    # This endpoint will GET a specific movie
+    # '''
+
+    @app.route('/movies/<int:movie_id>', methods=['GET'])
+    #@requires_auth('get:movies')
+    def get_movie_detail(movie_id):
+
+        if movie_id is None:
+            abort(404)
+
+        movie_query = Movie.query.get(movie_id)
+
+        if movie_query is None:
+            abort(404)
+
+        data = {  
+                "id": movie_query.id,
+                "title": movie_query.title,
+                "release_date": movie_query.release_date,
+                "movie_img": movie_query.movie_img,
+                "movie_publish": movie_query.movie_publish}
+
+        try:
+            return jsonify({
+                'success': True,
+                'movie': data
+            }), 200
+
+        except Exception as e:
+            print('\n'+'Error getting movie detail record: ', e)
+            abort(404)
+
+
+    # curl -X GET http://127.0.0.1:5000/movies/1
+
     # '''
     # update actor
 
     #  Implement endpoint
-    #     PATCH /drinks/<id>
+    #     PATCH /actors/<id>
     #         where <id> is the existing model id
     #         it should respond with a 404 error if <id> is not found
     #         it should update the corresponding row for <id>
-    #         it should require the 'patch:drinks' permission
-    #         it should contain the drink.long() data representation
-    #     returns status code 200 and json {"success": True, "drinks": drink} where
-    #         drink an array containing only the updated drink
+    #         it should require the 'patch:actors' permission
+    #     returns status code 200 and json {"success": True, "actors": actor} 
     #         or appropriate status code indicating reason for failure
     #         --Note: changed return array from drink to drinks as the array
     # '''
@@ -254,13 +328,12 @@ def create_app(test_config=None):
     # '''
     #  @TODO - Done:
     #  Implement endpoint
-    #     PATCH /drinks/<id>
+    #     PATCH /movies/<id>
     #         where <id> is the existing model id
     #         it should respond with a 404 error if <id> is not found
     #         it should update the corresponding row for <id>
-    #         it should require the 'patch:drinks' permission
-    #         it should contain the drink.long() data representation
-    #     returns status code 200 and json {"success": True, "drinks": drink} where
+    #         it should require the 'patch:movies' permission
+    #     returns status code 200 and json {"success": True, "movies": movie} where
     #         drink an array containing only the updated drink
     #         or appropriate status code indicating reason for failure
     #         --Note: changed return array from drink to drinks as the array
