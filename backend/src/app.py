@@ -42,7 +42,7 @@ def create_app(test_config=None):
                          'Content-Type, Authorization, true')
         response.headers.add('Access-Control-Allow-Methods',
                          'GET, PATCH, PUT, POST, DELETE, OPTIONS')
-        response.headers.add('Access-Control-Allow-Origin', '*')
+        # response.headers.add('Access-Control-Allow-Origin', 'http://localhost:8081/')
         return response
 
     # Test cors is working
@@ -50,6 +50,10 @@ def create_app(test_config=None):
     @cross_origin()
     def get_messages():
         return 'CORS IS WORKING'
+
+    # @app.route('/<path:page>')
+    # def fallback(page):
+    #     return render_template('index.html')
 
 
     # uncomment if want to drop and create database
@@ -106,14 +110,15 @@ def create_app(test_config=None):
 
         if len(movies_all) == 0:
             abort(404)
+        
+        print("movies format %s"  % movies_all)
 
-        movies = [a.to_json() for a in movies_all]
+        movie = [a.to_json() for a in movies_all]
+
 
         try:
-            return jsonify({
-                'success': True,
-                'movies': movies
-            }), 200
+            result = json.dumps(movie)
+            return result
 
         except Exception as e:
             print('\n'+'Error getting movies record: ', e)
@@ -227,7 +232,7 @@ def create_app(test_config=None):
                 "id": actor_query.id,
                 "first_name": actor_query.first_name,
                 "last_name": actor_query.last_name,
-                "birth_date": actor_query.birth_date,
+                "birth_date": str(actor_query.birth_date),
                 "gender": actor_query.gender,
                 "actor_img": actor_query.actor_img,
                 "actor_publish": actor_query.actor_publish}
@@ -265,7 +270,7 @@ def create_app(test_config=None):
         data = {  
                 "id": movie_query.id,
                 "title": movie_query.title,
-                "release_date": movie_query.release_date,
+                "release_date": str(movie_query.release_date),
                 "movie_img": movie_query.movie_img,
                 "movie_publish": movie_query.movie_publish}
 
