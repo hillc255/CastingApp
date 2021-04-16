@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Movie} from 'src/app/models/movie.model';
+import { Movie } from 'src/app/models/movie.model';
 import { MovieService } from 'src/app/services/movie.service';
 
 @Component({
@@ -11,7 +11,7 @@ export class MoviesListComponent implements OnInit {
   movies?: Movie[];
   currentMovie?: Movie;
   currentIndex = -1;
-  title = '';
+  title = ' ';
 
   constructor(private movieService: MovieService) { }
 
@@ -55,8 +55,9 @@ export class MoviesListComponent implements OnInit {
   }
 
   searchTitle(): void {
-    // this.currentMovie = undefined;
-    // this.currentIndex = -1;
+    this.currentMovie = undefined;
+    this.currentIndex = -1;
+    
     this.movieService.findByTitle(this.title)
       .subscribe(
         data => {

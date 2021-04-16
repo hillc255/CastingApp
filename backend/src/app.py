@@ -104,21 +104,20 @@ def create_app(test_config=None):
     # '''
 
     @app.route('/movies', methods=['GET'])
-    def get_movies():
+    def getAll():
 
         movies_all = Movie.query.all()
 
         if len(movies_all) == 0:
             abort(404)
-        
-        print("movies format %s"  % movies_all)
 
         movie = [a.to_json() for a in movies_all]
-
+       
 
         try:
-            result = json.dumps(movie)
-            return result
+            
+            data = json.dumps(movie)
+            return data
 
         except Exception as e:
             print('\n'+'Error getting movies record: ', e)
