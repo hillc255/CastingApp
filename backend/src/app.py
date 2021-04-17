@@ -94,10 +94,13 @@ def create_app(test_config=None):
 
         try:
      
-            movies = [a.to_json() for a in movies_all]
-            data = json.dumps(movies)
+            
+            results = []
 
-            return data
+            for i, movieObj in enumerate(movies_all):
+                results.append(json.loads(movieObj.to_json()))
+
+            return jsonify(results)
 
         except Exception as e:
             print('\n'+'Error getting movies records: ', e)
