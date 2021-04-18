@@ -24,10 +24,11 @@ DB_PASSWORD = os.getenv('DB_PASSWORD', 'picasso0')
 DB_NAME = os.getenv('DB_NAME', 'castapp')
 DB_URL = os.getenv('DB_URL', 'castapp')
 
-print(f"DB_HOST={DB_USER}")
-print(f"DB_HOST={DB_PASSWORD}")
-print(f"DB_HOST={DB_NAME}")
-print(f"DB_HOST={DB_URL}")
+print(f"1) DB_HOST={DB_HOST}")
+print(f"2) DB_USER={DB_USER}")
+print(f"3) DB_PASSWORD={DB_PASSWORD}")
+print(f"4) DB_NAME={DB_NAME}")
+print(f"5) DB_URL={DB_URL}")
 
 database_path = 'postgresql+psycopg2://{}:{}@{}/{}'.format(DB_USER, DB_PASSWORD, DB_HOST, DB_NAME)
 
