@@ -22,6 +22,12 @@ DB_HOST = os.getenv('DB_HOST', 'localhost:5432')
 DB_USER = os.getenv('DB_USER', 'postgres')
 DB_PASSWORD = os.getenv('DB_PASSWORD', 'picasso0')
 DB_NAME = os.getenv('DB_NAME', 'castapp')
+DB_URL = os.getenv('DB_URL', 'castapp')
+
+print(f"DB_HOST={DB_USER}")
+print(f"DB_HOST={DB_PASSWORD}")
+print(f"DB_HOST={DB_NAME}")
+print(f"DB_HOST={DB_URL}")
 
 database_path = 'postgresql+psycopg2://{}:{}@{}/{}'.format(DB_USER, DB_PASSWORD, DB_HOST, DB_NAME)
 
