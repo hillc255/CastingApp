@@ -1,0 +1,4 @@
+DB_HOST=ec2-54-167-152-185.compute-1.amazonaws.com
+DB_USER=odsgqztiwmdgxb
+DB_PASSWORD=fdba2f1e60653770f29df057aeedefd944889147582a10c8a4eb62883ab96ad6
+DB_NAME=d8gebjfq87smua
