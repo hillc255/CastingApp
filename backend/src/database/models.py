@@ -9,7 +9,6 @@ from sqlalchemy_utils import database_exists, create_database, drop_database
 import json
 import simplejson
 from simplejson import dumps
-import config.py
 
 print(f"*********************************BEFORE db=SQLAlchemy")
 
