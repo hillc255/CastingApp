@@ -37,7 +37,7 @@ print(f"*********************************database_path={database_path}")
 # create database
 engine = create_engine(database_path)
 
-print(f"********************************engine={engine})"
+print(f"********************************engine={engine}")
 
 #engine = create_engine(DB_URL)
 if database_exists(engine.url):
