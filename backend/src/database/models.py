@@ -1,21 +1,18 @@
 import os
 import sys
-import psycopg2
+
 from flask import Flask, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import relationship, backref
 from sqlalchemy import Column, String, Integer, Date, ForeignKey, create_engine
 from sqlalchemy_utils import database_exists, create_database, drop_database
-#from flask_sqlalchemy.model import DefaultMeta
-#from sqlalchemy.ext.declarative import declarative_base
 import json
 import simplejson
 from simplejson import dumps
-#Base = declarative_base()
+
+print(f"*********************************BEFORE SQLALHENY")
 
 db = SQLAlchemy()
-
-#BaseModel: DefaultMeta = db.Model
 
 
 DB_HOST = os.getenv('DB_HOST', 'localhost:5432')
