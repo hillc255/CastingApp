@@ -29,7 +29,7 @@ print(f"4) DB_NAME={DB_NAME}")
 print(f"5) DB_URL={DB_URL}")
 print(f"6) DB_PORT={DB_PORT}")
 
-database_path = 'postgresql+psycopg2://{}:{}@{}/{}'.format(DB_USER, DB_PASSWORD, DB_HOST:DB_PORT, DB_NAME)
+database_path = 'postgresql+psycopg2://{}:{}@{}:{}/{}'.format(DB_USER, DB_PASSWORD, DB_HOST, DB_PORT, DB_NAME)
 
 print(f"*********************************database_path={database_path}")
 
