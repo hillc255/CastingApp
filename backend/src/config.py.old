@@ -16,5 +16,8 @@ SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 # DATABASE URL
 
+print(f"BEFORE uri in config.py")
+
 SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:picasso0@localhost:5432/castapp'
 
+print(f"SQLALCHEMY_DATABASE_URI}")
