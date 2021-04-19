@@ -14,7 +14,6 @@ print(f"*********************************BEFORE SQLALHENY")
 
 db = SQLAlchemy()
 
-
 DB_HOST = os.getenv('DB_HOST', 'localhost:5432')
 DB_USER = os.getenv('DB_USER', 'postgres')
 DB_PASSWORD = os.getenv('DB_PASSWORD', 'picasso0')
