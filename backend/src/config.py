@@ -1,7 +1,5 @@
 import os
 
-
-
 SECRET_KEY = os.urandom(32)
 # Grabs the folder where the script runs.
 
@@ -20,4 +18,4 @@ print(f"BEFORE uri in config.py")
 
 SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:picasso0@localhost:5432/castapp'
 
-print(f"SQLALCHEMY_DATABASE_URI}")
+print(f"AFTER uri in config.py{SQLALCHEMY_DATABASE_URI}")

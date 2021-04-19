@@ -35,7 +35,8 @@ database_path = 'postgresql+psycopg2://{}:{}@{}/{}'.format(DB_USER, DB_PASSWORD,
 # create database
 engine = create_engine(database_path)
 #engine = create_engine(DB_URL)
-if database_exists(engine.url):
+#this is the original -- if database_exists(engine.url):
+if database_exists(engine.DB_URL):
     pass
     #drop_database(engine.url)
     #sys.exit("Drop database - exit")
@@ -43,9 +44,10 @@ if database_exists(engine.url):
 
 #if not database_exists(engine.url):
 else:
-    create_database(engine.url)
+    create_database(engine.DB_URL)
+    #create_database(engine.url)
 
-print(f"db exists={database_exists(engine.url)}")
+print(f"TEST ******* AFTER db exists={database_exists(engine.url)}")
 
 '''
 setup_db(app)
