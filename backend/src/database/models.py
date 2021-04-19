@@ -1,5 +1,6 @@
 import os
 import sys
+import psycopg2
 
 from flask import Flask, jsonify
 from flask_sqlalchemy import SQLAlchemy
@@ -13,6 +14,10 @@ from simplejson import dumps
 print(f"*********************************BEFORE db=SQLAlchemy")
 
 db = SQLAlchemy()
+
+DATABASE_URL = os.environ['DATABASE_URL']
+conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+print(f"******************************************************DB_URL={DATABASE_URL}")
 
 DB_HOST = os.getenv('DB_HOST', 'localhost:5432')
 DB_USER = os.getenv('DB_USER', 'postgres')
@@ -56,7 +61,7 @@ setup_db(app)
 
 #def setup_db(app, database_path=database_path):
 def setup_db(app): 
-    #app.config["SQLALCHEMY_DATABASE_URI"]
+    #app.config["SQLALCHEMY_DATABASE_URI"] = database_path
     app.config["SQLALCHEMY_DATABASE_URI"] 
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"]  = False
     db.app = app
