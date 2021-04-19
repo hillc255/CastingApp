@@ -1,2 +1,3 @@
+import backend.src.app
 
-web: waitress-serve --port=$PORT backend.src.app.wsgi:application
+waitress.serve(app.wsgifunc, port=8041, url_scheme='https')
