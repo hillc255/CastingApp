@@ -1,2 +1,1 @@
-web: waitress-serve --listen=*:8000 backend.src.app.wsgi:application
-heroku ps:scale web=1
+web: waitress-serve --listen=*:8000 app.wsgi:application
