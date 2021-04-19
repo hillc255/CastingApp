@@ -31,7 +31,7 @@ print(f"3) DB_PASSWORD={DB_PASSWORD}")
 print(f"4) DB_NAME={DB_NAME}")
 print(f"5) DB_URL={DB_URL}")
 
-#database_path = 'postgresql+psycopg2://{}:{}@{}/{}'.format(DB_USER, DB_PASSWORD, DB_HOST, DB_NAME)
+database_path = 'postgresql+psycopg2://{}:{}@{}/{}'.format(DB_USER, DB_PASSWORD, DB_HOST, DB_NAME)
 
 #print(f"*********************************database_path={database_path}")
 
@@ -61,8 +61,7 @@ setup_db(app)
 
 #def setup_db(app, database_path=database_path):
 def setup_db(app): 
-    #app.config["SQLALCHEMY_DATABASE_URI"] = database_path
-    app.config["SQLALCHEMY_DATABASE_URI"] 
+    app.config["SQLALCHEMY_DATABASE_URI"] = database_path
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"]  = False
     db.app = app
     db.init_app(app)
