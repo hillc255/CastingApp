@@ -1,2 +1,2 @@
-web: waitress-serve --listen=*:8000 app.wsgi:application
+web: gunicorn app:app
 heroku ps:scale web=1
