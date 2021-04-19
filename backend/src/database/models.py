@@ -22,7 +22,7 @@ DB_HOST = os.getenv('DB_HOST', 'localhost:5432')
 DB_USER = os.getenv('DB_USER', 'postgres')
 DB_PASSWORD = os.getenv('DB_PASSWORD', 'picasso0')
 DB_NAME = os.getenv('DB_NAME', 'castapp')
-DB_URL = os.getenv('DATABASE_URL', 'castapp')
+DB_URL = os.getenv('DB_URL', 'castapp')
 
 print(f"1) DB_HOST={DB_HOST}")
 print(f"2) DB_USER={DB_USER}")
