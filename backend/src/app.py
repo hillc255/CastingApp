@@ -92,9 +92,7 @@ def create_app(test_config=None):
         if len(movies_all) == 0:
             abort(404)
 
-        try:
-     
-            
+        try:  
             results = []
 
             for i, movieObj in enumerate(movies_all):

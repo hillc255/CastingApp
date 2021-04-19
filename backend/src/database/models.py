@@ -45,7 +45,7 @@ if database_exists(engine.url):
 else:
     create_database(engine.url)
 
-print(database_exists(engine.url))
+print(f"db exists={database_exists(engine.url)}")
 
 '''
 setup_db(app)
