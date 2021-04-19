@@ -14,9 +14,7 @@ print(f"*********************************BEFORE SQLALHENY")
 
 db = SQLAlchemy()
 
-#DB_HOST = os.getenv('DB_HOST', 'localhost:5432')
-DB_HOST = os.getenv('DB_HOST', 'localhost')
-DB_USER = os.getenv('DB_PORT', '5432')
+DB_HOST = os.getenv('DB_HOST', 'localhost:5432')
 DB_USER = os.getenv('DB_USER', 'postgres')
 DB_PASSWORD = os.getenv('DB_PASSWORD', 'picasso0')
 DB_NAME = os.getenv('DB_NAME', 'castapp')
@@ -27,9 +25,8 @@ print(f"2) DB_USER={DB_USER}")
 print(f"3) DB_PASSWORD={DB_PASSWORD}")
 print(f"4) DB_NAME={DB_NAME}")
 print(f"5) DB_URL={DB_URL}")
-print(f"6) DB_PORT={DB_PORT}")
 
-database_path = 'postgresql+psycopg2://{}:{}@{}:{}/{}'.format(DB_USER, DB_PASSWORD, DB_HOST, DB_PORT, DB_NAME)
+database_path = 'postgresql+psycopg2://{}:{}@{}/{}'.format(DB_USER, DB_PASSWORD, DB_HOST, DB_NAME)
 
 print(f"*********************************database_path={database_path}")
 
