@@ -4,9 +4,9 @@ import psycopg2
 
 from flask import Flask, jsonify
 from flask_sqlalchemy import SQLAlchemy
-# from sqlalchemy.orm import relationship, backref
-# from sqlalchemy import Column, String, Integer, Date, ForeignKey
-# from sqlalchemy_utils import database_exists, create_database, drop_database
+from sqlalchemy.orm import relationship, backref
+from sqlalchemy import Column, String, Integer, Date, ForeignKey
+from sqlalchemy_utils import database_exists, create_database, drop_database
 import json
 import simplejson
 from simplejson import dumps
