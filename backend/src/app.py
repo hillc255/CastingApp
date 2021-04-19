@@ -1,4 +1,5 @@
 import os
+import requests
 
 from flask import Flask, request, abort, jsonify
 from flask_sqlalchemy import SQLAlchemy
@@ -28,12 +29,12 @@ def create_app(test_config=None):
     # Added CORS and after_request decorator to set Access-Control-Allow
     CORS(app, resources={r"/*": {"origins": "*"}})
 
-    # @app.route('/')
-    # def hello():
-    #     return jsonify({
-    #         'success': True,
-    #         'message': 'Home page'
-    #     }), 200
+    @app.route('/')
+    def hello():
+        return jsonify({
+            'success': True,
+            'message': 'Application is running...'
+        }), 200
 
 
     @app.after_request
