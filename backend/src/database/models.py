@@ -22,7 +22,7 @@ DB_HOST = os.getenv('DB_HOST', 'localhost:5432')
 DB_USER = os.getenv('DB_USER', 'postgres')
 DB_PASSWORD = os.getenv('DB_PASSWORD', 'picasso0')
 DB_NAME = os.getenv('DB_NAME', 'castapp')
-DB_URL = os.getenv('DB_URL', 'castapp')
+DB_URL = os.getenv('DATABASE_URL', 'castapp')
 
 print(f"1) DB_HOST={DB_HOST}")
 print(f"2) DB_USER={DB_USER}")
@@ -33,7 +33,8 @@ print(f"5) DB_URL={DB_URL}")
 database_path = 'postgresql+psycopg2://{}:{}@{}/{}'.format(DB_USER, DB_PASSWORD, DB_HOST, DB_NAME)
 
 # create database
-engine = create_engine(database_path)
+#engine = create_engine(database_path)
+engine = create_engine(DB_URL)
 if database_exists(engine.url):
     pass
     #drop_database(engine.url)
