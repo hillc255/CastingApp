@@ -1,1 +1,1 @@
-web: waitress-serve --port=$PORT backend.src.app
+web: waitress-serve --port=$PORT backend.src.app:application
