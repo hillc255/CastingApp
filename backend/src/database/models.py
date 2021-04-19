@@ -1,6 +1,6 @@
 import os
 import sys
-
+import psycopg2
 from flask import Flask, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import relationship, backref
