@@ -4,7 +4,7 @@ import sys
 from flask import Flask, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import relationship, backref
-from sqlalchemy import Column, String, Integer, Date, ForeignKey, create_engine
+from sqlalchemy import Column, String, Integer, Date, ForeignKey # create_engine
 from sqlalchemy_utils import database_exists, create_database, drop_database
 import json
 import simplejson
@@ -32,9 +32,9 @@ print(f"*********************************database_path={database_path}")
 
 # create database
 #engine = create_engine(database_path)
-engine = create_engine('postgresql://DB_USER:DB_PASSWORD@DB_HOST/DB_NAME')
+# engine = create_engine('postgresql://DB_USER:DB_PASSWORD@DB_HOST/DB_NAME')
 
-print(f"********************************engine={engine}")
+# print(f"********************************engine={engine}")
 
 #engine = create_engine(DB_URL)
 # if database_exists(engine.url):
@@ -47,7 +47,7 @@ print(f"********************************engine={engine}")
 # else:
 #     create_database(engine.url)
 
-print(f"TEST ******* AFTER db exists={database_exists(engine.url)}")
+# print(f"TEST ******* AFTER db exists={database_exists(engine.url)}")
 
 '''
 setup_db(app)
