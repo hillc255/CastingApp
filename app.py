@@ -1,19 +1,27 @@
 import os
 
-from flask import Flask, request, abort, jsonify
-from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import exc
+import sys
 
-import json
-import simplejson
-from simplejson import dumps
+try:
 
-from flask_cors import CORS, cross_origin
-from flask_migrate import Migrate
-from flask_moment import Moment
+    from flask import Flask, request, abort, jsonify
+    from flask_sqlalchemy import SQLAlchemy
+    from sqlalchemy import exc
 
-from .backend.src.database.models import db_drop_and_create_all, setup_db, Movie, Actor, MovieActorLink
-from .backend.src.auth.auth import AuthError, requires_auth
+    import json
+    import simplejson
+    from simplejson import dumps
+
+    from flask_cors import CORS, cross_origin
+    from flask_migrate import Migrate
+    from flask_moment import Moment
+
+    from .backend.src.database.models import db_drop_and_create_all, setup_db, Movie, Actor, MovieActorLink
+    from .backend.src.auth.auth import AuthError, requires_auth
+
+except Exception as e:
+    print e
+    print sys.exc_type
 
 def create_app(test_config=None):
     app = Flask(__name__)
