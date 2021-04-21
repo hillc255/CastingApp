@@ -1,5 +1,4 @@
 import os
-
 import sys
 
 try:
@@ -36,7 +35,7 @@ def create_app(test_config=None):
     CORS(app, resources={r"/*": {"origins": "*"}})
 
     @app.route('/')
-    def hello():
+    def index():
         return jsonify({
             'success': True,
             'message': 'Application is running...'
@@ -56,7 +55,7 @@ def create_app(test_config=None):
     @app.route('/test_cors')
     @cross_origin()
     def get_messages():
-        return 'CORS IS WORKING'
+        return 'CORS is working...'
 
     # @app.route('/<path:page>')
     # def fallback(page):
