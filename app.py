@@ -25,7 +25,7 @@ except Exception as e:
 def create_app(test_config=None):
     app = Flask(__name__)
     moment = Moment(app)
-    setup_db(app)
+    .backend.src.database.models.setup_db(app)
     db = SQLAlchemy(app)
     migrate = Migrate(app, db)
     
