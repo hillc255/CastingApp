@@ -15,10 +15,10 @@ try:
     from flask_migrate import Migrate
     from flask_moment import Moment
 
-    import .backend.src.database.models as models
-
     from .backend.src.database.models import db_drop_and_create_all, setup_db, Movie, Actor, MovieActorLink
     from .backend.src.auth.auth import AuthError, requires_auth
+    
+    import models as models
 
 
 except Exception as e:
