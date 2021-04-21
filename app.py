@@ -1,9 +1,9 @@
 import os
 import sys
 
-import Flask, request, abort, jsonify
-flask_sqlalchemy import SQLAlchemy
-sqlalchemy import exc
+from flask import Flask, request, abort, jsonify
+from flask_sqlalchemy import SQLAlchemy
+#from sqlalchemy import exc
 
 import json
 import simplejson
