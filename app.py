@@ -1,40 +1,40 @@
 import os
 import sys
 
-from flask import Flask, request, abort, jsonify
-from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import exc
+# from  import Flask, request, abort, jsonify
+# from flask_sqlalchemy import SQLAlchemy
+# from sqlalchemy import exc
 
-from flask_cors import CORS, cross_origin
-from flask_migrate import Migrate
-from flask_moment import Moment
+# from flask_cors import CORS, cross_origin
+# from flask_migrate import Migrate
+# from flask_moment import Moment
 
-import json
-import simplejson
-from simplejson import dumps
+# import json
+# import simplejson
+# from simplejson import dumps
 
-from .backend.src.database.models import db_drop_and_create_all, setup_db, Movie, Actor, MovieActorLink
-from .backend.src.auth.auth import AuthError, requires_auth
+# from .backend.src.database.models import db_drop_and_create_all, setup_db, Movie, Actor, MovieActorLink
+# from .backend.src.auth.auth import AuthError, requires_auth
 
-# try:
+try:
 
-#      flask import Flask, request, abort, jsonify
-#      flask_sqlalchemy import SQLAlchemy
-#      sqlalchemy import exc
+    import Flask, request, abort, jsonify
+    flask_sqlalchemy import SQLAlchemy
+    sqlalchemy import exc
 
-#     import json
-#     import simplejson
-#      simplejson import dumps
+    import json
+    import simplejson
+    simplejson import dumps
 
-#      flask_cors import CORS, cross_origin
-#      flask_migrate import Migrate
-#      flask_moment import Moment
+    flask_cors import CORS, cross_origin
+    flask_migrate import Migrate
+    flask_moment import Moment
 
-#      .backend.src.database.models import db_drop_and_create_all, setup_db, Movie, Actor, MovieActorLink
-#      .backend.src.auth.auth import AuthError, requires_auth
+    .backend.src.database.models import db_drop_and_create_all, setup_db, Movie, Actor, MovieActorLink
+    .backend.src.auth.auth import AuthError, requires_auth
 
-# except Exception as e:
-#     print(e)
+except Exception as e:
+    print(e)
 
 def create_app(test_config=None):
     app = Flask(__name__)
