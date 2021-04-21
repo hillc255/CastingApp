@@ -19,7 +19,7 @@ import sys
 try:
 
     from flask import Flask, request, abort, jsonify
-    flask_sqlalchemy import SQLAlchemy
+    from flask_sqlalchemy import SQLAlchemy
     #from sqlalchemy import exc
 
     import json
