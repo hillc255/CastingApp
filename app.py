@@ -20,7 +20,7 @@ try:
     from .backend.src.auth.auth import AuthError, requires_auth
 
 except Exception as e:
-    print e
+    print(e)
     print sys.exc_type
 
 def create_app(test_config=None):
