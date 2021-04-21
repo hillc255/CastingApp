@@ -1,6 +1,9 @@
+# Standard library imports
 import os
 import sys
 
+
+# Third party imports
 try:
 
     from flask import Flask, request, abort, jsonify
@@ -15,10 +18,10 @@ try:
     from flask_migrate import Migrate
     from flask_moment import Moment
 
-    .backend.src.database.models import db_drop_and_create_all(), setup_db(), Movie, Actor, MovieActorLink
-    .backend.src.auth.auth import AuthError, requires_auth
-    
-    import models as models
+    # Local application imports
+
+    from backend.src.database.models import db_drop_and_create_all(), setup_db(), Movie, Actor, MovieActorLink
+    from backend.src.auth.auth import AuthError, requires_auth
 
 
 except Exception as e:
