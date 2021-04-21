@@ -1,20 +1,20 @@
 import os
 import sys
-
-flask import Flask, request, abort, jsonify
-flask_sqlalchemy import SQLAlchemy
-sqlalchemy import exc
-
 import json
 import simplejson
+
 from simplejson import dumps
 
-flask_cors import CORS, cross_origin
-flask_migrate import Migrate
-flask_moment import Moment
+from flask import Flask, request, abort, jsonify
+from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import exc
 
-.backend.src.database.models import db_drop_and_create_all, setup_db, Movie, Actor, MovieActorLink
-.backend.src.auth.auth import AuthError, requires_auth
+from flask_cors import CORS, cross_origin
+from flask_migrate import Migrate
+from flask_moment import Moment
+
+from .backend.src.database.models import db_drop_and_create_all, setup_db, Movie, Actor, MovieActorLink
+from .backend.src.auth.auth import AuthError, requires_auth
 
 # try:
 
