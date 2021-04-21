@@ -1,2 +1,2 @@
 ./background/src/database
-.backend.src.auth
+./backend/src/auth
