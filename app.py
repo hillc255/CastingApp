@@ -24,7 +24,7 @@ try:
 
     import json
     import simplejson
-    simplejson import dumps
+    from simplejson import dumps
 
     from flask_cors import CORS, cross_origin
     from flask_migrate import Migrate
