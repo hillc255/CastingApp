@@ -21,7 +21,7 @@ try:
 
 except Exception as e:
     print(e)
-    print sys.exc_type
+    print(sys.exc_type)
 
 def create_app(test_config=None):
     app = Flask(__name__)
