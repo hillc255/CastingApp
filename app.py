@@ -64,7 +64,7 @@ def create_app(test_config=None):
 
 
     # uncomment if want to drop and create database
-    db_drop_and_create_all() 
+    #db_drop_and_create_all() 
 
     # '''
     # MOVIES APIS
