@@ -15,7 +15,8 @@ print(f"**** models.py ****")
 
 db = SQLAlchemy()
 
-DATABASE_URL = os.environ['DATABASE_URL']
+#DATABASE_URL = os.environ['DATABASE_URL']
+DATABASE_URL = os.getenv['DATABASE_URL']
 conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 
 # local host
