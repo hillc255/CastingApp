@@ -2,29 +2,45 @@
 import os
 import sys
 
-
-# Third party imports
-try:
-
-    from flask import Flask, request, abort, jsonify
-    from flask_sqlalchemy import SQLAlchemy
+from flask import Flask, request, abort, jsonify
+from flask_sqlalchemy import SQLAlchemy
     #from sqlalchemy import exc
 
-    import json
-    import simplejson
-    from simplejson import dumps
+import json
+import simplejson
+from simplejson import dumps
 
-    from flask_cors import CORS, cross_origin
-    from flask_migrate import Migrate
-    from flask_moment import Moment
+from flask_cors import CORS, cross_origin
+from flask_migrate import Migrate
+from flask_moment import Moment
 
     # Local application imports
-    from .database.models import db_drop_and_create_all, setup_db(), Movie, Actor, MovieActorLink
-    from backend.src.auth.auth import AuthError, requires_auth
+from .database.models import db_drop_and_create_all, setup_db, Movie, Actor, MovieActorLink
+from backend.src.auth.auth import AuthError, requires_auth
 
 
-except Exception as e:
-    print(e)
+# # Third party imports
+# try:
+
+#     from flask import Flask, request, abort, jsonify
+#     from flask_sqlalchemy import SQLAlchemy
+#     #from sqlalchemy import exc
+
+#     import json
+#     import simplejson
+#     from simplejson import dumps
+
+#     from flask_cors import CORS, cross_origin
+#     from flask_migrate import Migrate
+#     from flask_moment import Moment
+
+#     # Local application imports
+#     from .database.models import db_drop_and_create_all, setup_db, Movie, Actor, MovieActorLink
+#     from backend.src.auth.auth import AuthError, requires_auth
+
+
+# except Exception as e:
+#     print(e)
 
 def create_app(test_config=None):
     app = Flask(__name__)
