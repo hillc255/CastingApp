@@ -19,7 +19,7 @@ try:
     from flask_moment import Moment
 
     # Local application imports
-    from .database.models import db_drop_and_create_all, setup_db, Movie, Actor, MovieActorLink
+    from .database.models import db_drop_and_create_all, setup_db(), Movie, Actor, MovieActorLink
     from backend.src.auth.auth import AuthError, requires_auth
 
 
@@ -29,7 +29,7 @@ except Exception as e:
 def create_app(test_config=None):
     app = Flask(__name__)
     moment = Moment(app)
-    setup_db(app)
+    #setup_db(app)
     db = SQLAlchemy(app)
     migrate = Migrate(app, db)
     
