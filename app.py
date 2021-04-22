@@ -16,7 +16,7 @@ from flask_moment import Moment
 
     # Local application imports
 from .database.models import db_drop_and_create_all, setup_db, Movie, Actor, MovieActorLink
-from backend.src.auth.auth import AuthError, requires_auth
+#from backend.src.auth.auth import AuthError, requires_auth
 
 
 # # Third party imports
