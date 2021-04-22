@@ -11,29 +11,28 @@ import json
 import simplejson
 from simplejson import dumps
 
-print(f"*********************************BEFORE db=SQLAlchemy")
+print(f"**** models.py ****")
 
 db = SQLAlchemy()
 
 DATABASE_URL = os.environ['DATABASE_URL']
 conn = psycopg2.connect(DATABASE_URL, sslmode='require')
-print(f"******************************************************DB_URL={DATABASE_URL}")
 
-DB_HOST = os.getenv('DB_HOST', 'localhost:5432')
-DB_USER = os.getenv('DB_USER', 'postgres')
-DB_PASSWORD = os.getenv('DB_PASSWORD', 'picasso0')
-DB_NAME = os.getenv('DB_NAME', 'castapp')
-DB_URL = os.getenv('DB_URL', 'castapp')
+# local host
+# DB_HOST = os.getenv('DB_HOST', 'localhost:5432')
+# DB_USER = os.getenv('DB_USER', 'postgres')
+# DB_PASSWORD = os.getenv('DB_PASSWORD', 'picasso0')
+# DB_NAME = os.getenv('DB_NAME', 'castapp')
+# DB_URL = os.getenv('DB_URL', 'castapp')
 
 print(f"1) DB_HOST={DB_HOST}")
 print(f"2) DB_USER={DB_USER}")
 print(f"3) DB_PASSWORD={DB_PASSWORD}")
 print(f"4) DB_NAME={DB_NAME}")
-print(f"5) DB_URL={DB_URL}")
+print(f"5) DB_URL={DATABASE_URL}")
 
 database_path = 'postgresql+psycopg2://{}:{}@{}/{}'.format(DB_USER, DB_PASSWORD, DB_HOST, DB_NAME)
 
-#print(f"*********************************database_path={database_path}")
 
 # create database
 #engine = create_engine(database_path)
