@@ -49,7 +49,7 @@ def create_app(test_config=None):
     db = SQLAlchemy(app)
     migrate = Migrate(app, db)
 
-    os.environ['DATABASE_URL'] = <URL>
+    DATABASE_URL = os.environ['DATABASE_URL']
     
     # create and configure the app
     CORS(app)
