@@ -33,7 +33,6 @@ print(f"5) DB_URL={DATABASE_URL}")
 
 database_path = 'postgresql+psycopg2://{}:{}@{}/{}'.format(DB_USER, DB_PASSWORD, DB_HOST, DB_NAME)
 
-
 # create database
 #engine = create_engine(database_path)
 # engine = create_engine('postgresql://DB_USER:DB_PASSWORD@DB_HOST/DB_NAME')
