@@ -2,7 +2,7 @@ from flask_script import Manager
 from flask_migrate import Migrate, MigrateCommand
 
 from app import app
-from backend.src.database.models import db
+from backend.src.database.models import db, DATABASE_URL
 
 # try:
 #     from flask_script import Manager
