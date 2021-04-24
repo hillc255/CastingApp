@@ -1,17 +1,17 @@
-# from flask_script import Manager
-# from flask_migrate import Migrate, MigrateCommand
+from flask_script import Manager
+from flask_migrate import Migrate, MigrateCommand
 
-# from app import app
-# from backend.src.database.models import db
+from app import app
+from backend.src.database.models import db
 
-try:
-    from flask_script import Manager
-    from flask_migrate import Migrate, MigrateCommand
+# try:
+#     from flask_script import Manager
+#     from flask_migrate import Migrate, MigrateCommand
 
-    from app import app
-    from backend.src.database.models import db
-except Exception as e:
-    print(e)
+#     from app import app
+#     from backend.src.database.models import db
+# except Exception as e:
+#     print(e)
 
 print(f"**** manage.py ****")
 
