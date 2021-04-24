@@ -6,7 +6,7 @@ from backend.src.database.models import db
 
 print(f"**** manage.py ****")
 
-app.config.from_object(os.environ['APP_SETTINGS'])
+# app.config.from_object(os.environ['APP_SETTINGS'])
 
 migrate = Migrate(app, db)
 manager = Manager(app)

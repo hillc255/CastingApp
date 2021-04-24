@@ -45,8 +45,6 @@ print(f"**** app.py ****")
 
 def create_app(test_config=None):
     app = Flask(__name__)
-    app.config.from_object(os.environ['APP_SETTINGS'])
-    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     moment = Moment(app)
     setup_db(app)
     db = SQLAlchemy(app)
