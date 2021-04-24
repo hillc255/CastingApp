@@ -15,7 +15,7 @@ from flask_migrate import Migrate
 from flask_moment import Moment
 
 # Local application imports
-from backend.src.database.models import db_drop_and_create_all, setup_db, Movie, Actor, MovieActorLink
+from backend.src.database.models import db_drop_and_create_all, setup_db, Movie, Actor, MovieActorLink, db
 from backend.src.auth.auth import AuthError, requires_auth
 
 print(f"**** app.py ****")
@@ -45,6 +45,8 @@ print(f"**** app.py ****")
 
 def create_app(test_config=None):
     app = Flask(__name__)
+    app.config.from_object(os.environ['APP_SETTINGS'])
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     moment = Moment(app)
     setup_db(app)
     db = SQLAlchemy(app)
