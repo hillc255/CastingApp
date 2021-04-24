@@ -15,7 +15,7 @@ from flask_migrate import Migrate
 from flask_moment import Moment
 
 # Local application imports
-from backend.src.database.models import db_drop_and_create_all, setup_db, Movie, Actor, MovieActorLink, db, DATABASE_URL
+from backend.src.database.models import db_drop_and_create_all, setup_db, Movie, Actor, MovieActorLink, db
 from backend.src.auth.auth import AuthError, requires_auth
 
 print(f"**** app.py ****")
