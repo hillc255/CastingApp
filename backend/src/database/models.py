@@ -25,6 +25,8 @@ DB_PASSWORD = os.getenv('DB_PASSWORD', 'picasso0')
 DB_NAME = os.getenv('DB_NAME', 'castapp')
 DB_URL = os.getenv('DB_URL', 'castapp')
 
+print("***BEFORE models.py DATABASE_URL***")
+
 DATABASE_URL = os.environ['DATABASE_URL']
 conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 
@@ -64,7 +66,6 @@ setup_db(app)
 def setup_db(app): 
     app.config["SQLALCHEMY_DATABASE_URI"] = database_path
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"]  = False
-    app.config["DATABASE_URL"] = database_path
     db.app = app
     db.init_app(app)
 
