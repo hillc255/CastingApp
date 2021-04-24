@@ -27,7 +27,7 @@ DB_URL = os.getenv('DB_URL', 'castapp')
 APP_SETTINGS = os.getenv('APP_SETTING', 'config')
 
 
-print("***BEFORE models.py DATABASE_URL***")
+print("***BEFORE models.py DATABASE_URL change***")
 
 DATABASE_URL = os.environ['DATABASE_URL']
 conn = psycopg2.connect(DATABASE_URL, sslmode='require')
