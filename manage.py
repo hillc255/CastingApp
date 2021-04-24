@@ -4,6 +4,8 @@ from flask_migrate import Migrate, MigrateCommand
 from app import app
 from .backend.src.database.models import db
 
+rint(f"**** manage.py ****")
+
 migrate = Migrate(app, db)
 manager = Manager(app)
 
