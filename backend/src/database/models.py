@@ -24,6 +24,8 @@ DB_USER = os.getenv('DB_USER', 'postgres')
 DB_PASSWORD = os.getenv('DB_PASSWORD', 'picasso0')
 DB_NAME = os.getenv('DB_NAME', 'castapp')
 DB_URL = os.getenv('DB_URL', 'castapp')
+APP_SETTINGS = os.getenv('APP_SETTING', 'config')
+
 
 print("***BEFORE models.py DATABASE_URL***")
 
@@ -35,6 +37,7 @@ print(f"2) DB_USER={DB_USER}")
 print(f"3) DB_PASSWORD={DB_PASSWORD}")
 print(f"4) DB_NAME={DB_NAME}")
 print(f"5) DB_URL={DATABASE_URL}")
+print(f"6) APP_SETTING={DATABASE_URL}")
 
 database_path = 'postgresql+psycopg2://{}:{}@{}/{}'.format(DB_USER, DB_PASSWORD, DB_HOST, DB_NAME)
 
@@ -66,6 +69,7 @@ setup_db(app)
 def setup_db(app): 
     app.config["SQLALCHEMY_DATABASE_URI"] = database_path
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"]  = False
+    app.config["DATABASE_URL"] = 'postgres://odsgqztiwmdgxb:fdba2f1e60653770f29df057aeedefd944889147582a10c8a4eb62883ab96ad6@ec2-544-167-152-185.compute-1.amazonaws.com:5432/d8gebjfq87smua'
     db.app = app
     db.init_app(app)
 
