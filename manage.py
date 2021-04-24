@@ -1,12 +1,15 @@
-from flask_script import Manager
-from flask_migrate import Migrate, MigrateCommand
+ try:
+    from flask_script import Manager
+    from flask_migrate import Migrate, MigrateCommand
 
-from app import app
-from backend.src.database.models import db
+    from app import app
+    from backend.src.database.models import db
+except Exception as e:
+    print(e)
 
 print(f"**** manage.py ****")
 
-# app.config.from_object(os.environ['APP_SETTINGS'])
+#app.config.from_object(os.environ['APP_SETTINGS'])
 
 migrate = Migrate(app, db)
 manager = Manager(app)
