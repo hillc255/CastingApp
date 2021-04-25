@@ -245,10 +245,9 @@ def create_app(test_config=None):
         data.movie_img = request.json.get('movie_img')
         data.movie_publish = request.json.get('movie_publish')
 
-        # movie.updateMovie()
+        data.updateMovie()
 
         return jsonify({
-                data : data.updateMovie(),
             "success": True
             }), 200
 

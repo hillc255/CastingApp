@@ -26,6 +26,10 @@ export class MovieService {
     return this.http.post(baseUrl, data);
   }
 
+  // updateMovie(id: any, data: any): Observable<any> {
+  //   return this.http.put(`${baseUrl}/${id}`, data);
+  // }
+
   updateMovie(id: any, data: any): Observable<any> {
     return this.http.patch(`${baseUrl}/${id}`, data);
   }
