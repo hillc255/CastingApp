@@ -20,7 +20,7 @@ export class MoviesListComponent implements OnInit {
   }
 
   retrieveMovies(): void {
-    this.movieService.getAll()
+    this.movieService.getAllMovies()
       .subscribe(
         data => {
           this.movies = data;

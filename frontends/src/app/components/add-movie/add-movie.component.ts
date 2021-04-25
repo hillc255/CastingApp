@@ -10,7 +10,6 @@ import { MovieService } from 'src/app/services/movie.service';
 export class AddMovieComponent implements OnInit {
   movie: Movie = {
     title: '',
-    description: '',
     release_date: '',
     movie_img: '',
     movie_publish: false
@@ -25,12 +24,11 @@ export class AddMovieComponent implements OnInit {
   saveMovie(): void {
     const data = {
       title: this.movie.title,
-      description: this.movie.description,
       release_date: this.movie.release_date,
       movie_img: this.movie.movie_img
     };
 
-    this.movieService.create(data)
+    this.movieService.addMovie(data)
       .subscribe(
         response => {
           console.log(response);
@@ -45,7 +43,6 @@ export class AddMovieComponent implements OnInit {
     this.submitted = false;
     this.movie = {
       title: '',
-      description: '',
       release_date: '',
       movie_img: '',
       movie_publish: false

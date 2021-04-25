@@ -25,7 +25,7 @@
           class="list-group-item"
           *ngFor="let movie of movies; let i = index"
           [class.active]="i == currentIndex"
-          (click)="setActiveMovies(movie, i)"
+          (click)="setActiveMovie(movie, i)"
         >
           {{ movie.title }}
         </li>
@@ -43,11 +43,6 @@
           <label><strong>Title:</strong></label> 
           {{ currentMovie.title }}
         </div>
-       
-        <div>
-          <label><strong>Description:</strong></label>
-          {{ currentMovie.description }}
-        </div>
 
         <div>
             <label><strong>Release Date:</strong></label>
@@ -58,6 +53,11 @@
             <label><strong>Movie Image:</strong></label>
             {{ currentMovie.movie_img }}
         </div>
+
+        <div>
+          <label><strong>Movie Published?:</strong></label>
+          {{ currentMovie.movie_publish }}
+      </div>
 
         <div>
           <label><strong>Status:</strong></label>

@@ -14,20 +14,20 @@ export class MovieService {
 
   constructor(private http: HttpClient) { }
 
-  getAll(): Observable<Movie[]> {
+  getAllMovies(): Observable<Movie[]> {
     return this.http.get<Movie[]>(baseUrl);
   }
 
-  get(id: any): Observable<Movie> {
+  getMovie(id: any): Observable<Movie> {
     return this.http.get(`${baseUrl}/${id}`);
   }
 
-  create(data: any): Observable<any> {
+  addMovie(data: any): Observable<any> {
     return this.http.post(baseUrl, data);
   }
 
-  update(id: any, data: any): Observable<any> {
-    return this.http.put(`${baseUrl}/${id}`, data);
+  updateMovie(id: any, data: any): Observable<any> {
+    return this.http.patch(`${baseUrl}/${id}`, data);
   }
 
   delete(id: any): Observable<any> {

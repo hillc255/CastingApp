@@ -12,23 +12,13 @@
             name="title"
           />
         </div>
-        <div class="form-group">
-          <label for="description">Description</label>
-          <input
-            type="text"
-            class="form-control"
-            id="description"
-            [(ngModel)]="currentMovie.description"
-            name="description"
-          />
-        </div>
 
         <div class="form-group">
             <label for="release_date">Release Date</label>
             <input
               type="text"
               class="form-control"
-              id="realse_date"
+              id="release_date"
               [(ngModel)]="currentMovie.release_date"
               name="release_date"
             />
@@ -44,6 +34,17 @@
               name="movie_img"
             />
         </div>
+
+        <div class="form-group">
+          <label for="movie_img">Movie Published?</label>
+          <input
+            type="text"
+            class="form-control"
+            id="movie_publish"
+            [(ngModel)]="currentMovie.movie_publish"
+            name="movie_publish"
+          />
+      </div>
   
         <div class="form-group">
           <label><strong>Status:</strong></label>

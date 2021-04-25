@@ -11,7 +11,6 @@ import { Movie } from 'src/app/models/movie.model';
 export class MovieDetailsComponent implements OnInit {
   currentMovie: Movie = {
     title: '',
-    description: '',
     release_date: '',
     movie_img: '',
     movie_publish: false
@@ -25,11 +24,11 @@ export class MovieDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.message = '';
-    this.getTutorial(this.route.snapshot.params.id);
+    this.getMovie(this.route.snapshot.params.id);
   }
 
-  getTutorial(id: string): void {
-    this.movieService.get(id)
+  getMovie(id: string): void {
+    this.movieService.getMovie(id)
       .subscribe(
         data => {
           this.currentMovie = data;
@@ -43,13 +42,12 @@ export class MovieDetailsComponent implements OnInit {
   updatePublished(status: boolean): void {
     const data = {
       title: this.currentMovie.title,
-      description: this.currentMovie.description,
       release_date: this.currentMovie.release_date,
       movie_img: this.currentMovie.movie_img,
       movie_publish: status
     };
 
-    this.movieService.update(this.currentMovie.id, data)
+    this.movieService.updateMovie(this.currentMovie.id, data)
       .subscribe(
         response => {
           this.currentMovie.movie_publish = status;
@@ -61,8 +59,8 @@ export class MovieDetailsComponent implements OnInit {
         });
   }
 
-  updateTutorial(): void {
-    this.movieService.update(this.currentMovie.id, this.currentMovie)
+  updateMovie(): void {
+    this.movieService.updateMovie(this.currentMovie.id, this.currentMovie)
       .subscribe(
         response => {
           console.log(response);

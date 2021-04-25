@@ -194,8 +194,10 @@ def create_app(test_config=None):
                   'movie_publish': request.get_json()['movie_publish']
             }
 
+
             if not ('title' in data and 'release_date' in data \
                 and 'movie_img' in data and 'movie_publish' in data):
+
                 abort(422)
 
             movie = Movie(**data)
@@ -221,8 +223,7 @@ def create_app(test_config=None):
     #     where movie is a single movie by id
     #     or appropriate status code indicating reason for failure
     #
-    # curl --header "Content-Type: application/json" --request PATCH --data "{\"title\":\"New movie2\",\"release_date\":\"2021-03-14\",\"movie_img\":\"https://github.com/hillc255/YelpCamp\",\"movie_publish\": true}" http://127.0.0.1:5000/movies/7
-    # curl --header "Content-Type: application/json" --request PATCH --data "{\"title\":\"New movie\",\"release_date\":\"2021-03-14\",\"movie_img\":\"https://github.com/hillc255/YelpCamp\"}" http://127.0.0.1:5000/movies/7
+    # curl --header "Content-Type: application/json" --request PUT --data "{\"title\":\"New movie2\",\"release_date\":\"2021-03-14\",\"movie_img\":\"https://github.com/hillc255/YelpCamp\",\"movie_publish\": true}" http://127.0.0.1:5000/movies/7
     #
     # '''
 
@@ -233,20 +234,21 @@ def create_app(test_config=None):
         if movie_id is None:
             abort(404)
 
-        movie = Movie.query.get(id)
+        data = Movie.query.get(id)
 
         if movie is None:
             abort(404)
 
         request_json = request.get_json()
-        movie.title = request.json.get('title')
-        movie.release_date = request.json.get('release_date')
-        movie.movie_img = request.json.get('movie_img')
-        movie.movie_publish = request.json.get('movie_publish')
+        data.title = request.json.get('title')
+        data.release_date = request.json.get('release_date')
+        data.movie_img = request.json.get('movie_img')
+        data.movie_publish = request.json.get('movie_publish')
 
-        movie.update()
+        # movie.updateMovie()
 
         return jsonify({
+                data : data.updateMovie()
             "success": True
             }), 200
 
