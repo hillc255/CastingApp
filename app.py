@@ -184,7 +184,7 @@ def create_app(test_config=None):
     #
     # '''
 
-    @app.route('/movies/add', methods=['POST'])
+    @app.route('/movies', methods=['POST'])
     def createMovie():
 
         try:
