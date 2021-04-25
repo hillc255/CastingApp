@@ -261,7 +261,7 @@ def create_app(test_config=None):
 
         data = Movie.query.get(id)
 
-        if movie is None:
+        if data is None:
             abort(404)
             
         data.movie_publish = True
