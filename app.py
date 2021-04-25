@@ -158,11 +158,12 @@ def create_app(test_config=None):
             abort(404)
 
         data = {  
-                "id": movie_query.id,
-                "title": movie_query.title,
-                "release_date": str(movie_query.release_date),
-                "movie_img": movie_query.movie_img,
-                "movie_publish": movie_query.movie_publish}
+            "id": movie_query.id,
+            "title": movie_query.title,
+            "release_date": str(movie_query.release_date),
+            "movie_img": movie_query.movie_img,
+            "movie_publish": movie_query.movie_publish
+        }
 
         try:
             return jsonify({
@@ -188,10 +189,10 @@ def create_app(test_config=None):
 
         try:
             data = {
-                  'title': request.get_json()['title'],
-                  'release_date': request.get_json()['release_date'],
-                  'movie_img': request.get_json()['movie_img'],
-                  'movie_publish': request.get_json()['movie_publish']
+                'title': request.get_json()['title'],
+                'release_date': request.get_json()['release_date'],
+                'movie_img': request.get_json()['movie_img'],
+                'movie_publish': False
             }
 
 
@@ -231,19 +232,60 @@ def create_app(test_config=None):
     #@requires_auth('patch:movies')
     def updateMovie(id):
 
-        if movie_id is None:
+        if id is None:
             abort(404)
 
         data = Movie.query.get(id)
 
-        if movie is None:
+        if data is None:
             abort(404)
 
         request_json = request.get_json()
         data.title = request.json.get('title')
         data.release_date = request.json.get('release_date')
         data.movie_img = request.json.get('movie_img')
-        data.movie_publish = request.json.get('movie_publish')
+
+        data.updateMovie()
+
+        return jsonify({
+            "success": True
+            }), 200
+
+
+    @app.route('/movies/<int:id>/publish', methods=['PATCH'])
+    #@requires_auth('patch:movies')
+    def updateMovie(id):
+
+        if id is None:
+            abort(404)
+
+        data = Movie.query.get(id)
+
+        if movie is None:
+            abort(404)
+            
+        data.movie_publish = True
+
+        data.updateMovie()
+
+        return jsonify({
+            "success": True
+            }), 200
+
+
+    @app.route('/movies/<int:id>/unpublish', methods=['PATCH'])
+    #@requires_auth('patch:movies')
+    def updateMovie(id):
+
+        if id is None:
+            abort(404)
+
+        data = Movie.query.get(id)
+
+        if data is None:
+            abort(404)
+            
+        data.movie_publish = False
 
         data.updateMovie()
 

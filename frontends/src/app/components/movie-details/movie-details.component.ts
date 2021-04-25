@@ -31,11 +31,15 @@ export class MovieDetailsComponent implements OnInit {
     this.movieService.getMovie(id)
       .subscribe(
         data => {
-          this.currentMovie = data;
-          console.log(data);
+          if(data && data.success === true) {
+            this.currentMovie = data.movie;
+            console.log(`getMovie(${id}): returned movie`, this.currentMovie);
+          } else {
+            console.error(`getMovie(${id}) failed`, data);
+          }
         },
         error => {
-          console.log(error);
+          console.error(`getMovie(${id})`, error);
         });
   }
 

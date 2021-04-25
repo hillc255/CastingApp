@@ -6,7 +6,6 @@ import { Movie } from '../models/movie.model';
 
 const baseUrl = 'https://cast-app.herokuapp.com/movies';
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -18,7 +17,7 @@ export class MovieService {
     return this.http.get<Movie[]>(baseUrl);
   }
 
-  getMovie(id: any): Observable<Movie> {
+  getMovie(id: any): Observable<any> {
     return this.http.get(`${baseUrl}/${id}`);
   }
 
