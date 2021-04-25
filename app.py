@@ -229,7 +229,7 @@ def create_app(test_config=None):
 
     @app.route('/movies/<int:id>', methods=['PATCH'])
     #@requires_auth('patch:movies')
-    def updateMovie(id, data):
+    def updateMovie(id):
 
         if movie_id is None:
             abort(404)
