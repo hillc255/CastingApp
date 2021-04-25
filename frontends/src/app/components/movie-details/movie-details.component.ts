@@ -43,20 +43,22 @@ export class MovieDetailsComponent implements OnInit {
         });
   }
 
-  updatePublished(status: boolean): void {
-    const data = {
-      title: this.currentMovie.title,
-      release_date: this.currentMovie.release_date,
-      movie_img: this.currentMovie.movie_img,
-      movie_publish: status
-    };
-
-    this.movieService.updateMovie(this.currentMovie.id, data)
+  publishMovie(): void {
+    this.movieService.publishMovie(this.currentMovie.id)
       .subscribe(
         response => {
-          this.currentMovie.movie_publish = status;
-          console.log(response);
-          this.message = response.message;
+          this.getMovie(this.route.snapshot.params.id);
+        },
+        error => {
+          console.log(error);
+        });
+  }
+
+  unpublishMovie(): void {
+    this.movieService.unpublishMovie(this.currentMovie.id)
+      .subscribe(
+        response => {
+          this.getMovie(this.route.snapshot.params.id);
         },
         error => {
           console.log(error);

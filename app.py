@@ -245,7 +245,7 @@ def create_app(test_config=None):
         data.release_date = request.json.get('release_date')
         data.movie_img = request.json.get('movie_img')
 
-        data.updateMovie()
+        data.update()
 
         return jsonify({
             "success": True
@@ -266,7 +266,7 @@ def create_app(test_config=None):
             
         data.movie_publish = True
 
-        data.updateMovie()
+        data.update()
 
         return jsonify({
             "success": True
@@ -287,7 +287,7 @@ def create_app(test_config=None):
             
         data.movie_publish = False
 
-        data.updateMovie()
+        data.update()
 
         return jsonify({
             "success": True

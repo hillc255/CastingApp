@@ -44,14 +44,14 @@
       <button
         class="badge badge-primary mr-2"
         *ngIf="currentMovie.movie_publish"
-        (click)="updatePublished(false)"
+        (click)="unpublishMovie()"
       >
         UnPublish
       </button>
       <button
         *ngIf="!currentMovie.movie_publish"
         class="badge badge-primary mr-2"
-        (click)="updatePublished(true)"
+        (click)="publishMovie()"
       >
         Publish
       </button>

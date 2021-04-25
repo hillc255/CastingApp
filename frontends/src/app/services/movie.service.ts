@@ -33,6 +33,14 @@ export class MovieService {
     return this.http.patch(`${baseUrl}/${id}`, data);
   }
 
+  publishMovie(id: any): Observable<any> {
+    return this.http.patch(`${baseUrl}/${id}/publish`, {});
+  }
+
+  unpublishMovie(id: any): Observable<any> {
+    return this.http.patch(`${baseUrl}/${id}/unpublish`, {});
+  }
+
   delete(id: any): Observable<any> {
     return this.http.delete(`${baseUrl}/${id}`);
   }
