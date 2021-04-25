@@ -254,7 +254,7 @@ def create_app(test_config=None):
 
     @app.route('/movies/<int:id>/publish', methods=['PATCH'])
     #@requires_auth('patch:movies')
-    def updateMovie(id):
+    def publishMovie(id):
 
         if id is None:
             abort(404)
@@ -275,7 +275,7 @@ def create_app(test_config=None):
 
     @app.route('/movies/<int:id>/unpublish', methods=['PATCH'])
     #@requires_auth('patch:movies')
-    def updateMovie(id):
+    def unpublishMovie(id):
 
         if id is None:
             abort(404)
