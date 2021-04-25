@@ -1,0 +1,70 @@
+<div>
+    <div class="submit-form">
+      <div *ngIf="!submitted">
+
+        <div class="form-group">
+          <label for="first_name">First Name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="first_name"
+            required
+            [(ngModel)]="actor.first_name"
+            name="actor"
+          />
+        </div>
+  
+        <div class="form-group">
+          <label for="last_name">Last Name</label>
+          <input
+            class="form-control"
+            id="last_name"
+            required
+            [(ngModel)]="actor.last_name"
+            name="last_name"
+          />
+        </div>
+
+        <div class="form-group">
+            <label for="birth_date">Birth Date</label>
+            <input
+              class="form-control"
+              id="birth_date"
+              required
+              [(ngModel)]="actor.birth_date"
+              name="birth_date"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="gender">Gender</label>
+            <input
+              class="form-control"
+              id="gender"
+              required
+              [(ngModel)]="actor.gender"
+              name="gender"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="actor_imgr">Actor Image</label>
+            <input
+              class="form-control"
+              id="actor_img"
+              required
+              [(ngModel)]="actor.actor_img"
+              name="actor_img"
+            />
+          </div>
+  
+        <button (click)="saveActor()" class="btn btn-success">Submit</button>
+      </div>
+  
+      <div *ngIf="submitted">
+        <h4>Actor was submitted successfully!</h4>
+        <button class="btn btn-success" (click)="newActor()">Add</button>
+      </div>
+    </div>
+  </div>
+

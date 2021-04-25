@@ -357,20 +357,20 @@ def create_app(test_config=None):
     # '''
 
     @app.route('/actors', methods=['GET'])
-    def get_actors():
+    def getAllActors():
 
         actors_all = Actor.query.all()
 
         if len(actors_all) == 0:
             abort(404)
 
-        actors = [a.to_json() for a in actors_all]
+        try:  
+            results = []
 
-        try:
-            return jsonify({
-                'success': True,
-                'actors': actors
-            }), 200
+            for i, actorObj in enumerate(actors_all):
+                results.append(json.loads(actorObj.to_json()))
+
+            return jsonify(results)
 
         except Exception as e:
             print('\n'+'Error getting actors record: ', e)
