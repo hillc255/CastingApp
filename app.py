@@ -189,6 +189,7 @@ def create_app(test_config=None):
 
         try:
             data = {
+                'id': None,
                 'title': request.get_json()['title'],
                 'release_date': request.get_json()['release_date'],
                 'movie_img': request.get_json()['movie_img'],
