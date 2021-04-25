@@ -248,7 +248,7 @@ def create_app(test_config=None):
         # movie.updateMovie()
 
         return jsonify({
-                data : data.updateMovie()
+                data : data.updateMovie(),
             "success": True
             }), 200
 
