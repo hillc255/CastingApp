@@ -344,7 +344,7 @@ def create_app(test_config=None):
     # curl -X GET http://127.0.0.1:5000/movies/title  
     # '''
     
-    @app.route('/movies', methods=['GET'])
+    @app.route('/movies/search', methods=['GET'])
     def findMovieByTitle():
 
         data = request.get_json()
