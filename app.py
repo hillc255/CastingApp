@@ -360,7 +360,7 @@ def create_app(test_config=None):
             
         #     return titles
 
-         try:  
+        try:  
             results = []
 
             for i, movieObj in enumerate(titles):
