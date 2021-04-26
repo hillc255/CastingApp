@@ -130,7 +130,7 @@ def create_app(test_config=None):
 
             return jsonify({
                 'success': True,
-                'results: results
+                'results': results
             }), 200
 
         except Exception as e:
