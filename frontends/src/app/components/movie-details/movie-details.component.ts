@@ -78,7 +78,7 @@ export class MovieDetailsComponent implements OnInit {
   }
 
   deleteMovie(): void {
-    this.movieService.delete(this.currentMovie.id)
+    this.movieService.deleteMovie(this.currentMovie.id)
       .subscribe(
         response => {
           console.log(response);
