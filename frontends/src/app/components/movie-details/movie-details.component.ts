@@ -88,4 +88,5 @@ export class MovieDetailsComponent implements OnInit {
           console.log(error);
         });
   }
+
 }
