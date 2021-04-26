@@ -307,20 +307,24 @@ def create_app(test_config=None):
     @app.route('/movie/<int:id>', methods=['DELETE'])
     def deleteMovie(id):
         try:
-            movie = Movie.query.filter(Movie.id == id).one_or_none()
+            data = Movie.query.filter(Movie.id == id).one_or_none()
 
-            if movie is None:
+            if data is None:
                 abort(404)
 
-            movie.delete()
-            selection = Movie.query.order_by(Movie.id).all()
-            current_movie = paginate_movies(request, selection)
+            data.delete()
+            # selection = Movie.query.order_by(Movie.id).all()
+            # current_movie = paginate_movies(request, selection)
+
+            # return jsonify({
+            #     'success': True,
+            #     'deleted': id,
+            #     'movies': current_movies,
+            #     'total_movies': len(Movie.query.all())
+            # }), 200
 
             return jsonify({
-                'success': True,
-                'deleted': id,
-                'movies': current_movies,
-                'total_movies': len(Movie.query.all())
+                'success': True
             }), 200
 
         except Exception as e:
