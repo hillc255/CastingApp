@@ -347,14 +347,22 @@ def create_app(test_config=None):
     @app.route('/movies', methods=['GET'])
     def findMovieByTitle():
 
-        all_titles = Movie.query.with_entities(Movie.title).all()
+        data = request.get_json()
+        if data.get('searchTerm') is not None:
+            search_term = data.get('searchTerm')
 
-        if all_titles is None:
-            abort(404)
+        #all_titles = Movie.query.with_entities(Movie.title).all()
 
-        print("titles format %s" % all_titles)
+        try:
+            titles = Movie.query.filter(
+                Movie.title.ilike(f'%{search_term}%')).all()
+
+                if len(titles) == 0:
+                    abort(404)
+
+        #print("titles format %s" % all_titles)
             
-        titles = json.dumps(all_titles)
+        #titles = json.dumps(all_titles)
 
         # try:
             
