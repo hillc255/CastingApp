@@ -306,10 +306,11 @@ def create_app(test_config=None):
 
     @app.route('/movie/<int:id>', methods=['DELETE'])
     def deleteMovie(id):
+
+        print('This is delete before try')
+
         try:
             data = Movie.query.filter(Movie.id == id).one_or_none()
-
-            print(f'This is after data query: {data}')
 
             if data is None:
                 abort(404)

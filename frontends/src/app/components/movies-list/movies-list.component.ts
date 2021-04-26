@@ -42,17 +42,17 @@ export class MoviesListComponent implements OnInit {
     this.currentIndex = index;
   }
 
-  removeAllMovies(): void {
-    this.movieService.deleteAll()
-      .subscribe(
-        response => {
-          console.log(response);
-          this.refreshList();
-        },
-        error => {
-          console.log(error);
-        });
-  }
+  // removeAllMovies(): void {
+  //   this.movieService.deleteAll()
+  //     .subscribe(
+  //       response => {
+  //         console.log(response);
+  //         this.refreshList();
+  //       },
+  //       error => {
+  //         console.log(error);
+  //       });
+  // }
 
   searchTitle(): void {
     this.movieService.findByTitle(this.title)

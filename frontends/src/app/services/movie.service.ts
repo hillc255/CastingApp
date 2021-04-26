@@ -41,9 +41,9 @@ export class MovieService {
     return this.http.delete(`${baseUrl}/${id}`);
   }
 
-  deleteAll(): Observable<any> {
-    return this.http.delete(baseUrl);
-  }
+  // deleteAll(): Observable<any> {
+  //   return this.http.delete(baseUrl);
+  // }
 
   findByTitle(title: any): Observable<Movie[]> {
     return this.http.get<Movie[]>(`${baseUrl}?title=${title}`);

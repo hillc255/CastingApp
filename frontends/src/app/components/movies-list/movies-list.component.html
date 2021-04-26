@@ -31,13 +31,18 @@
         </li>
       </ul>
   
-      <button class="m-3 btn btn-sm btn-danger" (click)="removeAllMovies()">
+      <!-- <button class="m-3 btn btn-sm btn-danger" (click)="removeAllMovies()">
         Remove All
-      </button>
+      </button> -->
     </div>
     <div class="col-md-6">
       <div *ngIf="currentMovie">
         <h4>Movie</h4>
+
+        <div>
+          <label><strong>Id:</strong></label> 
+          {{ currentMovie.id }}
+        </div>
         
         <div>
           <label><strong>Title:</strong></label> 
