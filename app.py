@@ -355,7 +355,7 @@ def create_app(test_config=None):
 
         try:
             titles = Movie.query.filter(
-                Movie.title.ilike(f'%{searchterm}%')).all()
+                Movie.title.ilike(f'%{search_term}%')).all()
 
             if len(titles) == 0:
                 abort(404)
