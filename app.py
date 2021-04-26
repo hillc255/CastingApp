@@ -307,16 +307,17 @@ def create_app(test_config=None):
     @app.route('/movie/<int:id>', methods=['DELETE'])
     def deleteMovie(id):
 
-        print('This is delete before try')
-
         try:
-            data = Movie.query.filter(Movie.id == id).one_or_none()
+            #data = Movie.query.filter(Movie.id == id).one_or_none()
+            #data = Movie.query.filter_by(id).delete()
+            data = Movie.query.filter_by(id).one_or_none()
 
             if data is None:
                 abort(404)
 
             data.delete()
-            # selection = Movie.query.order_by(Movie.id).all()
+
+            #current_movies = Movie.query.order_by(Movie.title).all()
             # current_movie = paginate_movies(request, selection)
 
             # return jsonify({
@@ -327,7 +328,8 @@ def create_app(test_config=None):
             # }), 200
 
             return jsonify({
-                'success': True
+                'success': True,
+                'movies': getAllMovies()
             }), 200
 
         except Exception as e:
@@ -340,26 +342,26 @@ def create_app(test_config=None):
     # curl -X DELETE http://127.0.0.1:5000/movies  
     # '''
 
-    @app.route('/movies', methods=['DELETE'])
-    def deleteAllMovies():
-        try:
+    # @app.route('/movies', methods=['DELETE'])
+    # def deleteAllMovies():
+    #     try:
  
-            movies_all = Movie.query.all()
+    #         movies_all = Movie.query.all()
 
-            if movies_all is None:
-                abort(404)
+    #         if movies_all is None:
+    #             abort(404)
 
-            movies_all.delete()
-            #models.Movie.query.delete()
-            #current_movie = paginate_movies(request, selection)
+    #         movies_all.delete()
+    #         #models.Movie.query.delete()
+    #         #current_movie = paginate_movies(request, selection)
 
-            return jsonify({
-                'success': True,
-            }), 200
+    #         return jsonify({
+    #             'success': True,
+    #         }), 200
 
-        except Exception as e:
-            print('\n'+'Error deleting all movies: ', e)
-            abort(404)  
+    #     except Exception as e:
+    #         print('\n'+'Error deleting all movies: ', e)
+    #         abort(404)  
 
     # '''
     # GET /movies/title
