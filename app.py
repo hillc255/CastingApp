@@ -355,7 +355,7 @@ def create_app(test_config=None):
 
         
         data = Movie.query.filter(
-            Movie.title.ilike(f'%{title}%')).all()
+            Movie.title.ilike(f'%{origami}%')).all()
 
         if len(data) == 0:
             abort(404)
