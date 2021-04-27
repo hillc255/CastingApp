@@ -360,7 +360,7 @@ def create_app(test_config=None):
             if len(search_titles) == 0:
                 abort(404)
 
-        print(f'titles format {search_titles}')
+       # print(f'titles format {search_titles}')
             
         titles = json.dumps(search_titles)
 
