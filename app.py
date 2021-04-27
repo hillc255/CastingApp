@@ -345,7 +345,7 @@ def create_app(test_config=None):
     # '''
     
     @app.route('/movies/title', methods=['GET'])
-    def findMovieByTitle():
+    def findMovieByTitle(title):
 
         data = request.get_json()
         if data.get('title') is not None:
