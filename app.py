@@ -360,9 +360,9 @@ def create_app(test_config=None):
             if len(search_titles) == 0:
                 abort(404)
 
-        #print("titles format %s" % all_titles)
+        print("titles format %s" % search_titles)
             
-        #titles = json.dumps(all_titles)
+        titles = json.dumps(search_titles)
 
         # try:
             
@@ -371,7 +371,7 @@ def create_app(test_config=None):
         #try:  
             results = []
 
-            for i, movieObj in enumerate(search_titles):
+            for i, movieObj in enumerate(titles):
                 results.append(json.loads(movieObj.to_json()))
 
             return jsonify(results)
