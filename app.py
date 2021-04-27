@@ -344,44 +344,26 @@ def create_app(test_config=None):
     # curl -X GET http://127.0.0.1:5000/movies/title  
     # '''
     
-    @app.route('/search', methods=['GET'])
+    @app.route('/movies/title', methods=['GET'])
     def findMovieByTitle():
 
         data = request.get_json()
         if data.get('searchTerm') is not None:
-            search_term = data.get('searchTerm')
-
-        #all_titles = Movie.query.with_entities(Movie.title).all()
+            search_title = data.get('searchTerm')
 
         try:
-            search_titles = Movie.query.filter(
-                Movie.title.ilike(f'%{search_term}%')).all()
+            data = Movie.query.filter(
+                Movie.title.ilike(f'%{search_title}%')).all()
 
-            if len(search_titles) == 0:
+            if len(data) == 0:
                 abort(404)
-
-            print(f'titles format {search_titles}')
-            
-            titles = json.dumps(search_titles)
-
-        # try:
-            
-        #     return titles
-
-        #try:  
+  
             results = []
 
-            for i, movieObj in enumerate(titles):
+            for i, movieObj in enumerate(data):
                 results.append(json.loads(movieObj.to_json()))
 
             return jsonify(results)
-
-
-        # try:
-        #     return jsonify({
-        #         'success': True,
-        #         'title': title
-        #     }), 200
 
         except Exception as e:
             print('\n'+'Error getting movie titles: ', e)
