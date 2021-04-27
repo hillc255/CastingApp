@@ -353,14 +353,16 @@ def create_app(test_config=None):
 
         # print(f'****search word {search_title}***')
 
-        try:
-            data = Movie.query.filter(
-                Movie.title.ilike(f'%{title}%')).all()
+        
+        data = Movie.query.filter(
+            Movie.title.ilike(f'%{title}%')).all()
 
-            if len(data) == 0:
-                abort(404)
+        if len(data) == 0:
+            abort(404)
   
-            results = []
+        results = []
+        
+        try:
 
             for i, movieObj in enumerate(data):
                 results.append(json.loads(movieObj.to_json()))
