@@ -42,7 +42,7 @@ export class MoviesListComponent implements OnInit {
     this.currentIndex = index;
   }
 
-  findMovieByTitle(): void {
+  searchTitle(): void {
     this.movieService.findMovieByTitle(this.title)
       .subscribe(
         data => {
