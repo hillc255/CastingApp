@@ -344,12 +344,14 @@ def create_app(test_config=None):
     # curl -X GET http://127.0.0.1:5000/movies/title  
     # '''
     
-    @app.route('/movies/title', methods=['GET'])
+    @app.route('/movies', methods=['GET'])
     def findMovieByTitle(title):
 
         data = request.get_json()
-        if data.get('title') is not None:
-            search_title = data.get('title')
+        if data.get('search_title') is not None:
+            search_title = data.get('search_title')
+
+        print(f'****search word {search_title}***')
 
         try:
             data = Movie.query.filter(
