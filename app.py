@@ -348,12 +348,12 @@ def create_app(test_config=None):
     def findMovieByTitle(title):
 
         data = request.get_json()
-        if data.get(title) is not None:
-            search_title = data.get(title)
+        if data.get('title') is not None:
+            search_title = data.get('title')
 
         
         data = Movie.query.filter(
-            Movie.title.ilike(f'%{search_title}%')).all()
+            Movie.title.ilike(f'%{Star}%')).all()
 
         if len(data) == 0:
             abort(404)
