@@ -347,15 +347,13 @@ def create_app(test_config=None):
     @app.route('/movies', methods=['GET'])
     def findMovieByTitle(title):
 
-        # data = request.get_json()
-        # if data.get('search_title') is not None:
-        #     search_title = data.get('search_title')
-
-        # print(f'****search word {search_title}***')
+        data = request.get_json()
+        if data.get(title) is not None:
+            search_title = data.get(title)
 
         
         data = Movie.query.filter(
-            Movie.title.ilike(f'%{origami}%')).all()
+            Movie.title.ilike(f'%{search_title}%')).all()
 
         if len(data) == 0:
             abort(404)
