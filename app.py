@@ -354,10 +354,10 @@ def create_app(test_config=None):
         #all_titles = Movie.query.with_entities(Movie.title).all()
 
         try:
-            titles = Movie.query.filter(
+            search_titles = Movie.query.filter(
                 Movie.title.ilike(f'%{search_term}%')).all()
 
-            if len(titles) == 0:
+            if len(search_titles) == 0:
                 abort(404)
 
         #print("titles format %s" % all_titles)
@@ -371,7 +371,7 @@ def create_app(test_config=None):
         #try:  
             results = []
 
-            for i, movieObj in enumerate(titles):
+            for i, movieObj in enumerate(search_titles):
                 results.append(json.loads(movieObj.to_json()))
 
             return jsonify(results)
