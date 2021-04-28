@@ -34,7 +34,7 @@ export class ActorDetailsComponent implements OnInit {
       .subscribe(
         data => {
           this.currentActor = data;  
-          console.log(data);
+          console.log(this.currentActor);
         },
         error => {
           console.error(error);

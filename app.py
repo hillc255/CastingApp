@@ -411,7 +411,7 @@ def create_app(test_config=None):
     # curl -X GET http://127.0.0.1:5000/actors/1
     # '''
 
-    @app.route('/actors/<int:actor_id>', methods=['GET'])
+    @app.route('/actors/<int:id>', methods=['GET'])
     #@requires_auth('get:actors')
     def getActor(id):
 
