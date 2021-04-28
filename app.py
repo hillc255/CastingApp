@@ -624,7 +624,7 @@ def create_app(test_config=None):
 
             return jsonify({
                 'success': True
-            }),
+                }), 200
 
         except Exception as e:
             print('\n'+'Error deleting actor record: ', e)
