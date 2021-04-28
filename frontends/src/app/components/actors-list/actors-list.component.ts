@@ -20,7 +20,7 @@ export class ActorsListComponent implements OnInit {
   }
 
   retrieveActors(): void {
-    this.actorService.getAll()
+    this.actorService.getAllActors()
       .subscribe(
         data => {
           this.actors = data;
@@ -43,7 +43,7 @@ export class ActorsListComponent implements OnInit {
   }
 
   searchFirstName(): void {
-    this.actorService.findByFirstName(this.first_name)
+    this.actorService.findActorByFirstName(this.first_name)
       .subscribe(
         data => {
           this.actors = data;

@@ -403,46 +403,6 @@ def create_app(test_config=None):
             print('\n'+'Error getting actors record: ', e)
             abort(404)
 
-    # '''
-    # add actors
-    # This endpoint will POST a new actor
-    #
-    # curl --header "Content-Type: application/json" --request POST --data "{\"first_name\":\"Claudia\",\"last_name\":\"Hill\",\"birth_date\":\"19601206\",\"gender\":\"robot\",\"actor_img\":\"https://github.com/hillc255/\",\"actor_publish\": true}" http://127.0.0.1:5000/actors/add
-    # curl --header "Content-Type: application/json" --request POST --data "{\"first_name\":\"Claudia\",\"last_name\":\"Hill\",\"birth_date\":\"19601206\",\"gender\":\"robot\",\"actor_img\":\"https://github.com/hillc255/\"}" http://127.0.0.1:5000/actors/add
-    #
-    # '''
-
-    @app.route('/actors/add', methods=['POST'])
-    def add_actor():
-
-        try:
-
-            data = {
-                'first_name': request.get_json()['first_name'],
-                'last_name': request.get_json()['last_name'],
-                'birth_date': request.get_json()['birth_date'],
-                'gender': request.get_json()['gender'],
-                'actor_img': request.get_json()['actor_img'],
-                'actor_publish': request.get_json()['actor_publish']
-            }
-
-            if not ('first_name' in data and 'last_name' in data and
-                    'birth_date' in data and 'gender' in data and 
-                    'actor_img' in data and 'actor_publish' in data
-                    ):
-                    abort(422)
-
-            actor = Actor(**data)
-            actor.insert()
-
-            return jsonify({
-                'success': True
-            }), 200
-
-        except Exception as e:
-            print('\n'+'Error adding actor record: ', e)
-            abort(422)
-
 
     # '''
     # get one actor
@@ -453,7 +413,7 @@ def create_app(test_config=None):
 
     @app.route('/actors/<int:actor_id>', methods=['GET'])
     #@requires_auth('get:actors')
-    def updateActor(actor_id):
+    def getActor(actor_id):
 
         if actor_id is None:
             abort(404)
@@ -470,18 +430,63 @@ def create_app(test_config=None):
                 "birth_date": str(actor_query.birth_date),
                 "gender": actor_query.gender,
                 "actor_img": actor_query.actor_img,
-                "actor_publish": actor_query.actor_publish}
+                "actor_publish": actor_query.actor_publish
+                }
 
         try:
             return jsonify({
                 'success': True,
-                'actors': data
+                'actor': data
             }), 200
 
         except Exception as e:
             print('\n'+'Error getting actor detail record: ', e)
             abort(404)
+        
 
+    # '''
+    # add actors
+    # This endpoint will POST a new actor
+    #
+    # curl --header "Content-Type: application/json" --request POST --data "{\"first_name\":\"Claudia\",\"last_name\":\"Hill\",\"birth_date\":\"19601206\",\"gender\":\"robot\",\"actor_img\":\"https://github.com/hillc255/\",\"actor_publish\": true}" http://127.0.0.1:5000/actors/add
+    # curl --header "Content-Type: application/json" --request POST --data "{\"first_name\":\"Claudia\",\"last_name\":\"Hill\",\"birth_date\":\"19601206\",\"gender\":\"robot\",\"actor_img\":\"https://github.com/hillc255/\"}" http://127.0.0.1:5000/actors/add
+    #
+    # '''
+
+    @app.route('/actors', methods=['POST'])
+    def createActor():
+
+        try:
+
+            data = {
+                'id': None,
+                'first_name': request.get_json()['first_name'],
+                'last_name': request.get_json()['last_name'],
+                'birth_date': request.get_json()['birth_date'],
+                'gender': request.get_json()['gender'],
+                'actor_img': request.get_json()['actor_img'],
+                'actor_publish': request.get_json()['actor_publish']
+            }
+
+            if not ('first_name' in data and 'last_name' in data \
+                     and 'birth_date' in data and 'gender' in data \
+                     and 'actor_img' in data and 'actor_publish' in data):
+
+                    abort(422)
+
+            actor = Actor(**data)
+            actor.insert()
+
+            return jsonify({
+                'success': True
+            }), 200
+
+        except Exception as e:
+            print('\n'+'Error adding actor record: ', e)
+            abort(422)
+
+
+ 
     # '''
     # update actor
     #
@@ -500,27 +505,82 @@ def create_app(test_config=None):
     #
     # '''
 
-    @app.route('/actors/<int:actor_id>', methods=['PATCH'])
+    @app.route('/actors/<int:id>', methods=['PATCH'])
     #@requires_auth('patch:actors')
-    def update_actor(actor_id):
+    def updateActor(id):
 
-        if actor_id is None:
+        if id is None:
             abort(404)
 
-        actor = Actor.query.get(actor_id)
+        data = Actor.query.get(id)
 
-        if actor is None:
+        if data is None:
             abort(404)
 
         request_json = request.get_json()
-        actor.first_name = request.json.get('first_name')
-        actor.last_name = request.json.get('last_name')
-        actor.birth_date = request.json.get('birth_date')
-        actor.gender = request.json.get('gender')
-        actor.actor_img = request.json.get('actor_img')
-        actor.actor_publish = request.json.get('actor_publish')
+        data.first_name = request.json.get('first_name')
+        data.last_name = request.json.get('last_name')
+        data.birth_date = request.json.get('birth_date')
+        data.gender = request.json.get('gender')
+        data.actor_img = request.json.get('actor_img')
+        data.actor_publish = request.json.get('actor_publish')
 
-        actor.update()
+        data.update()
+
+        return jsonify({
+            "success": True
+    
+            }), 200
+
+    # '''
+    # publish actor
+    #
+    #
+    # '''
+    
+    @app.route('/movies/<int:id>/publish', methods=['PATCH'])
+    #@requires_auth('patch:movies')
+    def publishActor(id):
+
+        if id is None:
+            abort(404)
+
+        data = Actor.query.get(id)
+
+        if data is None:
+            abort(404)
+            
+        data.actor_publish = True
+
+        data.update()
+
+        return jsonify({
+            "success": True
+            }), 200
+
+
+    # '''
+    # unpublish actor
+    #
+    #
+    # '''
+
+
+    @app.route('/actors/<int:id>/unpublish', methods=['PATCH'])
+    #@requires_auth('patch:actors')
+    def unpublishActor(id):
+
+        if id is None:
+            abort(404)
+
+        data = Actor.query.get(id)
+
+        if data is None:
+            abort(404)
+            
+        data.actor_publish = False
+
+        data.update()
 
         return jsonify({
             "success": True
@@ -548,24 +608,63 @@ def create_app(test_config=None):
 
             actor.delete()
 
-            actors_all = Actor.query.all()
+            # actors_all = Actor.query.all()
 
-            if len(actors_all) == 0:
-                abort(404)
+            # if len(actors_all) == 0:
+            #     abort(404)
 
-            actors = [a.to_json() for a in actors_all]
+            # actors = [a.to_json() for a in actors_all]
+
+            # return jsonify({
+            #     'success': True,
+            #     'deleted': id,
+            #     'actor': actor,
+            #     'total_actors': len(actors_all)
+            # }), 200
 
             return jsonify({
-                'success': True,
-                'deleted': id,
-                'actor': actor,
-                'total_actors': len(actors_all)
-            }), 200
+                'success': True
+            }),
 
         except Exception as e:
             print('\n'+'Error deleting actor record: ', e)
             abort(404)
 
+
+    # '''
+    # GET /movies/title
+    #
+    # Search /movies?title=[title]
+    #
+    # curl -X GET http://127.0.0.1:5000/movies/title  
+    # '''
+    
+    @app.route('/actors/search', methods=['GET'])
+    def findActorByFirstName(text):
+
+        data = request.get_json()
+        if data.get('text') is not None:
+            search_firstname = data.get('text')
+
+        
+        data = Actor.query.filter(
+            Actor.first_name.ilike(f'%{search_firstname}%')).all()
+
+        if len(data) == 2:
+            abort(404)
+  
+        results = []
+        
+        try:
+
+            for i, actorObj in enumerate(data):
+                results.append(json.loads(actorObj.to_json()))
+
+            return jsonify(results)
+
+        except Exception as e:
+            print('\n'+'Error getting actor first name: ', e)
+            abort(404) 
 
 
     '''

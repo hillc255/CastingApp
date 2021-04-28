@@ -30,41 +30,45 @@ export class ActorDetailsComponent implements OnInit {
   }
 
   getActor(id: string): void {
-    this.actorService.get(id)
+    this.actorService.getActor(id)
       .subscribe(
         data => {
-          this.currentActor = data;
-          console.log(data);
+          if(data && data.success === true) {
+            this.currentActor = data.actor;
+            console.log(`getActor(${id}): returned actor`, this.currentActor);
+          } else {
+            console.error(`getActor(${id}) failed`, data);
+          }
         },
         error => {
-          console.log(error);
+          console.error(`getActor(${id})`, error);
         });
   }
 
-  updatePublished(status: boolean): void {
-    const data = {
-      first_name: this.currentActor.first_name,
-      last_name: this.currentActor.last_name,
-      birth_date: this.currentActor.birth_date,
-      gender: this.currentActor.gender,
-      actor_img: this.currentActor.actor_img,
-      actor_publish: status
-    };
-
-    this.actorService.update(this.currentActor.id, data)
+  publishActor(): void {
+    this.actorService.publishActor(this.currentActor.id)
       .subscribe(
         response => {
-          this.currentActor.actor_publish = status;
-          console.log(response);
-          this.message = response.message;
+          this.getActor(this.route.snapshot.params.id);
         },
         error => {
           console.log(error);
         });
   }
 
-  updateTutorial(): void {
-    this.actorService.update(this.currentActor.id, this.currentActor)
+  unpublishActor(): void {
+    this.actorService.unpublishActor(this.currentActor.id)
+      .subscribe(
+        response => {
+          this.getActor(this.route.snapshot.params.id);
+        },
+        error => {
+          console.log(error);
+        });
+  }
+
+  updateActor(): void {
+    this.actorService.updateActor(this.currentActor.id, this.currentActor)
       .subscribe(
         response => {
           console.log(response);
@@ -76,7 +80,7 @@ export class ActorDetailsComponent implements OnInit {
   }
 
   deleteActor(): void {
-    this.actorService.delete(this.currentActor.id)
+    this.actorService.deleteActor(this.currentActor.id)
       .subscribe(
         response => {
           console.log(response);

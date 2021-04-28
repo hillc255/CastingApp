@@ -33,7 +33,7 @@ export class AddActorComponent implements OnInit {
       actor_publish: this.actor.actor_publish
     };
 
-    this.actorService.create(data)
+    this.actorService.addActor(data)
       .subscribe(
         response => {
           console.log(response);
