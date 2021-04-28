@@ -424,13 +424,13 @@ def create_app(test_config=None):
             abort(404)
 
         data = {
-                "id": actor_query.id,
-                "first_name": actor_query.first_name,
-                "last_name": actor_query.last_name,
-                "birth_date": str(actor_query.birth_date),
-                "gender": actor_query.gender,
-                "actor_img": actor_query.actor_img,
-                "actor_publish": actor_query.actor_publish
+            "id": actor_query.id,
+            "first_name": actor_query.first_name,
+            "last_name": actor_query.last_name,
+            "birth_date": str(actor_query.birth_date),
+            "gender": actor_query.gender,
+            "actor_img": actor_query.actor_img,
+            "actor_publish": actor_query.actor_publish
         }
 
         try:
