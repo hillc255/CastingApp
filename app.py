@@ -250,7 +250,7 @@ def create_app(test_config=None):
 
         return jsonify({
             "success": True
-            }), 200
+        }), 200
 
 
     @app.route('/movies/<int:id>/publish', methods=['PATCH'])
@@ -271,7 +271,7 @@ def create_app(test_config=None):
 
         return jsonify({
             "success": True
-            }), 200
+        }), 200
 
 
     @app.route('/movies/<int:id>/unpublish', methods=['PATCH'])
@@ -292,7 +292,7 @@ def create_app(test_config=None):
 
         return jsonify({
             "success": True
-            }), 200
+        }), 200
 
     # '''
     # Delete movie
@@ -529,7 +529,7 @@ def create_app(test_config=None):
 
         return jsonify({
             "success": True
-            }), 200
+        }), 200
 
     # '''
     # publish actor
@@ -555,7 +555,7 @@ def create_app(test_config=None):
 
         return jsonify({
             "success": True
-            }), 200
+        }), 200
 
 
     # '''
@@ -583,7 +583,7 @@ def create_app(test_config=None):
 
         return jsonify({
             "success": True
-            }), 200
+        }), 200
 
 
     # '''
@@ -623,7 +623,7 @@ def create_app(test_config=None):
 
             return jsonify({
                 'success': True
-                }), 200
+            }), 200
 
         except Exception as e:
             print('\n'+'Error deleting actor record: ', e)
