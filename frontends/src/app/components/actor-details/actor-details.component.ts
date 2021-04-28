@@ -33,15 +33,11 @@ export class ActorDetailsComponent implements OnInit {
     this.actorService.getActor(id)
       .subscribe(
         data => {
-          if(data && data.success === true) {
-            this.currentActor = data.actor;
-            console.log(`getActor(${id}): returned actor`, this.currentActor);
-          } else {
-            console.error(`getActor(${id}) failed`, data);
-          }
+          this.currentActor = data;  
+          console.log(data);
         },
         error => {
-          console.error(`getActor(${id})`, error);
+          console.error(error);
         });
   }
 

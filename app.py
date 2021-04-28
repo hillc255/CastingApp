@@ -431,7 +431,7 @@ def create_app(test_config=None):
                 "gender": actor_query.gender,
                 "actor_img": actor_query.actor_img,
                 "actor_publish": actor_query.actor_publish
-                }
+        }
 
         try:
             return jsonify({
