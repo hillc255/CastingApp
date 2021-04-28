@@ -413,12 +413,12 @@ def create_app(test_config=None):
 
     @app.route('/actors/<int:actor_id>', methods=['GET'])
     #@requires_auth('get:actors')
-    def getActor(actor_id):
+    def getActor(id):
 
-        if actor_id is None:
+        if id is None:
             abort(404)
 
-        actor_query = Actor.query.get(actor_id)
+        actor_query = Actor.query.get(id)
 
         if actor_query is None:
             abort(404)
