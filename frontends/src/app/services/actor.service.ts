@@ -16,7 +16,7 @@ export class ActorService {
     return this.http.get<Actor[]>(baseUrl);
   }
 
-  getActor(id: any): Observable<Actor> {
+  getActor(id: any): Observable<any> {
     return this.http.get(`${baseUrl}/${id}`);
   }
 

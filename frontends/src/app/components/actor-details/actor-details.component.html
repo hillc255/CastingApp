@@ -8,6 +8,7 @@
           <input
             type="text"
             class="form-control"
+            [readonly]="!editable"
             id="id"
             [(ngModel)]="currentActor.id"
             name="id"
@@ -78,7 +79,7 @@
       <button
         class="badge badge-primary mr-2"
         *ngIf="currentActor.actor_publish"
-        (click)="unPublishActor()"
+        (click)="unpublishActor()"
       >
         UnPublish
       </button>

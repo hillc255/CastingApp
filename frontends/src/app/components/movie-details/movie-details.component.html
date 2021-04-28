@@ -8,6 +8,7 @@
           <input
             type="text"
             class="form-control"
+            [readonly]="!editable"
             id="id"
             [(ngModel)]="currentMovie.id"
             name="id"
