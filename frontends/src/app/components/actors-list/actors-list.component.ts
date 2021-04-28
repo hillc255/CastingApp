@@ -42,18 +42,6 @@ export class ActorsListComponent implements OnInit {
     this.currentIndex = index;
   }
 
-  removeAllActors(): void {
-    this.actorService.deleteAll()
-      .subscribe(
-        response => {
-          console.log(response);
-          this.refreshList();
-        },
-        error => {
-          console.log(error);
-        });
-  }
-
   searchFirstName(): void {
     this.actorService.findByFirstName(this.first_name)
       .subscribe(

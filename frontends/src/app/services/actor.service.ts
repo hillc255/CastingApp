@@ -12,31 +12,35 @@ export class ActorService {
 
   constructor(private http: HttpClient) { }
 
-  getAll(): Observable<Actor[]> {
+  getAllActors(): Observable<Actor[]> {
     return this.http.get<Actor[]>(baseUrl);
   }
 
-  get(id: any): Observable<Actor> {
+  getActor(id: any): Observable<Actor> {
     return this.http.get(`${baseUrl}/${id}`);
   }
 
-  create(data: any): Observable<any> {
+  addActor(data: any): Observable<any> {
     return this.http.post(baseUrl, data);
   }
 
-  update(id: any, data: any): Observable<any> {
-    return this.http.put(`${baseUrl}/${id}`, data);
+  updateActor(id: any, data: any): Observable<any> {
+    return this.http.patch(`${baseUrl}/${id}`, data);
   }
 
-  delete(id: any): Observable<any> {
+  publishActor(id: any): Observable<any> {
+    return this.http.patch(`${baseUrl}/${id}/publish`, {});
+  }
+
+  unpublishActor(id: any): Observable<any> {
+    return this.http.patch(`${baseUrl}/${id}/unpublish`, {});
+  }
+
+  deleteActor(id: any): Observable<any> {
     return this.http.delete(`${baseUrl}/${id}`);
   }
 
-  deleteAll(): Observable<any> {
-    return this.http.delete(baseUrl);
-  }
-
-  findByFirstName(first_name: any): Observable<Actor[]> {
-    return this.http.get<Actor[]>(`${baseUrl}?first_name=${first_name}`);
+  findActorByFirstName(first_name: any): Observable<Actor[]> {
+    return this.http.get<Actor[]>(`${baseUrl}/search?first_name=${first_name}`);
   }
 }

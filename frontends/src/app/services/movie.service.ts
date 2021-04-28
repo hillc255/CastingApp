@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Movie } from '../models/movie.model';
 
-
 const baseUrl = 'https://cast-app.herokuapp.com/movies';
 
 @Injectable({
@@ -42,7 +41,7 @@ export class MovieService {
   }
 
   findMovieByTitle(title: any): Observable<Movie[]> {
-    return this.http.get<Movie[]>(`${baseUrl}?title=${title}`);
+    return this.http.get<Movie[]>(`${baseUrl}/search?title=${title}`);
   }
 
 }
