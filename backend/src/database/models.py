@@ -113,7 +113,7 @@ class Movie(db.Model):
     movie_publish = db.Column(db.Boolean, nullable=False)
     actors = relationship('Actor', secondary='movie_actor_link')
 
-    def __init__(self, id=None, title, release_date, movie_img, movie_publish):
+    def __init__(self, id, title, release_date, movie_img, movie_publish):
         self.id = id
         self.title = title
         self.release_date = release_date
@@ -162,7 +162,7 @@ class Actor(db.Model):
     actor_publish = db.Column(db.Boolean, nullable=False)
     movies = relationship('Movie', secondary='movie_actor_link')
 
-    def __init__(self, id=None, first_name, last_name, birth_date, gender, actor_img, actor_publish):
+    def __init__(self, id, first_name, last_name, birth_date, gender, actor_img, actor_publish):
         self.id = id
         self.first_name = first_name
         self.last_name = last_name
@@ -247,7 +247,7 @@ IMG_URL = 'https://i.ibb.co/'
 
 # insert default data
 
-movie1 = Movie(title='Black Panther', release_date='2018-01-29', movie_img=IMG_URL+'xgNj30x/blackpanther.jpg', movie_publish=True)
+movie1 = Movie(None, title='Black Panther', release_date='2018-01-29', movie_img=IMG_URL+'xgNj30x/blackpanther.jpg', movie_publish=True)
 movie2 = Movie(id=2, title='Jetsons: The Movie', release_date='1990-06-07', movie_img=IMG_URL+'w44pmy7/jetsons.jpg', movie_publish=True)
 movie3 = Movie(id=3, title='Star Wars', release_date='1977-03-25', movie_img=IMG_URL+'0ryBFpX/starwars.jpg', movie_publish=True)
 movie4 = Movie(id=4, title='Star Wars: The Force Awakens', release_date='2015-01-18', movie_img=IMG_URL+'87VCXRQ/forceawakens.jpg', movie_publish=True)
