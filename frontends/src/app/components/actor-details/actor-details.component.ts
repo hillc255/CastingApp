@@ -72,10 +72,12 @@ export class ActorDetailsComponent implements OnInit {
       .subscribe(
         response => {
           console.log(response);
-          this.message = response.message;
+          
+          this.message = (response.success)?"hey I got a success!":"whoopsies no good!";
         },
         error => {
           console.log(error);
+          this.message = "whoopsies, badd error, no good!";
         });
   }
 

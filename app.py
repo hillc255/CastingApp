@@ -345,11 +345,9 @@ def create_app(test_config=None):
     # '''
     
     @app.route('/movies/search', methods=['GET'])
-    def findMovieByTitle(text):
+    def findMovieByTitle():
 
-        data = request.get_json()
-        if data.get('text') is not None:
-            search_title = data.get('text')
+        search_title = request.args.get('title')
 
         
         data = Movie.query.filter(
@@ -641,10 +639,7 @@ def create_app(test_config=None):
     @app.route('/actors/search', methods=['GET'])
     def findActorByFirstName(text):
 
-        data = request.get_json()
-        if data.get('text') is not None:
-            search_firstname = data.get('text')
-
+        search_firstname = request.args.get('first_name')
         
         data = Actor.query.filter(
             Actor.first_name.ilike(f'%{search_firstname}%')).all()

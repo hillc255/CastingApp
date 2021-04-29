@@ -12,11 +12,11 @@ import { AddActorComponent } from './components/add-actor/add-actor.component';
 const routes: Routes = [
   { path: '', redirectTo: 'movies', pathMatch: 'full' },
   { path: 'movies', component: MoviesListComponent },
+  { path: 'movies/add', component: AddMovieComponent },
   { path: 'movies/:id', component: MovieDetailsComponent },
-  { path: 'add', component: AddMovieComponent },
   { path: 'actors', component: ActorsListComponent },
+  { path: 'actors/add', component: AddActorComponent },
   { path: 'actors/:id', component: ActorDetailsComponent },
-  { path: 'add', component: AddActorComponent }
 ];
 
 @NgModule({

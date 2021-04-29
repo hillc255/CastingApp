@@ -113,7 +113,7 @@ class Movie(db.Model):
     movie_publish = db.Column(db.Boolean, nullable=False)
     actors = relationship('Actor', secondary='movie_actor_link')
 
-    def __init__(self, id, title, release_date, movie_img, movie_publish):
+    def __init__(self, id=None, title, release_date, movie_img, movie_publish):
         self.id = id
         self.title = title
         self.release_date = release_date
@@ -162,7 +162,7 @@ class Actor(db.Model):
     actor_publish = db.Column(db.Boolean, nullable=False)
     movies = relationship('Movie', secondary='movie_actor_link')
 
-    def __init__(self, id, first_name, last_name, birth_date, gender, actor_img, actor_publish):
+    def __init__(self, id=None, first_name, last_name, birth_date, gender, actor_img, actor_publish):
         self.id = id
         self.first_name = first_name
         self.last_name = last_name
@@ -247,7 +247,7 @@ IMG_URL = 'https://i.ibb.co/'
 
 # insert default data
 
-movie1 = Movie(id=1, title='Black Panther', release_date='2018-01-29', movie_img=IMG_URL+'xgNj30x/blackpanther.jpg', movie_publish=True)
+movie1 = Movie(title='Black Panther', release_date='2018-01-29', movie_img=IMG_URL+'xgNj30x/blackpanther.jpg', movie_publish=True)
 movie2 = Movie(id=2, title='Jetsons: The Movie', release_date='1990-06-07', movie_img=IMG_URL+'w44pmy7/jetsons.jpg', movie_publish=True)
 movie3 = Movie(id=3, title='Star Wars', release_date='1977-03-25', movie_img=IMG_URL+'0ryBFpX/starwars.jpg', movie_publish=True)
 movie4 = Movie(id=4, title='Star Wars: The Force Awakens', release_date='2015-01-18', movie_img=IMG_URL+'87VCXRQ/forceawakens.jpg', movie_publish=True)
@@ -262,7 +262,7 @@ actor5 = Actor(id=5, first_name='BB-8', last_name='Droid', gender='droid', birth
 actor6 = Actor(id=6, first_name='WALL-E', last_name='Droid', gender='droid', birth_date='2805-12-31', actor_img=IMG_URL+'w4Qt7fG/wall-e.jpg', actor_publish=True)
 actor7 = Actor(id=7, first_name='Bender', last_name='Bending Rodriguez', gender='other', birth_date='2996-09-24', actor_img=IMG_URL+'fpP8TDn/bender.jpg', actor_publish=True)
 
-movieactor1 = MovieActorLink(movie_id=1, actor_id=1)
+movieactor1 = MovieActorLink(movie1.id, actor1.id)
 movieactor2 = MovieActorLink(movie_id=2, actor_id=2)
 movieactor3 = MovieActorLink(movie_id=3, actor_id=3)
 movieactor4 = MovieActorLink(movie_id=3, actor_id=4)
