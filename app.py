@@ -637,7 +637,7 @@ def create_app(test_config=None):
     # '''
     
     @app.route('/actors/search', methods=['GET'])
-    def findActorByFirstName(text):
+    def findActorByFirstName():
 
         search_firstname = request.args.get('first_name')
         
