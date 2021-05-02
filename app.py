@@ -280,7 +280,7 @@ def create_app(test_config=None):
     def deleteMovie(id):
 
         try:
-            movie = Movie.query.filter(Movie_id == id).one_or_none()
+            movie = Movie.query.filter(Movie.id == id).one_or_none()
 
             if movie is None:
                 abort(404)

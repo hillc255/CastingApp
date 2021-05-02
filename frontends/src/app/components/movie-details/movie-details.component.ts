@@ -70,10 +70,11 @@ export class MovieDetailsComponent implements OnInit {
       .subscribe(
         response => {
           console.log(response);
-          this.message = response.message;
+          this.message = (response.success)?"Movie updated successfully!":"Movie update unsuccessful";
         },
         error => {
           console.log(error);
+          this.message = "Movie update unsuccessful";
         });
   }
 
