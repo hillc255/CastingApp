@@ -371,14 +371,12 @@ def create_app(test_config=None):
    
  
     # '''
-    #     GET /actors
-    #     public endpoint
-    #     contains all actors data representation
-    #     returns status code 200 and json {"success": True, "actors": actors}
-    #     where actors is the list of actors
-    #         or appropriate status code indicating reason for failure
-    #
-    #     curl --request GET http://127.0.0.1:5000/actors
+    # GET: /actors
+    # Authorized:
+    # Endpoint: gets all actors data representation
+    # Returns status code 200 and json {"success": True, "actors": actors}
+    #   where actors is the list of actors
+    #   or appropriate status code indicating reason for failure
     # '''
 
     @app.route('/actors', methods=['GET'])
@@ -403,10 +401,12 @@ def create_app(test_config=None):
 
 
     # '''
-    # get one actor
-    # This endpoint will GET a specific actor
-    #
-    # curl -X GET http://127.0.0.1:5000/actors/1
+    # GET: /actors/<int:id>
+    # Authorized:
+    # Endpoint:  GET a specific actor
+    # Returns: status code 200 and json {"success": True, "actor": data}
+    #   where actor is a single actor data
+    #   or appropriate status code indicating reason for failure
     # '''
 
     @app.route('/actors/<int:id>', methods=['GET'])
@@ -443,12 +443,12 @@ def create_app(test_config=None):
         
 
     # '''
-    # add actors
-    # This endpoint will POST a new actor
-    #
-    # curl --header "Content-Type: application/json" --request POST --data "{\"first_name\":\"Claudia\",\"last_name\":\"Hill\",\"birth_date\":\"19601206\",\"gender\":\"robot\",\"actor_img\":\"https://github.com/hillc255/\",\"actor_publish\": true}" http://127.0.0.1:5000/actors/add
-    # curl --header "Content-Type: application/json" --request POST --data "{\"first_name\":\"Claudia\",\"last_name\":\"Hill\",\"birth_date\":\"19601206\",\"gender\":\"robot\",\"actor_img\":\"https://github.com/hillc255/\"}" http://127.0.0.1:5000/actors/add
-    #
+    # POST: /actors
+    # Authorized:
+    # Endpoint: create a new actor
+    # Returns: status code 200 and json {"success": True}
+    #   where actor is a single new actor
+    #   or appropriate status code indicating reason for failure
     # '''
 
     @app.route('/actors', methods=['POST'])
@@ -483,25 +483,16 @@ def create_app(test_config=None):
             print('\n'+'Error adding actor record: ', e)
             abort(422)
 
-
  
     # '''
-    # update actor
-    #
-    #  Implement endpoint
-    #     PATCH /actors/<id>
-    #         where <id> is the existing model id
-    #         it should respond with a 404 error if <id> is not found
-    #         it should update the corresponding row for <id>
-    #         it should require the 'patch:actors' permission
-    #     returns status code 200 and json {"success": True, "actors": actor} 
-    #         or appropriate status code indicating reason for failure
-    #  
-    #
-    # curl --header "Content-Type: application/json" --request PATCH --data "{\"first_name\":\"Claudia2\",\"last_name\":\"Robot2\",\"birth_date\":\"19601206\",\"gender\":\"robot\",\"actor_img\":\"https://github.com/hillc255/\",\"actor_publish\": true}" http://127.0.0.1:5000/actors/8
-    # curl --header "Content-Type: application/json" --request PATCH --data "{\"first_name\":\"Claudia\",\"last_name\":\"Robot\",\"birth_date\":\"19601206\",\"gender\":\"robot\",\"actor_img\":\"https://github.com/hillc255/\"}" http://127.0.0.1:5000/actors/8    
-    #
+    # PATCH: /actors/<int:id>
+    # Authorized:
+    # Endpoint:  update actor data fields
+    # Returns: status code 200 and json {"success": True}
+    #   where actor published is a single actor
+    #   or appropriate status code indicating reason for failure
     # '''
+
 
     @app.route('/actors/<int:id>', methods=['PATCH'])
     #@requires_auth('patch:actors')
@@ -530,9 +521,12 @@ def create_app(test_config=None):
         }), 200
 
     # '''
-    # publish actor
-    #
-    #
+    # PATCH: /actors/<int:id>/publish
+    # Authorized:
+    # Endpoint: publish actor data fields
+    # Returns: status code 200 and json {"success": True}
+    #   where actor updated is a single actor
+    #   or appropriate status code indicating reason for failure
     # '''
     
     @app.route('/actors/<int:id>/publish', methods=['PATCH'])
@@ -557,9 +551,12 @@ def create_app(test_config=None):
 
 
     # '''
-    # unpublish actor
-    #
-    #
+    # PATCH: /actors/<int:id>/unpublish
+    # Authorized:
+    # Endpoint:  unpublish actor data fields
+    # Returns: status code 200 and json {"success": True}
+    #   where actor unpublish is a single actor
+    #   or appropriate status code indicating reason for failure
     # '''
 
 
@@ -585,14 +582,12 @@ def create_app(test_config=None):
 
 
     # '''
-    # Delete actors
-
-    # Create an endpoint to DELETE question using a question ID.
-    # TEST: When you click the trash icon next to a question, the question
-    # will be removed.  This removal will persist in the database and when
-    # you refresh the page.
-    #
-    # curl -X DELETE http://127.0.0.1:5000/actors/8
+    # DELETE: /actors/<int:id>
+    # Authorized:
+    # Endpoint: Deletes specific actor data fields
+    # Returns: status code 200 and json {"success": True}
+    #   where actor deleted is a single actor
+    #   or appropriate status code indicating reason for failure
     # '''
 
     @app.route('/actors/<int:id>', methods=['DELETE'])
@@ -605,20 +600,6 @@ def create_app(test_config=None):
 
             actor.delete()
 
-            # actors_all = Actor.query.all()
-
-            # if len(actors_all) == 0:
-            #     abort(404)
-
-            # actors = [a.to_json() for a in actors_all]
-
-            # return jsonify({
-            #     'success': True,
-            #     'deleted': id,
-            #     'actor': actor,
-            #     'total_actors': len(actors_all)
-            # }), 200
-
             return jsonify({
                 'success': True
             }), 200
@@ -629,11 +610,12 @@ def create_app(test_config=None):
 
 
     # '''
-    # GET /movies/title
-    #
-    # Search /movies?title=[title]
-    #
-    # curl -X GET http://127.0.0.1:5000/movies/title  
+    # SEARCH: /actors/search
+    # Authorized:
+    # Endpoint: Provide a like search for actor first-name
+    # Returns: status code 200 and json {"success": True}
+    #   where actor(s) are searched for by first-name
+    #   or appropriate status code indicating reason for failure
     # '''
     
     @app.route('/actors/search', methods=['GET'])
@@ -659,6 +641,48 @@ def create_app(test_config=None):
         except Exception as e:
             print('\n'+'Error getting actor first name: ', e)
             abort(404) 
+
+
+
+    # MANY TO MANY RELATIONSHIP add actor to movie
+    # @app.route('/movies/<int:movie_id>/actors/<int:actor_id>', methods=['POST'])
+    # def addActorToMovie(movie_id, actor_id)
+
+    # MANY TO MANY RELATIONSHIP remove actor from movie
+    # @app.route('/movies/<int:movie_id>/actors/<int:actor_id>', methods=['Delete'])
+    # def removeActorToMovie(movie_id, actor_id)
+
+    # MANY TO MANY RELATIONSHIP add movie to an actor
+    # @app.route('/actors/<int:actor_id>/movies/<int:movie_id>', methods=['POST'])
+    # def addMovieToActor(actor_id, movie_id)
+
+    # MANY TO MANY RELATIONSHIP remove movie from an actor
+    # @app.route('/actors/<int:actor_id>/movies/<int:movie_id>', methods=['DELETE'])
+    # def removeMovieToActor(actor_id, movie_id)
+
+    # MANY TO MANY RELATIONSHIP Get all Actors for a movie
+    # @app.route('/movies/<int:movie_id>/actors', methods=['GET'])
+    # def get_all_actors_for_movie(id):
+
+    # MANY TO MANY RELATIONSHIP Get all Movies for the actor with id=id
+    # @app.route('/actors/<int:actor_id>/movies', methods=['GET'])
+    # def get_all_movies_for_actor(actor_id):
+    #     try:
+
+    #         if id is None:
+    #             abort(404)
+
+    #         actor = Actor.query.get(id)
+
+    #         if actor is None:
+    #             abort(404)
+
+    #         #return jsonify(Actor.movies.any(id=actor.id)), 200
+    #         return jsonify(actor.movies.query.all()), 200
+
+    #     except Exception as e:
+    #         print('\n'+'Error fetching movies for actor record: ', e)
+    #         abort(404)
 
 
     '''
