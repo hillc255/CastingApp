@@ -87,17 +87,10 @@ def create_app(test_config=None):
     # uncomment if want to drop and create database
     #db_drop_and_create_all() 
 
+
     # '''
-    # MOVIES APIS
-    #
-    # getAllMovies
-    # getMovie
-    # createMovie
-    # updateMovie
-    # deleteMovie
-    # deleteAllMovies
-    # findMovieByTitle
-    #
+    # MOVIE APIs
+    # 
     # '''
 
     # '''
@@ -368,6 +361,12 @@ def create_app(test_config=None):
         except Exception as e:
             print('\n'+'Error getting movie titles: ', e)
             abort(404) 
+
+
+    # '''
+    # ACTOR ENDPOINTS
+    #
+    # '''
    
  
     # '''
@@ -393,7 +392,7 @@ def create_app(test_config=None):
             for i, actorObj in enumerate(actors_all):
                 results.append(json.loads(actorObj.to_json()))
 
-            return jsonify(results)
+            return jsonify(results), 200
 
         except Exception as e:
             print('\n'+'Error getting actors record: ', e)

@@ -83,6 +83,7 @@
       >
         UnPublish
       </button>
+
       <button
         *ngIf="!currentActor.actor_publish"
         class="badge badge-primary mr-2"
@@ -97,8 +98,7 @@
   
       <button
         type="submit"
-        class="badge badge-success mb-2"
-        (click)="updateActor()"
+        class="badge badge-success mb-2" (click)="updateActor()"
       >
         Update
       </button>
