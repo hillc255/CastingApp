@@ -20,29 +20,6 @@ from backend.src.auth.auth import AuthError, requires_auth
 
 print(f"**** app.py ****")
 
-# # Third party imports
-# try:
-
-#     from flask import Flask, request, abort, jsonify
-#     from flask_sqlalchemy import SQLAlchemy
-#     #from sqlalchemy import exc
-
-#     import json
-#     import simplejson
-#     from simplejson import dumps
-
-#     from flask_cors import CORS, cross_origin
-#     from flask_migrate import Migrate
-#     from flask_moment import Moment
-
-#     # Local application imports
-#     from .database.models import db_drop_and_create_all, setup_db, Movie, Actor, MovieActorLink
-#     from backend.src.auth.auth import AuthError, requires_auth
-
-
-# except Exception as e:
-#     print(e)
-
 def create_app(test_config=None):
     app = Flask(__name__)
     moment = Moment(app)
@@ -50,7 +27,7 @@ def create_app(test_config=None):
     db = SQLAlchemy(app)
     migrate = Migrate(app, db)
 
-    # create and configure the app
+    # Create and configure the app
     CORS(app)
 
     # Added CORS and after_request decorator to set Access-Control-Allow
@@ -79,12 +56,8 @@ def create_app(test_config=None):
     def get_messages():
         return 'CORS is working...'
 
-    # @app.route('/<path:page>')
-    # def fallback(page):
-    #     return render_template('index.html')
-
-
-    # uncomment if want to drop and create database
+ 
+    # Uncomment if want to drop and create database
     #db_drop_and_create_all() 
 
 
@@ -93,16 +66,14 @@ def create_app(test_config=None):
     # 
     # '''
 
+
     # '''
-    #     GET /movies 
-    #         a public endpoint
-    #         contains all movies data representation
-    #     returns status code 200 and json {"success": True, "movies": movies}
-    #     where movies is the list of movies
-    #      or appropriate status code indicating reason for failure
-    #
-    #      curl --request GET http://127.0.0.1:5000/movies
-    #
+    # GET:          /movies
+    # Authorized:
+    # Endpoint:     Gets all movies data representation
+    # Returns:      Status code 200 for successful get
+    #               where movies is the list of movies
+    #               or appropriate status code indicating reason for failure
     # '''
 
     @app.route('/movies', methods=['GET'])
@@ -119,22 +90,19 @@ def create_app(test_config=None):
             for i, movieObj in enumerate(movies_all):
                 results.append(json.loads(movieObj.to_json()))
 
-            return jsonify(results)
+            return jsonify(results), 200
 
         except Exception as e:
             print('\n'+'Error getting movies records: ', e)
             abort(404)
     
     # '''
-    #     GET /movies/<int:movie_id>
-    #         a public endpoint
-    #         contains a single movie data representation
-    #     returns status code 200 and json {"success": True, "movie": movie}
-    #     where movie is a single movie by id
-    #     or appropriate status code indicating reason for failure
-    #
-    #     curl -X GET http://127.0.0.1:5000/movies/1
-    #
+    # GET:          /movies/<int:id>
+    # Authorized:
+    # Endpoint:     GET a specific movie
+    # Returns:      Status code 200 and json {"success": True, "movie": data}
+    #               where movie is a single movie data
+    #               or appropriate status code indicating reason for failure
     # '''
 
 
@@ -169,12 +137,12 @@ def create_app(test_config=None):
             abort(404)
 
     # '''
-    # create movie
-    # This endpoint to POST a new movie
-    # 
-    # curl --header "Content-Type: application/json" --request POST --data "{\"title\":\"Great movie\",\"release_date\":\"2021-03-14\",\"movie_img\":\"https://github.com/hillc255/YelpCamp\",\"movie_publish\": true}" http://127.0.0.1:5000/movies/add 
-    # curl --header "Content-Type: application/json" --request POST --data "{\"title\":\"Great movie\",\"release_date\":\"2021-03-14\",\"movie_img\":\"https://github.com/hillc255/YelpCamp\"}" http://127.0.0.1:5000/movies/add
-    #
+    # POST:         /movies
+    # Authorized:
+    # Endpoint:     Create a new movie
+    # Returns:      Status code 200 and json {"success": True}
+    #               where movie is a single new movie
+    #               or appropriate status code indicating reason for failure
     # '''
 
     @app.route('/movies', methods=['POST'])
@@ -207,20 +175,14 @@ def create_app(test_config=None):
             abort(422)
     
     # '''
-    #     PATCH /movies/<int:movie_id>
-    #         a public endpoint
-    #         contains a single movie data representation to be updated
-    #         where <id> is the existing model id
-    #         it should respond with a 404 error if <id> is not found
-    #         it should update the corresponding row for <id>
-    #         it should require the 'patch:movies' permission
-    #     returns status code 200 and json {"success": True, "movie": movie}
-    #     where movie is a single movie by id
-    #     or appropriate status code indicating reason for failure
-    #
-    # curl --header "Content-Type: application/json" --request PUT --data "{\"title\":\"New movie2\",\"release_date\":\"2021-03-14\",\"movie_img\":\"https://github.com/hillc255/YelpCamp\",\"movie_publish\": true}" http://127.0.0.1:5000/movies/7
-    #
+    # PATCH:        /movies/<int:id>
+    # Authorized:
+    # Endpoint:     Update movie data fields
+    # Returns:      Status code 200 and json {"success": True}
+    #               where movie published is a single movie
+    #               or appropriate status code indicating reason for failure
     # '''
+
 
     @app.route('/movies/<int:id>', methods=['PATCH'])
     #@requires_auth('patch:movies')
@@ -245,6 +207,15 @@ def create_app(test_config=None):
             "success": True
         }), 200
 
+    # '''
+    # PATCH:        /actors/<int:id>/publish
+    # Authorized:
+    # Endpoint:     Publish movie data fields - boolen
+    # Returns:      Status code 200 and json {"success": True}
+    #               where movie updated is a single movie
+    #               or appropriate status code indicating reason for failure
+    # '''
+
 
     @app.route('/movies/<int:id>/publish', methods=['PATCH'])
     #@requires_auth('patch:movies')
@@ -267,6 +238,15 @@ def create_app(test_config=None):
         }), 200
 
 
+    # '''
+    # PATCH:        /actors/<int:id>/publish
+    # Authorized:
+    # Endpoint:     Unpublish movie data fields - boolen
+    # Returns:      Status code 200 and json {"success": True}
+    #               where movie updated is a single movie
+    #               or appropriate status code indicating reason for failure
+    # '''
+
     @app.route('/movies/<int:id>/unpublish', methods=['PATCH'])
     #@requires_auth('patch:movies')
     def unpublishMovie(id):
@@ -288,13 +268,12 @@ def create_app(test_config=None):
         }), 200
 
     # '''
-    # Delete movie
-    # Create an endpoint to DELETE question using a question ID.
-    # TEST: When you click the trash icon next to a question, the question
-    #  will be removed.  This removal will persist in the database and when
-    # you refresh the page.
-    #
-    # curl -X DELETE http://127.0.0.1:5000/movies/6   
+    # DELETE:       /movies/<int:id>
+    # Authorized:
+    # Endpoint:     Deletes specific movie data fields
+    # Returns:      Status code 200 and json {"success": True}
+    #               where movie deleted is a single movie
+    #               or appropriate status code indicating reason for failure
     # '''
 
     @app.route('/movie/<int:id>', methods=['DELETE'])
@@ -330,11 +309,12 @@ def create_app(test_config=None):
  
 
     # '''
-    # GET /movies/title
-    #
-    # Search /movies?title=[title]
-    #
-    # curl -X GET http://127.0.0.1:5000/movies/title  
+    # SEARCH:       /movies/search
+    # Authorized:
+    # Endpoint:     Provide a like search for movie title
+    # Returns:      Status code 200 if search is successful
+    #               where movie(s) are searched for by title
+    #               or appropriate status code indicating reason for failure
     # '''
     
     @app.route('/movies/search', methods=['GET'])
@@ -370,12 +350,12 @@ def create_app(test_config=None):
    
  
     # '''
-    # GET: /actors
+    # GET:          /actors
     # Authorized:
-    # Endpoint: gets all actors data representation
-    # Returns status code 200 for successful get
-    #   where actors is the list of actors
-    #   or appropriate status code indicating reason for failure
+    # Endpoint:     Gets all actors data representation
+    # Returns:      Status code 200 for successful get
+    #               where actors is the list of actors
+    #               or appropriate status code indicating reason for failure
     # '''
 
     @app.route('/actors', methods=['GET'])
@@ -400,12 +380,12 @@ def create_app(test_config=None):
 
 
     # '''
-    # GET: /actors/<int:id>
+    # GET:          /actors/<int:id>
     # Authorized:
-    # Endpoint:  GET a specific actor
-    # Returns: status code 200 and json {"success": True, "actor": data}
-    #   where actor is a single actor data
-    #   or appropriate status code indicating reason for failure
+    # Endpoint:     GET a specific actor
+    # Returns:      Status code 200 and json {"success": True, "actor": data}
+    #               where actor is a single actor data
+    #               or appropriate status code indicating reason for failure
     # '''
 
     @app.route('/actors/<int:id>', methods=['GET'])
@@ -442,12 +422,12 @@ def create_app(test_config=None):
         
 
     # '''
-    # POST: /actors
+    # POST:         /actors
     # Authorized:
-    # Endpoint: create a new actor
-    # Returns: status code 200 and json {"success": True}
-    #   where actor is a single new actor
-    #   or appropriate status code indicating reason for failure
+    # Endpoint:     Create a new actor
+    # Returns:      Status code 200 and json {"success": True}
+    #               where actor is a single new actor
+    #               or appropriate status code indicating reason for failure
     # '''
 
     @app.route('/actors', methods=['POST'])
@@ -484,12 +464,12 @@ def create_app(test_config=None):
 
  
     # '''
-    # PATCH: /actors/<int:id>
+    # PATCH:        /actors/<int:id>
     # Authorized:
-    # Endpoint:  update actor data fields
-    # Returns: status code 200 and json {"success": True}
-    #   where actor published is a single actor
-    #   or appropriate status code indicating reason for failure
+    # Endpoint:     Update actor data fields
+    # Returns:      Status code 200 and json {"success": True}
+    #               where actor published is a single actor
+    #               or appropriate status code indicating reason for failure
     # '''
 
 
@@ -520,12 +500,12 @@ def create_app(test_config=None):
         }), 200
 
     # '''
-    # PATCH: /actors/<int:id>/publish
+    # PATCH:        /actors/<int:id>/publish
     # Authorized:
-    # Endpoint: publish actor data fields
-    # Returns: status code 200 and json {"success": True}
-    #   where actor updated is a single actor
-    #   or appropriate status code indicating reason for failure
+    # Endpoint:     Publish actor data fields - boolen
+    # Returns:      Status code 200 and json {"success": True}
+    #               where actor updated is a single actor
+    #               or appropriate status code indicating reason for failure
     # '''
     
     @app.route('/actors/<int:id>/publish', methods=['PATCH'])
@@ -550,12 +530,12 @@ def create_app(test_config=None):
 
 
     # '''
-    # PATCH: /actors/<int:id>/unpublish
+    # PATCH:        /actors/<int:id>/unpublish
     # Authorized:
-    # Endpoint:  unpublish actor data fields
-    # Returns: status code 200 and json {"success": True}
-    #   where actor unpublish is a single actor
-    #   or appropriate status code indicating reason for failure
+    # Endpoint:     Unpublish actor data fields - boolean
+    # Returns:      Status code 200 and json {"success": True}
+    #               where actor unpublish is a single actor
+    #               or appropriate status code indicating reason for failure
     # '''
 
 
@@ -581,12 +561,12 @@ def create_app(test_config=None):
 
 
     # '''
-    # DELETE: /actors/<int:id>
+    # DELETE:       /actors/<int:id>
     # Authorized:
-    # Endpoint: Deletes specific actor data fields
-    # Returns: status code 200 and json {"success": True}
-    #   where actor deleted is a single actor
-    #   or appropriate status code indicating reason for failure
+    # Endpoint:     Deletes specific actor data fields
+    # Returns:      Status code 200 and json {"success": True}
+    #               where actor deleted is a single actor
+    #               or appropriate status code indicating reason for failure
     # '''
 
     @app.route('/actors/<int:id>', methods=['DELETE'])
@@ -609,12 +589,12 @@ def create_app(test_config=None):
 
 
     # '''
-    # SEARCH: /actors/search
+    # SEARCH:       /actors/search
     # Authorized:
-    # Endpoint: Provide a like search for actor first-name
-    # Returns: status code 200 if search is successful
-    #   where actor(s) are searched for by first-name
-    #   or appropriate status code indicating reason for failure
+    # Endpoint:      Provide a like search for actor first-name
+    # Returns:      Status code 200 if search is successful
+    #               where actor(s) are searched for by first-name
+    #               or appropriate status code indicating reason for failure
     # '''
     
     @app.route('/actors/search', methods=['GET'])
