@@ -280,24 +280,12 @@ def create_app(test_config=None):
     def deleteMovie(id):
 
         try:
-            #data = Movie.query.filter(Movie.id == id).one_or_none()
-            #data = Movie.query.filter_by(id).delete()
-            data = Movie.query.filter_by(id).one_or_none()
+            movie = Movie.query.filter(Movie_id == id).one_or_none()
 
-            if data is None:
+            if movie is None:
                 abort(404)
 
-            data.delete()
-
-            #current_movies = Movie.query.order_by(Movie.title).all()
-            # current_movie = paginate_movies(request, selection)
-
-            # return jsonify({
-            #     'success': True,
-            #     'deleted': id,
-            #     'movies': current_movies,
-            #     'total_movies': len(Movie.query.all())
-            # }), 200
+            movie.delete()
 
             return jsonify({
                 'success': True
@@ -570,7 +558,7 @@ def create_app(test_config=None):
     # '''
 
     @app.route('/actors/<int:id>', methods=['DELETE'])
-    def delete_actor(id):
+    def deleteActor(id):
         try:
             actor = Actor.query.filter(Actor.id == id).one_or_none()
 
