@@ -373,7 +373,7 @@ def create_app(test_config=None):
     # GET: /actors
     # Authorized:
     # Endpoint: gets all actors data representation
-    # Returns status code 200 and json {"success": True, "actors": actors}
+    # Returns status code 200 for successful get
     #   where actors is the list of actors
     #   or appropriate status code indicating reason for failure
     # '''
@@ -612,7 +612,7 @@ def create_app(test_config=None):
     # SEARCH: /actors/search
     # Authorized:
     # Endpoint: Provide a like search for actor first-name
-    # Returns: status code 200 and json {"success": True}
+    # Returns: status code 200 if search is successful
     #   where actor(s) are searched for by first-name
     #   or appropriate status code indicating reason for failure
     # '''
@@ -635,7 +635,7 @@ def create_app(test_config=None):
             for i, actorObj in enumerate(data):
                 results.append(json.loads(actorObj.to_json()))
 
-            return jsonify(results)
+            return jsonify(results), 200
 
         except Exception as e:
             print('\n'+'Error getting actor first name: ', e)
