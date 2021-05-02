@@ -276,7 +276,7 @@ def create_app(test_config=None):
     #               or appropriate status code indicating reason for failure
     # '''
 
-    @app.route('/movie/<int:id>', methods=['DELETE'])
+    @app.route('/movies/<int:id>', methods=['DELETE'])
     def deleteMovie(id):
 
         try:
