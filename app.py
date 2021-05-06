@@ -114,7 +114,6 @@ def create_app(test_config=None):
             abort(404)
 
         movie_query = Movie.query.filter(Movie.id == id).one_or_none()
-        #movie_query = Movie.query.get(id)
 
         if movie_query is None:
             abort(404)
@@ -193,7 +192,6 @@ def create_app(test_config=None):
             abort(404)
 
         data = Movie.query.filter(Movie.id == id).one_or_none()
-        # data = Movie.query.get(id)
 
         if data is None:
             abort(404)
@@ -231,7 +229,7 @@ def create_app(test_config=None):
         if id is None:
             abort(404)
 
-        data = Movie.query.get(id)
+        data = Movie.query.filter(Movie.id == id).one_or_none()
 
         if data is None:
             abort(404)
@@ -266,7 +264,7 @@ def create_app(test_config=None):
         if id is None:
             abort(404)
 
-        data = Movie.query.get(id)
+        data = Movie.query.filter(Movie.id == id).one_or_none()
 
         if data is None:
             abort(404)
@@ -400,7 +398,6 @@ def create_app(test_config=None):
             abort(404)
 
         actor_query = Actor.query.filter(Actor.id == id).one_or_none()
-        #actor_query = Actor.query.get(id)
 
         if actor_query is None:
             abort(404)
@@ -486,7 +483,6 @@ def create_app(test_config=None):
             abort(404)
 
         data = Actor.query.filter(Actor.id == id).one_or_none()
-        #data = Actor.query.get(id)
 
         if data is None:
             abort(404)
@@ -527,7 +523,6 @@ def create_app(test_config=None):
             abort(404)
 
         data = Actor.query.filter(Actor.id == id).one_or_none()
-        #data = Actor.query.get(id)
 
         if data is None:
             abort(404)
@@ -564,7 +559,6 @@ def create_app(test_config=None):
             abort(404)
 
         data = Actor.query.filter(Actor.id == id).one_or_none()
-        #data = Actor.query.get(id)
 
         if data is None:
             abort(404)
