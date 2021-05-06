@@ -113,7 +113,8 @@ def create_app(test_config=None):
         if id is None:
             abort(404)
 
-        movie_query = Movie.query.get(id)
+        movie_query = Movie.query.filter(Movie.id == id).one_or_none()
+        #movie_query = Movie.query.get(id)
 
         if movie_query is None:
             abort(404)
@@ -191,7 +192,8 @@ def create_app(test_config=None):
         if id is None:
             abort(404)
 
-        data = Movie.query.get(id)
+        data = Movie.query.filter(Movie.id == id).one_or_none()
+        # data = Movie.query.get(id)
 
         if data is None:
             abort(404)
@@ -383,7 +385,8 @@ def create_app(test_config=None):
         if id is None:
             abort(404)
 
-        actor_query = Actor.query.get(id)
+        actor_query = Actor.query.filter(Actor.id == id).one_or_none()
+        #actor_query = Actor.query.get(id)
 
         if actor_query is None:
             abort(404)
@@ -468,7 +471,8 @@ def create_app(test_config=None):
         if id is None:
             abort(404)
 
-        data = Actor.query.get(id)
+        data = Actor.query.filter(Actor.id == id).one_or_none()
+        #data = Actor.query.get(id)
 
         if data is None:
             abort(404)
@@ -503,7 +507,8 @@ def create_app(test_config=None):
         if id is None:
             abort(404)
 
-        data = Actor.query.get(id)
+        data = Actor.query.filter(Actor.id == id).one_or_none()
+        #data = Actor.query.get(id)
 
         if data is None:
             abort(404)
@@ -534,7 +539,8 @@ def create_app(test_config=None):
         if id is None:
             abort(404)
 
-        data = Actor.query.get(id)
+        data = Actor.query.filter(Actor.id == id).one_or_none()
+        #data = Actor.query.get(id)
 
         if data is None:
             abort(404)
@@ -608,49 +614,6 @@ def create_app(test_config=None):
         except Exception as e:
             print('\n'+'Error getting actor first name: ', e)
             abort(404) 
-
-
-
-    # MANY TO MANY RELATIONSHIP add actor to movie
-    # @app.route('/movies/<int:movie_id>/actors/<int:actor_id>', methods=['POST'])
-    # def addActorToMovie(movie_id, actor_id)
-
-    # MANY TO MANY RELATIONSHIP remove actor from movie
-    # @app.route('/movies/<int:movie_id>/actors/<int:actor_id>', methods=['Delete'])
-    # def removeActorToMovie(movie_id, actor_id)
-
-    # MANY TO MANY RELATIONSHIP add movie to an actor
-    # @app.route('/actors/<int:actor_id>/movies/<int:movie_id>', methods=['POST'])
-    # def addMovieToActor(actor_id, movie_id)
-
-    # MANY TO MANY RELATIONSHIP remove movie from an actor
-    # @app.route('/actors/<int:actor_id>/movies/<int:movie_id>', methods=['DELETE'])
-    # def removeMovieToActor(actor_id, movie_id)
-
-    # MANY TO MANY RELATIONSHIP Get all Actors for a movie
-    # @app.route('/movies/<int:movie_id>/actors', methods=['GET'])
-    # def get_all_actors_for_movie(id):
-
-    # MANY TO MANY RELATIONSHIP Get all Movies for the actor with id=id
-    # @app.route('/actors/<int:actor_id>/movies', methods=['GET'])
-    # def get_all_movies_for_actor(actor_id):
-    #     try:
-
-    #         if id is None:
-    #             abort(404)
-
-    #         actor = Actor.query.get(id)
-
-    #         if actor is None:
-    #             abort(404)
-
-    #         #return jsonify(Actor.movies.any(id=actor.id)), 200
-    #         return jsonify(actor.movies.query.all()), 200
-
-    #     except Exception as e:
-    #         print('\n'+'Error fetching movies for actor record: ', e)
-    #         abort(404)
-
 
     '''
     Error handlers for all expected errors including 404 and 422.

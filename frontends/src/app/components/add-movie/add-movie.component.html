@@ -1,4 +1,4 @@
-<div>
+<form #form="ngForm" (ngSubmit)="saveMovie(form)" novalidate>
     <div class="submit-form">
       <div *ngIf="!submitted">
 
@@ -7,36 +7,63 @@
           <input
             type="text"
             class="form-control"
-            id="title"
+            #title="ngModel"
             required
+            minlength="4"
             [(ngModel)]="movie.title"
             name="title"
           />
+        </div>
+     
+        <div *ngIf="title.invalid && (title.dirty || title.touched)"
+          class="alert alert-danger">
+          <div *ngIf="title.errors.required">
+            Title is required.
+          </div>
+          <div *ngIf="title.errors.minlength">
+            Title must be 4 characters long.
+          </div>
         </div>
 
         <div class="form-group">
             <label for="release_date">Release Date</label>
             <input
+              type="date"
               class="form-control"
-              id="release_date"
+              #release_date="ngModel"
               required
               [(ngModel)]="movie.release_date"
               name="release_date"
             />
           </div>
 
-          <div class="form-group">
+        <div class="form-group">
             <label for="movie_img">Movie Image</label>
             <input
-              class="form-control"
               id="movie_img"
+              type="url"
+              class="form-control"
+              name="movie_img"
+              placeholder="https://starwars/R2-D2_Droid.png"
+              #movie_img="ngModel"
               required
               [(ngModel)]="movie.movie_img"
-              name="movie_img"
+              [ngModelOptions]="{ updateOn: 'blur' }" 
+              pattern="[-a-zA-Z0-9@:%_+.~#?&//=]{2,256}(.[a-z]{2,4})?\b(/[-a-zA-Z0-9@:%_+.~#?&//=]*)?"
             />
+        </div>
+
+        <div *ngIf="movie_img.invalid && (movie_img.dirty || movie_img.touched)"
+          class="alert alert-danger">
+          <div *ngIf="movie_img.errors.required">
+            URL is required.
           </div>
+          <div *ngIf="movie_img.errors.pattern">
+            Please enter valid url.
+          </div>
+        </div>
   
-        <button (click)="saveMovie()" class="btn btn-success">Submit</button>
+        <button class="btn btn-success" [disabled]="form.invalid">Submit</button>
       </div>
   
       <div *ngIf="submitted">
@@ -44,4 +71,4 @@
         <button class="btn btn-success" (click)="newMovie()">Add</button>
       </div>
     </div>
-  </div>
+</form>

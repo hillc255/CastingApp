@@ -7,6 +7,7 @@ import { MovieService } from 'src/app/services/movie.service';
   templateUrl: './add-movie.component.html',
   styleUrls: ['./add-movie.component.css']
 })
+
 export class AddMovieComponent implements OnInit {
   movie: Movie = {
     title: '',
@@ -21,7 +22,7 @@ export class AddMovieComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  saveMovie(): void {
+  saveMovie(form: any): void {
     const data = {
       title: this.movie.title,
       release_date: this.movie.release_date,
