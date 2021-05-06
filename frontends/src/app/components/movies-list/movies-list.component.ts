@@ -31,6 +31,10 @@ export class MoviesListComponent implements OnInit {
         });
   }
 
+  setDefaultPic() {
+    this.currentMovie.movie_img = "https://i.ibb.co/6v84Gpq/no-image.png";
+  }
+
   refreshList(): void {
     this.retrieveMovies();
     this.currentMovie = undefined;

@@ -40,8 +40,8 @@
         <h4>Movie</h4>
 
         <div>
-          <img class="image-thumb" src="{{ currentMovie.movie_img }}" onError="this.onerror=null; 
-              this.src='src/app/static/noimage.png';" />
+          <img class="image-thumb" src="{{ currentMovie.movie_img }}" 
+          (error)="setDefaultPic()" />
         </div>
 
         <div>
