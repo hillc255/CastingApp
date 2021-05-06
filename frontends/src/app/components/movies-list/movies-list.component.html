@@ -18,7 +18,9 @@
         </div>
       </div>
     </div>
+
     <div class="col-md-6">
+      <p></p>
       <h4>Movies List</h4>
       <ul class="list-group">
         <li
@@ -30,14 +32,15 @@
           {{ movie.title }}
         </li>
       </ul>
-  
     </div>
+
     <div class="col-md-6">
       <div *ngIf="currentMovie">
+        <p></p>
         <h4>Movie</h4>
 
         <div>
-          <img class="image-thumb" src="{{ currentMovie.movie_img }}">
+          <img class="image-thumb" src="{{ currentMovie.movie_img }}" onError="this.src='static/no_image.png'" />
         </div>
 
         <div>

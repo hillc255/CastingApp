@@ -1,7 +1,9 @@
 <form #form="ngForm" (ngSubmit)="saveMovie(form)" novalidate>
     <div class="submit-form">
       <div *ngIf="!submitted">
-
+        <br />
+        <h4>Add Movie</h4>
+        <p></p>
         <div class="form-group">
           <label for="title">Title</label>
           <input
@@ -9,7 +11,7 @@
             class="form-control"
             #title="ngModel"
             required
-            minlength="4"
+            minlength="2"
             [(ngModel)]="movie.title"
             name="title"
           />
@@ -21,19 +23,21 @@
             Title is required.
           </div>
           <div *ngIf="title.errors.minlength">
-            Title must be 4 characters long.
+            Title must be 2 characters long.
           </div>
         </div>
 
         <div class="form-group">
             <label for="release_date">Release Date</label>
             <input
-              type="date"
+              type="text"
+              onfocus="(this.type='date')"
               class="form-control"
+              name="release_date"
+              placeholder="mm/dd/yyyy"
               #release_date="ngModel"
               required
               [(ngModel)]="movie.release_date"
-              name="release_date"
             />
           </div>
 
@@ -63,6 +67,7 @@
           </div>
         </div>
   
+        <p></p>
         <button class="btn btn-success" [disabled]="form.invalid">Submit</button>
       </div>
   

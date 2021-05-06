@@ -2,3 +2,16 @@
     max-width: 400px;
     margin: auto;
   }
+
+input:placeholder-shown {
+    font-style: italic;
+ }
+
+label, input {
+  display: block;
+}
+
+label {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
