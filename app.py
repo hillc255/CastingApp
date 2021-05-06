@@ -93,7 +93,7 @@ def create_app(test_config=None):
             return jsonify(results), 200
 
         except Exception as e:
-            print('\n'+'Error getting movies records: ', e)
+            print('\n'+'Error getting all movie records: ', e)
             abort(404)
     
     # '''
@@ -172,7 +172,7 @@ def create_app(test_config=None):
             }), 200
 
         except Exception as e:
-            print('\n'+'Error adding movie record: ', e)
+            print('\n'+'Error creating movie record: ', e)
             abort(422)
     
     # '''
@@ -203,11 +203,16 @@ def create_app(test_config=None):
         data.release_date = request.json.get('release_date')
         data.movie_img = request.json.get('movie_img')
 
-        data.update()
+        try:
+            data.update()
 
-        return jsonify({
-            "success": True
-        }), 200
+            return jsonify({
+                "success": True
+             }), 200
+        
+        except Exception as e:
+            print('\n'+'Error updating movie record: ', e)
+            abort(422)
 
     # '''
     # PATCH:        /actors/<int:id>/publish
@@ -233,11 +238,16 @@ def create_app(test_config=None):
             
         data.movie_publish = True
 
-        data.update()
+        try:
+            data.update()
 
-        return jsonify({
-            "success": True
-        }), 200
+            return jsonify({
+                "success": True
+            }), 200
+
+        except Exception as e:
+            print('\n'+'Error publishing movie record: ', e)
+            abort(422)
 
 
     # '''
@@ -263,11 +273,16 @@ def create_app(test_config=None):
             
         data.movie_publish = False
 
-        data.update()
+        try:
+            data.update()
 
-        return jsonify({
-            "success": True
-        }), 200
+            return jsonify({
+                "success": True
+            }), 200
+        
+        except Exception as e:
+            print('\n'+'Error unpublishing movie record: ', e)
+            abort(422)
 
     # '''
     # DELETE:       /movies/<int:id>
@@ -322,14 +337,13 @@ def create_app(test_config=None):
         results = []
         
         try:
-
             for i, movieObj in enumerate(data):
                 results.append(json.loads(movieObj.to_json()))
 
             return jsonify(results)
 
         except Exception as e:
-            print('\n'+'Error getting movie titles: ', e)
+            print('\n'+'Error searching by movie titles: ', e)
             abort(404) 
 
 
@@ -365,7 +379,7 @@ def create_app(test_config=None):
             return jsonify(results), 200
 
         except Exception as e:
-            print('\n'+'Error getting actors record: ', e)
+            print('\n'+'Error getting all actor records: ', e)
             abort(404)
 
 
@@ -450,7 +464,7 @@ def create_app(test_config=None):
             }), 200
 
         except Exception as e:
-            print('\n'+'Error adding actor record: ', e)
+            print('\n'+'Error creating actor record: ', e)
             abort(422)
 
  
@@ -485,11 +499,16 @@ def create_app(test_config=None):
         data.actor_img = request.json.get('actor_img')
         data.actor_publish = request.json.get('actor_publish')
 
-        data.update()
+        try:
+            data.update()
 
-        return jsonify({
-            "success": True
-        }), 200
+            return jsonify({
+                "success": True
+            }), 200
+
+        except Exception as e:
+            print('\n'+'Error updating actor record: ', e)
+            abort(422)
 
     # '''
     # PATCH:        /actors/<int:id>/publish
@@ -515,11 +534,16 @@ def create_app(test_config=None):
             
         data.actor_publish = True
 
-        data.update()
+        try:
+            data.update()
 
-        return jsonify({
-            "success": True
-        }), 200
+            return jsonify({
+                "success": True
+            }), 200
+        
+        except Exception as e:
+            print('\n'+'Error publishing actor record: ', e)
+            abort(422)
 
 
     # '''
@@ -547,11 +571,16 @@ def create_app(test_config=None):
             
         data.actor_publish = False
 
-        data.update()
+        try:
+            data.update()
 
-        return jsonify({
-            "success": True
-        }), 200
+            return jsonify({
+                "success": True
+            }), 200
+        
+        except Exception as e:
+            print('\n'+'Error unpublishing actor record: ', e)
+            abort(422)
 
 
     # '''
@@ -612,7 +641,7 @@ def create_app(test_config=None):
             return jsonify(results), 200
 
         except Exception as e:
-            print('\n'+'Error getting actor first name: ', e)
+            print('\n'+'Error searching by actor first name: ', e)
             abort(404) 
 
     '''
