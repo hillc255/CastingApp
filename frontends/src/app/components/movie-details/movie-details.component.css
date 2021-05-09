@@ -1,4 +1,13 @@
 .edit-form {
     max-width: 400px;
     margin: auto;
-  }
+}
+
+label, input {
+    display: block;
+}
+  
+label {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}

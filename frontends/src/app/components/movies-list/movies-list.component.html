@@ -43,33 +43,23 @@
           <img class="image-thumb" src="{{ currentMovie.movie_img }}" 
           (error)="setDefaultPic()" />
         </div>
-
+        <br />
         <div>
-          <label><strong>Id:</strong></label> 
-          {{ currentMovie.id }}
-        </div>
-        
-        <div>
-          <label><strong>Title:</strong></label> 
-          {{ currentMovie.title }}
+          <label><strong>Title:    </strong>
+            {{ currentMovie.title }}</label> 
         </div>
 
         <div>
-          <label><strong>Release Date:</strong></label>
-          {{ currentMovie.release_date }}
+          <label><strong>Release Date:   </strong>
+            {{ currentMovieReleaseDate}} </label>
         </div>
 
         <div>
-          <label><strong>Movie Image:</strong></label>
-          {{ currentMovie.movie_img }}
+          <label><strong>Status:    </strong>
+            {{ currentMovie.movie_publish ? "Published" : "Pending" }}</label>      
         </div>
-
-        <div>
-          <label><strong>Status:</strong></label>
-          {{ currentMovie.movie_publish ? "Published" : "Pending" }}
-        </div>
-  
-        <a class="badge badge-warning" routerLink="/movies/{{ currentMovie.id }}">
+        <p></p>
+        <a class="btn btn-primary me-2" routerLink="/movies/{{ currentMovie.id }}">
           Edit
         </a>
       </div>

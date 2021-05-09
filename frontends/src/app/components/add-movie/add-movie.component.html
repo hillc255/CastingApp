@@ -4,6 +4,7 @@
         <br />
         <h4>Add Movie</h4>
         <p></p>
+        
         <div class="form-group">
           <label for="title">Title</label>
           <input
@@ -45,7 +46,7 @@
             <label for="movie_img">Movie Image</label>
             <input
               id="movie_img"
-              type="url"
+              type="text"
               class="form-control"
               name="movie_img"
               placeholder="https://starwars/R2-D2_Droid.png"
@@ -53,7 +54,7 @@
               required
               [(ngModel)]="movie.movie_img"
               [ngModelOptions]="{ updateOn: 'blur' }" 
-              pattern="[-a-zA-Z0-9@:%_+.~#?&//=]{2,256}(.[a-z]{2,4})?\b(/[-a-zA-Z0-9@:%_+.~#?&//=]*)?"
+              pattern="(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|jpeg|gif|png|svg)"
             />
         </div>
 

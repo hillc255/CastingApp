@@ -23,7 +23,7 @@ export class AddActorComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  saveActor(): void {
+  saveActor(form: any): void {
     const data = {
       first_name: this.actor.first_name,
       last_name: this.actor.last_name,

@@ -18,8 +18,11 @@
         </div>
       </div>
     </div>
+
     <div class="col-md-6">
-      <h4>Actors List</h4>
+      <p></p>
+      <h4>Robot List</h4>
+
       <ul class="list-group">
         <li
           class="list-group-item"
@@ -34,46 +37,45 @@
     </div>
     <div class="col-md-6">
       <div *ngIf="currentActor">
-        <h4>Actor</h4>
+        <p></p>
+        <h4>Robot</h4>
 
         <div>
-          <label><strong>First Name:</strong></label> 
-          {{ currentActor.first_name }}
+          <img class="image-thumb" src="{{ currentActor.actor_img }}" 
+          (error)="setDefaultPic()" />
+        </div>
+        <br />
+        <div>
+          <label><strong>First Name:    </strong>
+          {{ currentActor.first_name }} 
+          <strong>Last Name:    </strong>
+          {{ currentActor.last_name }} </label>
         </div>
 
         <div>
-          <label><strong>Last Name:</strong></label>
-          {{ currentActor.last_name }}
-        </div>
-
-        <div>
-          <label><strong>Birth Date:</strong></label>
-          {{ currentActor.birth_date }}
+          <label><strong>Birth Date:    </strong>
+          {{ currentActor.birth_date }} </label>
         </div>
         
         <div>
-          <label><strong>Gender:</strong></label>
-          {{ currentActor.gender }}
+          <label><strong>Gender:    </strong>
+          {{ currentActor.gender }} </label>
         </div>
-                
-        <div>
-            <label><strong>Actor Image:</strong></label>
-            {{ currentActor.actor_img }}
-          </div>
 
         <div>
-          <label><strong>Status:</strong></label>
+          <label><strong>Status:    </strong>
           {{ currentActor.actor_publish ? "Published" : "Pending" }}
+        </label>
         </div>
-  
-        <a class="badge badge-warning" routerLink="/actors/{{ currentActor.id }}">
+        <p></p>
+        <a class="btn btn-primary me-2" routerLink="/actors/{{ currentActor.id }}">
           Edit
         </a>
       </div>
   
       <div *ngIf="!currentActor">
         <br />
-        <p>Please click on an Actor...</p>
+        <p>Please click on a Robot...</p>
       </div>
     </div>
   </div>

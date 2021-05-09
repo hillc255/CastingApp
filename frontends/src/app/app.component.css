@@ -1,0 +1,29 @@
+.image-thumb {
+    max-height: 25px;
+    width: auto;
+}
+
+.navbar-custom {
+    background-color: #000000;
+}
+
+.navbar-custom .navbar-brand {
+    color: white;
+    position: absolute;
+    left: 0;
+    margin-left: 15px;
+}
+
+.navbar-custom .navbar-text,
+.navbar-custom .nav-link {
+    color: gray;
+}
+
+.navbar-custom .nav-item:hover .nav-link {
+    color: white;
+}
+
+.container {
+    display : flex;
+    justify-content: center;
+  }

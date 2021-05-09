@@ -72,11 +72,11 @@ export class ActorDetailsComponent implements OnInit {
       .subscribe(
         response => {
           console.log(response);
-          this.message = (response.success)?"Actor updated successfully!":"Actor update unsuccessful";
+          this.message = (response.success)?"Robot updated successfully!":"Robot update unsuccessful";
         },
         error => {
           console.log(error);
-          this.message = "Actor update unsuccessful";
+          this.message = "Robot update unsuccessful";
         });
   }
 

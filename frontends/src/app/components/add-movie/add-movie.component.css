@@ -1,11 +1,11 @@
 .submit-form {
     max-width: 400px;
     margin: auto;
-  }
+}
 
 input:placeholder-shown {
     font-style: italic;
- }
+}
 
 label, input {
   display: block;

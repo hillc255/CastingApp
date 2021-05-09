@@ -31,6 +31,10 @@ export class ActorsListComponent implements OnInit {
         });
   }
 
+  setDefaultPic() {
+    this.currentActor.actor_img = "https://i.ibb.co/6v84Gpq/no-image.png";
+  }
+
   refreshList(): void {
     this.retrieveActors();
     this.currentActor = undefined;
@@ -52,6 +56,12 @@ export class ActorsListComponent implements OnInit {
         error => {
           console.log(error);
         });
+  }
+
+  formatReleaseDate(): void {
+    var parsedData;
+    let dateString = this.currentActor.birth_date;
+    parsedData = new Date(dateString);
   }
 
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Movie } from 'src/app/models/movie.model';
 import { MovieService } from 'src/app/services/movie.service';
 
+
 @Component({
   selector: 'app-movies-list',
   templateUrl: './movies-list.component.html',
@@ -61,4 +62,8 @@ export class MoviesListComponent implements OnInit {
         });
   }
 
+  get currentMovieReleaseDate(): Date {
+    console.log('this.currentMovie.release_date', this.currentMovie.release_date)
+    return new Date(this.currentMovie.release_date);
+  }
 }

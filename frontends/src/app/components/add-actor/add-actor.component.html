@@ -1,70 +1,130 @@
-<div>
+<form #form="ngForm" (ngSubmit)="saveActor(form)" novalidate>
     <div class="submit-form">
       <div *ngIf="!submitted">
+        <br />
+        <h4>Add Robot</h4>
+        <p></p>
 
         <div class="form-group">
           <label for="first_name">First Name</label>
           <input
             type="text"
             class="form-control"
-            id="first_name"
+            #first_name="ngModel"
             required
+            minlength="2"
             [(ngModel)]="actor.first_name"
             name="actor"
           />
+        </div>
+             
+        <div *ngIf="first_name.invalid && (first_name.dirty || first_name.touched)"
+          class="alert alert-danger">
+          <div *ngIf="first_name.errors.required">
+            First Name is required.
+          </div>
+          <div *ngIf="first_name.errors.minlength">
+            First Name must be 2 characters long.
+          </div>
         </div>
   
         <div class="form-group">
           <label for="last_name">Last Name</label>
           <input
+            type="text"
             class="form-control"
-            id="last_name"
+            #last_name="ngModel"
             required
+            minlength="2"
             [(ngModel)]="actor.last_name"
             name="last_name"
           />
         </div>
 
+        <div *ngIf="last_name.invalid && (last_name.dirty || last_name.touched)"
+        class="alert alert-danger">
+        <div *ngIf="last_name.errors.required">
+          Last Name is required.
+        </div>
+        <div *ngIf="last_name.errors.minlength">
+          Last Name must be 2 characters long.
+        </div>
+      </div>
+
         <div class="form-group">
             <label for="birth_date">Birth Date</label>
             <input
+              type="text"
+              onfocus="(this.type='date')"
               class="form-control"
+              name="birth_date"
+              placeholder="mm/dd/yyyy"
+              #birth_date="ngModel"
               id="birth_date"
               required
               [(ngModel)]="actor.birth_date"
-              name="birth_date"
             />
           </div>
 
           <div class="form-group">
             <label for="gender">Gender</label>
             <input
+              type="text"
               class="form-control"
+              #gender="ngModel"
               id="gender"
               required
+              minlength="2"
               [(ngModel)]="actor.gender"
               name="gender"
             />
           </div>
 
+          <div *ngIf="gender.invalid && (gender.dirty || gender.touched)"
+            class="alert alert-danger">
+            <div *ngIf="gender.errors.required">
+              Gender is required.
+            </div>
+            <div *ngIf="gender.errors.minlength">
+              Gender must be 2 characters long.
+            </div>
+          </div>
+
           <div class="form-group">
-            <label for="actor_imgr">Actor Image</label>
+            <label for="actor_imgr">Robot Image</label>
             <input
-              class="form-control"
               id="actor_img"
+              type="text"
+              class="form-control"
+              name="actor_img"
+              placeholder="https://starwars/R2-D2_Droid.png"
+              #actor_img="ngModel"
               required
               [(ngModel)]="actor.actor_img"
               name="actor_img"
+              [ngModelOptions]="{ updateOn: 'blur' }" 
+              pattern="(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|jpeg|gif|png|svg)"
             />
           </div>
+
+          <div *ngIf="actor_img.invalid && (actor_img.dirty || actor_img.touched)"
+            class="alert alert-danger">
+            <div *ngIf="actor_img.errors.required">
+              URL is required.
+            </div>
+            <div *ngIf="actor_img.errors.pattern">
+              Please enter valid url.
+            </div>
+          </div>
   
-        <button (click)="saveActor()" class="btn btn-success">Submit</button>
-      </div>
+          <p></p>
+          <button class="btn btn-success" [disabled]="form.invalid">Submit</button>
+        </div>
   
-      <div *ngIf="submitted">
-        <h4>Actor was submitted successfully!</h4>
-        <button class="btn btn-success" (click)="newActor()">Add</button>
-      </div>
+        <div *ngIf="submitted">
+          <h4>Robot was submitted successfully!</h4>
+          <button class="btn btn-success" (click)="newActor()">Add</button>
+        </div>
     </div>
-  </div>
+</form>
 

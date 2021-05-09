@@ -144,7 +144,7 @@ class Movie(db.Model):
         json_movie = dumps({
             'id': self.id,
             'title': self.title,
-            'release_date': self.release_date.strftime("%Y%m%d"),
+            'release_date': self.release_date.strftime("%Y-%m-%d"),
             'movie_img': self.movie_img,
             'movie_publish': self.movie_publish
         })
