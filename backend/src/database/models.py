@@ -198,7 +198,7 @@ class Actor(db.Model):
             'id': self.id,
             'first_name': self.first_name,
             'last_name': self.last_name,
-            'birth_date': self.birth_date.strftime("%Y%m%d"),
+            'birth_date': self.birth_date.strftime("%Y-%m-%d"),
             'gender': self.gender,
             'actor_img': self.actor_img,
             'actor_publish': self.actor_publish

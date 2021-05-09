@@ -11,6 +11,7 @@ import { MovieService } from 'src/app/services/movie.service';
 export class MoviesListComponent implements OnInit {
   movies?: Movie[];
   currentMovie?: Movie;
+  currentMovieImg: string;
   currentIndex = -1;
   title = '';
 
@@ -32,8 +33,13 @@ export class MoviesListComponent implements OnInit {
         });
   }
 
+  get defaultPic(): string {
+    return (this.currentMovie && this.currentMovieImg)?
+      this.currentMovieImg:"https://i.ibb.co/6v84Gpq/no-image.png";
+  }
+
   setDefaultPic() {
-    this.currentMovie.movie_img = "https://i.ibb.co/6v84Gpq/no-image.png";
+    this.currentMovieImg = null;
   }
 
   refreshList(): void {
@@ -43,8 +49,13 @@ export class MoviesListComponent implements OnInit {
   }
 
   setActiveMovie(movie: Movie, index: number): void {
-    this.currentMovie = movie;
-    this.currentIndex = index;
+    this.currentMovieImg = null;
+    
+    setTimeout(()=>{
+      this.currentMovieImg = (movie)? movie.movie_img: null;
+      this.currentMovie = movie;
+      this.currentIndex = index;
+    }, 100);
   }
 
   searchTitle(): void {
@@ -62,8 +73,4 @@ export class MoviesListComponent implements OnInit {
         });
   }
 
-  get currentMovieReleaseDate(): Date {
-    console.log('this.currentMovie.release_date', this.currentMovie.release_date)
-    return new Date(this.currentMovie.release_date);
-  }
 }

@@ -16,3 +16,9 @@ label, input {
   max-height: 210px;
   width: auto;
 }
+
+@media (min-width: 992px) {
+  .movie-col {
+    min-width: 300px;
+  }
+}
