@@ -1,4 +1,5 @@
-<div>
+<form #form="ngForm" (ngSubmit)="updateActor()" novalidate>
+  <div class="submit-form">
     <div *ngIf="currentActor.id" class="edit-form">
       <h4>Robot</h4>
 
@@ -20,10 +21,23 @@
           <input
             type="text"
             class="form-control"
+            #first_name="ngModel"
+            required
+            minlength="2"
             id="first_name"
             [(ngModel)]="currentActor.first_name"
             name="first_name"
           />
+        </div>
+
+        <div *ngIf="first_name.invalid && (first_name.dirty || first_name.touched)"
+          class="alert alert-danger">
+          <div *ngIf="first_name.errors.required">
+            First Name is required.
+          </div>
+          <div *ngIf="first_name.errors.minlength">
+            First Name must be at least 2 characters.
+          </div>
         </div>
 
         <div class="form-group">
@@ -31,53 +45,97 @@
           <input
             type="text"
             class="form-control"
+            #last_name="ngModel"
+            required
+            minlength="2"
             id="last_name"
             [(ngModel)]="currentActor.last_name"
             name="last_name"
           />
         </div>
 
+        <div *ngIf="last_name.invalid && (last_name.dirty || last_name.touched)"
+          class="alert alert-danger">
+          <div *ngIf="last_name.errors.required">
+            Last Name is required.
+          </div>
+          <div *ngIf="last_name.errors.minlength">
+            Last Name must be at least 2 characters.
+          </div>
+        </div>
+
         <div class="form-group">
             <label for="birth_date">Birth Date</label>
             <input
               type="text"
+              onfocus="(this.type='date')"
               class="form-control"
+              name="birth_date"
+              #birth_date="ngModel"
+              required
               id="birth_date"
               [(ngModel)]="currentActor.birth_date"
-              name="birth_date"
             />
-          </div>
+        </div>
 
         <div class="form-group">
             <label for="gender">Gender</label>
             <input
               type="text"
               class="form-control"
+              #gender="ngModel"
+              required
+              minlength="2"
               id="gender"
               [(ngModel)]="currentActor.gender"
               name="gender"
             />
-        </div>  
+        </div> 
+        
+        <div *ngIf="gender.invalid && (gender.dirty || gender.touched)"
+          class="alert alert-danger">
+          <div *ngIf="gender.errors.required">
+            Gender is required.
+          </div>
+          <div *ngIf="gender.errors.minlength">
+            Gender must be at least 2 characters.
+          </div>
+        </div>
 
         <div class="form-group">
             <label for="actor_img">Robot Image</label>
             <input
+              id="actor_img"
               type="text"
               class="form-control"
-              id="actor_img"
-              [(ngModel)]="currentActor.actor_img"
               name="actor_img"
+              #actor_img="ngModel"
+              required
+              [(ngModel)]="currentActor.actor_img"
+              [ngModelOptions]="{ updateOn: 'blur' }" 
+              pattern="(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|jpeg|gif|png|svg)"
             />
         </div> 
+
+        <div *ngIf="actor_img.invalid && (actor_img.dirty || actor_img.touched)"
+          class="alert alert-danger">
+          <div *ngIf="actor_img.errors.required">
+            URL is required.
+          </div>
+          <div *ngIf="actor_img.errors.pattern">
+            Please enter valid url.
+          </div>
+        </div>
   
         <div class="form-group">
           <label><strong>Status:</strong></label>
           {{ currentActor.actor_publish ? "Published" : "Pending" }}
         </div>
       </form>
-  
+      
+      <br />
       <button
-        class="badge badge-primary mr-2"
+        class="btn btn-primary me-2"
         *ngIf="currentActor.actor_publish"
         (click)="unpublishActor()"
       >
@@ -85,22 +143,20 @@
       </button>
 
       <button
+        class="btn btn-primary me-2"
         *ngIf="!currentActor.actor_publish"
-        class="badge badge-primary mr-2"
         (click)="publishActor()"
       >
         Publish
       </button>
   
-      <button class="badge badge-danger mr-2" (click)="deleteActor()">
+      <button class="btn btn-danger me-2" (click)="deleteActor()">
         Delete
       </button>
   
       <button
         type="submit"
-        class="badge badge-success mb-2" 
-        (click)="updateActor()"
-      >
+        class="btn btn-success me-2" [disabled]="form.invalid">
         Update
       </button>
       <p>{{ message }}</p>
@@ -111,3 +167,4 @@
       <p>Cannot access this Robot...</p>
     </div>
   </div>
+</form>

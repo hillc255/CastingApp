@@ -33,8 +33,8 @@
           {{ actor.first_name }}
         </li>
       </ul>
-  
     </div>
+
     <div class="col-md-6">
       <div *ngIf="currentActor">
         <p></p>
@@ -47,8 +47,11 @@
         <br />
         <div>
           <label><strong>First Name:    </strong>
-          {{ currentActor.first_name }} 
-          <strong>Last Name:    </strong>
+          {{ currentActor.first_name }} </label>
+        </div>
+
+         <div>
+          <label><strong>Last Name:    </strong>
           {{ currentActor.last_name }} </label>
         </div>
 
@@ -78,4 +81,4 @@
         <p>Please click on a Robot...</p>
       </div>
     </div>
-  </div>
+</div>

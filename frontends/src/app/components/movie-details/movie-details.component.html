@@ -36,7 +36,7 @@
             Title is required.
           </div>
           <div *ngIf="title.errors.minlength">
-            Title must be 2 characters long.
+            Title must be at least 2 characters.
           </div>
         </div>
 
@@ -63,7 +63,6 @@
               name="movie_img"
               #movie_img="ngModel"
               required
-              id="movie_img"
               [(ngModel)]="currentMovie.movie_img"
               [ngModelOptions]="{ updateOn: 'blur' }" 
               pattern="(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|jpeg|gif|png|svg)"
@@ -94,9 +93,10 @@
       >
         UnPublish
       </button>
+      
       <button
-        *ngIf="!currentMovie.movie_publish"
         class="btn btn-primary me-2"
+        *ngIf="!currentMovie.movie_publish"
         (click)="publishMovie()"
       >
         Publish

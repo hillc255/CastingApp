@@ -37,7 +37,7 @@ def create_app(test_config=None):
     def index():
         return jsonify({
             'success': True,
-            'message': 'Application is running...'
+            'message': 'Home page'
         }), 200
 
 

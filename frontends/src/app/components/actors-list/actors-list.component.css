@@ -13,6 +13,12 @@ display: block;
 }
 
 .image-thumb {
-max-height: 100px;
+max-height: 125px;
 width: auto;
+}
+
+@media (min-width: 992px) {
+  .movie-col {
+    min-width: 300px;
+  }
 }
