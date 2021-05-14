@@ -213,7 +213,7 @@ def create_app(test_config=None):
             abort(422)
 
     # '''
-    # PATCH:        /actors/<int:id>/publish
+    # PATCH:        /movies/<int:id>/publish
     # Authorized:
     # Endpoint:     Publish movie data fields - boolen
     # Returns:      Status code 200 and json {"success": True}
@@ -249,7 +249,7 @@ def create_app(test_config=None):
 
 
     # '''
-    # PATCH:        /actors/<int:id>/publish
+    # PATCH:        /movies/<int:id>/publish
     # Authorized:
     # Endpoint:     Unpublish movie data fields - boolen
     # Returns:      Status code 200 and json {"success": True}
@@ -324,13 +324,9 @@ def create_app(test_config=None):
     def findMovieByTitle():
 
         search_title = request.args.get('title')
-
         
         data = Movie.query.filter(
             Movie.title.ilike(f'%{search_title}%')).all()
-
-        if len(data) == 2:
-            abort(404)
   
         results = []
         
@@ -338,7 +334,7 @@ def create_app(test_config=None):
             for i, movieObj in enumerate(data):
                 results.append(json.loads(movieObj.to_json()))
 
-            return jsonify(results)
+            return jsonify(results), 200
 
         except Exception as e:
             print('\n'+'Error searching by movie titles: ', e)
@@ -621,9 +617,6 @@ def create_app(test_config=None):
         
         data = Actor.query.filter(
             Actor.first_name.ilike(f'%{search_firstname}%')).all()
-
-        if len(data) == 2:
-            abort(404)
   
         results = []
         
