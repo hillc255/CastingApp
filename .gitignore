@@ -8,6 +8,9 @@ env/
 venv/
 ENV/
 
+# local coonstants
+config.txt
+
 # node dependency
 build
 node_modules
