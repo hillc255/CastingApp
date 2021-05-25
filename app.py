@@ -69,7 +69,7 @@ def create_app(test_config=None):
 
     # '''
     # GET:          /movies
-    # Authorized:
+    # Authorized:   Public access
     # Endpoint:     Gets all movies data representation
     # Returns:      Status code 200 for successful get
     #               where movies is the list of movies
@@ -98,7 +98,7 @@ def create_app(test_config=None):
     
     # '''
     # GET:          /movies/<int:id>
-    # Authorized:
+    # Authorized:   Assistant and Director access
     # Endpoint:     GET a specific movie
     # Returns:      Status code 200 and json {"success": True, "movie": data}
     #               where movie is a single movie data
@@ -138,7 +138,7 @@ def create_app(test_config=None):
 
     # '''
     # POST:         /movies
-    # Authorized:
+    # Authorized:   Director access
     # Endpoint:     Create a new movie
     # Returns:      Status code 200 and json {"success": True}
     #               where movie is a single new movie
@@ -146,6 +146,7 @@ def create_app(test_config=None):
     # '''
 
     @app.route('/movies', methods=['POST'])
+     #@requires_auth('post:movies')
     def createMovie():
 
         try:
@@ -176,7 +177,7 @@ def create_app(test_config=None):
     
     # '''
     # PATCH:        /movies/<int:id>
-    # Authorized:
+    # Authorized:   Assistant and Director access
     # Endpoint:     Update movie data fields
     # Returns:      Status code 200 and json {"success": True}
     #               where movie published is a single movie
@@ -214,7 +215,7 @@ def create_app(test_config=None):
 
     # '''
     # PATCH:        /movies/<int:id>/publish
-    # Authorized:
+    # Authorized:   Assistant and Director access
     # Endpoint:     Publish movie data fields - boolen
     # Returns:      Status code 200 and json {"success": True}
     #               where movie updated is a single movie
@@ -250,7 +251,7 @@ def create_app(test_config=None):
 
     # '''
     # PATCH:        /movies/<int:id>/publish
-    # Authorized:
+    # Authorized:   Assistant and Director access
     # Endpoint:     Unpublish movie data fields - boolen
     # Returns:      Status code 200 and json {"success": True}
     #               where movie updated is a single movie
@@ -284,7 +285,7 @@ def create_app(test_config=None):
 
     # '''
     # DELETE:       /movies/<int:id>
-    # Authorized:
+    # Authorized:   Director access
     # Endpoint:     Deletes specific movie data fields
     # Returns:      Status code 200 and json {"success": True}
     #               where movie deleted is a single movie
@@ -292,6 +293,7 @@ def create_app(test_config=None):
     # '''
 
     @app.route('/movies/<int:id>', methods=['DELETE'])
+    #@requires_auth('delete:movies')
     def deleteMovie(id):
 
         try:
@@ -313,7 +315,7 @@ def create_app(test_config=None):
 
     # '''
     # SEARCH:       /movies/search
-    # Authorized:
+    # Authorized:   Public access
     # Endpoint:     Provide a like search for movie title
     # Returns:      Status code 200 if search is successful
     #               where movie(s) are searched for by title
@@ -349,7 +351,7 @@ def create_app(test_config=None):
  
     # '''
     # GET:          /actors
-    # Authorized:
+    # Authorized:   Public access
     # Endpoint:     Gets all actors data representation
     # Returns:      Status code 200 for successful get
     #               where actors is the list of actors
@@ -379,7 +381,7 @@ def create_app(test_config=None):
 
     # '''
     # GET:          /actors/<int:id>
-    # Authorized:
+    # Authorized:   Assistant and Director access
     # Endpoint:     GET a specific actor
     # Returns:      Status code 200 and json {"success": True, "actor": data}
     #               where actor is a single actor data
@@ -421,7 +423,7 @@ def create_app(test_config=None):
 
     # '''
     # POST:         /actors
-    # Authorized:
+    # Authorized:   Director access
     # Endpoint:     Create a new actor
     # Returns:      Status code 200 and json {"success": True}
     #               where actor is a single new actor
@@ -429,6 +431,7 @@ def create_app(test_config=None):
     # '''
 
     @app.route('/actors', methods=['POST'])
+    #@requires_auth('post:actors')
     def createActor():
 
         try:
@@ -463,7 +466,7 @@ def create_app(test_config=None):
  
     # '''
     # PATCH:        /actors/<int:id>
-    # Authorized:
+    # Authorized:   Assistant and Director access
     # Endpoint:     Update actor data fields
     # Returns:      Status code 200 and json {"success": True}
     #               where actor published is a single actor
@@ -489,7 +492,7 @@ def create_app(test_config=None):
         data.birth_date = request.json.get('birth_date')
         data.gender = request.json.get('gender')
         data.actor_img = request.json.get('actor_img')
-        data.actor_publish = request.json.get('actor_publish')
+        #data.actor_publish = request.json.get('actor_publish')
 
         try:
             data.update()
@@ -504,7 +507,7 @@ def create_app(test_config=None):
 
     # '''
     # PATCH:        /actors/<int:id>/publish
-    # Authorized:
+    # Authorized:   Assistant and Director access
     # Endpoint:     Publish actor data fields - boolen
     # Returns:      Status code 200 and json {"success": True}
     #               where actor updated is a single actor
@@ -539,7 +542,7 @@ def create_app(test_config=None):
 
     # '''
     # PATCH:        /actors/<int:id>/unpublish
-    # Authorized:
+    # Authorized:   Assistant and Director access
     # Endpoint:     Unpublish actor data fields - boolean
     # Returns:      Status code 200 and json {"success": True}
     #               where actor unpublish is a single actor
@@ -575,7 +578,7 @@ def create_app(test_config=None):
 
     # '''
     # DELETE:       /actors/<int:id>
-    # Authorized:
+    # Authorized:   Director access
     # Endpoint:     Deletes specific actor data fields
     # Returns:      Status code 200 and json {"success": True}
     #               where actor deleted is a single actor
@@ -583,6 +586,7 @@ def create_app(test_config=None):
     # '''
 
     @app.route('/actors/<int:id>', methods=['DELETE'])
+    #@requires_auth('delete:actors')
     def deleteActor(id):
         try:
             actor = Actor.query.filter(Actor.id == id).one_or_none()
@@ -603,8 +607,8 @@ def create_app(test_config=None):
 
     # '''
     # SEARCH:       /actors/search
-    # Authorized:
-    # Endpoint:      Provide a like search for actor first-name
+    # Authorized:   Public access
+    # Endpoint:     Provide a like search for actor first-name
     # Returns:      Status code 200 if search is successful
     #               where actor(s) are searched for by first-name
     #               or appropriate status code indicating reason for failure
