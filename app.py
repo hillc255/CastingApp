@@ -492,7 +492,6 @@ def create_app(test_config=None):
         data.birth_date = request.json.get('birth_date')
         data.gender = request.json.get('gender')
         data.actor_img = request.json.get('actor_img')
-        #data.actor_publish = request.json.get('actor_publish')
 
         try:
             data.update()

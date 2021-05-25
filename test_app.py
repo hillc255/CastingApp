@@ -142,7 +142,7 @@ class CastingAppTestCase(unittest.TestCase):
         json_res = json.loads(res.get_data(as_text=True))
 
     def test_404_patch_no_movies(self):
-        print("*** Test '/movies' PATCH success ***")
+        print("*** Test '/movies' PATCH error ***")
         data = {
             'title': 'Test Robot Movie2',
             'release_date': '2021-04-01',
@@ -320,7 +320,7 @@ class CastingAppTestCase(unittest.TestCase):
         json_res = json.loads(res.get_data(as_text=True))
 
     def test_404_patch_no_actors(self):
-        print("*** Test '/actors' PATCH success ***")
+        print("*** Test '/actors' PATCH error ***")
         data = {
             'id': 2,
             'first_name': 'Test New Robot',
