@@ -443,7 +443,7 @@ def create_app(test_config=None):
                 'birth_date': request.get_json()['birth_date'],
                 'gender': request.get_json()['gender'],
                 'actor_img': request.get_json()['actor_img'],
-                'actor_publish': request.get_json()['actor_publish']
+                'actor_publish': False
             }
 
             if not ('first_name' in data and 'last_name' in data \
