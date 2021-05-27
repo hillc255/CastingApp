@@ -77,7 +77,6 @@ def create_app(test_config=None):
     # '''
 
     @app.route('/movies', methods=['GET'])
-    #@requires_auth('get:movies')
     def getAllMovies():
 
         movies_all = Movie.query.all()
@@ -260,7 +259,7 @@ def create_app(test_config=None):
     # '''
 
     @app.route('/movies/<int:id>/unpublish', methods=['PATCH'])
-    #@requires_auth('patch:movie-unpublish')
+    @requires_auth('patch:movie-unpublish')
     def unpublishMovie(id):
 
         if id is None:
