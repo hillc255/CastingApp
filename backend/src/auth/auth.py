@@ -5,9 +5,9 @@ from jose import jwt
 from urllib.request import urlopen
 
 
-AUTH0_DOMAIN = 'dev-mg9nhwma.us.auth0.com' #change this
+AUTH0_DOMAIN = 'autumn-voice-0666.us.auth0.com' # heroku auth0 domain
 ALGORITHMS = ['RS256']
-API_AUDIENCE = 'coffeeshop' #change this
+API_AUDIENCE = 'cast-app' # heroku app name
 
 # AuthError Exception
 '''

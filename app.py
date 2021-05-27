@@ -69,7 +69,7 @@ def create_app(test_config=None):
 
     # '''
     # GET:          /movies
-    # Authorized:   Public access
+    # Authorized:   Assistant and Director access
     # Endpoint:     Gets all movies data representation
     # Returns:      Status code 200 for successful get
     #               where movies is the list of movies
@@ -77,6 +77,7 @@ def create_app(test_config=None):
     # '''
 
     @app.route('/movies', methods=['GET'])
+    #@requires_auth('get:movies')
     def getAllMovies():
 
         movies_all = Movie.query.all()
@@ -107,7 +108,7 @@ def create_app(test_config=None):
 
 
     @app.route('/movies/<int:id>', methods=['GET'])
-    #@requires_auth('get:movies')
+    #@requires_auth('get:movies-id')
     def getMovie(id):
 
         if id is None:
@@ -224,7 +225,7 @@ def create_app(test_config=None):
 
 
     @app.route('/movies/<int:id>/publish', methods=['PATCH'])
-    #@requires_auth('patch:movies')
+    #@requires_auth('patch:movie-publish')
     def publishMovie(id):
 
         if id is None:
@@ -259,7 +260,7 @@ def create_app(test_config=None):
     # '''
 
     @app.route('/movies/<int:id>/unpublish', methods=['PATCH'])
-    #@requires_auth('patch:movies')
+    #@requires_auth('patch:movie-unpublish')
     def unpublishMovie(id):
 
         if id is None:
@@ -315,7 +316,7 @@ def create_app(test_config=None):
 
     # '''
     # SEARCH:       /movies/search
-    # Authorized:   Public access
+    # Authorized:   Assistant and Director access
     # Endpoint:     Provide a like search for movie title
     # Returns:      Status code 200 if search is successful
     #               where movie(s) are searched for by title
@@ -323,6 +324,7 @@ def create_app(test_config=None):
     # '''
     
     @app.route('/movies/search', methods=['GET'])
+    #@requires_auth('get:movies-search')
     def findMovieByTitle():
 
         search_title = request.args.get('title')
@@ -351,7 +353,7 @@ def create_app(test_config=None):
  
     # '''
     # GET:          /actors
-    # Authorized:   Public access
+    # Authorized:   Assistant and Director access
     # Endpoint:     Gets all actors data representation
     # Returns:      Status code 200 for successful get
     #               where actors is the list of actors
@@ -359,6 +361,7 @@ def create_app(test_config=None):
     # '''
 
     @app.route('/actors', methods=['GET'])
+    #@requires_auth('get:actors')
     def getAllActors():
 
         actors_all = Actor.query.all()
@@ -389,7 +392,7 @@ def create_app(test_config=None):
     # '''
 
     @app.route('/actors/<int:id>', methods=['GET'])
-    #@requires_auth('get:actors')
+    #@requires_auth('get:actors-id')
     def getActor(id):
 
         if id is None:
@@ -514,7 +517,7 @@ def create_app(test_config=None):
     # '''
     
     @app.route('/actors/<int:id>/publish', methods=['PATCH'])
-    #@requires_auth('patch:movies')
+    #@requires_auth('patch:actor-publish')
     def publishActor(id):
 
         if id is None:
@@ -550,7 +553,7 @@ def create_app(test_config=None):
 
 
     @app.route('/actors/<int:id>/unpublish', methods=['PATCH'])
-    #@requires_auth('patch:actors')
+    #@requires_auth('patch:actor-unpublish')
     def unpublishActor(id):
 
         if id is None:
@@ -606,7 +609,7 @@ def create_app(test_config=None):
 
     # '''
     # SEARCH:       /actors/search
-    # Authorized:   Public access
+    # Authorized:   Assistant and Director access
     # Endpoint:     Provide a like search for actor first-name
     # Returns:      Status code 200 if search is successful
     #               where actor(s) are searched for by first-name
@@ -614,6 +617,7 @@ def create_app(test_config=None):
     # '''
     
     @app.route('/actors/search', methods=['GET'])
+    #@requires_auth('get:actors-search')
     def findActorByFirstName():
 
         search_firstname = request.args.get('first_name')
