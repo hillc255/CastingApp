@@ -187,7 +187,7 @@ def create_app(test_config=None):
 
 
     @app.route('/movies/<int:id>', methods=['PATCH'])
-    @requires_auth('patch:movies')
+    #@requires_auth('patch:movies')
     def updateMovie(id):
 
         if id is None:
@@ -225,7 +225,7 @@ def create_app(test_config=None):
 
 
     @app.route('/movies/<int:id>/publish', methods=['PATCH'])
-    @requires_auth('patch:movie-publish')
+    #@requires_auth('patch:movie-publish')
     def publishMovie(id):
 
         if id is None:
@@ -260,7 +260,7 @@ def create_app(test_config=None):
     # '''
 
     @app.route('/movies/<int:id>/unpublish', methods=['PATCH'])
-    @requires_auth('patch:movie-unpublish')
+    #@requires_auth('patch:movie-unpublish')
     def unpublishMovie(id):
 
         if id is None:
@@ -294,7 +294,7 @@ def create_app(test_config=None):
     # '''
 
     @app.route('/movies/<int:id>', methods=['DELETE'])
-    @requires_auth('delete:movies')
+    #@requires_auth('delete:movies')
     def deleteMovie(id):
 
         try:
@@ -324,7 +324,7 @@ def create_app(test_config=None):
     # '''
     
     @app.route('/movies/search', methods=['GET'])
-    @requires_auth('get:movies-search')
+    #@requires_auth('get:movies-search')
     def findMovieByTitle():
 
         search_title = request.args.get('title')
