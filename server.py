@@ -13,6 +13,8 @@ from flask import url_for
 from authlib.integrations.flask_client import OAuth
 from six.moves.urllib.parse import urlencode
 
+from functools import wraps
+
 # Initialize Authlib
 
 app = Flask(__name__)
