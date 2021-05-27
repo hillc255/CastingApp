@@ -69,7 +69,7 @@ def create_app(test_config=None):
 
     # '''
     # GET:          /movies
-    # Authorized:   Assistant and Director access
+    # Authorized:   Public Access
     # Endpoint:     Gets all movies data representation
     # Returns:      Status code 200 for successful get
     #               where movies is the list of movies
@@ -108,7 +108,7 @@ def create_app(test_config=None):
 
 
     @app.route('/movies/<int:id>', methods=['GET'])
-    #@requires_auth('get:movies-id')
+    @requires_auth('get:movies-id')
     def getMovie(id):
 
         if id is None:
@@ -147,7 +147,7 @@ def create_app(test_config=None):
     # '''
 
     @app.route('/movies', methods=['POST'])
-    #@requires_auth('post:movies')
+    @requires_auth('post:movies')
     def createMovie():
 
         try:
