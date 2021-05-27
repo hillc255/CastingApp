@@ -475,7 +475,7 @@ def create_app(test_config=None):
 
 
     @app.route('/actors/<int:id>', methods=['PATCH'])
-    #@requires_auth('patch:actors')
+    @requires_auth('patch:actors')
     def updateActor(id):
 
         if id is None:
@@ -514,7 +514,7 @@ def create_app(test_config=None):
     # '''
     
     @app.route('/actors/<int:id>/publish', methods=['PATCH'])
-    #@requires_auth('patch:actor-publish')
+    @requires_auth('patch:actor-publish')
     def publishActor(id):
 
         if id is None:
@@ -550,7 +550,7 @@ def create_app(test_config=None):
 
 
     @app.route('/actors/<int:id>/unpublish', methods=['PATCH'])
-    #@requires_auth('patch:actor-unpublish')
+    @requires_auth('patch:actor-unpublish')
     def unpublishActor(id):
 
         if id is None:
@@ -585,7 +585,7 @@ def create_app(test_config=None):
     # '''
 
     @app.route('/actors/<int:id>', methods=['DELETE'])
-    #@requires_auth('delete:actors')
+    @requires_auth('delete:actors')
     def deleteActor(id):
         try:
             actor = Actor.query.filter(Actor.id == id).one_or_none()
