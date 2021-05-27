@@ -389,7 +389,7 @@ def create_app(test_config=None):
     # '''
 
     @app.route('/actors/<int:id>', methods=['GET'])
-    #@requires_auth('get:actors-id')
+    @requires_auth('get:actors-id')
     def getActor(id):
 
         if id is None:
@@ -431,7 +431,7 @@ def create_app(test_config=None):
     # '''
 
     @app.route('/actors', methods=['POST'])
-    #@requires_auth('post:actors')
+    @requires_auth('post:actors')
     def createActor():
 
         try:
