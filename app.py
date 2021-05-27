@@ -77,7 +77,7 @@ def create_app(test_config=None):
     # '''
 
     @app.route('/movies', methods=['GET'])
-    @requires_auth('get:movies')
+    #@requires_auth('get:movies')
     def getAllMovies():
 
         movies_all = Movie.query.all()
@@ -108,7 +108,7 @@ def create_app(test_config=None):
 
 
     @app.route('/movies/<int:id>', methods=['GET'])
-    @requires_auth('get:movies-id')
+    #@requires_auth('get:movies-id')
     def getMovie(id):
 
         if id is None:
@@ -147,7 +147,7 @@ def create_app(test_config=None):
     # '''
 
     @app.route('/movies', methods=['POST'])
-    @requires_auth('post:movies')
+    #@requires_auth('post:movies')
     def createMovie():
 
         try:
@@ -187,7 +187,7 @@ def create_app(test_config=None):
 
 
     @app.route('/movies/<int:id>', methods=['PATCH'])
-    @requires_auth('patch:movies')
+    #@requires_auth('patch:movies')
     def updateMovie(id):
 
         if id is None:
@@ -225,7 +225,7 @@ def create_app(test_config=None):
 
 
     @app.route('/movies/<int:id>/publish', methods=['PATCH'])
-    @requires_auth('patch:movie-publish')
+    #@requires_auth('patch:movie-publish')
     def publishMovie(id):
 
         if id is None:
@@ -260,7 +260,7 @@ def create_app(test_config=None):
     # '''
 
     @app.route('/movies/<int:id>/unpublish', methods=['PATCH'])
-    @requires_auth('patch:movie-unpublish')
+    #@requires_auth('patch:movie-unpublish')
     def unpublishMovie(id):
 
         if id is None:
@@ -294,7 +294,7 @@ def create_app(test_config=None):
     # '''
 
     @app.route('/movies/<int:id>', methods=['DELETE'])
-    @requires_auth('delete:movies')
+    #@requires_auth('delete:movies')
     def deleteMovie(id):
 
         try:
@@ -324,7 +324,7 @@ def create_app(test_config=None):
     # '''
     
     @app.route('/movies/search', methods=['GET'])
-    @requires_auth('get:movies-search')
+    #@requires_auth('get:movies-search')
     def findMovieByTitle():
 
         search_title = request.args.get('title')
@@ -361,7 +361,7 @@ def create_app(test_config=None):
     # '''
 
     @app.route('/actors', methods=['GET'])
-    @requires_auth('get:actors')
+    #@requires_auth('get:actors')
     def getAllActors():
 
         actors_all = Actor.query.all()
@@ -392,7 +392,7 @@ def create_app(test_config=None):
     # '''
 
     @app.route('/actors/<int:id>', methods=['GET'])
-    @requires_auth('get:actors-id')
+    #@requires_auth('get:actors-id')
     def getActor(id):
 
         if id is None:
@@ -434,7 +434,7 @@ def create_app(test_config=None):
     # '''
 
     @app.route('/actors', methods=['POST'])
-    @requires_auth('post:actors')
+    #@requires_auth('post:actors')
     def createActor():
 
         try:
@@ -478,7 +478,7 @@ def create_app(test_config=None):
 
 
     @app.route('/actors/<int:id>', methods=['PATCH'])
-    @requires_auth('patch:actors')
+    #@requires_auth('patch:actors')
     def updateActor(id):
 
         if id is None:
@@ -517,7 +517,7 @@ def create_app(test_config=None):
     # '''
     
     @app.route('/actors/<int:id>/publish', methods=['PATCH'])
-    @requires_auth('patch:actor-publish')
+    #@requires_auth('patch:actor-publish')
     def publishActor(id):
 
         if id is None:
@@ -553,7 +553,7 @@ def create_app(test_config=None):
 
 
     @app.route('/actors/<int:id>/unpublish', methods=['PATCH'])
-    @requires_auth('patch:actor-unpublish')
+    #@requires_auth('patch:actor-unpublish')
     def unpublishActor(id):
 
         if id is None:
@@ -588,7 +588,7 @@ def create_app(test_config=None):
     # '''
 
     @app.route('/actors/<int:id>', methods=['DELETE'])
-    @requires_auth('delete:actors')
+    #@requires_auth('delete:actors')
     def deleteActor(id):
         try:
             actor = Actor.query.filter(Actor.id == id).one_or_none()
@@ -617,7 +617,7 @@ def create_app(test_config=None):
     # '''
     
     @app.route('/actors/search', methods=['GET'])
-    @requires_auth('get:actors-search')
+    #@requires_auth('get:actors-search')
     def findActorByFirstName():
 
         search_firstname = request.args.get('first_name')
