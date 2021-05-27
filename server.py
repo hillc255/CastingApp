@@ -69,3 +69,13 @@ def requires_auth(f):
     return f(*args, **kwargs)
 
   return decorated
+
+
+# Display User Information
+
+@app.route('/dashboard')
+@requires_auth
+def dashboard():
+    return render_template('dashboard.html',
+                           userinfo=session['profile'],
+                           userinfo_pretty=json.dumps(session['jwt_payload'], indent=4))
