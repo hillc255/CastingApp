@@ -79,3 +79,14 @@ def dashboard():
     return render_template('dashboard.html',
                            userinfo=session['profile'],
                            userinfo_pretty=json.dumps(session['jwt_payload'], indent=4))
+
+# Logout
+
+@app.route('/logout')
+def logout():
+    # Clear session stored data
+    session.clear()
+    # Redirect user to logout endpoint
+    params = {'returnTo': url_for('home', _external=True), 'client_id': 'f7ZLU2DmWeRcLuikyEKjqk0893KA2Mbj'}
+    return redirect(auth0.api_base_url + '/v2/logout?' + urlencode(params))
+
