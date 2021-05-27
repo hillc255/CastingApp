@@ -315,7 +315,7 @@ def create_app(test_config=None):
 
     # '''
     # SEARCH:       /movies/search
-    # Authorized:   Assistant and Director access
+    # Authorized:   Public access
     # Endpoint:     Provide a like search for movie title
     # Returns:      Status code 200 if search is successful
     #               where movie(s) are searched for by title
@@ -323,7 +323,6 @@ def create_app(test_config=None):
     # '''
     
     @app.route('/movies/search', methods=['GET'])
-    @requires_auth('get:movies-search')
     def findMovieByTitle():
 
         search_title = request.args.get('title')
@@ -360,7 +359,6 @@ def create_app(test_config=None):
     # '''
 
     @app.route('/actors', methods=['GET'])
-    #@requires_auth('get:actors')
     def getAllActors():
 
         actors_all = Actor.query.all()
@@ -608,7 +606,7 @@ def create_app(test_config=None):
 
     # '''
     # SEARCH:       /actors/search
-    # Authorized:   Assistant and Director access
+    # Authorized:   Public access
     # Endpoint:     Provide a like search for actor first-name
     # Returns:      Status code 200 if search is successful
     #               where actor(s) are searched for by first-name
@@ -616,7 +614,6 @@ def create_app(test_config=None):
     # '''
     
     @app.route('/actors/search', methods=['GET'])
-    #@requires_auth('get:actors-search')
     def findActorByFirstName():
 
         search_firstname = request.args.get('first_name')
