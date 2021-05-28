@@ -17,6 +17,7 @@ import { AddActorComponent } from './components/add-actor/add-actor.component';
 
 // Import the module from the SDK
 import { AuthModule } from '@auth0/auth0-angular';
+import { AuthButtonComponent } from './components/auth/auth.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { AuthModule } from '@auth0/auth0-angular';
     MoviesListComponent,
     AddActorComponent,
     ActorDetailsComponent,
-    ActorsListComponent
+    ActorsListComponent,
+    AuthButtonComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +41,7 @@ import { AuthModule } from '@auth0/auth0-angular';
       domain: 'autumn-voice-0666.us.auth0.com',
       clientId: 'f7ZLU2DmWeRcLuikyEKjqk0893KA2Mbj'
     }),
-    
+
   ],
   providers: [],
   bootstrap: [AppComponent]

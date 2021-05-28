@@ -10,8 +10,15 @@
 .navbar-custom .navbar-brand {
     color: white;
     position: absolute;
-    left: 0;
-    margin-left: 15px;
+    left: 40px;
+    margin-left: 20px;
+}
+
+.navbar-custom .navbar-btn {
+    color: white;
+    position: absolute;
+    right: 40px;
+    margin-right: 20px;
 }
 
 .navbar-custom .navbar-text,
