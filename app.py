@@ -298,7 +298,7 @@ def create_app(test_config=None):
     # '''
 
     @app.route('/movies/<int:id>', methods=['DELETE'])
-    @requires_role('director')
+    #@requires_role('director')
     #@requires_auth('delete:movies')
     def deleteMovie(id):
 
