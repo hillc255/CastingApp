@@ -188,7 +188,7 @@ def create_app(test_config=None):
 
 
     @app.route('/movies/<int:id>', methods=['PATCH'])
-    @requires_role('assistant')
+    #@requires_role('assistant')
     #@requires_auth('patch:movies')
     def updateMovie(id):
 
