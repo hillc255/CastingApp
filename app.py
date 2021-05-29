@@ -77,6 +77,7 @@ def create_app(test_config=None):
     # '''
 
     @app.route('/movies', methods=['GET'])
+    @requires_role('user')
     def getAllMovies():
 
         movies_all = Movie.query.all()
@@ -107,6 +108,7 @@ def create_app(test_config=None):
 
 
     @app.route('/movies/<int:id>', methods=['GET'])
+    @requires_role('user')
     #@requires_role('assistant')
     #@requires_auth('get:movies-id')
     def getMovie(id):
@@ -329,6 +331,7 @@ def create_app(test_config=None):
     # '''
     
     @app.route('/movies/search', methods=['GET'])
+    @requires_role('user')
     def findMovieByTitle():
 
         search_title = request.args.get('title')
@@ -365,6 +368,7 @@ def create_app(test_config=None):
     # '''
 
     @app.route('/actors', methods=['GET'])
+    @requires_role('user')
     def getAllActors():
 
         actors_all = Actor.query.all()
@@ -395,6 +399,7 @@ def create_app(test_config=None):
     # '''
 
     @app.route('/actors/<int:id>', methods=['GET'])
+    @requires_role('user')
     #@requires_role('assistant')
     #@requires_auth('get:actors-id')
     def getActor(id):
@@ -626,6 +631,7 @@ def create_app(test_config=None):
     # '''
     
     @app.route('/actors/search', methods=['GET'])
+    @requires_role('user')
     def findActorByFirstName():
 
         search_firstname = request.args.get('first_name')
