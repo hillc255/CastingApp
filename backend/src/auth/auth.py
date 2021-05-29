@@ -216,7 +216,7 @@ def requires_role(required_role):
             }, 401)
 
         # Renaming the function name:
-        wrapper.__name__ = func.__name__
+        wrapper.__name__ = f.__name__
         return wrapper
 
     return decorator
