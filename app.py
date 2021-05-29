@@ -147,7 +147,7 @@ def create_app(test_config=None):
     # '''
 
     @app.route('/movies', methods=['POST'])
-    #@requires_role('director')
+    @requires_role('director')
     #@requires_auth('post:movies')
     def createMovie():
 
