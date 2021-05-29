@@ -98,7 +98,7 @@ def create_app(test_config=None):
     
     # '''
     # GET:          /movies/<int:id>
-    # Authorized:   Assistant and Director access
+    # Authorized:   Public access
     # Endpoint:     GET a specific movie
     # Returns:      Status code 200 and json {"success": True, "movie": data}
     #               where movie is a single movie data
@@ -263,7 +263,7 @@ def create_app(test_config=None):
     # '''
 
     @app.route('/movies/<int:id>/unpublish', methods=['PATCH'])
-    #@requires_role('assistant')
+    @requires_role('assistant')
     #@requires_auth('patch:movie-unpublish')
     def unpublishMovie(id):
 
@@ -298,7 +298,7 @@ def create_app(test_config=None):
     # '''
 
     @app.route('/movies/<int:id>', methods=['DELETE'])
-    #@requires_role('director')
+    @requires_role('director')
     #@requires_auth('delete:movies')
     def deleteMovie(id):
 
@@ -357,7 +357,7 @@ def create_app(test_config=None):
  
     # '''
     # GET:          /actors
-    # Authorized:   Assistant and Director access
+    # Authorized:   Public access
     # Endpoint:     Gets all actors data representation
     # Returns:      Status code 200 for successful get
     #               where actors is the list of actors
@@ -387,7 +387,7 @@ def create_app(test_config=None):
 
     # '''
     # GET:          /actors/<int:id>
-    # Authorized:   Assistant and Director access
+    # Authorized:   Public access
     # Endpoint:     GET a specific actor
     # Returns:      Status code 200 and json {"success": True, "actor": data}
     #               where actor is a single actor data
@@ -438,7 +438,7 @@ def create_app(test_config=None):
     # '''
 
     @app.route('/actors', methods=['POST'])
-    #@requires_role('director')
+    @requires_role('director')
     #@requires_auth('post:actors')
     def createActor():
 
@@ -483,7 +483,7 @@ def create_app(test_config=None):
 
 
     @app.route('/actors/<int:id>', methods=['PATCH'])
-    #@requires_role('assistant')
+    @requires_role('assistant')
     #@requires_auth('patch:actors')
     def updateActor(id):
 
@@ -523,7 +523,7 @@ def create_app(test_config=None):
     # '''
     
     @app.route('/actors/<int:id>/publish', methods=['PATCH'])
-    #@requires_role('assistant')
+    @requires_role('assistant')
     #@requires_auth('patch:actor-publish')
     def publishActor(id):
 
@@ -560,7 +560,7 @@ def create_app(test_config=None):
 
 
     @app.route('/actors/<int:id>/unpublish', methods=['PATCH'])
-    #@requires_role('assistant')
+    @requires_role('assistant')
     #@requires_auth('patch:actor-unpublish')
     def unpublishActor(id):
 
@@ -596,7 +596,7 @@ def create_app(test_config=None):
     # '''
 
     @app.route('/actors/<int:id>', methods=['DELETE'])
-    #@requires_role('director')
+    @requires_role('director')
     #@requires_auth('delete:actors')
     def deleteActor(id):
         try:
