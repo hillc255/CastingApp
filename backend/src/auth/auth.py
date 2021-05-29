@@ -215,6 +215,8 @@ def requires_role(required_role):
                 'description': 'You do not have the roles needed to perform this operation.'
             }, 401)
 
+        # Renaming the function name:
+        wrapper.__name__ = func.__name__
         return wrapper
 
     return decorator
