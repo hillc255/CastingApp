@@ -179,7 +179,6 @@ def verify_decode_jwt(token):
     method
 '''
 
-
 def requires_auth(permission=''):
     def requires_auth_decorator(f):
         @wraps(f)
@@ -190,3 +189,32 @@ def requires_auth(permission=''):
             return f(payload, *args, **kwargs)
         return wrapper
     return requires_auth_decorator
+
+'''
+Auth0 Handling Authorization Through Roles
+https://auth0.com/blog/using-python-flask-and-angular-to-build-
+modern-web-apps-part-3/#Handling-Authorization-Through-Roles
+
+'''
+
+def requires_role(required_role):
+    def decorator(f):
+        def wrapper(**args):
+            token = get_token_auth_header()
+            unverified_claims = jwt.get_unverified_claims(token)
+
+            # search current token for the expected role
+            if unverified_claims.get('https://cast-app.herokuapp.com/roles'):
+                roles = unverified_claims['https://cast-app.herokuapp.com/roles']
+                for role in roles:
+                    if role == required_role:
+                        return f(**args)
+
+            raise AuthError({
+                'code': 'insuficient_roles',
+                'description': 'You do not have the roles needed to perform this operation.'
+            }, 401)
+
+        return wrapper
+
+    return decorator

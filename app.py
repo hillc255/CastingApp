@@ -16,7 +16,7 @@ from flask_moment import Moment
 
 #Local application imports
 from backend.src.database.models import db_drop_and_create_all, setup_db, Movie, Actor, MovieActorLink, db
-from backend.src.auth.auth import AuthError, requires_auth
+from backend.src.auth.auth import AuthError, requires_auth, requires_role
 
 print(f"**** app.py ****")
 
@@ -107,7 +107,8 @@ def create_app(test_config=None):
 
 
     @app.route('/movies/<int:id>', methods=['GET'])
-    @requires_auth('get:movies-id')
+    #@requires_role('assistant')
+    #@requires_auth('get:movies-id')
     def getMovie(id):
 
         if id is None:
@@ -146,7 +147,8 @@ def create_app(test_config=None):
     # '''
 
     @app.route('/movies', methods=['POST'])
-    @requires_auth('post:movies')
+    @requires_role('director')
+    #@requires_auth('post:movies')
     def createMovie():
 
         try:
@@ -186,7 +188,8 @@ def create_app(test_config=None):
 
 
     @app.route('/movies/<int:id>', methods=['PATCH'])
-    @requires_auth('patch:movies')
+    @requires_role('assistant')
+    #@requires_auth('patch:movies')
     def updateMovie(id):
 
         if id is None:
@@ -224,7 +227,8 @@ def create_app(test_config=None):
 
 
     @app.route('/movies/<int:id>/publish', methods=['PATCH'])
-    @requires_auth('patch:movie-publish')
+    @requires_role('assistant')
+    #@requires_auth('patch:movie-publish')
     def publishMovie(id):
 
         if id is None:
@@ -259,7 +263,8 @@ def create_app(test_config=None):
     # '''
 
     @app.route('/movies/<int:id>/unpublish', methods=['PATCH'])
-    @requires_auth('patch:movie-unpublish')
+    @requires_role('assistant')
+    #@requires_auth('patch:movie-unpublish')
     def unpublishMovie(id):
 
         if id is None:
@@ -293,7 +298,8 @@ def create_app(test_config=None):
     # '''
 
     @app.route('/movies/<int:id>', methods=['DELETE'])
-    @requires_auth('delete:movies')
+    @requires_role('director')
+    #@requires_auth('delete:movies')
     def deleteMovie(id):
 
         try:
@@ -389,7 +395,8 @@ def create_app(test_config=None):
     # '''
 
     @app.route('/actors/<int:id>', methods=['GET'])
-    @requires_auth('get:actors-id')
+    #@requires_role('assistant')
+    #@requires_auth('get:actors-id')
     def getActor(id):
 
         if id is None:
@@ -431,7 +438,8 @@ def create_app(test_config=None):
     # '''
 
     @app.route('/actors', methods=['POST'])
-    @requires_auth('post:actors')
+    @requires_role('director')
+    #@requires_auth('post:actors')
     def createActor():
 
         try:
@@ -475,7 +483,8 @@ def create_app(test_config=None):
 
 
     @app.route('/actors/<int:id>', methods=['PATCH'])
-    @requires_auth('patch:actors')
+    @requires_role('assistant')
+    #@requires_auth('patch:actors')
     def updateActor(id):
 
         if id is None:
@@ -514,7 +523,8 @@ def create_app(test_config=None):
     # '''
     
     @app.route('/actors/<int:id>/publish', methods=['PATCH'])
-    @requires_auth('patch:actor-publish')
+    @requires_role('assistant')
+    #@requires_auth('patch:actor-publish')
     def publishActor(id):
 
         if id is None:
@@ -550,7 +560,8 @@ def create_app(test_config=None):
 
 
     @app.route('/actors/<int:id>/unpublish', methods=['PATCH'])
-    @requires_auth('patch:actor-unpublish')
+    @requires_role('assistant')
+    #@requires_auth('patch:actor-unpublish')
     def unpublishActor(id):
 
         if id is None:
@@ -585,7 +596,8 @@ def create_app(test_config=None):
     # '''
 
     @app.route('/actors/<int:id>', methods=['DELETE'])
-    @requires_auth('delete:actors')
+    @requires_role('director')
+    #@requires_auth('delete:actors')
     def deleteActor(id):
         try:
             actor = Actor.query.filter(Actor.id == id).one_or_none()
