@@ -88,7 +88,7 @@
       <br />
       <button
         class="btn btn-primary me-2"
-        *ngIf="currentMovie.movie_publish"
+        *ngIf="currentMovie.movie_publish && isAssistant"
         (click)="unpublishMovie()"
       >
         UnPublish
@@ -96,13 +96,13 @@
       
       <button
         class="btn btn-primary me-2"
-        *ngIf="!currentMovie.movie_publish"
+        *ngIf="!currentMovie.movie_publish && isAssistant"
         (click)="publishMovie()"
       >
         Publish
       </button>
   
-      <button class="btn btn-danger me-2" (click)="deleteMovie()">
+      <button class="btn btn-danger me-2" *ngIf="isDirector" (click)="deleteMovie()">
         Delete
       </button>
   

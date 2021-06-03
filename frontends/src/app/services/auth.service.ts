@@ -1,27 +1,25 @@
 // import { Injectable } from '@angular/core';
 // import * as auth0 from 'auth0-js';
+// //import * as Auth0 from 'auth0-web';
+
 
 // @Injectable({
 //   providedIn: 'root'
 // })
 
-// export class AuthService {
-
-//   constructor() { }
-// }
-
 // @Injectable()
 // export class AuthService {
-//   private AUTH0_DOMAIN = '[AUTH0_DOMAIN]'; // e.g., yourname.auth0.com
+//   private AUTH0_DOMAIN = '[AUTH0_DOMAIN]';
 //   // Create Auth0 WebAuth instance
 //   private _webAuth = new auth0.WebAuth({
 //     domain: this.AUTH0_DOMAIN,
 //     clientID: '[AUTH0_CLIENT_ID]',
 //     responseType: 'token',
-//     redirectUri: 'http://localhost:4200',
+//     redirectUri: 'http://localhost:8081',
 //     audience: `https://${this.AUTH0_DOMAIN}/userinfo`, // This audience grants access to user profile data
 //     scope: 'openid profile email'
 //   });
+
 //   // Store the user's profile locally once they log in
 //   userProfile: any;
 //   // Store access token to authorize an API (future)
@@ -76,4 +74,4 @@
 //     const expiresAt = JSON.parse(localStorage.getItem('expires_at'));
 //     return (Date.now() < expiresAt) && this.accessToken && this.userProfile;
 //   }
-
+// }

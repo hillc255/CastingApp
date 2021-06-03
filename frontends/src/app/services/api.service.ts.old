@@ -1,0 +1,24 @@
+import { Injectable } from '@angular/core';
+import { HttpHeaders, HttpClient, HttpParams } from '@angular/common/http';
+import { AuthService } from '@auth0/auth0-angular';
+
+const baseUrl = 'https://cast-app.herokuapp.com';
+
+@Injectable()
+export class ApiService {
+
+  constructor(private http: HttpClient, private auth0: AuthService) {}
+
+  async deleteMovie(id: number) {
+    const accessToken = await this.auth0.getAccessTokenSilently().toPromise();
+    const httpOptions = {
+      headers: new HttpHeaders({
+        // SDK?
+        'Authorization': `Bearer ${accessToken}`
+        //'Authorization': `Bearer ${Auth0.getAccessToken()}`
+      })
+    };
+    return this.http
+      .delete(`${baseUrl}/movies/${id}`, httpOptions);
+  }
+}

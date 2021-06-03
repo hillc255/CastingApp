@@ -179,7 +179,7 @@ def create_app(test_config=None):
     
     # '''
     # PATCH:        /movies/<int:id>
-    # Authorized:   Assistant and Director access
+    # Authorized:   Assistant access
     # Endpoint:     Update movie data fields
     # Returns:      Status code 200 and json {"success": True}
     #               where movie published is a single movie
@@ -218,7 +218,7 @@ def create_app(test_config=None):
 
     # '''
     # PATCH:        /movies/<int:id>/publish
-    # Authorized:   Assistant and Director access
+    # Authorized:   Assistant access
     # Endpoint:     Publish movie data fields - boolen
     # Returns:      Status code 200 and json {"success": True}
     #               where movie updated is a single movie
@@ -255,7 +255,7 @@ def create_app(test_config=None):
 
     # '''
     # PATCH:        /movies/<int:id>/publish
-    # Authorized:   Assistant and Director access
+    # Authorized:   Assistant access
     # Endpoint:     Unpublish movie data fields - boolen
     # Returns:      Status code 200 and json {"success": True}
     #               where movie updated is a single movie
@@ -298,8 +298,8 @@ def create_app(test_config=None):
     # '''
 
     @app.route('/movies/<int:id>', methods=['DELETE'])
-    @requires_role('director')
-    #@requires_auth('delete:movies')
+    #requires_role('director')
+    @requires_auth('delete:movies')
     def deleteMovie(id):
 
         try:
@@ -474,7 +474,7 @@ def create_app(test_config=None):
  
     # '''
     # PATCH:        /actors/<int:id>
-    # Authorized:   Assistant and Director access
+    # Authorized:   Assistant access
     # Endpoint:     Update actor data fields
     # Returns:      Status code 200 and json {"success": True}
     #               where actor published is a single actor
@@ -515,7 +515,7 @@ def create_app(test_config=None):
 
     # '''
     # PATCH:        /actors/<int:id>/publish
-    # Authorized:   Assistant and Director access
+    # Authorized:   Assistant access
     # Endpoint:     Publish actor data fields - boolen
     # Returns:      Status code 200 and json {"success": True}
     #               where actor updated is a single actor
@@ -551,7 +551,7 @@ def create_app(test_config=None):
 
     # '''
     # PATCH:        /actors/<int:id>/unpublish
-    # Authorized:   Assistant and Director access
+    # Authorized:   Assistant access
     # Endpoint:     Unpublish actor data fields - boolean
     # Returns:      Status code 200 and json {"success": True}
     #               where actor unpublish is a single actor

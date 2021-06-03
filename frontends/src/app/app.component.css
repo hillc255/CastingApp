@@ -19,6 +19,15 @@
     position: absolute;
     right: 40px;
     margin-right: 20px;
+    font-size: 12px;
+}
+
+.navbar-custom .navbar-profile {
+    color: white;
+    font-size: 12px;
+    position: absolute;
+    right: 110px;
+    margin-right: 20px;
 }
 
 .navbar-custom .navbar-text,

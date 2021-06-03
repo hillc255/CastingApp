@@ -16,6 +16,7 @@ export class AddMovieComponent implements OnInit {
     movie_publish: false
   };
   submitted = false;
+ // isDirector: boolean = false; //changed isDirector to a property of component
 
   constructor(private movieService: MovieService) { }
 
