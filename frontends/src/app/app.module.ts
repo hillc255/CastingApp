@@ -49,36 +49,36 @@ import{ UserProfileComponent }  from './components/profile/profile.component';
       domain: 'autumn-voice-0666.us.auth0.com',
       clientId: 'f7ZLU2DmWeRcLuikyEKjqk0893KA2Mbj',
 
-      //provide the HTTP Interceptor
-      //purpose -  perform common authentication tasks within the Angular apps.
-      //https://auth0.com/docs/quickstart/spa/angular/02-calling-an-api#provide-the-http-interceptor
-      audience: 'https://autumn-voice-0666.us.auth0.com/api.v2/',
-      scope: 'read:current_user',
-      httpInterceptor: {
-        allowedList: [
-          {
-           // Match any request that starts 'https://YOUR_DOMAIN/api/v2/' (note the asterisk)
-            uri: 'https://autumn-voice-0666.us.auth0.com/api/v2/*',
-            tokenOptions: {
-              // The attached token should target this audience
-              audience: 'https://autumn-voice-0666.us.auth0.com/api/v2/',
-              // The attached token should have these scopes
-              scope: 'read:current_user'
-            }       
-          }
-        ]
-      }
-    }),
-  ],
+  //     //provide the HTTP Interceptor
+  //     //purpose -  perform common authentication tasks within the Angular apps.
+  //     //https://auth0.com/docs/quickstart/spa/angular/02-calling-an-api#provide-the-http-interceptor
+  //     audience: 'https://autumn-voice-0666.us.auth0.com/api.v2/',
+  //     scope: 'read:current_user',
+  //     httpInterceptor: {
+  //       allowedList: [
+  //         {
+  //          // Match any request that starts 'https://YOUR_DOMAIN/api/v2/' (note the asterisk)
+  //           uri: 'https://autumn-voice-0666.us.auth0.com/api/v2/*',
+  //           tokenOptions: {
+  //             // The attached token should target this audience
+  //             audience: 'https://autumn-voice-0666.us.auth0.com/api/v2/',
+  //             // The attached token should have these scopes
+  //             scope: 'read:current_user'
+  //           }       
+  //         }
+  //       ]
+  //     }
+  //   }),
+  // ],
 
-//  }),
-//  ],
+  }),
+ ],
   providers: [
-    {
-      provide : HTTP_INTERCEPTORS,
-      useClass: AuthHttpInterceptor,
-      multi   : true,
-    }
+    // {
+    //   provide : HTTP_INTERCEPTORS,
+    //   useClass: AuthHttpInterceptor,
+    //   multi   : true,
+    // }
   ],
 
   bootstrap: [AppComponent]

@@ -10,20 +10,20 @@ export class ApiService {
 
   constructor(private http: HttpClient, private auth0: AuthService) {}
 
-  //   deleteMovie(id: number) {
-  //   const httpOptions = {
-  //     headers: new HttpHeaders({
-  //       'Authorization': 'Bearer $(this.auth.getToken()}'
-  //       //'Authorization': `Bearer ${Auth0.getAccessToken()}`
-  //     })
-  //   };
-  //   return this.http
-  //     .delete(`${baseUrl}/movies/${id}`, httpOptions);
-  // }
+//   //   deleteMovie(id: number) {
+//   //   const httpOptions = {
+//   //     headers: new HttpHeaders({
+//   //       'Authorization': 'Bearer $(this.auth.getToken()}'
+//   //       //'Authorization': `Bearer ${Auth0.getAccessToken()}`
+//   //     })
+//   //   };
+//   //   return this.http
+//   //     .delete(`${baseUrl}/movies/${id}`, httpOptions);
+//   // }
 
   async deleteMovie(id: number) {
     const accessToken = await this.auth0.getAccessTokenSilently().toPromise();
-    //const accessToken = await this.auth0.getAccessTokenSilently().toPromise();
+    
     const httpOptions = {
       headers: new HttpHeaders({
         'Authorization': 'Bearer $(this.auth0.getToken()}'
