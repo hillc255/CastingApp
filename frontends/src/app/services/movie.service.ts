@@ -44,7 +44,7 @@ export class MovieService {
 
     const httpOptions = {
       headers: new HttpHeaders({
-        'Authorization': `Bearer ${accessToken}`
+        Authorization: `Bearer ${accessToken}`
       })
     };
     //called http delete option convert to promise
