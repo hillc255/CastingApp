@@ -18,7 +18,7 @@ export class MovieDetailsComponent implements OnInit {
   };
   message = '';
   isAssistant: boolean = false; //added as a property of component
-  isDirector: boolean = false; //changed isDirector to a property of component
+  isDirector: boolean = false; //added as a property of component
 
   constructor(
     private movieService: MovieService,
@@ -75,11 +75,11 @@ export class MovieDetailsComponent implements OnInit {
       .subscribe(
         response => {
           console.log(response);
-          this.message = (response.success)?"Movie updated successfully!":"Movie update unsuccessful";
+          this.message = (response.success)?"Successful Movie update!":"Unsuccessful Movie update.";
         },
         error => {
           console.log(error);
-          this.message = "Movie update unsuccessful";
+          this.message = "Unsuccessful Movie update";
         });
   }
 
