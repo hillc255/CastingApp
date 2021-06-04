@@ -109,8 +109,6 @@ def create_app(test_config=None):
 
 
     @app.route('/movies/<int:id>', methods=['GET'])
-    #@requires_role('assistant')
-    #@requires_auth('get:movies-id')
     def getMovie(id):
 
         if id is None:
@@ -300,8 +298,8 @@ def create_app(test_config=None):
     # '''
 
     @app.route('/movies/<int:id>', methods=['DELETE'])
-    #@requires_role('director')
-    @requires_auth('delete:movies')
+    @requires_role('director')
+    #@requires_auth('delete:movies')
     def deleteMovie(id):
 
         try:
@@ -397,8 +395,6 @@ def create_app(test_config=None):
     # '''
 
     @app.route('/actors/<int:id>', methods=['GET'])
-    #@requires_role('assistant')
-    #@requires_auth('get:actors-id')
     def getActor(id):
 
         if id is None:
