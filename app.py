@@ -31,7 +31,10 @@ def create_app(test_config=None):
     CORS(app)
 
     # Added CORS and after_request decorator to set Access-Control-Allow
-    CORS(app, resources={r"/*": {"origins": "*"}})
+    CORS(app, resources={r"/*": {
+        "origins": "*",
+        "methods": ["DELETE","GET", "HEAD", "POST", "OPTIONS", "PUT", "PATCH"]
+    }})
 
     # Make sure home page is working
     @app.route('/')
