@@ -32,8 +32,7 @@ def create_app(test_config=None):
 
     # Added CORS and after_request decorator to set Access-Control-Allow
     CORS(app, resources={r"/*": {
-        "origins": "*",
-        "methods": ["DELETE","GET", "HEAD", "POST", "OPTIONS", "PUT", "PATCH"]
+        "origins": "*"
     }})
 
     # Make sure home page is working
@@ -301,6 +300,7 @@ def create_app(test_config=None):
     # '''
 
     @app.route('/movies/<int:id>', methods=['DELETE'])
+    @cross_origin()
     #@requires_role('director')
     #@requires_auth('delete:movies')
     def deleteMovie(id):
