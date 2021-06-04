@@ -29,12 +29,12 @@ conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 # DATABASE_URL = os.environ['DATABASE_URL']
 # conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 
-print(f"1) DB_HOST={DB_HOST}")
-print(f"2) DB_USER={DB_USER}")
-print(f"3) DB_PASSWORD={DB_PASSWORD}")
-print(f"4) DB_NAME={DB_NAME}")
-print(f"5) DB_URL={DATABASE_URL}")
-print(f"6) APP_SETTING={DATABASE_URL}")
+# print(f"1) DB_HOST={DB_HOST}")
+# print(f"2) DB_USER={DB_USER}")
+# print(f"3) DB_PASSWORD={DB_PASSWORD}")
+# print(f"4) DB_NAME={DB_NAME}")
+# print(f"5) DB_URL={DATABASE_URL}")
+# print(f"6) APP_SETTING={DATABASE_URL}")
 # ---------------------------uncomment above
 
 database_path = 'postgresql+psycopg2://{}:{}@{}/{}'.format(DB_USER, DB_PASSWORD, DB_HOST, DB_NAME)
