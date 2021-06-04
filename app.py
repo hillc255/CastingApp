@@ -149,7 +149,7 @@ def create_app(test_config=None):
     # '''
 
     @app.route('/movies', methods=['POST'])
-    @requires_role('director')
+    #@requires_role('director')
     #@requires_auth('post:movies')
     def createMovie():
 
@@ -300,9 +300,8 @@ def create_app(test_config=None):
     # '''
 
     @app.route('/movies/<int:id>', methods=['DELETE'])
-    @cross_origin()
     #@requires_role('director')
-    #@requires_auth('delete:movies')
+    @requires_auth('delete:movies')
     def deleteMovie(id):
 
         try:

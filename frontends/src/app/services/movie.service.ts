@@ -48,7 +48,7 @@ export class MovieService {
       })
     };
     //called http delete option convert to promise
-    return this.http.delete(`${baseUrl}/movies/${id}`, httpOptions).toPromise();
+    return this.http.delete(`${baseUrl}/${id}`, httpOptions).toPromise();
     //then in movie-details.components 
   }
 
