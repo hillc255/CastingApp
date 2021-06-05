@@ -8,10 +8,11 @@ from jose import jwt
 
 
 
-AUTH0_DOMAIN = 'autumn-voice-0666.us.auth0.com/' # heroku auth0 domain
+AUTH0_DOMAIN = 'autumn-voice-0666.us.auth0.com/' # heroku auth0 domain + "/"
 ALGORITHMS = ['RS256']
 #API_AUDIENCE = 'cast-app' # heroku app name
-API_AUDIENCE = 'f7ZLU2DmWeRcLuikyEKjqk0893KA2Mbj'
+#API_AUDIENCE = 'f7ZLU2DmWeRcLuikyEKjqk0893KA2Mbj'
+API_AUDIENCE = 'https://cast-app.herokuapp.com/api'
 
 APP = Flask(__name__)
 
@@ -35,7 +36,7 @@ def get_token_auth_header():
     """Obtains the Access Token from the Authorization Header
     """
     #auth = request.headers.get("Authorization", None)
-    request.headers.get("Authorization", None)
+    auth = request.headers.get("Authorization", None)
     if not auth:
         raise AuthError({"code": "authorization_header_missing",
                         "description":
