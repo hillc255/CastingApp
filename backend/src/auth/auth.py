@@ -6,6 +6,8 @@ from flask import Flask, request, jsonify, _request_ctx_stack
 from flask_cors import cross_origin
 from jose import jwt
 
+from auth0.v3.authentication.token_verifier import TokenVerifier
+
 
 AUTH0_DOMAIN = 'autumn-voice-0666.us.auth0.com/' # heroku auth0 domain
 ALGORITHMS = ['RS256']
