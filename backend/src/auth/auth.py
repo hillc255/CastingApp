@@ -61,7 +61,7 @@ def get_token_auth_header():
     token = parts[1]
     return token
 
- print("***Headers complete")
+print("***Headers complete")
 
 def requires_auth(f):
     """Determines if the Access Token is valid
@@ -111,7 +111,7 @@ def requires_auth(f):
                         "description": "Unable to find appropriate key"}, 401)
     return decorated
 
- print("***requires_auth complete")
+print("***requires_auth complete")
 
 # VALIDATE SCOPES
 
@@ -129,7 +129,7 @@ def requires_scope(required_scope):
                     return True
     return False
 
- print("***requires_scope complete")
+print("***requires_scope complete")
 
 # PROTECT API ENDPOINTS
 
