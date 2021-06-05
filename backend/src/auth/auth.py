@@ -14,6 +14,9 @@ API_AUDIENCE = 'f7ZLU2DmWeRcLuikyEKjqk0893KA2Mbj'
 
 APP = Flask(__name__)
 
+# After authenticating
+id_token = auth_result['id_token']
+
 # Error handler
 class AuthError(Exception):
     def __init__(self, error, status_code):
@@ -29,7 +32,7 @@ def handle_auth_error(ex):
 #JWT VALIDATION DECORATOR
 
 # Format error response and append status code
-def get_token_auth_header():
+def get_token_auth_header(id_token):
     """Obtains the Access Token from the Authorization Header
     """
     auth = request.headers.get("Authorization", None)
