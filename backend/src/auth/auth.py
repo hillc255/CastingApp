@@ -11,6 +11,7 @@ ALGORITHMS = ['RS256']
 #API_AUDIENCE = 'https://cast-app.herokuapp.com/api'
 API_AUDIENCE = 'f7ZLU2DmWeRcLuikyEKjqk0893KA2Mbj'
 
+
 # AuthError Exception
 '''
 AuthError Exception
@@ -24,6 +25,8 @@ class AuthError(Exception):
     def __init__(self, error, status_code):
         self.error = error
         self.status_code = status_code
+
+        print("***Exception complete")
 
 
 # Auth Header
@@ -67,6 +70,8 @@ def get_token_auth_header():
 
     return headers_parts[1]
 
+    print("***Headers complete")
+
 
 '''
 @TODO implement check_permissions(permission, payload) method
@@ -97,6 +102,7 @@ def check_permissions(permission, payload):
         }, 403)
     return True
 
+    print("***Permissions complete")
 
 '''
 @TODO implement verify_decode_jwt(token) method
@@ -118,7 +124,7 @@ def verify_decode_jwt(token):
 def verify_decode_jwt(token):
     jsonurl = urlopen(f'https://{AUTH0_DOMAIN}/.well-known/jwks.json')
     jwks = json.loads(jsonurl.read())
-    print('token', token)
+    print('token= ', token)
     unverified_header = jwt.get_unverified_header(token)
     rsa_key = {}
     if 'kid' not in unverified_header:
@@ -169,6 +175,7 @@ def verify_decode_jwt(token):
                 'description': 'Unable to find the appropriate key.'
             }, 400)
 
+            print("***Decode complete")
 
 '''
 @TODO implement @requires_auth(permission) decorator method
@@ -193,12 +200,15 @@ def requires_auth(permission=''):
         return wrapper
     return requires_auth_decorator
 
+    print("***Requires_auth complete")
+
 '''
 Auth0 Handling Authorization Through Roles
 https://auth0.com/blog/using-python-flask-and-angular-to-build-
 modern-web-apps-part-3/#Handling-Authorization-Through-Roles
 
 '''
+print("***requires_role start")
 
 def requires_role(required_role):
     def decorator(f):
@@ -222,3 +232,5 @@ def requires_role(required_role):
         return wrapper
 
     return decorator
+
+    print("***requires_role complete")
