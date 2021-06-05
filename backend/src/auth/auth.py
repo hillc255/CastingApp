@@ -160,26 +160,26 @@ def private_scoped():
 
 # RULE / ROLES
 
-# def requires_role(required_role):
-#     def decorator(f):
-#         def wrapper(**args):
-#             token = get_token_auth_header()
-#             unverified_claims = jwt.get_unverified_claims(token)
+def requires_role(required_role):
+    def decorator(f):
+        def wrapper(**args):
+            token = get_token_auth_header()
+            unverified_claims = jwt.get_unverified_claims(token)
 
-#             # search current token for the expected role
-#             if unverified_claims.get('https://cast-app.herokuapp.com/roles'):
-#                 roles = unverified_claims['https://cast-app.herokuapp.com/roles']
-#                 for role in roles:
-#                     if role == required_role:
-#                         return f(**args)
+            # search current token for the expected role
+            if unverified_claims.get('https://cast-app.herokuapp.com/roles'):
+                roles = unverified_claims['https://cast-app.herokuapp.com/roles']
+                for role in roles:
+                    if role == required_role:
+                        return f(**args)
 
-#             raise AuthError({
-#                 'code': 'insuficient_roles',
-#                 'description': 'You do not have the roles needed to perform this operation.'
-#             }, 401)
+            raise AuthError({
+                'code': 'insuficient_roles',
+                'description': 'You do not have the roles needed to perform this operation.'
+            }, 401)
 
-#         # Renaming the function name:
-#         wrapper.__name__ = f.__name__
-#     #     return wrapper
+        # Renaming the function name:
+        wrapper.__name__ = f.__name__
+    #     return wrapper
 
-#     return decorator
+    return decorator
