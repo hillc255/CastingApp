@@ -24,7 +24,8 @@ import { AddActorComponent } from './components/add-actor/add-actor.component';
 import { AuthModule } from '@auth0/auth0-angular';
 import { AuthButtonComponent } from './components/auth/auth.component';
 import{ UserProfileComponent }  from './components/profile/profile.component';
-//import {ApiService} from './services/api.service';
+//Import headers from tokens
+import{ TokenInterceptor } from './token.interceptor';
 
 
 @NgModule({
@@ -48,19 +49,18 @@ import{ UserProfileComponent }  from './components/profile/profile.component';
     AuthModule.forRoot({
       domain: 'autumn-voice-0666.us.auth0.com',
       clientId: 'f7ZLU2DmWeRcLuikyEKjqk0893KA2Mbj',
+      audience: 'f7ZLU2DmWeRcLuikyEKjqk0893KA2Mbj',
+      //audience: 'https://cast-app.herokuapp.com/api',
+      scope: 'openid profile email',
       httpInterceptor: {
         allowedList: [
-          '/*',
           {
             uri:'/movies/*',
-            httpMethod: HttpMethod.Delete,
-            allowAnonymous: true,
             tokenOptions: {
-              scope: 'openid'
+              audience: 'f7ZLU2DmWeRcLuikyEKjqk0893KA2Mbj',
+              //audience: 'https://cast-app.herokuapp.com/api',
+              scope: 'openid profile email',
             }
-          },
-          {
-            uri: 'http://localhost:8081/movies/*'
           }
         ]
       }
@@ -68,9 +68,9 @@ import{ UserProfileComponent }  from './components/profile/profile.component';
   ],
   providers: [
     {
-      provide : HTTP_INTERCEPTORS,
-      useClass: AuthHttpInterceptor,
-      multi   : true,
+      provide: HTTP_INTERCEPTORS, 
+      useClass: TokenInterceptor, 
+      multi: true 
     }
   ],
 
