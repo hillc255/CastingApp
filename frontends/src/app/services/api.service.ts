@@ -13,7 +13,7 @@ export class ApiService {
 //   //   deleteMovie(id: number) {
 //   //   const httpOptions = {
 //   //     headers: new HttpHeaders({
-//   //       'Authorization': 'Bearer $(this.auth.getToken()}'
+//   //       'Authorization': 'Bearer $(this.auth0.getToken()}'
 //   //       //'Authorization': `Bearer ${Auth0.getAccessToken()}`
 //   //     })
 //   //   };
@@ -21,17 +21,17 @@ export class ApiService {
 //   //     .delete(`${baseUrl}/movies/${id}`, httpOptions);
 //   // }
 
-  async deleteMovie(id: number) {
-    const accessToken = await this.auth0.getAccessTokenSilently().toPromise();
+  // async deleteMovie(id: number) {
+  //   const accessToken = await this.auth0.getAccessTokenSilently().toPromise();
     
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Authorization': 'Bearer $(this.auth0.getToken()}'
-        //'Authorization': `Bearer ${accessToken}`
-        //'Authorization': `Bearer ${Auth0.getAccessToken()}`
-      })
-    };
-    return this.http
-      .delete(`${baseUrl}/movies/${id}`, httpOptions);
-  }
+  //   const httpOptions = {
+  //     headers: new HttpHeaders({
+  //       'Authorization': `Bearer ${this.auth0.getToken()}`
+  //       //'Authorization': `Bearer ${accessToken}`
+  //       //'Authorization': `Bearer ${Auth0.getAccessToken()}`
+  //     })
+  //   };
+  //   return this.http
+  //     .delete(`${baseUrl}/movies/${id}`, httpOptions);
+  // }
 }

@@ -42,7 +42,7 @@ export class MovieService {
   // }
 
   //made async function returned promise for a movie rather an observable
-  async deleteMovie(id: any): Promise<any> {
+  deleteMovie(id: any): Observable<any> {
     // //fetched token and awaited the promise - getAccessTokenSilently changed from subscription to promise
     // const accessToken = await this.auth0.idTokenClaims$.subscribe(val => {console.log(val)})
 
@@ -53,7 +53,7 @@ export class MovieService {
     // };
     // //called http delete option convert to promise
     //return this.http.delete(`${baseUrl}/${id}`, httpOptions).toPromise();
-    return this.http.delete(`${baseUrl}/${id}`).toPromise();
+    return this.http.delete(`${baseUrl}/${id}`);
     //then in movie-details.components 
   }
 

@@ -82,17 +82,19 @@ export class MovieDetailsComponent implements OnInit {
           this.message = "Unsuccessful Movie update";
         });
   }
-
-  //made function async and calls delete movie await response
-  async deleteMovie() {
-    try {
-      //call service method and log as an error if error
-      const response = await this.movieService.deleteMovie(this.currentMovie.id);
-      console.log(response);
-      this.router.navigate(['/movies']);
-    } catch(error) {
-      console.log(error);
-    }
+  
+  deleteMovie() {
+    //call service method and log as an error if error
+    this.movieService.deleteMovie(this.currentMovie.id)
+      .subscribe(
+        response => {
+          console.log(response);
+          this.router.navigate(['/movies']);
+        },
+        err => {
+          console.log(err);
+        }
+      );
   }
 
   
