@@ -188,7 +188,7 @@ def create_app(test_config=None):
 
 
     @app.route('/movies/<int:id>', methods=['PATCH'])
-    @requires_role('assistant')
+    #@requires_role('assistant')
     #@requires_auth('patch:movies')
     def updateMovie(id):
 
@@ -227,7 +227,7 @@ def create_app(test_config=None):
 
 
     @app.route('/movies/<int:id>/publish', methods=['PATCH'])
-    @requires_role('assistant')
+    #@requires_role('assistant')
     #@requires_auth('patch:movie-publish')
     def publishMovie(id):
 
@@ -263,7 +263,7 @@ def create_app(test_config=None):
     # '''
 
     @app.route('/movies/<int:id>/unpublish', methods=['PATCH'])
-    @requires_role('assistant')
+    #@requires_role('assistant')
     #@requires_auth('patch:movie-unpublish')
     def unpublishMovie(id):
 
@@ -298,8 +298,8 @@ def create_app(test_config=None):
     # '''
 
     @app.route('/movies/<int:id>', methods=['DELETE'])
-    @requires_role('director')
-    #@requires_auth('delete:movies')
+    #@requires_role('director')
+    @requires_auth('delete:movies')
     def deleteMovie(id):
 
         try:
@@ -436,7 +436,7 @@ def create_app(test_config=None):
     # '''
 
     @app.route('/actors', methods=['POST'])
-    @requires_role('director')
+    #@requires_role('director')
     #@requires_auth('post:actors')
     def createActor():
 
@@ -481,7 +481,7 @@ def create_app(test_config=None):
 
 
     @app.route('/actors/<int:id>', methods=['PATCH'])
-    @requires_role('assistant')
+    #@requires_role('assistant')
     #@requires_auth('patch:actors')
     def updateActor(id):
 
@@ -558,7 +558,7 @@ def create_app(test_config=None):
 
 
     @app.route('/actors/<int:id>/unpublish', methods=['PATCH'])
-    @requires_role('assistant')
+    #@requires_role('assistant')
     #@requires_auth('patch:actor-unpublish')
     def unpublishActor(id):
 
@@ -594,7 +594,7 @@ def create_app(test_config=None):
     # '''
 
     @app.route('/actors/<int:id>', methods=['DELETE'])
-    @requires_role('director')
+    #@requires_role('director')
     #@requires_auth('delete:actors')
     def deleteActor(id):
         try:
