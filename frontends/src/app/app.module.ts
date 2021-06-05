@@ -54,10 +54,9 @@ import{ TokenInterceptor } from './token.interceptor';
       httpInterceptor: {
         allowedList: [
           {
-            uri:'/movies/*',
             tokenOptions: {
               audience: 'https://cast-app.herokuapp.com/api',
-              scope: 'openid profile email',
+              scope: 'openid',
             }
           }
         ]
