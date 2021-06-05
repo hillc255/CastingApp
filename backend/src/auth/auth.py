@@ -175,7 +175,7 @@ def verify_decode_jwt(token):
                 'description': 'Unable to find the appropriate key.'
             }, 400)
 
-            print("***Decode complete")
+print("***Decode complete")
 
 '''
 @TODO implement @requires_auth(permission) decorator method
