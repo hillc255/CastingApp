@@ -6,7 +6,6 @@ from flask import Flask, request, jsonify, _request_ctx_stack
 from flask_cors import cross_origin
 from jose import jwt
 
-from auth0.v3.authentication.token_verifier import TokenVerifier
 
 
 AUTH0_DOMAIN = 'autumn-voice-0666.us.auth0.com/' # heroku auth0 domain
@@ -16,9 +15,6 @@ API_AUDIENCE = 'f7ZLU2DmWeRcLuikyEKjqk0893KA2Mbj'
 
 APP = Flask(__name__)
 
-# After authenticating
-id_token = auth_result['id_token']
-print("id_token = ", id_token)
 
 # Error handler
 class AuthError(Exception):
@@ -38,7 +34,8 @@ def handle_auth_error(ex):
 def get_token_auth_header():
     """Obtains the Access Token from the Authorization Header
     """
-    auth = request.headers.get("Authorization", None)
+    #auth = request.headers.get("Authorization", None)
+    request.headers.get("Authorization", None)
     if not auth:
         raise AuthError({"code": "authorization_header_missing",
                         "description":
