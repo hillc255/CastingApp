@@ -18,6 +18,7 @@ APP = Flask(__name__)
 
 # After authenticating
 id_token = auth_result['id_token']
+print("id_token = ", id_token)
 
 # Error handler
 class AuthError(Exception):
@@ -34,7 +35,7 @@ def handle_auth_error(ex):
 #JWT VALIDATION DECORATOR
 
 # Format error response and append status code
-def get_token_auth_header(id_token):
+def get_token_auth_header():
     """Obtains the Access Token from the Authorization Header
     """
     auth = request.headers.get("Authorization", None)
