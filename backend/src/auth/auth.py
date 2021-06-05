@@ -6,10 +6,11 @@ from flask import Flask, request, jsonify, _request_ctx_stack
 from flask_cors import cross_origin
 from jose import jwt
 
+
 AUTH0_DOMAIN = 'autumn-voice-0666.us.auth0.com/' # heroku auth0 domain
 ALGORITHMS = ['RS256']
 #API_AUDIENCE = 'cast-app' # heroku app name
-API_AUDIENCE = 'https://cast-app.herokuapp.com/api'
+API_AUDIENCE = 'f7ZLU2DmWeRcLuikyEKjqk0893KA2Mbj'
 
 APP = Flask(__name__)
 
