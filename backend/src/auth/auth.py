@@ -17,7 +17,7 @@ API_AUDIENCE = 'f7ZLU2DmWeRcLuikyEKjqk0893KA2Mbj'
 APP = Flask(__name__)
 
 
-**** auth.py ****
+print("***auth.py***")
 
 # Error handler
 class AuthError(Exception):
