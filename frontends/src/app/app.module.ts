@@ -50,11 +50,11 @@ import{ TokenInterceptor } from './token.interceptor';
       domain: 'autumn-voice-0666.us.auth0.com',
       clientId: 'f7ZLU2DmWeRcLuikyEKjqk0893KA2Mbj',
       audience: 'https://cast-app.herokuapp.com/api',
-      scope: 'openid profile email',
+      scope: 'openid',
       httpInterceptor: {
         allowedList: [
           {
-            uri: 'https://cast-app.herokuapp.com/api*',
+            uri: 'https://cast-app.herokuapp.com/*',
             tokenOptions: {
               audience: 'https://cast-app.herokuapp.com/api/',
               scope: 'openid profile email',
