@@ -54,16 +54,10 @@ import{ TokenInterceptor } from './token.interceptor';
       httpInterceptor: {
         allowedList: [
           {
+            uri: 'https://cast-app.herokuapp.com/api*',
             tokenOptions: {
+              audience: 'https://cast-app.herokuapp.com/api/',
               scope: 'openid profile email',
-              roles: 'director',
-              iss: 'https://autumn-voice-0666.us.auth0.com/',
-              sub: 'auth0|60b12648923fe2006f0809fe',
-              aud: [
-                  'https://cast-app.herokuapp.com/api',
-                  'https://autumn-voice-0666.us.auth0.com/userinfo'
-                ],
-              azp: 'f7ZLU2DmWeRcLuikyEKjqk0893KA2Mbj'
             }
           }
         ]
