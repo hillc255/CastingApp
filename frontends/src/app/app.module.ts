@@ -56,7 +56,7 @@ import{ TokenInterceptor } from './token.interceptor';
           {
             tokenOptions: {
               audience: 'https://cast-app.herokuapp.com/api',
-              expires_in: 86400,
+              'https://autumn-voice-0666.us.auth0.com/userinfo',
               scope: 'openid profile email',
             }
           }
