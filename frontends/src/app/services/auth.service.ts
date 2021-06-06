@@ -1,6 +1,27 @@
+import { Injectable } from '@angular/core';
+//import decode from 'jwt-decode';
+
+
+@Injectable()
+export class AuthService {
+  public getToken(): string {
+    return localStorage.getItem('token');
+  }
+  // public isAuthenticated(): boolean {
+  //   // get the token
+  //   const token = this.getToken();
+  //   // return a boolean reflecting 
+  //   // whether or not the token is expired
+  //   return tokenNotExpired(null, token);
+  // }
+}
+
+
+
+
 // import { Injectable } from '@angular/core';
 // import * as auth0 from 'auth0-js';
-// //import * as Auth0 from 'auth0-web';
+// // //import * as Auth0 from 'auth0-web';
 
 
 // @Injectable({
@@ -9,21 +30,21 @@
 
 // @Injectable()
 // export class AuthService {
-//   private AUTH0_DOMAIN = '[AUTH0_DOMAIN]';
+//   private AUTH0_DOMAIN = 'autumn-voice-0666.us.auth0.com', //'[AUTH0_DOMAIN]';
 //   // Create Auth0 WebAuth instance
 //   private _webAuth = new auth0.WebAuth({
 //     domain: this.AUTH0_DOMAIN,
-//     clientID: '[AUTH0_CLIENT_ID]',
+//     clientID: 'f7ZLU2DmWeRcLuikyEKjqk0893KA2Mbj', //'[AUTH0_CLIENT_ID]',
 //     responseType: 'token',
 //     redirectUri: 'http://localhost:8081',
 //     audience: `https://${this.AUTH0_DOMAIN}/userinfo`, // This audience grants access to user profile data
 //     scope: 'openid profile email'
 //   });
 
-//   // Store the user's profile locally once they log in
-//   userProfile: any;
-//   // Store access token to authorize an API (future)
-//   accessToken: string;
+  // // Store the user's profile locally once they log in
+  // userProfile: any;
+  // // Store access token to authorize an API (future)
+  // accessToken: string;
 
 //   constructor() {
 //     // You should explore token renewal with checkSession() to restore user login when returning
