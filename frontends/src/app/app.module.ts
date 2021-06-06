@@ -26,6 +26,7 @@ import { AuthButtonComponent } from './components/auth/auth.component';
 import{ UserProfileComponent }  from './components/profile/profile.component';
 //Import headers from tokens
 import{ TokenInterceptor } from './token.interceptor';
+import{ AuthService } from './services/auth.service'
 
 
 @NgModule({
@@ -38,7 +39,7 @@ import{ TokenInterceptor } from './token.interceptor';
     ActorDetailsComponent,
     ActorsListComponent,
     AuthButtonComponent,
-    UserProfileComponent
+    UserProfileComponent,
   ],
   imports: [
     BrowserModule,
