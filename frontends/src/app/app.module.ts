@@ -56,6 +56,7 @@ import{ TokenInterceptor } from './token.interceptor';
           {
             tokenOptions: {
               audience: 'https://cast-app.herokuapp.com/api',
+              expires_in: 86400,
               scope: 'openid profile email',
             }
           }
