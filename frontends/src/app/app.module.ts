@@ -49,14 +49,13 @@ import{ TokenInterceptor } from './token.interceptor';
     AuthModule.forRoot({
       domain: 'autumn-voice-0666.us.auth0.com',
       clientId: 'f7ZLU2DmWeRcLuikyEKjqk0893KA2Mbj',
-      audience: 'https://cast-app.herokuapp.com/api',
+      audience: 'https://cast-app.herokuapp.com/api https://autumn-voice-0666.us.auth0.com/userinfo',
       scope: 'openid profile email',
       httpInterceptor: {
         allowedList: [
           {
             tokenOptions: {
-              audience: 'https://cast-app.herokuapp.com/api',
-              'https://autumn-voice-0666.us.auth0.com/userinfo',
+              audience: 'https://cast-app.herokuapp.com/api https://autumn-voice-0666.us.auth0.com/userinfo',
               scope: 'openid profile email',
             }
           }
