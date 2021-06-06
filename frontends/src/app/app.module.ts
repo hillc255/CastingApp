@@ -26,8 +26,7 @@ import { AuthButtonComponent } from './components/auth/auth.component';
 import{ UserProfileComponent }  from './components/profile/profile.component';
 //Import headers from tokens
 import{ TokenInterceptor } from './token.interceptor';
-import{ AuthService } from './services/auth.service'
-
+import { AuthService } from './services/auth.service';
 
 @NgModule({
   declarations: [
@@ -67,6 +66,7 @@ import{ AuthService } from './services/auth.service'
     }),
   ],
   providers: [
+    AuthService,
     {
       provide: HTTP_INTERCEPTORS, 
       useClass: TokenInterceptor, 
