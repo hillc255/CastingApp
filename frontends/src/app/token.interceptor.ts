@@ -18,20 +18,20 @@ export class TokenInterceptor implements HttpInterceptor {
     ////const userToken = this.token.getToken();
     ////const userToken = this.auth.accessToken;
 
-    // //const accessToken = this.auth0.getToken();
+    const accessToken = 'secure-token';
 
 
-    // const modifiedReq = req.clone({ 
-    //   headers: req.headers.set('Authorization', `Bearer ${accessToken}`),
-    // });
-    // return next.handle(modifiedReq);
-
-    request = request.clone({
-      setHeaders: {
-        Authorization: `Bearer ${this.auth.getToken()}`
-      }
+    const modifiedReq = request.clone({ 
+      headers: request.headers.set('Authorization', `Bearer ${accessToken}`),
     });
-    return next.handle(request);
+    return next.handle(modifiedReq);
+
+    // request = request.clone({
+    //   setHeaders: {
+    //     Authorization: `Bearer ${this.auth.getToken()}`
+    //   }
+    // });
+    // return next.handle(request);
 
   } 
 }
