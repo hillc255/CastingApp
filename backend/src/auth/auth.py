@@ -8,7 +8,7 @@ from jose import jwt
 
 
 
-AUTH0_DOMAIN = 'autumn-voice-0666.us.auth0.com/' # heroku auth0 domain + "/"
+AUTH0_DOMAIN = 'autumn-voice-0666.us.auth0.com' # heroku auth0 domain + "/"
 ALGORITHMS = ['RS256']
 #API_AUDIENCE = 'f7ZLU2DmWeRcLuikyEKjqk0893KA2Mbj'
 API_AUDIENCE = 'https://cast-app.herokuapp.com/api'
