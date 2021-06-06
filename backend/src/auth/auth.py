@@ -60,7 +60,7 @@ def get_token_auth_header():
                             "Authorization header must be"
                             " Bearer token"}, 401)
 
-    token = parts[2]
+    token = parts[1]
     return token
 
 print("***Headers complete")
