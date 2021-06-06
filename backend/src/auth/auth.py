@@ -17,6 +17,8 @@ API_AUDIENCE = 'f7ZLU2DmWeRcLuikyEKjqk0893KA2Mbj'
 APP = Flask(__name__)
 
 
+**** auth.py ****
+
 # Error handler
 class AuthError(Exception):
     def __init__(self, error, status_code):
@@ -186,7 +188,8 @@ def requires_role(required_role):
 
         # Renaming the function name:
         wrapper.__name__ = f.__name__
-    #     return wrapper
+     
+        return wrapper
 
     return decorator
 
