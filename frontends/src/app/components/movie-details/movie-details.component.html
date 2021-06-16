@@ -107,7 +107,7 @@
       </button>
   
       <button
-        class="btn btn-success me-2" [disabled]="form.invalid" (click)="updateMovie()" >
+        class="btn btn-success me-2" *ngIf="isAssistant" [disabled]="form.invalid" (click)="updateMovie()" >
         Update
       </button>
       <p>{{ message }}</p>

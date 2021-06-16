@@ -37,24 +37,8 @@ export class MovieService {
     return this.http.patch(`${baseUrl}/${id}/unpublish`, {});
   }
 
-  // deleteMovie(id: any): Observable<any> {
-  //   return this.http.delete(`${baseUrl}/${id}`);
-  // }
-
-  //made async function returned promise for a movie rather an observable
   deleteMovie(id: any): Observable<any> {
-    // //fetched token and awaited the promise - getAccessTokenSilently changed from subscription to promise
-    // const accessToken = await this.auth0.idTokenClaims$.subscribe(val => {console.log(val)})
-
-    // const httpOptions = {
-    //   headers: new HttpHeaders({
-    //     Authorization: `Bearer ${accessToken}`
-    //   })
-    // };
-    // //called http delete option convert to promise
-    //return this.http.delete(`${baseUrl}/${id}`, httpOptions).toPromise();
     return this.http.delete(`${baseUrl}/${id}`);
-    //then in movie-details.components 
   }
 
   findMovieByTitle(title: any): Observable<Movie[]> {

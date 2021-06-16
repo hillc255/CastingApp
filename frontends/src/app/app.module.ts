@@ -68,6 +68,7 @@ import { AuthService } from './services/auth.service';
   providers: [
     AuthService,
     {
+      //get headers and access token
       provide: HTTP_INTERCEPTORS, 
       useClass: TokenInterceptor, 
       multi: true 

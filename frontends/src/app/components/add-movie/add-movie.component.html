@@ -69,7 +69,7 @@
         </div>
   
         <p></p>
-        <button class="btn btn-success" [disabled]="form.invalid">Submit</button>
+        <button class="btn btn-success"  *ngIf="isDirector" [disabled]="form.invalid">Submit</button>
       </div>
   
       <div *ngIf="submitted">

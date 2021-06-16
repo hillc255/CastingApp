@@ -84,7 +84,6 @@ export class MovieDetailsComponent implements OnInit {
   }
   
   deleteMovie() {
-    //call service method and log as an error if error
     this.movieService.deleteMovie(this.currentMovie.id)
       .subscribe(
         response => {
