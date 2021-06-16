@@ -1,7 +1,7 @@
-<form #form="ngForm" (ngSubmit)="updateActor()" novalidate>
+<form #form="ngForm" novalidate>
   <div class="submit-form">
     <div *ngIf="currentActor.id" class="edit-form">
-      <h4>Robot</h4>
+      <h4>Robot</h4> <p>{{ message }}</p>
 
       <form>
         <div class="form-group">
@@ -136,7 +136,7 @@
       <br />
       <button
         class="btn btn-primary me-2"
-        *ngIf="currentActor.actor_publish"
+        *ngIf="currentActor.actor_publish && isAssistant"
         (click)="unpublishActor()"
       >
         UnPublish
@@ -144,22 +144,21 @@
 
       <button
         class="btn btn-primary me-2"
-        *ngIf="!currentActor.actor_publish"
+        *ngIf="!currentActor.actor_publish && isAssistant"
         (click)="publishActor()"
       >
         Publish
       </button>
   
-      <button class="btn btn-danger me-2" (click)="deleteActor()">
+      <button class="btn btn-danger me-2" *ngIf="isDirector" (click)="deleteActor()">
         Delete
       </button>
   
       <button
         type="submit"
-        class="btn btn-success me-2" [disabled]="form.invalid">
+        class="btn btn-success me-2" *ngIf="isAssistant" [disabled]="form.invalid" (click)="updateActor()" >
         Update
       </button>
-      <p>{{ message }}</p>
     </div>
   
     <div *ngIf="!currentActor.id">

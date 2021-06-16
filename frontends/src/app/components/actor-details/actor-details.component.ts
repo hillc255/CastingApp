@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActorService } from 'src/app/services/actor.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Actor } from 'src/app/models/actor.model';
+import { AuthService } from '@auth0/auth0-angular';
 
 @Component({
   selector: 'app-actor-details',
@@ -18,15 +19,19 @@ export class ActorDetailsComponent implements OnInit {
     actor_publish: false
   };
   message = '';
+  isAssistant: boolean = false; //added as a property of component
+  isDirector: boolean = false; //added as a property of component
 
   constructor(
     private actorService: ActorService,
     private route: ActivatedRoute,
-    private router: Router) { }
+    private router: Router,
+    public auth0: AuthService) { }
 
-  ngOnInit(): void {
+  async ngOnInit() {
     this.message = '';
     this.getActor(this.route.snapshot.params.id);
+    this.checkRoles() ; //function whenever page loads
   }
 
   getActor(id: string): void {
@@ -72,11 +77,11 @@ export class ActorDetailsComponent implements OnInit {
       .subscribe(
         response => {
           console.log(response);
-          this.message = (response.success)?"Robot updated successfully!":"Robot update unsuccessful";
+          this.message = (response.success)?"Successful Robot update!":"Unsuccessful Robot update";
         },
         error => {
           console.log(error);
-          this.message = "Robot update unsuccessful";
+          this.message = "Unsuccessful Robot update";
         });
   }
 
@@ -90,5 +95,36 @@ export class ActorDetailsComponent implements OnInit {
         error => {
           console.log(error);
         });
+  }
+
+  //method called after component loads to check the roles
+  checkRoles() {
+    console.log('checkRoles()');
+    this.auth0.isAuthenticated$  //observable which returns the authenticated status
+      .subscribe(
+        isAuthenticated=>{
+          if(isAuthenticated) {  //if authenticated then gets the user
+            console.log('checkRoles(): authenticated getting user');
+            this.auth0.user$  //observable which returns the user
+              .subscribe(
+                user=>{  // returns the user
+                  console.log('checkRoles(): user', user);
+                  const roles: Array<string> = user["https://cast-app.herokuapp.com/roles"]; //fetch roles from user
+                  console.log("checkRoles(): user roles: ", roles);
+                  this.isAssistant = roles.some(elem => elem=="assistant")
+                  this.isDirector = roles.some(elem => elem=="director")
+                },
+                err=>{
+                  console.log('checkRoles(): error getting user', err);
+                }
+              );
+          } else {
+            console.log('checkRoles(): not authenticated ');
+          }
+        },
+        err=>{
+          console.log('checkRoles(): error getting authentication status', err);
+        }
+      );
   }
 }

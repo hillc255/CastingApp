@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Actor } from '../models/actor.model';
+import { AuthService } from '@auth0/auth0-angular';
 
 const baseUrl = 'https://cast-app.herokuapp.com/actors';
 
@@ -10,7 +11,7 @@ const baseUrl = 'https://cast-app.herokuapp.com/actors';
 })
 export class ActorService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private auth0: AuthService) { }
 
   getAllActors(): Observable<Actor[]> {
     return this.http.get<Actor[]>(baseUrl);
