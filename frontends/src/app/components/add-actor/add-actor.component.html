@@ -97,7 +97,7 @@
               type="text"
               class="form-control"
               name="actor_img"
-              placeholder="https://starwars/R2-D2_Droid.png"
+              placeholder="https://R2-D2.png"
               #actor_img="ngModel"
               required
               [(ngModel)]="actor.actor_img"
@@ -118,7 +118,7 @@
           </div>
   
           <p></p>
-          <button class="btn btn-success" [disabled]="form.invalid">Submit</button>
+          <button class="btn btn-success" *ngIf="isDirector" [disabled]="form.invalid">Submit</button>
         </div>
   
         <div *ngIf="submitted">

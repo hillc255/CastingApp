@@ -17,7 +17,7 @@ export class AddMovieComponent implements OnInit {
     movie_publish: false
   };
   submitted = false;
-  isDirector: boolean = false; //changed isDirector to a property of component
+  isDirector: boolean = false; //isDirector is a property of component
 
   constructor(
     private movieService: MovieService,
@@ -72,7 +72,6 @@ export class AddMovieComponent implements OnInit {
                   console.log('checkRoles(): user', user);
                   const roles: Array<string> = user["https://cast-app.herokuapp.com/roles"]; //fetch roles from user
                   console.log("checkRoles(): user roles: ", roles);
-                  //this.isAssistant = roles.some(elem => elem=="assistance")
                   this.isDirector = roles.some(elem => elem=="director")
                 },
                 err=>{
