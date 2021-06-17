@@ -81,7 +81,8 @@ def create_app(test_config=None):
     @app.route('/movies', methods=['GET'])
     def getAllMovies():
 
-        movies_all = Movie.query.all()
+        #movies_all = Movie.query.all()
+        movies_all = Movie.query.order_by(Movie.title).all()
 
         if len(movies_all) == 0:
             abort(404)
