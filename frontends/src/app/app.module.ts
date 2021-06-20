@@ -1,13 +1,12 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-//https://auth0.com/docs/quickstart/spa/angular/02-calling-an-api
+//source: https://auth0.com/docs/quickstart/spa/angular/02-calling-an-api
 
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 // Import the HTTP interceptor from the Auth0 Angular SDK
-import { AuthHttpInterceptor, HttpMethod } from '@auth0/auth0-angular';
-//import { AuthInterceptor } from './components/auth/auth.interceptor';
+// import { AuthHttpInterceptor, HttpMethod } from '@auth0/auth0-angular';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
