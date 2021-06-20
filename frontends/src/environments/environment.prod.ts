@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  title: 'Prod Environment Heading',
-  apiURL: 'https://apiexample.com'
+  title: 'Production Environment Heading',
+  apiEndPoint: 'https://apiexample.com'
 };

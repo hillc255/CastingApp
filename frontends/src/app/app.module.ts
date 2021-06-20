@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { environment } from '../environments/environment';
 
 //source: https://auth0.com/docs/quickstart/spa/angular/02-calling-an-api
 
@@ -47,7 +48,6 @@ import { AuthService } from './services/auth.service';
       domain: 'autumn-voice-0666.us.auth0.com',
       clientId: 'f7ZLU2DmWeRcLuikyEKjqk0893KA2Mbj',
       audience: 'https://cast-app.herokuapp.com/api',
-      //responseType: 'token',
       scope: 'openid',
       httpInterceptor: {
         allowedList: [

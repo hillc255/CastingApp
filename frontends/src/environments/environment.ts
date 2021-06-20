@@ -15,7 +15,8 @@ export const environment = {
     domain: 'autumn-voice-0666.us.auth0.com', //'YOUR-AUTH0-DOMAIN', // e.g., you.auth0.com
     audience: 'https://cast-app.herokuapp.com/api', //'YOUR-AUTH0-API-IDENTIFIER', // e.g., http://localhost:3001
     redirect: 'http://localhost:8081', //http://localhost:4200/callback',
-    scope: 'openid profile email'
+    scope: 'openid profile email',
+    uri: 'https://cast-app.herokuapp.com/*'
   }
 };
 
