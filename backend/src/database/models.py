@@ -6,10 +6,14 @@ from flask import Flask, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import relationship, backref
 from sqlalchemy import Column, String, Integer, Date, ForeignKey
-#from sqlalchemy_utils import database_exists, create_database, drop_database
+
 import json
 import simplejson
 from simplejson import dumps
+
+# comment? out after creating database
+# from sqlalchemy_utils import database_exists, create_database, drop_database
+
 
 print(f"**** models.py ****")
 
@@ -86,22 +90,15 @@ def db_drop_and_create_all():
     db.session.add_all([movie1, movie2, movie3, movie4, movie5, movie6]) 
     db.session.add_all([actor1, actor2, actor3, actor4, actor5, actor6, actor7]) 
     db.session.commit()
-    db.session.add_all([movieactor1, movieactor2, movieactor3, movieactor4, movieactor5, movieactor6, movieactor7, movieactor8, movieactor9]) 
-    db.session.commit()
 
 '''
 Models
 
-Casting Agency Specifications
+Movie-Robot Casting Agency Specifications
 The Casting Agency models a company that is responsible for creating 
 movies and managing and assigning actors to those movies. 
-You are an Executive Producer within the company and are creating a 
-system to simplify and streamline your process.
-'''
-'''
-Association table for movies and actors table
-Movies with attributes title and release date
-Actors with attributes name, age and gender
+This system simplifies and streamlines the process.
+
 '''
 
 class Movie(db.Model):
@@ -112,7 +109,6 @@ class Movie(db.Model):
     release_date = db.Column(db.Date, nullable=False) 
     movie_img = db.Column(db.String(500), nullable=False)
     movie_publish = db.Column(db.Boolean, nullable=False)
-    actors = relationship('Actor', secondary='movie_actor_link')
 
     def __init__(self, id, title, release_date, movie_img, movie_publish):
         self.id = id
@@ -161,7 +157,6 @@ class Actor(db.Model):
     gender = db.Column(db.String(10), nullable=False)
     actor_img = db.Column(db.String(500), nullable=False)
     actor_publish = db.Column(db.Boolean, nullable=False)
-    movies = relationship('Movie', secondary='movie_actor_link')
 
     def __init__(self, id, first_name, last_name, birth_date, gender, actor_img, actor_publish):
         self.id = id
@@ -204,45 +199,7 @@ class Actor(db.Model):
             'actor_img': self.actor_img,
             'actor_publish': self.actor_publish
         })
-        return json_actor
-
-
-class MovieActorLink(db.Model):
-    __tablename__ = 'movie_actor_link'
-
-    movie_id = Column(Integer, ForeignKey('movies.id'), primary_key=True)
-    actor_id = Column(Integer, ForeignKey('actors.id'), primary_key=True)
-    movie = relationship('Actor', backref=backref('movie_actor_link', cascade='all, delete-orphan'))
-    actor = relationship('Movie', backref=backref('movie_actor_link', cascade='all, delete-orphan'))
-
-    def __init__(self, movie_id, actor_id):
-        self.movie_id = movie_id
-        self.actor_id = actor_id
-
-    def insert(self):
-        db.session.add(self)
-        db.session.commit()
-  
-    def update(self):
-        db.session.commit()
-
-    def delete(self):
-        db.session.delete(self)
-        db.session.commit()
-
-
-    def format(self):
-        return {
-           'id': self.id,
-           'movie_id': self.movie_id,
-           'actor_id': self.actor_id
-        }
-    
-    def to_json(self):
-        return {
-            "movie_id_int": int(self.movie_id_int),
-            "actor_id_int": int(self.actor_id_int)
-        }   
+        return json_actor   
 
 IMG_URL = 'https://i.ibb.co/'
 
@@ -262,13 +219,3 @@ actor4 = Actor(id=4, first_name='R2-D2', last_name='Droid', gender='droid', birt
 actor5 = Actor(id=5, first_name='BB-8', last_name='Droid', gender='droid', birth_date='8006-01-01', actor_img=IMG_URL+'fVWFXSq/bb-8.jpg', actor_publish=True)
 actor6 = Actor(id=6, first_name='WALL-E', last_name='Droid', gender='droid', birth_date='2805-12-31', actor_img=IMG_URL+'w4Qt7fG/wall-e.jpg', actor_publish=True)
 actor7 = Actor(id=7, first_name='Bender', last_name='Bending Rodriguez', gender='other', birth_date='2996-09-24', actor_img=IMG_URL+'fpP8TDn/bender.jpg', actor_publish=True)
-
-movieactor1 = MovieActorLink(movie1.id, actor1.id)
-movieactor2 = MovieActorLink(movie_id=2, actor_id=2)
-movieactor3 = MovieActorLink(movie_id=3, actor_id=3)
-movieactor4 = MovieActorLink(movie_id=3, actor_id=4)
-movieactor5 = MovieActorLink(movie_id=4, actor_id=3)
-movieactor6 = MovieActorLink(movie_id=4, actor_id=4)
-movieactor7 = MovieActorLink(movie_id=4, actor_id=5)
-movieactor8 = MovieActorLink(movie_id=5, actor_id=6)
-movieactor9 = MovieActorLink(movie_id=6, actor_id=7)

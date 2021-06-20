@@ -15,7 +15,7 @@ from flask_migrate import Migrate
 from flask_moment import Moment
 
 #Local application imports
-from backend.src.database.models import db_drop_and_create_all, setup_db, Movie, Actor, MovieActorLink, db
+from backend.src.database.models import db_drop_and_create_all, setup_db, Movie, Actor, db
 from backend.src.auth.auth import AuthError, requires_auth, requires_role
 
 print(f"**** app.py ****")
@@ -60,7 +60,7 @@ def create_app(test_config=None):
 
  
     # Uncomment if want to drop and create database
-    #db_drop_and_create_all() 
+    # db_drop_and_create_all() 
 
 
     # '''
