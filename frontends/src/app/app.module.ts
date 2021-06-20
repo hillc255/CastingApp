@@ -47,22 +47,16 @@ import { AuthService } from './services/auth.service';
     // import the module into the application, with environment configuration
     AuthModule.forRoot({
       domain: environment.auth.domain,
-      //domain: 'autumn-voice-0666.us.auth0.com',
       clientId: environment.auth.clientID,
-      //clientId: 'f7ZLU2DmWeRcLuikyEKjqk0893KA2Mbj',
       audience: environment.auth.audience,
-      //audience: 'https://cast-app.herokuapp.com/api',
       scope: 'openid',
       httpInterceptor: {
         allowedList: [
           {
             uri: environment.auth.uri,
-            //uri: 'https://cast-app.herokuapp.com/*',
             tokenOptions: {
               audience: environment.auth.audience,
-              //audience: 'https://cast-app.herokuapp.com/api/',
               scope: environment.auth.scope,
-              //scope: 'openid profile email',
             }
           }
         ]
