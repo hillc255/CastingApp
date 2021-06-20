@@ -19,6 +19,7 @@ print(f"**** models.py ****")
 
 db = SQLAlchemy()
 
+# package to connect to DATABASE_URL in the code
 # DATABASE_URL = os.environ['DATABASE_URL']
 # conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 
@@ -96,8 +97,7 @@ Models
 
 Movie-Robot Casting Agency Specifications
 The Casting Agency models a company that is responsible for creating 
-movies and managing and assigning actors to those movies. 
-This system simplifies and streamlines the process.
+movies and managing robot actors data. 
 
 '''
 
@@ -199,13 +199,16 @@ class Actor(db.Model):
             'actor_img': self.actor_img,
             'actor_publish': self.actor_publish
         })
-        return json_actor   
+        return json_actor 
+
+
+# images hosted at this location         
 
 IMG_URL = 'https://i.ibb.co/'
 
 # insert default data
 
-movie1 = Movie(None, title='Black Panther', release_date='2018-01-29', movie_img=IMG_URL+'xgNj30x/blackpanther.jpg', movie_publish=True)
+movie1 = Movie(id=1, title='Black Panther', release_date='2018-01-29', movie_img=IMG_URL+'xgNj30x/blackpanther.jpg', movie_publish=True)
 movie2 = Movie(id=2, title='Jetsons: The Movie', release_date='1990-06-07', movie_img=IMG_URL+'w44pmy7/jetsons.jpg', movie_publish=True)
 movie3 = Movie(id=3, title='Star Wars', release_date='1977-03-25', movie_img=IMG_URL+'0ryBFpX/starwars.jpg', movie_publish=True)
 movie4 = Movie(id=4, title='Star Wars: The Force Awakens', release_date='2015-01-18', movie_img=IMG_URL+'87VCXRQ/forceawakens.jpg', movie_publish=True)

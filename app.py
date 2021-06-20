@@ -109,6 +109,7 @@ def create_app(test_config=None):
 
 
     @app.route('/movies/<int:id>', methods=['GET'])
+    #@roles_required(['director', 'assistant'])
     def getMovie(id):
 
         if id is None:
@@ -147,8 +148,7 @@ def create_app(test_config=None):
     # '''
 
     @app.route('/movies', methods=['POST'])
-    #@requires_role('director')
-    #@requires_auth('post:movies')
+    @requires_role('director')
     def createMovie():
 
         try:
@@ -188,8 +188,7 @@ def create_app(test_config=None):
 
 
     @app.route('/movies/<int:id>', methods=['PATCH'])
-    #@requires_role('assistant')
-    #@requires_auth('patch:movies')
+    @requires_role('assistant')
     def updateMovie(id):
 
         if id is None:
@@ -227,8 +226,7 @@ def create_app(test_config=None):
 
 
     @app.route('/movies/<int:id>/publish', methods=['PATCH'])
-    #@requires_role('assistant')
-    #@requires_auth('patch:movie-publish')
+    @requires_role('assistant')
     def publishMovie(id):
 
         if id is None:
@@ -263,8 +261,7 @@ def create_app(test_config=None):
     # '''
 
     @app.route('/movies/<int:id>/unpublish', methods=['PATCH'])
-    #@requires_role('assistant')
-    #@requires_auth('patch:movie-unpublish')
+    @requires_role('assistant')
     def unpublishMovie(id):
 
         if id is None:
@@ -299,7 +296,6 @@ def create_app(test_config=None):
 
     @app.route('/movies/<int:id>', methods=['DELETE'])
     @requires_role('director')
-    #@requires_auth('delete:movies')
     def deleteMovie(id):
 
         try:
