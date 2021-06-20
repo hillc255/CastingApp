@@ -9,6 +9,7 @@
 // environment.ts
 export const environment = {
   production: false,
+  title: 'Local Environment Heading',
   auth: {
     clientID: 'f7ZLU2DmWeRcLuikyEKjqk0893KA2Mbj', //'YOUR-AUTH0-CLIENT-ID',
     domain: 'autumn-voice-0666.us.auth0.com', //'YOUR-AUTH0-DOMAIN', // e.g., you.auth0.com
