@@ -83,7 +83,7 @@ export class AuthService {
   }
 
   get isLoggedIn(): boolean {
-    // Check if current date is before token
+    // check if current date is before token
     // expiration and user is signed in locally
     const expiresAt = JSON.parse(localStorage.getItem('expires_at'));
     return Date.now() < expiresAt && this.authenticated;

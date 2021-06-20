@@ -5,8 +5,6 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-// Import the HTTP interceptor from the Auth0 Angular SDK
-// import { AuthHttpInterceptor, HttpMethod } from '@auth0/auth0-angular';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -19,11 +17,11 @@ import { ActorsListComponent } from './components/actors-list/actors-list.compon
 import { ActorDetailsComponent } from './components/actor-details/actor-details.component';
 import { AddActorComponent } from './components/add-actor/add-actor.component';
 
-// Import the module from the SDK and ApiService
+// import the module from the SDK and ApiService
 import { AuthModule } from '@auth0/auth0-angular';
 import { AuthButtonComponent } from './components/auth/auth.component';
 import{ UserProfileComponent }  from './components/profile/profile.component';
-//Import headers from tokens
+// import headers from tokens
 import{ TokenInterceptor } from './token.interceptor';
 import { AuthService } from './services/auth.service';
 
@@ -44,7 +42,7 @@ import { AuthService } from './services/auth.service';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    // Import the module into the application, with configuration
+    // import the module into the application, with configuration
     AuthModule.forRoot({
       domain: 'autumn-voice-0666.us.auth0.com',
       clientId: 'f7ZLU2DmWeRcLuikyEKjqk0893KA2Mbj',
