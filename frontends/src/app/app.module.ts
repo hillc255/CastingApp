@@ -26,6 +26,7 @@ import{ UserProfileComponent }  from './components/profile/profile.component';
 import{ TokenInterceptor } from './token.interceptor';
 import { AuthService } from './services/auth.service';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,19 +44,25 @@ import { AuthService } from './services/auth.service';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    // import the module into the application, with configuration
+    // import the module into the application, with environment configuration
     AuthModule.forRoot({
-      domain: 'autumn-voice-0666.us.auth0.com',
-      clientId: 'f7ZLU2DmWeRcLuikyEKjqk0893KA2Mbj',
-      audience: 'https://cast-app.herokuapp.com/api',
+      domain: environment.auth.domain,
+      //domain: 'autumn-voice-0666.us.auth0.com',
+      clientId: environment.auth.clientID,
+      //clientId: 'f7ZLU2DmWeRcLuikyEKjqk0893KA2Mbj',
+      audience: environment.auth.audience,
+      //audience: 'https://cast-app.herokuapp.com/api',
       scope: 'openid',
       httpInterceptor: {
         allowedList: [
           {
-            uri: 'https://cast-app.herokuapp.com/*',
+            uri: environment.auth.uri,
+            //uri: 'https://cast-app.herokuapp.com/*',
             tokenOptions: {
-              audience: 'https://cast-app.herokuapp.com/api/',
-              scope: 'openid profile email',
+              audience: environment.auth.audience,
+              //audience: 'https://cast-app.herokuapp.com/api/',
+              scope: environment.auth.scope,
+              //scope: 'openid profile email',
             }
           }
         ]
@@ -75,6 +82,22 @@ import { AuthService } from './services/auth.service';
   bootstrap: [AppComponent]
 })
 export class AppModule {
+
+  apiEndPoint:string="";
+  domain:string="";
+  clientID:string="";
+  audience:string="";
+  redirect:string="";
+  scope:string="";
+  uri:string="";
+
   constructor() {
+    this.apiEndPoint = environment.apiEndPoint;
+    this.domain = environment.auth.domain;
+    this.clientID = environment.auth.clientID;
+    this.audience = environment.auth.audience;
+    this.redirect = environment.auth.redirect;
+    this.scope = environment.auth.scope;
+    this.uri = environment.auth.uri;
  }
 }
