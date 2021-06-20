@@ -71,7 +71,7 @@
         </label>
         </div>
         <p></p>
-        <a class="btn btn-primary me-2" routerLink="/actors/{{ currentActor.id }}">
+        <a class="btn btn-primary me-2" *ngIf="isDirector || isAssistant" routerLink="/actors/{{ currentActor.id }}">
           Edit
         </a>
       </div>

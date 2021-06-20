@@ -100,7 +100,7 @@ def create_app(test_config=None):
     
     # '''
     # GET:          /movies/<int:id>
-    # Authorized:   Public access
+    # Authorized:   Director or Assistant access
     # Endpoint:     GET a specific movie
     # Returns:      Status code 200 and json {"success": True, "movie": data}
     #               where movie is a single movie data
@@ -109,9 +109,6 @@ def create_app(test_config=None):
 
 
     @app.route('/movies/<int:id>', methods=['GET'])
-    #@requires_role(['director'||'assistant'])
-    #@requires_role('director||assistant')
-    #@requires_role('director','assistant')
     @requires_role(['director','assistant'])
     def getMovie(id):
 
@@ -386,7 +383,7 @@ def create_app(test_config=None):
 
     # '''
     # GET:          /actors/<int:id>
-    # Authorized:   Public access
+    # Authorized:   Director or Assistant access
     # Endpoint:     GET a specific actor
     # Returns:      Status code 200 and json {"success": True, "actor": data}
     #               where actor is a single actor data
@@ -394,7 +391,7 @@ def create_app(test_config=None):
     # '''
 
     @app.route('/actors/<int:id>', methods=['GET'])
-    #@roles_required(['director', 'assistant'])
+    @requires_role(['director','assistant'])
     def getActor(id):
 
         if id is None:

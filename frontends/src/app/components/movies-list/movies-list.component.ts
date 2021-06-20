@@ -3,7 +3,6 @@ import { Movie } from 'src/app/models/movie.model';
 import { MovieService } from 'src/app/services/movie.service';
 import { AuthService } from '@auth0/auth0-angular';
 
-
 @Component({
   selector: 'app-movies-list',
   templateUrl: './movies-list.component.html',
