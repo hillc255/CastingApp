@@ -7,7 +7,7 @@ import { environment } from '../environments/environment';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  //added constructor for production which logs false for default environment
+  //added constructor for production - logs false for default environment
   constructor() {
     console.log(environment.production);
   }

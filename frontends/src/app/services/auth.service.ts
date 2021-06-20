@@ -1,5 +1,4 @@
-// auth.service.ts
-//https://www.sitepoint.com/authentication-angular-auth0/
+//source: https://www.sitepoint.com/authentication-angular-auth0/
 import { Injectable } from '@angular/core';
 import * as auth0 from 'auth0-js';
 import { environment } from './../../environments/environment';

@@ -26,7 +26,6 @@ import{ UserProfileComponent }  from './components/profile/profile.component';
 import{ TokenInterceptor } from './token.interceptor';
 import { AuthService } from './services/auth.service';
 
-
 @NgModule({
   declarations: [
     AppComponent,

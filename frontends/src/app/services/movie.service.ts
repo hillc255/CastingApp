@@ -3,8 +3,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Movie } from '../models/movie.model';
 import { AuthService } from '@auth0/auth0-angular';
+import { environment } from 'src/environments/environment';
 
-const baseUrl = 'https://cast-app.herokuapp.com/movies';
+const baseUrl = environment.baseUrl;
 
 @Injectable({
   providedIn: 'root'
