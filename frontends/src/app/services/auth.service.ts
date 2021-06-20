@@ -90,22 +90,3 @@ export class AuthService {
   }
 
 }
-
-//https://www.syncfusion.com/blogs/post/best-practices-for-jwt-authentication-in-angular-apps.aspx
-  
-// @Injectable()
-// //export class LocalStorageService {
-// export class AuthService{
- 
-//     setToken(key: string, value: string) {
-//         localStorage.setItem(key, value);
-//     }
- 
-//     getToken(key: string) {
-//         return localStorage.getItem(key);
-//     }
- 
-//     removeToken(key: string) {
-//         localStorage.removeItem(key);
-//     }
-// }
