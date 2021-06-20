@@ -109,7 +109,7 @@ def create_app(test_config=None):
 
 
     @app.route('/movies/<int:id>', methods=['GET'])
-    @roles_required(['director', 'assistant'])
+    @requires_role(['director', 'assistant'])
     def getMovie(id):
 
         if id is None:
