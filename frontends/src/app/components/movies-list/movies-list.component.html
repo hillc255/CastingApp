@@ -60,7 +60,7 @@
             {{ currentMovie.movie_publish ? "Published" : "Pending" }}</label>      
         </div>
         <p></p>
-        <a class="btn btn-primary me-2" routerLink="/movies/{{ currentMovie.id }}">
+        <a class="btn btn-primary me-2" *ngIf="isDirector || isAssistant" routerLink="/movies/{{ currentMovie.id }}">
           Edit
         </a>
       </div>

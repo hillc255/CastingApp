@@ -391,7 +391,7 @@ def create_app(test_config=None):
     # '''
 
     @app.route('/actors/<int:id>', methods=['GET'])
-    @roles_required(['director', 'assistant'])
+    #@roles_required(['director', 'assistant'])
     def getActor(id):
 
         if id is None:
