@@ -27,9 +27,6 @@ export class AddMovieComponent implements OnInit {
     this.checkRoles() ; //function whenever page loads
   }
 
-  //ngOnInit(): void {
-  //}
-
   saveMovie(form: any): void {
     const data = {
       title: this.movie.title,

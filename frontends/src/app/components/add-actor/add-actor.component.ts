@@ -28,8 +28,6 @@ export class AddActorComponent implements OnInit {
     this.checkRoles() ; //function whenever page loads
   }
 
-  //ngOnInit(): void {
-  //}
   saveActor(form: any): void {
     const data = {
       first_name: this.actor.first_name,
