@@ -109,7 +109,7 @@ def create_app(test_config=None):
 
 
     @app.route('/movies/<int:id>', methods=['GET'])
-    #@roles_required(['director', 'assistant'])
+    @roles_required(['director', 'assistant'])
     def getMovie(id):
 
         if id is None:
@@ -391,6 +391,7 @@ def create_app(test_config=None):
     # '''
 
     @app.route('/actors/<int:id>', methods=['GET'])
+    @roles_required(['director', 'assistant'])
     def getActor(id):
 
         if id is None:
@@ -432,8 +433,7 @@ def create_app(test_config=None):
     # '''
 
     @app.route('/actors', methods=['POST'])
-    #@requires_role('director')
-    #@requires_auth('post:actors')
+    @requires_role('director')
     def createActor():
 
         try:
@@ -477,8 +477,7 @@ def create_app(test_config=None):
 
 
     @app.route('/actors/<int:id>', methods=['PATCH'])
-    #@requires_role('assistant')
-    #@requires_auth('patch:actors')
+    @requires_role('assistant')
     def updateActor(id):
 
         if id is None:
@@ -517,8 +516,7 @@ def create_app(test_config=None):
     # '''
     
     @app.route('/actors/<int:id>/publish', methods=['PATCH'])
-    #@requires_role('assistant')
-    #@requires_auth('patch:actor-publish')
+    @requires_role('assistant')
     def publishActor(id):
 
         if id is None:
@@ -554,8 +552,7 @@ def create_app(test_config=None):
 
 
     @app.route('/actors/<int:id>/unpublish', methods=['PATCH'])
-    #@requires_role('assistant')
-    #@requires_auth('patch:actor-unpublish')
+    @requires_role('assistant')
     def unpublishActor(id):
 
         if id is None:
@@ -590,8 +587,7 @@ def create_app(test_config=None):
     # '''
 
     @app.route('/actors/<int:id>', methods=['DELETE'])
-    #@requires_role('director')
-    #@requires_auth('delete:actors')
+    @requires_role('director')
     def deleteActor(id):
         try:
             actor = Actor.query.filter(Actor.id == id).one_or_none()
