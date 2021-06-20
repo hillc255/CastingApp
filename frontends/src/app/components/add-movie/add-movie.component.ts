@@ -69,7 +69,6 @@ export class AddMovieComponent implements OnInit {
                 user=>{  // returns the user
                   console.log('checkRoles(): user', user);
                   const roles: Array<string> = user[ environment.userRole ]; //fetch roles from user
-                  //const roles: Array<string> = user["https://cast-app.herokuapp.com/roles"]; //fetch roles from user
                   console.log("checkRoles(): user roles: ", roles);
                   this.isDirector = roles.some(elem => elem=="director")
                 },
