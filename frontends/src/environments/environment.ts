@@ -2,6 +2,7 @@ export const environment = {
   production: false,
   apiEndPoint: 'https://apiexample.com',
   title: 'Local Environment Heading',
+  userRole: 'https://cast-app.herokuapp.com/roles',
   auth: {
     clientID: 'f7ZLU2DmWeRcLuikyEKjqk0893KA2Mbj',
     domain: 'autumn-voice-0666.us.auth0.com',

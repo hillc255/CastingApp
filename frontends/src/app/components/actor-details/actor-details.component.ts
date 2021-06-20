@@ -3,6 +3,7 @@ import { ActorService } from 'src/app/services/actor.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Actor } from 'src/app/models/actor.model';
 import { AuthService } from '@auth0/auth0-angular';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-actor-details',
@@ -109,7 +110,8 @@ export class ActorDetailsComponent implements OnInit {
               .subscribe(
                 user=>{  // returns the user
                   console.log('checkRoles(): user', user);
-                  const roles: Array<string> = user["https://cast-app.herokuapp.com/roles"]; //fetch roles from user
+                  const roles: Array<string> = user[ environment.userRole ]; //fetch roles from user
+                  //const roles: Array<string> = user["https://cast-app.herokuapp.com/roles"]; //fetch roles from user
                   console.log("checkRoles(): user roles: ", roles);
                   this.isAssistant = roles.some(elem => elem=="assistant")
                   this.isDirector = roles.some(elem => elem=="director")
