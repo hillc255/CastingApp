@@ -179,7 +179,8 @@ def requires_role(required_role):
             if unverified_claims.get('https://cast-app.herokuapp.com/roles'):
                 roles = unverified_claims['https://cast-app.herokuapp.com/roles']
                 for role in roles:
-                    if role == required_role:
+                    if role in required_role:
+                    #if role == required_role:
                         return f(**args)
 
             raise AuthError({
