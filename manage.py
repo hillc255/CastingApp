@@ -1,21 +1,17 @@
 from flask_script import Manager
+"""This file sets up a command line manager.
+Use "python manage.py" for a list of available commands.
+Use "python manage.py runserver" to start the development web server
+ on localhost:5000.
+Use "python manage.py runserver --help" for a list of runserver options.
+"""
+
 from flask_migrate import Migrate, MigrateCommand
 
 from app import app
 from backend.src.database.models import db
 
-# try:
-#     from flask_script import Manager
-#     from flask_migrate import Migrate, MigrateCommand
-
-#     from app import app
-#     from backend.src.database.models import db
-# except Exception as e:
-#     print(e)
-
 print(f"**** manage.py ****")
-
-#app.config.from_object(os.environ['APP_SETTINGS'])
 
 migrate = Migrate(app, db)
 manager = Manager(app)
