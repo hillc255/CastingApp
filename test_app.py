@@ -13,7 +13,7 @@ import settings
 from backend.src.database.models import setup_db, Movie, Actor, db
 
 
-print(f"**** test_app.py ****")
+print("**** test_app.py ****")
 print(" ")
 
 
