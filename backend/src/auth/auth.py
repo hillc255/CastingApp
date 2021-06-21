@@ -17,7 +17,7 @@ API_AUDIENCE = 'https://cast-app.herokuapp.com/api'
 APP = Flask(__name__)
 
 
-print("***auth.py***")
+print("**** auth.py ****")
 
 # Error handler
 class AuthError(Exception):
@@ -63,7 +63,7 @@ def get_token_auth_header():
     token = parts[1]
     return token
 
-print("***Headers complete")
+print("**** get_token_auth_header complete ****")
 
 def requires_auth(f):
     """Determines if the Access Token is valid
@@ -113,7 +113,7 @@ def requires_auth(f):
                         "description": "Unable to find appropriate key"}, 401)
     return decorated
 
-print("***requires_auth complete")
+print("**** requires_auth complete ****")
 
 # VALIDATE SCOPES
 
@@ -131,40 +131,7 @@ def requires_scope(required_scope):
                     return True
     return False
 
-print("***requires_scope complete***")
-
-# # PROTECT API ENDPOINTS
-
-# # Controllers API
-
-# # This doesn't need authentication
-# @APP.route("/api/public")
-# @cross_origin(headers=["Content-Type", "Authorization"])
-# def public():
-#     response = "Hello from a public endpoint! You don't need to be authenticated to see this."
-#     return jsonify(message=response)
-
-# # This needs authentication
-# @APP.route("/api/private")
-# @cross_origin(headers=["Content-Type", "Authorization"])
-# @requires_auth
-# def private():
-#     response = "Hello from a private endpoint! You need to be authenticated to see this."
-#     return jsonify(message=response)
-
-# # This needs authorization
-# @APP.route("/api/private-scoped")
-# @cross_origin(headers=["Content-Type", "Authorization"])
-# @requires_auth
-# def private_scoped():
-#     if requires_scope("read:messages"):
-#         response = "Hello from a private endpoint! You need to be authenticated and have a scope of read:messages to see this."
-#         return jsonify(message=response)
-#     raise AuthError({
-#         "code": "Unauthorized",
-#         "description": "You don't have access to this resource"
-#     }, 403)
-
+print("**** requires_scope complete ****")
 
 # RULE / ROLES
 
@@ -195,4 +162,4 @@ def requires_role(required_role):
 
     return decorator
 
-print("***requires_role complete")
+print("**** requires_role complete ****")

@@ -71,7 +71,7 @@ def create_app(test_config=None):
 
     # '''
     # GET:          /movies
-    # Authorized:   Public Access
+    # Authorized:   Public user access
     # Endpoint:     Gets all movies data representation
     # Returns:      Status code 200 for successful get
     #               where movies is the list of movies
@@ -317,7 +317,7 @@ def create_app(test_config=None):
 
     # '''
     # SEARCH:       /movies/search
-    # Authorized:   Public access
+    # Authorized:   Public user access
     # Endpoint:     Provide a like search for movie title
     # Returns:      Status code 200 if search is successful
     #               where movie(s) are searched for by title
@@ -353,7 +353,7 @@ def create_app(test_config=None):
  
     # '''
     # GET:          /actors
-    # Authorized:   Public access
+    # Authorized:   Public user access
     # Endpoint:     Gets all actors data representation
     # Returns:      Status code 200 for successful get
     #               where actors is the list of actors
@@ -608,7 +608,7 @@ def create_app(test_config=None):
 
     # '''
     # SEARCH:       /actors/search
-    # Authorized:   Public access
+    # Authorized:   Public user access
     # Endpoint:     Provide a like search for actor first-name
     # Returns:      Status code 200 if search is successful
     #               where actor(s) are searched for by first-name
