@@ -1,4 +1,8 @@
 ./background/src/database
 ./backend/src/auth
 
-export DATABASE_URL = ''
+#running python locally
+
+export DATABASE_URL=localhost:5432
+
+waitress-serve --port=$PORT app:app

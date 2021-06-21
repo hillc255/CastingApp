@@ -24,11 +24,11 @@ db = SQLAlchemy()
 # conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 
 # DB variables (environmental variable heroku, local default if heroku unavailable)
-DB_HOST = os.getenv('DB_HOST', 'localhost:5432')
-DB_USER = os.getenv('DB_USER', 'postgres')
-DB_PASSWORD = os.getenv('DB_PASSWORD', 'picasso0')
-DB_NAME = os.getenv('DB_NAME', 'castapp')
-DB_URL = os.getenv('DB_URL', 'castapp')
+DB_HOST = os.getenv('DB_HOST')
+DB_USER = os.getenv('DB_USER')
+DB_PASSWORD = os.getenv('DB_PASSWORD')
+DB_NAME = os.getenv('DB_NAME')
+DB_URL = os.getenv('DB_URL')
 APP_SETTINGS = os.getenv('APP_SETTING', 'config')
 
 DATABASE_URL = os.environ['DATABASE_URL']

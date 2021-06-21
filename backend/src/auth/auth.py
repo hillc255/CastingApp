@@ -1,4 +1,5 @@
 import json
+import os
 from six.moves.urllib.request import urlopen
 from functools import wraps
 
@@ -7,12 +8,12 @@ from flask_cors import cross_origin
 from jose import jwt
 
 
-
-AUTH0_DOMAIN = 'autumn-voice-0666.us.auth0.com' # heroku auth0 domain + "/"
+# Environment variables
+AUTH0_DOMAIN = os.getenv('AUTH0_DOMAIN')
 ALGORITHMS = ['RS256']
-#API_AUDIENCE = 'f7ZLU2DmWeRcLuikyEKjqk0893KA2Mbj'
-API_AUDIENCE = 'https://cast-app.herokuapp.com/api'
-#API_AUDIENCE = 'cast-app' # heroku app name
+API_AUDIENCE = os.getenv('API_AUDIENCE')
+ROLES_URI = os.getenv('ROLES_URI')
+
 
 APP = Flask(__name__)
 
@@ -143,8 +144,8 @@ def requires_role(required_role):
             unverified_claims = jwt.get_unverified_claims(token)
 
             # search current token for the expected role
-            if unverified_claims.get('https://cast-app.herokuapp.com/roles'):
-                roles = unverified_claims['https://cast-app.herokuapp.com/roles']
+            if unverified_claims.get(ROLES_URI):
+                roles = unverified_claims[ROLES_URI]
                 for role in roles:
                     if role in required_role:
                     #if role == required_role:
