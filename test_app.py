@@ -1,13 +1,13 @@
-# Standard library imports
+# standard library imports
 import os
 import unittest
 import json
 
-# Third party imports
+# third party imports
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import func, desc
 
-# Local application imports
+# local application imports
 import app
 import settings
 from backend.src.database.models import setup_db, Movie, Actor, db
@@ -18,7 +18,7 @@ print(" ")
 
 
 class CastingAppTestCase(unittest.TestCase):
-    """This class represents the CastingApp test case"""
+    """This class represents the CastingApp test case - tested locally"""
 
     def setUp(self):
         """Define test variables and initialize app."""

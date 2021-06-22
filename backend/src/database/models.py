@@ -4,15 +4,12 @@ import psycopg2
 
 from flask import Flask, jsonify
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy.orm import relationship, backref
+#from sqlalchemy.orm import relationship, backref
 from sqlalchemy import Column, String, Integer, Date, ForeignKey
 
 import json
 import simplejson
 from simplejson import dumps
-
-# comment out after creating database
-# from sqlalchemy_utils import database_exists, create_database, drop_database
 
 print("**** models.py ****")
 
@@ -46,7 +43,6 @@ def setup_db(app, database_path=database_path):
 db_drop_and_create_all()
     drops the database tables and starts fresh
     can be used to initialize a clean database
-    !!NOTE you can change the database_filename variable to have multiple versions of a database
 '''
 
 def db_drop_and_create_all():
