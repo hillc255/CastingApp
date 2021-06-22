@@ -11,19 +11,14 @@ import json
 import simplejson
 from simplejson import dumps
 
-# comment? out after creating database
+# comment out after creating database
 # from sqlalchemy_utils import database_exists, create_database, drop_database
-
 
 print("**** models.py ****")
 
 db = SQLAlchemy()
 
-# package to connect to DATABASE_URL in the code
-# DATABASE_URL = os.environ['DATABASE_URL']
-# conn = psycopg2.connect(DATABASE_URL, sslmode='require')
-
-# DB variables in Heroku settings
+# variables in Heroku settings
 DB_HOST = os.getenv('DB_HOST')
 DB_USER = os.getenv('DB_USER')
 DB_PASSWORD = os.getenv('DB_PASSWORD')
@@ -34,34 +29,7 @@ APP_SETTINGS = os.getenv('APP_SETTING', 'config')
 DATABASE_URL = os.environ['DATABASE_URL']
 conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 
-# print(f"1) DB_HOST={DB_HOST}")
-# print(f"2) DB_USER={DB_USER}")
-# print(f"3) DB_PASSWORD={DB_PASSWORD}")
-# print(f"4) DB_NAME={DB_NAME}")
-# print(f"5) DB_URL={DATABASE_URL}")
-# print(f"6) APP_SETTING={DATABASE_URL}")
-# ---------------------------uncomment above
-
 database_path = 'postgresql+psycopg2://{}:{}@{}/{}'.format(DB_USER, DB_PASSWORD, DB_HOST, DB_NAME)
-
-# create database
-#engine = create_engine(database_path)
-# engine = create_engine('postgresql://DB_USER:DB_PASSWORD@DB_HOST/DB_NAME')
-
-# print(f"********************************engine={engine}")
-
-#engine = create_engine(DB_URL)
-# if database_exists(engine.url):
-#     pass
-#     #drop_database(engine.url)
-#     #sys.exit("Drop database - exit")
-#     #create_database(engine.url)
-
-# #if not database_exists(engine.url):
-# else:
-#     create_database(engine.url)
-
-# print(f"TEST ******* AFTER db exists={database_exists(engine.url)}")
 
 '''
 setup_db(app)
@@ -69,10 +37,8 @@ setup_db(app)
 '''
 
 def setup_db(app, database_path=database_path):
-#def setup_db(app): 
     app.config["SQLALCHEMY_DATABASE_URI"] = database_path
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"]  = False
-    #app.config["DATABASE_URL"] = 'postgres://odsgqztiwmdgxb:fdba2f1e60653770f29df057aeedefd944889147582a10c8a4eb62883ab96ad6@ec2-544-167-152-185.compute-1.amazonaws.com:5432/d8gebjfq87smua'
     db.app = app
     db.init_app(app)
 

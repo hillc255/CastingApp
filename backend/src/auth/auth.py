@@ -152,7 +152,7 @@ def requires_role(required_role):
                         return f(**args)
 
             raise AuthError({
-                'code': 'insuficient_roles',
+                'code': 'insufficient_roles',
                 'description': 'You do not have the roles needed to perform this operation.'
             }, 401)
 
