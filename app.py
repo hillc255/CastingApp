@@ -14,7 +14,7 @@ from flask_cors import CORS, cross_origin
 from flask_migrate import Migrate
 from flask_moment import Moment
 
-#Local application imports
+# Local application imports
 from backend.src.database.models import db_drop_and_create_all, setup_db, Movie, Actor, db
 from backend.src.auth.auth import AuthError, requires_auth, requires_role
 
