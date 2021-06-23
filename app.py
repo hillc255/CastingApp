@@ -48,9 +48,9 @@ def create_app(test_config=None):
     @app.after_request
     def after_request(response):
         response.headers.add('Access-Control-Allow-Headers',
-            'Content-Type, Authorization, true')
+                             'Content-Type, Authorization, true')
         response.headers.add('Access-Control-Allow-Methods',
-            'GET, PATCH, PUT, POST, DELETE, OPTIONS')
+                             'GET, PATCH, PUT, POST, DELETE, OPTIONS')
         return response
 
     # Test cors is working
@@ -453,7 +453,6 @@ def create_app(test_config=None):
             print('\n'+'Error creating actor record: ', e)
             abort(422)
 
- 
     # '''
     # PATCH:        /actors/<int:id>
     # Authorized:   Assistant access
@@ -462,7 +461,6 @@ def create_app(test_config=None):
     #               where actor published is a single actor
     #               or appropriate status code indicating reason for failure
     # '''
-
 
     @app.route('/actors/<int:id>', methods=['PATCH'])
     @requires_role('assistant')
@@ -502,7 +500,7 @@ def create_app(test_config=None):
     #               where actor updated is a single actor
     #               or appropriate status code indicating reason for failure
     # '''
-    
+
     @app.route('/actors/<int:id>/publish', methods=['PATCH'])
     @requires_role('assistant')
     def publishActor(id):
@@ -514,7 +512,7 @@ def create_app(test_config=None):
 
         if data is None:
             abort(404)
-            
+
         data.actor_publish = True
 
         try:
@@ -523,11 +521,10 @@ def create_app(test_config=None):
             return jsonify({
                 "success": True
             }), 200
-        
+
         except Exception as e:
             print('\n'+'Error publishing actor record: ', e)
             abort(422)
-
 
     # '''
     # PATCH:        /actors/<int:id>/unpublish
@@ -537,7 +534,6 @@ def create_app(test_config=None):
     #               where actor unpublish is a single actor
     #               or appropriate status code indicating reason for failure
     # '''
-
 
     @app.route('/actors/<int:id>/unpublish', methods=['PATCH'])
     @requires_role('assistant')
@@ -550,7 +546,7 @@ def create_app(test_config=None):
 
         if data is None:
             abort(404)
-            
+
         data.actor_publish = False
 
         try:
@@ -559,11 +555,10 @@ def create_app(test_config=None):
             return jsonify({
                 "success": True
             }), 200
-        
+
         except Exception as e:
             print('\n'+'Error unpublishing actor record: ', e)
             abort(422)
-
 
     # '''
     # DELETE:       /actors/<int:id>
@@ -593,7 +588,6 @@ def create_app(test_config=None):
             print('\n'+'Error deleting actor record: ', e)
             abort(404)
 
-
     # '''
     # SEARCH:       /actors/search
     # Authorized:   Public user access
@@ -602,17 +596,17 @@ def create_app(test_config=None):
     #               where actor(s) are searched for by first-name
     #               or appropriate status code indicating reason for failure
     # '''
-    
+
     @app.route('/actors/search', methods=['GET'])
     def findActorByFirstName():
 
         search_firstname = request.args.get('first_name')
-        
+
         data = Actor.query.filter(
             Actor.first_name.ilike(f'%{search_firstname}%')).all()
-  
+
         results = []
-        
+
         try:
 
             for i, actorObj in enumerate(data):
@@ -622,7 +616,7 @@ def create_app(test_config=None):
 
         except Exception as e:
             print('\n'+'Error searching by actor first name: ', e)
-            abort(404) 
+            abort(404)
 
     '''
     Error handlers for all expected errors including 404 and 422.
@@ -661,11 +655,12 @@ def create_app(test_config=None):
 
     return app
 
+
 app = create_app()
 
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080, debug=True)
-    #app.run()
+    # app.run()
     # port = int(os.environ.get("PORT",5000))
     # app.run(host='127.0.0.1',port=port,debug=True)
