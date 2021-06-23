@@ -140,7 +140,9 @@ def requires_scope(required_scope):
                 return True
     return False
 
+
 print("**** requires_scope complete ****")
+
 
 # RULE / ROLES
 
@@ -156,19 +158,19 @@ def requires_role(required_role):
                 roles = unverified_claims[ROLES_URI]
                 for role in roles:
                     if role in required_role:
-                    #if role == required_role:
                         return f(**args)
 
             raise AuthError({
                 'code': 'insufficient_roles',
-                'description': 'You do not have the roles needed to perform this operation.'
+                'description': 'You do not have the roles for this operation.'
             }, 401)
 
         # Renaming the function name:
         wrapper.__name__ = f.__name__
-     
+
         return wrapper
 
     return decorator
+
 
 print("**** requires_role complete ****")
