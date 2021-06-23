@@ -15,10 +15,12 @@ from flask_migrate import Migrate
 from flask_moment import Moment
 
 # Local application imports
-from backend.src.database.models import db_drop_and_create_all, setup_db, Movie, Actor, db
+from backend.src.database.models import db_drop_and_create_all, \
+    setup_db, Movie, Actor, db
 from backend.src.auth.auth import AuthError, requires_auth, requires_role
 
 print(f"**** app.py ****")
+
 
 def create_app(test_config=None):
     app = Flask(__name__)
@@ -43,13 +45,12 @@ def create_app(test_config=None):
             'message': 'Home page'
         }), 200
 
-
     @app.after_request
     def after_request(response):
         response.headers.add('Access-Control-Allow-Headers',
-                         'Content-Type, Authorization, true')
+            'Content-Type, Authorization, true')
         response.headers.add('Access-Control-Allow-Methods',
-                         'GET, PATCH, PUT, POST, DELETE, OPTIONS')
+            'GET, PATCH, PUT, POST, DELETE, OPTIONS')
         return response
 
     # Test cors is working
@@ -58,16 +59,13 @@ def create_app(test_config=None):
     def get_messages():
         return 'CORS is working...'
 
- 
     # Uncomment if want to drop and create database
-    # db_drop_and_create_all() 
-
+    # db_drop_and_create_all()
 
     # '''
     # MOVIE APIs
-    # 
+    #
     # '''
-
 
     # '''
     # GET:          /movies
@@ -86,7 +84,7 @@ def create_app(test_config=None):
         if len(movies_all) == 0:
             abort(404)
 
-        try:  
+        try:
             results = []
 
             for i, movieObj in enumerate(movies_all):
@@ -97,19 +95,18 @@ def create_app(test_config=None):
         except Exception as e:
             print('\n'+'Error getting all movie records: ', e)
             abort(404)
-    
+
     # '''
     # GET:          /movies/<int:id>
     # Authorized:   Director or Assistant access
-    # Endpoint:     GET a specific movie
+    # Endpoint:     GET2 a specific movie
     # Returns:      Status code 200 and json {"success": True, "movie": data}
     #               where movie is a single movie data
     #               or appropriate status code indicating reason for failure
     # '''
 
-
     @app.route('/movies/<int:id>', methods=['GET'])
-    @requires_role(['director','assistant'])
+    @requires_role(['director', 'assistant'])
     def getMovie(id):
 
         if id is None:
@@ -120,7 +117,7 @@ def create_app(test_config=None):
         if movie_query is None:
             abort(404)
 
-        data = {  
+        data = {
             "id": movie_query.id,
             "title": movie_query.title,
             "release_date": str(movie_query.release_date),
@@ -160,9 +157,8 @@ def create_app(test_config=None):
                 'movie_publish': False
             }
 
-
-            if not ('title' in data and 'release_date' in data \
-                and 'movie_img' in data and 'movie_publish' in data):
+            if not ('title' in data and 'release_date' in data
+                    and 'movie_img' in data and 'movie_publish' in data):
 
                 abort(422)
 
@@ -176,7 +172,7 @@ def create_app(test_config=None):
         except Exception as e:
             print('\n'+'Error creating movie record: ', e)
             abort(422)
-    
+
     # '''
     # PATCH:        /movies/<int:id>
     # Authorized:   Assistant access
@@ -185,7 +181,6 @@ def create_app(test_config=None):
     #               where movie published is a single movie
     #               or appropriate status code indicating reason for failure
     # '''
-
 
     @app.route('/movies/<int:id>', methods=['PATCH'])
     @requires_role('assistant')
@@ -210,7 +205,7 @@ def create_app(test_config=None):
             return jsonify({
                 "success": True
              }), 200
-        
+
         except Exception as e:
             print('\n'+'Error updating movie record: ', e)
             abort(422)
@@ -224,7 +219,6 @@ def create_app(test_config=None):
     #               or appropriate status code indicating reason for failure
     # '''
 
-
     @app.route('/movies/<int:id>/publish', methods=['PATCH'])
     @requires_role('assistant')
     def publishMovie(id):
@@ -236,7 +230,7 @@ def create_app(test_config=None):
 
         if data is None:
             abort(404)
-            
+
         data.movie_publish = True
 
         try:
@@ -249,7 +243,6 @@ def create_app(test_config=None):
         except Exception as e:
             print('\n'+'Error publishing movie record: ', e)
             abort(422)
-
 
     # '''
     # PATCH:        /movies/<int:id>/publish
