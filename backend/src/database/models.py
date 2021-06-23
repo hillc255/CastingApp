@@ -4,7 +4,6 @@ import psycopg2
 
 from flask import Flask, jsonify
 from flask_sqlalchemy import SQLAlchemy
-#from sqlalchemy.orm import relationship, backref
 from sqlalchemy import Column, String, Integer, Date, ForeignKey
 
 import json
@@ -26,18 +25,21 @@ APP_SETTINGS = os.getenv('APP_SETTING', 'config')
 DATABASE_URL = os.environ['DATABASE_URL']
 conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 
-database_path = 'postgresql+psycopg2://{}:{}@{}/{}'.format(DB_USER, DB_PASSWORD, DB_HOST, DB_NAME)
+database_path = 'postgresql+psycopg2://{}:{}@{}/{}'.format(
+    DB_USER, DB_PASSWORD, DB_HOST, DB_NAME)
 
 '''
 setup_db(app)
     binds a flask application and a SQLAlchemy service
 '''
 
+
 def setup_db(app, database_path=database_path):
     app.config["SQLALCHEMY_DATABASE_URI"] = database_path
-    app.config["SQLALCHEMY_TRACK_MODIFICATIONS"]  = False
+    app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
     db.app = app
     db.init_app(app)
+
 
 '''
 db_drop_and_create_all()
@@ -45,30 +47,32 @@ db_drop_and_create_all()
     can be used to initialize a clean database
 '''
 
+
 def db_drop_and_create_all():
     db.drop_all()
     db.create_all()
     db.session.execute("ALTER SEQUENCE movies_id_seq RESTART WITH 1")
     db.session.execute("ALTER SEQUENCE actors_id_seq RESTART WITH 1")
-    db.session.add_all([movie1, movie2, movie3, movie4, movie5, movie6]) 
-    db.session.add_all([actor1, actor2, actor3, actor4, actor5, actor6, actor7]) 
+    db.session.add_all([movie1, movie2, movie3, movie4, movie5, movie6])
+    db.session.add_all([actor1, actor2, actor3, actor4, actor5, actor6, actor7])
     db.session.commit()
+
 
 '''
 Models
 
 Movie-Robot Casting Agency Specifications
-The Casting Agency models a company that is responsible for creating 
-movies and managing robot actors data. 
-
+The Casting Agency models a company responsible for creating
+movies and managing robot actors data.
 '''
+
 
 class Movie(db.Model):
     __tablename__ = 'movies'
 
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(128), nullable=False)
-    release_date = db.Column(db.Date, nullable=False) 
+    release_date = db.Column(db.Date, nullable=False)
     movie_img = db.Column(db.String(500), nullable=False)
     movie_publish = db.Column(db.Boolean, nullable=False)
 
@@ -82,7 +86,7 @@ class Movie(db.Model):
     def insert(self):
         db.session.add(self)
         db.session.commit()
-  
+
     def update(self):
         db.session.commit()
 
@@ -98,7 +102,7 @@ class Movie(db.Model):
            'movie_img': self.movie_img,
            'movie_publish': self.movie_publish
         }
-    
+
     def to_json(self):
         json_movie = dumps({
             'id': self.id,
@@ -109,7 +113,8 @@ class Movie(db.Model):
         })
         return json_movie
 
-class Actor(db.Model):  
+
+class Actor(db.Model):
     __tablename__ = 'actors'
 
     id = db.Column(db.Integer, primary_key=True)
@@ -132,7 +137,7 @@ class Actor(db.Model):
     def insert(self):
         db.session.add(self)
         db.session.commit()
-  
+
     def update(self):
         db.session.commit()
 
@@ -161,10 +166,10 @@ class Actor(db.Model):
             'actor_img': self.actor_img,
             'actor_publish': self.actor_publish
         })
-        return json_actor 
+        return json_actor
 
 
-# images hosted at this location         
+# images hosted at this location
 
 IMG_URL = 'https://i.ibb.co/'
 

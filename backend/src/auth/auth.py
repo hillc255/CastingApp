@@ -20,11 +20,13 @@ APP = Flask(__name__)
 
 print("**** auth.py ****")
 
+
 # Error handler
 class AuthError(Exception):
     def __init__(self, error, status_code):
         self.error = error
         self.status_code = status_code
+
 
 @APP.errorhandler(AuthError)
 def handle_auth_error(ex):
@@ -32,13 +34,14 @@ def handle_auth_error(ex):
     response.status_code = ex.status_code
     return response
 
-#JWT VALIDATION DECORATOR
+# JWT VALIDATION DECORATOR
+
 
 # Format error response and append status code
 def get_token_auth_header():
     """Obtains the Access Token from the Authorization Header
     """
-    
+
     auth = request.headers.get("Authorization", None)
     if not auth:
         raise AuthError({"code": "authorization_header_missing",
@@ -64,7 +67,9 @@ def get_token_auth_header():
     token = parts[1]
     return token
 
+
 print("**** get_token_auth_header complete ****")
+
 
 def requires_auth(f):
     """Determines if the Access Token is valid
@@ -101,7 +106,8 @@ def requires_auth(f):
                 raise AuthError({"code": "invalid_claims",
                                 "description":
                                     "incorrect claims,"
-                                    "please check the audience and issuer"}, 401)
+                                    "please check the audience and issuer"},
+                                401)
             except Exception:
                 raise AuthError({"code": "invalid_header",
                                 "description":
@@ -114,7 +120,9 @@ def requires_auth(f):
                         "description": "Unable to find appropriate key"}, 401)
     return decorated
 
+
 print("**** requires_auth complete ****")
+
 
 # VALIDATE SCOPES
 
@@ -126,10 +134,10 @@ def requires_scope(required_scope):
     token = get_token_auth_header()
     unverified_claims = jwt.get_unverified_claims(token)
     if unverified_claims.get("scope"):
-            token_scopes = unverified_claims["scope"].split()
-            for token_scope in token_scopes:
-                if token_scope == required_scope:
-                    return True
+        token_scopes = unverified_claims["scope"].split()
+        for token_scope in token_scopes:
+            if token_scope == required_scope:
+                return True
     return False
 
 print("**** requires_scope complete ****")
