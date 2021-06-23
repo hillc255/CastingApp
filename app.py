@@ -264,7 +264,7 @@ def create_app(test_config=None):
 
         if data is None:
             abort(404)
-            
+
         data.movie_publish = False
 
         try:
@@ -273,7 +273,7 @@ def create_app(test_config=None):
             return jsonify({
                 "success": True
             }), 200
-        
+
         except Exception as e:
             print('\n'+'Error unpublishing movie record: ', e)
             abort(422)
@@ -305,8 +305,7 @@ def create_app(test_config=None):
 
         except Exception as e:
             print('\n'+'Error deleting movie record: ', e)
-            abort(404)  
- 
+            abort(404)
 
     # '''
     # SEARCH:       /movies/search
@@ -316,17 +315,17 @@ def create_app(test_config=None):
     #               where movie(s) are searched for by title
     #               or appropriate status code indicating reason for failure
     # '''
-    
+
     @app.route('/movies/search', methods=['GET'])
     def findMovieByTitle():
 
         search_title = request.args.get('title')
-        
+
         data = Movie.query.filter(
             Movie.title.ilike(f'%{search_title}%')).all()
-  
+
         results = []
-        
+
         try:
             for i, movieObj in enumerate(data):
                 results.append(json.loads(movieObj.to_json()))
@@ -335,15 +334,13 @@ def create_app(test_config=None):
 
         except Exception as e:
             print('\n'+'Error searching by movie titles: ', e)
-            abort(404) 
-
+            abort(404)
 
     # '''
     # ACTOR ENDPOINTS
     #
     # '''
-   
- 
+
     # '''
     # GET:          /actors
     # Authorized:   Public user access
@@ -361,7 +358,7 @@ def create_app(test_config=None):
         if len(actors_all) == 0:
             abort(404)
 
-        try:  
+        try:
             results = []
 
             for i, actorObj in enumerate(actors_all):
@@ -373,7 +370,6 @@ def create_app(test_config=None):
             print('\n'+'Error getting all actor records: ', e)
             abort(404)
 
-
     # '''
     # GET:          /actors/<int:id>
     # Authorized:   Director or Assistant access
@@ -384,7 +380,7 @@ def create_app(test_config=None):
     # '''
 
     @app.route('/actors/<int:id>', methods=['GET'])
-    @requires_role(['director','assistant'])
+    @requires_role(['director', 'assistant'])
     def getActor(id):
 
         if id is None:
@@ -414,7 +410,6 @@ def create_app(test_config=None):
         except Exception as e:
             print('\n'+'Error getting actor detail record: ', e)
             abort(404)
-        
 
     # '''
     # POST:         /actors
@@ -441,11 +436,11 @@ def create_app(test_config=None):
                 'actor_publish': False
             }
 
-            if not ('first_name' in data and 'last_name' in data \
-                     and 'birth_date' in data and 'gender' in data \
-                     and 'actor_img' in data and 'actor_publish' in data):
+            if not ('first_name' in data and 'last_name' in data
+                    and 'birth_date' in data and 'gender' in data
+                    and 'actor_img' in data and 'actor_publish' in data):
 
-                    abort(422)
+                abort(422)
 
             actor = Actor(**data)
             actor.insert()
