@@ -76,7 +76,6 @@ import { AuthService } from './services/auth.service';
 })
 export class AppModule {
 
-  apiEndPoint:string="";
   domain:string="";
   clientID:string="";
   audience:string="";
@@ -85,7 +84,6 @@ export class AppModule {
   uri:string="";
 
   constructor() {
-    this.apiEndPoint = environment.apiEndPoint;
     this.domain = environment.auth.domain;
     this.clientID = environment.auth.clientID;
     this.audience = environment.auth.audience;
