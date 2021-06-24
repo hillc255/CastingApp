@@ -1,7 +1,6 @@
 export const environment = {
   production: false,
   title: 'Local Environment Heading',
-  apiEndPoint: 'https://apiexample.com',
   userRole: 'https://cast-app.herokuapp.com/roles',
   baseUrl: 'https://cast-app.herokuapp.com/movies',
   baseUrl2: 'https://cast-app.herokuapp.com/actors',
