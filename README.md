@@ -62,7 +62,7 @@ Create the database "cast-app" and populate tables - uncomment the following:
 app.py.db_drop_and_create_all()
 
 
-PPostgreSQL Database - Heroku CLI
+PostgreSQL Database - Heroku CLI
 
 cast-app::DATABASE=> \d
                  List of relations
