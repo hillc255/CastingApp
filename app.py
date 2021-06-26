@@ -40,7 +40,7 @@ def create_app(test_config=None):
     # Make sure home page is working
     @app.route('/')
     def index():
-        #return render_template('index.html')
+        return render_template('frontends/src/app/components/movies-list/movies-list.component.html')
         # if request.args['type'] == 'json':
         #     return jsonify({
         #         'success': True,
@@ -49,10 +49,10 @@ def create_app(test_config=None):
         # else:
             # return render_template('index.html')
         #original below
-        return jsonify({
-            'success': True,
-            'message': 'Home page'
-        }), 200
+        # return jsonify({
+        #     'success': True,
+        #     'message': 'Home page'
+        # }), 200
 
     @app.after_request
     def after_request(response):
