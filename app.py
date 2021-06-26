@@ -40,7 +40,7 @@ def create_app(test_config=None):
     # Make sure home page is working
     @app.route('/')
     def index():
-        return render_template('src/app/models/index.html')
+        return render_template('frontends/app/src/index.html')
         # if request.args['type'] == 'json':
         #     return jsonify({
         #         'success': True,
