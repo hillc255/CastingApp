@@ -48,8 +48,6 @@ class CastingAppTestCase(unittest.TestCase):
         print("*** Test '/' GET success ***")
         res = self.client().get('/')
         self.assertEqual(res.status_code, 200)
-        json_res = json.loads(res.get_data(as_text=True))
-        self.assertEqual('Home page', json_res['message'])
 
     def test_404_home_page_not_found(self):
         print("*** Test '/home' GET error ***")

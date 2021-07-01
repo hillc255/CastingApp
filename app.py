@@ -41,18 +41,6 @@ def create_app(test_config=None):
     @app.route('/')
     def index():
         return render_template('index.html')
-        # if request.args['type'] == 'json':
-        #     return jsonify({
-        #         'success': True,
-        #         'message': 'Home page'
-        #     }), 200
-        # else:
-            # return render_template('index.html')
-        #original below
-        #return jsonify({
-            #'success': True,
-            #'message': 'Home page'
-        #}), 200
 
     @app.after_request
     def after_request(response):
