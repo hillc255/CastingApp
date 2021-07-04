@@ -65,7 +65,7 @@ def create_app(test_config=None):
     # '''
 
     # '''
-    # GET:          /movies
+    # GET:          /api/movies
     # Authorized:   Public user access
     # Endpoint:     Gets all movies data representation
     # Returns:      Status code 200 for successful get
@@ -94,7 +94,7 @@ def create_app(test_config=None):
             abort(404)
 
     # '''
-    # GET:          /movies/<int:id>
+    # GET:          /api/movies/<int:id>
     # Authorized:   Director or Assistant access
     # Endpoint:     GET2 a specific movie
     # Returns:      Status code 200 and json {"success": True, "movie": data}
@@ -133,7 +133,7 @@ def create_app(test_config=None):
             abort(404)
 
     # '''
-    # POST:         /movies
+    # POST:         /api/movies
     # Authorized:   Director access
     # Endpoint:     Create a new movie
     # Returns:      Status code 200 and json {"success": True}
@@ -171,7 +171,7 @@ def create_app(test_config=None):
             abort(422)
 
     # '''
-    # PATCH:        /movies/<int:id>
+    # PATCH:        /api/movies/<int:id>
     # Authorized:   Assistant access
     # Endpoint:     Update movie data fields
     # Returns:      Status code 200 and json {"success": True}
@@ -208,7 +208,7 @@ def create_app(test_config=None):
             abort(422)
 
     # '''
-    # PATCH:        /movies/<int:id>/publish
+    # PATCH:        /api/movies/<int:id>/publish
     # Authorized:   Assistant access
     # Endpoint:     Publish movie data fields - boolen
     # Returns:      Status code 200 and json {"success": True}
@@ -242,7 +242,7 @@ def create_app(test_config=None):
             abort(422)
 
     # '''
-    # PATCH:        /movies/<int:id>/publish
+    # PATCH:        /api/movies/<int:id>/publish
     # Authorized:   Assistant access
     # Endpoint:     Unpublish movie data fields - boolen
     # Returns:      Status code 200 and json {"success": True}
@@ -276,7 +276,7 @@ def create_app(test_config=None):
             abort(422)
 
     # '''
-    # DELETE:       /movies/<int:id>
+    # DELETE:       /api/movies/<int:id>
     # Authorized:   Director access
     # Endpoint:     Deletes specific movie data fields
     # Returns:      Status code 200 and json {"success": True}
@@ -305,7 +305,7 @@ def create_app(test_config=None):
             abort(404)
 
     # '''
-    # SEARCH:       /movies/search
+    # SEARCH:       /api/movies/search
     # Authorized:   Public user access
     # Endpoint:     Provide a like search for movie title
     # Returns:      Status code 200 if search is successful
@@ -339,7 +339,7 @@ def create_app(test_config=None):
     # '''
 
     # '''
-    # GET:          /actors
+    # GET:          /api/actors
     # Authorized:   Public user access
     # Endpoint:     Gets all actors data representation
     # Returns:      Status code 200 for successful get
@@ -368,7 +368,7 @@ def create_app(test_config=None):
             abort(404)
 
     # '''
-    # GET:          /actors/<int:id>
+    # GET:          /api/actors/<int:id>
     # Authorized:   Director or Assistant access
     # Endpoint:     GET a specific actor
     # Returns:      Status code 200 and json {"success": True, "actor": data}
@@ -409,7 +409,7 @@ def create_app(test_config=None):
             abort(404)
 
     # '''
-    # POST:         /actors
+    # POST:         /api/actors
     # Authorized:   Director access
     # Endpoint:     Create a new actor
     # Returns:      Status code 200 and json {"success": True}
@@ -451,7 +451,7 @@ def create_app(test_config=None):
             abort(422)
 
     # '''
-    # PATCH:        /actors/<int:id>
+    # PATCH:        /api/actors/<int:id>
     # Authorized:   Assistant access
     # Endpoint:     Update actor data fields
     # Returns:      Status code 200 and json {"success": True}
@@ -490,7 +490,7 @@ def create_app(test_config=None):
             abort(422)
 
     # '''
-    # PATCH:        /actors/<int:id>/publish
+    # PATCH:        /api/actors/<int:id>/publish
     # Authorized:   Assistant access
     # Endpoint:     Publish actor data fields - boolen
     # Returns:      Status code 200 and json {"success": True}
@@ -524,7 +524,7 @@ def create_app(test_config=None):
             abort(422)
 
     # '''
-    # PATCH:        /actors/<int:id>/unpublish
+    # PATCH:        /api/actors/<int:id>/unpublish
     # Authorized:   Assistant access
     # Endpoint:     Unpublish actor data fields - boolean
     # Returns:      Status code 200 and json {"success": True}
@@ -558,7 +558,7 @@ def create_app(test_config=None):
             abort(422)
 
     # '''
-    # DELETE:       /actors/<int:id>
+    # DELETE:       /api/actors/<int:id>
     # Authorized:   Director access
     # Endpoint:     Deletes specific actor data fields
     # Returns:      Status code 200 and json {"success": True}
@@ -586,7 +586,7 @@ def create_app(test_config=None):
             abort(404)
 
     # '''
-    # SEARCH:       /actors/search
+    # SEARCH:       /api/actors/search
     # Authorized:   Public user access
     # Endpoint:     Provide a like search for actor first-name
     # Returns:      Status code 200 if search is successful
