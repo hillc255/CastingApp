@@ -73,7 +73,7 @@ def create_app(test_config=None):
     #               or appropriate status code indicating reason for failure
     # '''
 
-    @app.route('/movies', methods=['GET'])
+    @app.route('/api/movies', methods=['GET'])
     def getAllMovies():
 
         movies_all = Movie.query.order_by(Movie.title).all()
@@ -102,7 +102,7 @@ def create_app(test_config=None):
     #               or appropriate status code indicating reason for failure
     # '''
 
-    @app.route('/movies/<int:id>', methods=['GET'])
+    @app.route('/api/movies/<int:id>', methods=['GET'])
     @requires_role(['director', 'assistant'])
     def getMovie(id):
 
@@ -141,7 +141,7 @@ def create_app(test_config=None):
     #               or appropriate status code indicating reason for failure
     # '''
 
-    @app.route('/movies', methods=['POST'])
+    @app.route('/api/movies', methods=['POST'])
     @requires_role('director')
     def createMovie():
 
@@ -179,7 +179,7 @@ def create_app(test_config=None):
     #               or appropriate status code indicating reason for failure
     # '''
 
-    @app.route('/movies/<int:id>', methods=['PATCH'])
+    @app.route('/api/movies/<int:id>', methods=['PATCH'])
     @requires_role('assistant')
     def updateMovie(id):
 
@@ -216,7 +216,7 @@ def create_app(test_config=None):
     #               or appropriate status code indicating reason for failure
     # '''
 
-    @app.route('/movies/<int:id>/publish', methods=['PATCH'])
+    @app.route('/api/movies/<int:id>/publish', methods=['PATCH'])
     @requires_role('assistant')
     def publishMovie(id):
 
@@ -250,7 +250,7 @@ def create_app(test_config=None):
     #               or appropriate status code indicating reason for failure
     # '''
 
-    @app.route('/movies/<int:id>/unpublish', methods=['PATCH'])
+    @app.route('/api/movies/<int:id>/unpublish', methods=['PATCH'])
     @requires_role('assistant')
     def unpublishMovie(id):
 
@@ -284,7 +284,7 @@ def create_app(test_config=None):
     #               or appropriate status code indicating reason for failure
     # '''
 
-    @app.route('/movies/<int:id>', methods=['DELETE'])
+    @app.route('/api/movies/<int:id>', methods=['DELETE'])
     @requires_role('director')
     def deleteMovie(id):
 
@@ -313,7 +313,7 @@ def create_app(test_config=None):
     #               or appropriate status code indicating reason for failure
     # '''
 
-    @app.route('/movies/search', methods=['GET'])
+    @app.route('/api/movies/search', methods=['GET'])
     def findMovieByTitle():
 
         search_title = request.args.get('title')
@@ -347,7 +347,7 @@ def create_app(test_config=None):
     #               or appropriate status code indicating reason for failure
     # '''
 
-    @app.route('/actors', methods=['GET'])
+    @app.route('/api/actors', methods=['GET'])
     def getAllActors():
 
         actors_all = Actor.query.order_by(Actor.first_name).all()
@@ -376,7 +376,7 @@ def create_app(test_config=None):
     #               or appropriate status code indicating reason for failure
     # '''
 
-    @app.route('/actors/<int:id>', methods=['GET'])
+    @app.route('/api/actors/<int:id>', methods=['GET'])
     @requires_role(['director', 'assistant'])
     def getActor(id):
 
@@ -417,7 +417,7 @@ def create_app(test_config=None):
     #               or appropriate status code indicating reason for failure
     # '''
 
-    @app.route('/actors', methods=['POST'])
+    @app.route('/api/actors', methods=['POST'])
     @requires_role('director')
     def createActor():
 
@@ -459,7 +459,7 @@ def create_app(test_config=None):
     #               or appropriate status code indicating reason for failure
     # '''
 
-    @app.route('/actors/<int:id>', methods=['PATCH'])
+    @app.route('/api/actors/<int:id>', methods=['PATCH'])
     @requires_role('assistant')
     def updateActor(id):
 
@@ -498,7 +498,7 @@ def create_app(test_config=None):
     #               or appropriate status code indicating reason for failure
     # '''
 
-    @app.route('/actors/<int:id>/publish', methods=['PATCH'])
+    @app.route('/api/actors/<int:id>/publish', methods=['PATCH'])
     @requires_role('assistant')
     def publishActor(id):
 
@@ -532,7 +532,7 @@ def create_app(test_config=None):
     #               or appropriate status code indicating reason for failure
     # '''
 
-    @app.route('/actors/<int:id>/unpublish', methods=['PATCH'])
+    @app.route('/api/actors/<int:id>/unpublish', methods=['PATCH'])
     @requires_role('assistant')
     def unpublishActor(id):
 
@@ -566,7 +566,7 @@ def create_app(test_config=None):
     #               or appropriate status code indicating reason for failure
     # '''
 
-    @app.route('/actors/<int:id>', methods=['DELETE'])
+    @app.route('/api/actors/<int:id>', methods=['DELETE'])
     @requires_role('director')
     def deleteActor(id):
         try:
@@ -594,7 +594,7 @@ def create_app(test_config=None):
     #               or appropriate status code indicating reason for failure
     # '''
 
-    @app.route('/actors/search', methods=['GET'])
+    @app.route('/api/actors/search', methods=['GET'])
     def findActorByFirstName():
 
         search_firstname = request.args.get('first_name')
