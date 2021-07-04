@@ -1468,8 +1468,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-//allow browser refresh
-//import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 
 
@@ -1510,11 +1508,6 @@ AppModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_17__["ɵɵdefineInjecto
             useClass: _token_interceptor__WEBPACK_IMPORTED_MODULE_15__["TokenInterceptor"],
             multi: true
         }
-        // },
-        // {
-        //   //allow browser refresh
-        //   provide : LocationStrategy, useClass: HashLocationStrategy
-        // }
     ], imports: [[
             _angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"],
             _app_routing_module__WEBPACK_IMPORTED_MODULE_4__["AppRoutingModule"],

@@ -9,8 +9,6 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-//allow browser refresh
-//import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 import { MoviesListComponent } from './components/movies-list/movies-list.component';
 import { MovieDetailsComponent } from './components/movie-details/movie-details.component';
@@ -73,11 +71,6 @@ import { AuthService } from './services/auth.service';
       useClass: TokenInterceptor, 
       multi: true
     } 
-    // },
-    // {
-    //   //allow browser refresh
-    //   provide : LocationStrategy, useClass: HashLocationStrategy
-    // }
   ],
 
   bootstrap: [AppComponent]
