@@ -9,6 +9,8 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+//allow browser refresh
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 import { MoviesListComponent } from './components/movies-list/movies-list.component';
 import { MovieDetailsComponent } from './components/movie-details/movie-details.component';
@@ -25,8 +27,7 @@ import{ UserProfileComponent }  from './components/profile/profile.component';
 // import headers from tokens
 import{ TokenInterceptor } from './token.interceptor';
 import { AuthService } from './services/auth.service';
-// allow browser refresh
-import { HashLocationStrategy, LocationStrategy  } from '@angular/common';
+
 
 @NgModule({
   declarations: [
@@ -74,7 +75,7 @@ import { HashLocationStrategy, LocationStrategy  } from '@angular/common';
     },
     {
       //allow browser refresh
-      provide : LocationStrategy , useClass: HashLocationStrategy
+      provide : LocationStrategy, useClass: HashLocationStrategy
     }
   ],
 
