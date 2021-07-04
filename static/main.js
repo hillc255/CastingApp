@@ -599,7 +599,7 @@ const environment = {
         clientID: 'f7ZLU2DmWeRcLuikyEKjqk0893KA2Mbj',
         domain: 'autumn-voice-0666.us.auth0.com',
         audience: 'https://cast-app.herokuapp.com/api',
-        redirect: 'https://cast-app.herokuapp.com',
+        redirect: 'http://localhost:8081',
         scope: 'openid profile email',
         uri: 'https://cast-app.herokuapp.com/*'
     }
@@ -1449,24 +1449,27 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common/http */ "tk/3");
 /* harmony import */ var _app_routing_module__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./app-routing.module */ "vY5A");
 /* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./app.component */ "Sy1n");
-/* harmony import */ var _components_movies_list_movies_list_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/movies-list/movies-list.component */ "XGzh");
-/* harmony import */ var _components_movie_details_movie_details_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/movie-details/movie-details.component */ "4cG8");
-/* harmony import */ var _components_add_movie_add_movie_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/add-movie/add-movie.component */ "oxEG");
-/* harmony import */ var _components_actors_list_actors_list_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/actors-list/actors-list.component */ "/DGk");
-/* harmony import */ var _components_actor_details_actor_details_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/actor-details/actor-details.component */ "ZzJs");
-/* harmony import */ var _components_add_actor_add_actor_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/add-actor/add-actor.component */ "GHXl");
-/* harmony import */ var _auth0_auth0_angular__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @auth0/auth0-angular */ "2beD");
-/* harmony import */ var _components_auth_auth_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/auth/auth.component */ "qrmE");
-/* harmony import */ var _components_profile_profile_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/profile/profile.component */ "DZ0t");
-/* harmony import */ var _token_interceptor__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./token.interceptor */ "Bx2m");
-/* harmony import */ var _services_auth_service__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./services/auth.service */ "lGQG");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! @angular/core */ "fXoL");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/common */ "ofXK");
+/* harmony import */ var _components_movies_list_movies_list_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/movies-list/movies-list.component */ "XGzh");
+/* harmony import */ var _components_movie_details_movie_details_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/movie-details/movie-details.component */ "4cG8");
+/* harmony import */ var _components_add_movie_add_movie_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/add-movie/add-movie.component */ "oxEG");
+/* harmony import */ var _components_actors_list_actors_list_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/actors-list/actors-list.component */ "/DGk");
+/* harmony import */ var _components_actor_details_actor_details_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/actor-details/actor-details.component */ "ZzJs");
+/* harmony import */ var _components_add_actor_add_actor_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/add-actor/add-actor.component */ "GHXl");
+/* harmony import */ var _auth0_auth0_angular__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @auth0/auth0-angular */ "2beD");
+/* harmony import */ var _components_auth_auth_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/auth/auth.component */ "qrmE");
+/* harmony import */ var _components_profile_profile_component__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./components/profile/profile.component */ "DZ0t");
+/* harmony import */ var _token_interceptor__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./token.interceptor */ "Bx2m");
+/* harmony import */ var _services_auth_service__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./services/auth.service */ "lGQG");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! @angular/core */ "fXoL");
 
 
 //source: https://auth0.com/docs/quickstart/spa/angular/02-calling-an-api
 
 
 
+
+//allow browser refresh
 
 
 
@@ -1499,14 +1502,18 @@ class AppModule {
         this.uri = _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].auth.uri;
     }
 }
-AppModule.ɵmod = _angular_core__WEBPACK_IMPORTED_MODULE_17__["ɵɵdefineNgModule"]({ type: AppModule, bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_5__["AppComponent"]] });
-AppModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_17__["ɵɵdefineInjector"]({ factory: function AppModule_Factory(t) { return new (t || AppModule)(); }, providers: [
-        _services_auth_service__WEBPACK_IMPORTED_MODULE_16__["AuthService"],
+AppModule.ɵmod = _angular_core__WEBPACK_IMPORTED_MODULE_18__["ɵɵdefineNgModule"]({ type: AppModule, bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_5__["AppComponent"]] });
+AppModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_18__["ɵɵdefineInjector"]({ factory: function AppModule_Factory(t) { return new (t || AppModule)(); }, providers: [
+        _services_auth_service__WEBPACK_IMPORTED_MODULE_17__["AuthService"],
         {
             //get headers and access token
             provide: _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HTTP_INTERCEPTORS"],
-            useClass: _token_interceptor__WEBPACK_IMPORTED_MODULE_15__["TokenInterceptor"],
+            useClass: _token_interceptor__WEBPACK_IMPORTED_MODULE_16__["TokenInterceptor"],
             multi: true
+        },
+        {
+            //allow browser refresh
+            provide: _angular_common__WEBPACK_IMPORTED_MODULE_6__["LocationStrategy"], useClass: _angular_common__WEBPACK_IMPORTED_MODULE_6__["HashLocationStrategy"]
         }
     ], imports: [[
             _angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"],
@@ -1514,7 +1521,7 @@ AppModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_17__["ɵɵdefineInjecto
             _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormsModule"],
             _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClientModule"],
             // import the module into the application, with environment configuration
-            _auth0_auth0_angular__WEBPACK_IMPORTED_MODULE_12__["AuthModule"].forRoot({
+            _auth0_auth0_angular__WEBPACK_IMPORTED_MODULE_13__["AuthModule"].forRoot({
                 domain: _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].auth.domain,
                 clientId: _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].auth.clientID,
                 audience: _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].auth.audience,
@@ -1532,18 +1539,18 @@ AppModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_17__["ɵɵdefineInjecto
                 }
             }),
         ]] });
-(function () { (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_17__["ɵɵsetNgModuleScope"](AppModule, { declarations: [_app_component__WEBPACK_IMPORTED_MODULE_5__["AppComponent"],
-        _components_add_movie_add_movie_component__WEBPACK_IMPORTED_MODULE_8__["AddMovieComponent"],
-        _components_movie_details_movie_details_component__WEBPACK_IMPORTED_MODULE_7__["MovieDetailsComponent"],
-        _components_movies_list_movies_list_component__WEBPACK_IMPORTED_MODULE_6__["MoviesListComponent"],
-        _components_add_actor_add_actor_component__WEBPACK_IMPORTED_MODULE_11__["AddActorComponent"],
-        _components_actor_details_actor_details_component__WEBPACK_IMPORTED_MODULE_10__["ActorDetailsComponent"],
-        _components_actors_list_actors_list_component__WEBPACK_IMPORTED_MODULE_9__["ActorsListComponent"],
-        _components_auth_auth_component__WEBPACK_IMPORTED_MODULE_13__["AuthButtonComponent"],
-        _components_profile_profile_component__WEBPACK_IMPORTED_MODULE_14__["UserProfileComponent"]], imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"],
+(function () { (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_18__["ɵɵsetNgModuleScope"](AppModule, { declarations: [_app_component__WEBPACK_IMPORTED_MODULE_5__["AppComponent"],
+        _components_add_movie_add_movie_component__WEBPACK_IMPORTED_MODULE_9__["AddMovieComponent"],
+        _components_movie_details_movie_details_component__WEBPACK_IMPORTED_MODULE_8__["MovieDetailsComponent"],
+        _components_movies_list_movies_list_component__WEBPACK_IMPORTED_MODULE_7__["MoviesListComponent"],
+        _components_add_actor_add_actor_component__WEBPACK_IMPORTED_MODULE_12__["AddActorComponent"],
+        _components_actor_details_actor_details_component__WEBPACK_IMPORTED_MODULE_11__["ActorDetailsComponent"],
+        _components_actors_list_actors_list_component__WEBPACK_IMPORTED_MODULE_10__["ActorsListComponent"],
+        _components_auth_auth_component__WEBPACK_IMPORTED_MODULE_14__["AuthButtonComponent"],
+        _components_profile_profile_component__WEBPACK_IMPORTED_MODULE_15__["UserProfileComponent"]], imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"],
         _app_routing_module__WEBPACK_IMPORTED_MODULE_4__["AppRoutingModule"],
         _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormsModule"],
-        _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClientModule"], _auth0_auth0_angular__WEBPACK_IMPORTED_MODULE_12__["AuthModule"]] }); })();
+        _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClientModule"], _auth0_auth0_angular__WEBPACK_IMPORTED_MODULE_13__["AuthModule"]] }); })();
 
 
 /***/ }),
