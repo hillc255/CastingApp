@@ -25,6 +25,8 @@ import{ UserProfileComponent }  from './components/profile/profile.component';
 // import headers from tokens
 import{ TokenInterceptor } from './token.interceptor';
 import { AuthService } from './services/auth.service';
+// allow browser refresh
+import { HashLocationStrategy, LocationStrategy  } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -69,6 +71,10 @@ import { AuthService } from './services/auth.service';
       provide: HTTP_INTERCEPTORS, 
       useClass: TokenInterceptor, 
       multi: true 
+    },
+    {
+      //allow browser refresh
+      provide : LocationStrategy , useClass: HashLocationStrategy
     }
   ],
 
