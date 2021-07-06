@@ -2,9 +2,6 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { environment } from '../environments/environment';
 
-//allow browser refresh
-import { RouterModule, Routes } from '@angular/router';
-
 //source: https://auth0.com/docs/quickstart/spa/angular/02-calling-an-api
 
 import { FormsModule } from '@angular/forms';
@@ -29,12 +26,6 @@ import{ UserProfileComponent }  from './components/profile/profile.component';
 import{ TokenInterceptor } from './token.interceptor';
 import { AuthService } from './services/auth.service';
 
-//refresh
-export const routes: Routes = [
-  {path:'', component: AppComponent}
-]
-
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -51,11 +42,6 @@ export const routes: Routes = [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    //refresh browser
-    RouterModule.forRoot(routes, {
-      // onSameUrlNavigation: 'ignore',
-      onSameUrlNavigation: 'reload'
-    }),
     HttpClientModule,
     // import the module into the application, with environment configuration
     AuthModule.forRoot({
