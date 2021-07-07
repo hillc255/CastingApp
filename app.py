@@ -38,10 +38,26 @@ def create_app(test_config=None):
     }})
 
     # Serve the Angular app
-    @app.route('/actors', defaults={'u_path': ''})
     @app.route('/', defaults={'u_path': ''})
+    def index(u_path):
+        return render_template('index.html')
+
+    # Serve the Angular app
     @app.route('/movies', defaults={'u_path': ''})
+    def index(u_path):
+        return render_template('index.html')
+
+    # Serve the Angular app
+    @app.route('/actors', defaults={'u_path': ''})
+    def index(u_path):
+        return render_template('index.html')
+
+    # Serve the Angular app
     @app.route('/movies/<path:u_path>')
+    def index(u_path):
+        return render_template('index.html')
+
+    # Serve the Angular app
     @app.route('/actors/<path:u_path>')
     def index(u_path):
         return render_template('index.html')
