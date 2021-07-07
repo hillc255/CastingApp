@@ -2,7 +2,7 @@ TITLE
 Movie-Robots: Casting Application
 
 URL
-https://git.heroku.com/cast-app.git
+https://cast-app.herokuapp.com/
 
 
 PURPOSE
