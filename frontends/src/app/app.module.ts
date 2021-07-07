@@ -71,7 +71,7 @@ import { AuthService } from './services/auth.service';
       multi: true
     } 
   ],
-
+  
   bootstrap: [AppComponent]
 })
 export class AppModule {
