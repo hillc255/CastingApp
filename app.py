@@ -37,9 +37,11 @@ def create_app(test_config=None):
         "origins": "*"
     }})
 
-    # Make sure home page is working
-    @app.route('/')
-    def index():
+    # Serve the Angular app
+    @app.route('/', defaults={'u_path': ''})
+    @app.route('/movies/<path:u_path>')
+    @app.route('/actors/<path:u_path>')
+    def index(u_path):
         return render_template('index.html')
 
     @app.after_request
