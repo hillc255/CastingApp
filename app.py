@@ -38,9 +38,9 @@ def create_app(test_config=None):
     }})
 
     # Serve the Angular app
-    @app.route('/', defaults={'u_path': ''})
     @app.route('/movies', defaults={'u_path': ''})
     @app.route('/actors', defaults={'u_path': ''})
+    @app.route('/', defaults={'u_path': ''})
     @app.route('/movies/<path:u_path>')
     @app.route('/actors/<path:u_path>')
     def index(u_path):
