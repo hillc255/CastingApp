@@ -37,27 +37,23 @@ def create_app(test_config=None):
         "origins": "*"
     }})
 
-    # Serve the Angular app
+    # Serve the Angular app - routes for browser refresh issues
     @app.route('/')
     def index():
         return render_template('index.html')
 
-    # Serve the Angular app
     @app.route('/movies')
     def showMovies():
         return render_template('index.html')
 
-    # Serve the Angular app
     @app.route('/actors')
     def showActors():
         return render_template('index.html')
 
-    # Serve the Angular app
     @app.route('/movies/<path:u_path>')
     def showOneMovie(u_path):
         return render_template('index.html')
 
-    # Serve the Angular app
     @app.route('/actors/<path:u_path>')
     def showOneActor(u_path):
         return render_template('index.html')

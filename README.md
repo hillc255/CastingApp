@@ -6,7 +6,7 @@ https://git.heroku.com/cast-app.git
 
 
 PURPOSE
-Movie-Robots casting application models a company that is responsible for documenting movies with robot actors.  Movies and robots can be viewed, added, updated, deleted and searched in the application.  This is the capstone project for Udacity's Full-Stack Nanodegree program.
+Movie-Robots casting application models a company that is responsible for documenting movies with robot actors.  Movies and robots can be viewed, added, updated, deleted and searched in the application.  This is the capstone project for Udacity's Full-Stack Web Nanodegree program.
 
 
 APPLICATION STRUCTURE
@@ -77,7 +77,7 @@ cast-app::DATABASE=> \d
 
 cast-app::DATABASE=> \d movies
                                        Table "public.movies"
-    Column     |          Type          | Collation | Nullable |              Default
+    Column     |          Type          | Collation | Nullable | Default
 ---------------+------------------------+-----------+----------+------------------------------------
  id            | integer                |           | not null | nextval('movies_id_seq'::regclass)
  title         | character varying(128) |           | not null |
@@ -91,7 +91,7 @@ Indexes:
 
 cast-app::DATABASE=> \d actors
                                        Table "public.actors"
-    Column     |          Type          | Collation | Nullable |              Default
+    Column     |          Type          | Collation | Nullable | Default
 ---------------+------------------------+-----------+----------+------------------------------------
  id            | integer                |           | not null | nextval('actors_id_seq'::regclass)
  first_name    | character varying(30)  |           | not null |
@@ -107,98 +107,98 @@ Indexes:
 
 API ENDPOINTS  (app.py)
 
-GET '/movies'
+GET '/api/movies'
 
     Fetches: All movie titles
     Request Arguments: None
     Returns: A list of movie titles
     Permissions: Public, Director, Assistant can GET and view this endpoint.
 
-GET '/movies/id'
+GET '/api//movies/id'
 
     Fetches: A single movie data.
     Request Arguments: id
     Returns: All movie data for a single movie.
     Permissions: Director and Assistant can GET and view this endpoint.
 
-POST '/movies'
+POST '/api/movies'
 
     Fetches: Movie data representation.
     Request Arguments: Input string with movie data for each movie.
     Returns: Movie array added to list of movies.
     Permissions: Director can POST with this endpoint.
 
-PATCH '/movies/id'
+PATCH '/api/movies/id'
 
     Fetches: Single movie data representation.
     Request Arguments: Unique id - primary key: value of existing movie id.
     Returns: Movie array of single movie.
     Permission: Assistant can PATCH with this endpoint.
 
-PATCH '/movies/id/publish' or '/movies/id/unpublish'
+PATCH '/api/movies/id/publish' or /api/movies/id/unpublish'
 
     Fetches: Single movie data representation.
     Request Arguments: Unique id - primary key: value of existing movie id.
     Returns: Movie boolean for publish / unpublish.
     Permission: Assistant can PATCH with this endpoint.
 
-DELETE '/movies/id'
+DELETE '/api/movies/id'
 
     Fetches: Single movie data representation.
     Request Arguments: Unique id - primary key: value of existing movie id.
     Returns: Movie array of the single deleted movie data.
     Permission: Director can DELETE with this endpoint.
 
-SEARCH '/movies/search'
+SEARCH '/api/movies/search'
 
     Fetches: Searches for like movie title.
-    Request Arguments: Any inpuy.
+    Request Arguments: Any input.
     Returns: Any title like search query.
     Permission: Public, Director, Assistant can SEARCH with this endpoint.
 
-GET '/actors'
+GET '/api/actors'
 
     Fetches: All actor titles
     Request Arguments: None
     Returns: A list of actor titles
     Permissions: Public, Director, Assistant can GET and view this endpoint.
 
-GET '/actors/id'
+GET '/api/actors/id'
 
     Fetches: A single actor data.
     Request Arguments: id
     Returns: All actor data for a single actor.
     Permissions: Director and Assistant can GET and view this endpoint.
 
-POST '/actors'
+POST '/api/actors'
 
     Fetches: Actor data representation.
     Request Arguments: Input string with actor data for each actor.
     Returns: Actor array added to list of actors.
     Permissions: Director can POST with this endpoint.
 
-PATCH '/actors/id'
+PATCH '/api/actors/id'
 
     Fetches: Single actor data representation.
     Request Arguments: Unique id - primary key: value of existing actor id.
     Returns: Actor array of single actor.
     Permission: Assistant can PATCH with this endpoint.
 
-PATCH '/actors/id/publish' or '/actors/id/unpublish'
+PATCH '/api/actors/id/publish' or '/api/actors/id/unpublish'
 
     Fetches: Single actor data representation.
     Request Arguments: Unique id - primary key: value of existing actor id.
     Returns: Actor boolean for publish / unpublish.
     Permission: Assistant can PATCH with this endpoint.
 
-DELETE '/actors/id'
+DELETE '/api/actors/id'
 
     Fetches: Single actor data representation.
     Request Arguments: Unique id - primary key: value of existing actor id.
     Returns: Actor array of the single deleted actor data.
     Permission: Director can DELETE with this endpoint.
 
-SEARCH '/actors/search'
+SEARCH '/api/actors/search'
 
     Fetches: Searches for like actor first name.
     Request Arguments: Any inpuy.
