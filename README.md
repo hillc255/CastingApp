@@ -114,7 +114,7 @@ GET '/api/movies'
     Returns: A list of movie titles
     Permissions: Public, Director, Assistant can GET and view this endpoint.
 
-GET '/api//movies/id'
+GET '/api/movies/id'
 
     Fetches: A single movie data.
     Request Arguments: id
@@ -201,7 +201,7 @@ DELETE '/api/actors/id'
 SEARCH '/api/actors/search'
 
     Fetches: Searches for like actor first name.
-    Request Arguments: Any inpuy.
+    Request Arguments: Any input.
     Returns: Any actor first name like search query.
     Permission: Public, Director, Assistant can SEARCH with this endpoint.
 
