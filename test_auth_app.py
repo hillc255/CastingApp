@@ -13,12 +13,12 @@ import settings
 from backend.src.database.models import setup_db, Movie, Actor, db
 
 
-print("**** test_app.py ****")
+print("**** test_auth_app.py ****")
 print(" ")
 
 
-class CastingAppTestCase(unittest.TestCase):
-    """This class represents the CastingApp test case - tested locally"""
+class CastingAppTestCase_Auth(unittest.TestCase):
+    """Class represents the CastingApp Auth test case - tested locally"""
 
     def setUp(self):
         """Define test variables and initialize app."""
@@ -53,13 +53,15 @@ class CastingAppTestCase(unittest.TestCase):
         print("*** Test '/home' GET error ***")
         res = self.client().get('/home')
         self.assertEqual(res.status_code, 404)
+        json_res = json.loads(res.get_data(as_text=False))
+        self.assertEqual('Resource Not Found', json_res['message'])
 
     def test_given_cors_behavior(self):
         print("*** Test '/test_cors' GET success ***")
         res = self.client().get('/test_cors')
         self.assertEqual(res.status_code, 200)
 
-    def test_404_cors_not_found(self):
+    def test_404_home_page_not_found(self):
         print("*** Test '/test_cors' GET error ***")
         res = self.client().get('/test_cor')
         self.assertEqual(res.status_code, 404)
