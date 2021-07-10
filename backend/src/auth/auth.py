@@ -15,7 +15,7 @@ API_AUDIENCE = os.getenv('API_AUDIENCE')
 ROLES_URI = os.getenv('ROLES_URI')
 
 
-APP = Flask(__name__)
+app = Flask(__name__)
 
 
 print("**** auth.py ****")
@@ -28,7 +28,7 @@ class AuthError(Exception):
         self.status_code = status_code
 
 
-@APP.errorhandler(AuthError)
+@app.errorhandler(AuthError)
 def handle_auth_error(ex):
     response = jsonify(ex.error)
     response.status_code = ex.status_code

@@ -89,10 +89,11 @@ class CastingAppPublicTestCase(unittest.TestCase):
         print("*** Test '/api/movies/<ind:id>' GET error ***")
         res = self.client().get('/api/movies/2',
             headers={'Authorization':'Bearer ' + self.test_asst})
+            #headers={'Authorization':'Bearer ' + str(self.test_asst)})
         #data = json.loads(res.data)
         data = res.json
-        self.assertEqual(500, res.status_code)
-        # self.assertEqual(res.status_code, 401)
+        #self.assertEqual(res.status_code, 500)
+        self.assertEqual(res.status_code, 401)
         #self.assertEqual(data['message'], 'Token not found')
         #self.assertEqual(data['success'], False)
 
