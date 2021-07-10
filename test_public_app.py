@@ -90,6 +90,7 @@ class CastingAppPublicTestCase(unittest.TestCase):
         res = self.client().get('/api/movies/2',
             headers={'Authorization':'Bearer ' + self.test_asst})
         #data = json.loads(res.data)
+        data = res.json
         self.assertEqual(500, res.status_code)
         # self.assertEqual(res.status_code, 401)
         #self.assertEqual(data['message'], 'Token not found')
