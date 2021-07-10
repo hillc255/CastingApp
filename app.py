@@ -669,8 +669,7 @@ def create_app(test_config=None):
     @app.errorhandler(401)
     def unauthorized(error):
         return jsonify({
-            "success": False,
-            "error": 401,
+            "error": 401
          }), 401
 
     return app
