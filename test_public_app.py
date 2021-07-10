@@ -90,7 +90,8 @@ class CastingAppPublicTestCase(unittest.TestCase):
     def test_401_get_movies_two_fails(self):
         print("*** Test '/api/movies/<ind:id>' GET error ***")
         res = self.client().get('/api/movies/2',
-            headers={'Authorization': 'Bearer ' + self.test_asst})
+            headers={'Authorization': 'Bearer ' + ''})
+            #headers={'Authorization': 'Bearer ' + self.test_asst})
             #headers=self.test_asst)
             #headers={"Authorization": "Bearer {}".format(self.test_asst)})
             #headers=self.auth_header)
@@ -105,11 +106,11 @@ class CastingAppPublicTestCase(unittest.TestCase):
         #self.assertEqual(data['message'], 'Token not found')
         #self.assertEqual(data['success'], False)
 
-    # def test_200_get_movies_two_success(self):
-    #     print("*** Test '/api/movies/<ind:id>' GET success ***")
-    #     res = self.client().get('/api/movies/2', 
-    #         headers={'Authorization':'Bearer ' +self.test_asst})
-    #     self.assertEqual(res.status_code, 200)
+    def test_200_get_movies_two_success(self):
+         print("*** Test '/api/movies/<ind:id>' GET success ***")
+         res = self.client().get('/api/movies/2', 
+             headers={'Authorization':'Bearer ' + self.test_asst})
+         self.assertEqual(res.status_code, 200)
 
 
 

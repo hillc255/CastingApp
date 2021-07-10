@@ -666,7 +666,7 @@ def create_app(test_config=None):
             "message": "Method Not Allowed"
          }), 405
 
-    @app.errorhandler(401)
+    @app.errorhandler(AuthError)
     def unauthorized(error):
         return jsonify({
             "error": 401
