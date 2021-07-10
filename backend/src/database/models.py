@@ -16,15 +16,24 @@ db = SQLAlchemy()
 
 # Heroku settings - one can add local variables
 # ex: ('DB_HOST', 'localhost:5432')
-DB_HOST = os.getenv('DB_HOST')
-DB_USER = os.getenv('DB_USER')
-DB_PASSWORD = os.getenv('DB_PASSWORD')
-DB_NAME = os.getenv('DB_NAME')
+# DB_HOST = os.getenv('DB_HOST')
+# DB_USER = os.getenv('DB_USER')
+# DB_PASSWORD = os.getenv('DB_PASSWORD')
+# DB_NAME = os.getenv('DB_NAME')
+# DB_URL = os.getenv('DB_URL')
+# APP_SETTINGS = os.getenv('APP_SETTING', 'config')
+
+# uncomment these settings to run unittests locally
+DB_HOST = os.getenv('DB_HOST','localhost:5432')
+DB_USER = os.getenv('DB_USER','postgres')
+DB_PASSWORD = os.getenv('DB_PASSWORD','picasso0')
+DB_NAME = os.getenv('DB_NAME','castapp_test')
 DB_URL = os.getenv('DB_URL')
 APP_SETTINGS = os.getenv('APP_SETTING', 'config')
 
-DATABASE_URL = os.environ['DATABASE_URL']
-conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+# comment out DATABASE_URL and conn to run unittests locally
+#DATABASE_URL = os.environ['DATABASE_URL']
+#conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 
 database_path = 'postgresql+psycopg2://{}:{}@{}/{}'.format(
     DB_USER, DB_PASSWORD, DB_HOST, DB_NAME)
