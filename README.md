@@ -49,8 +49,10 @@ CastingApp>frontends> src $ ng serve --port 8081
 http://localhost:8081/movies
 
 8.Locally run unittests
-Create PostgreSQL database locally and run the api unittests
-C:\CastingApp> python test_app.py
+Create PostgreSQL test database locally and run the api unittests
+Uncomment some code in models.py
+a. Disable roles and run api tests - C:\CastingApp> python test_app.py
+b. Test access tokens - C:\CastingApp> python test_tokens_app.py
 
 9.Check application is running
 https://cast-app.herokuapp.com/
