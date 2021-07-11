@@ -152,12 +152,14 @@ def requires_role(required_role):
             token = get_token_auth_header()
             print("**** token = ", token)
             unverified_claims = jwt.get_unverified_claims(token)
-
+            print("**** under unverified_claims =", unverified_claims)
             # search current token for the expected role
             if unverified_claims.get(ROLES_URI):
+                print("**** get roles ")
                 roles = unverified_claims[ROLES_URI]
                 for role in roles:
                     if role in required_role:
+                        print("**** role identified")
                         return f(**args)
 
             raise AuthError({

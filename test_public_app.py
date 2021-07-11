@@ -24,6 +24,8 @@ class CastingAppPublicTestCase(unittest.TestCase):
         self.app = app.create_app()
         self.client = self.app.test_client
         self.assistant_token = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IkJpc1RBYmdXS1YtXzEyeXpkNE1PVSJ9.eyJodHRwczovL2Nhc3QtYXBwLmhlcm9rdWFwcC5jb20vcm9sZXMiOlsiYXNzaXN0YW50Il0sImlzcyI6Imh0dHBzOi8vYXV0dW1uLXZvaWNlLTA2NjYudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDYwYjEyYzFhZTIwMGNiMDA3MDk3NmI1OSIsImF1ZCI6WyJodHRwczovL2Nhc3QtYXBwLmhlcm9rdWFwcC5jb20vYXBpIiwiaHR0cHM6Ly9hdXR1bW4tdm9pY2UtMDY2Ni51cy5hdXRoMC5jb20vdXNlcmluZm8iXSwiaWF0IjoxNjI1OTUyMTE2LCJleHAiOjE2MjYwMzg1MTYsImF6cCI6ImY3WkxVMkRtV2VSY0x1aWt5RUtqcWswODkzS0EyTWJqIiwic2NvcGUiOiJvcGVuaWQgcHJvZmlsZSBlbWFpbCIsInBlcm1pc3Npb25zIjpbImdldDphY3Rvci1pZCIsImdldDptb3ZpZS1pZCIsInBhdGNoOmFjdG9yLXB1Ymxpc2giLCJwYXRjaDphY3RvcnMiLCJwYXRjaDphY3Rvci11bnB1Ymxpc2giLCJwYXRjaDptb3ZpZS1wdWJsaXNoIiwicGF0Y2g6bW92aWVzIiwicGF0Y2g6bW92aWUtdW5wdWJsaXNoIl19.Z_KnnFNMwV90_5XLRHCh3bu3jp-FDRlLRIi_e1a6oUhhwUKg5DryXgrPOh6OboawMH7nJEQBpoi88IOtqm9V4TODnvfk2Ml6oaKqgVH_NjRR0qiUhyhc8q4l0aEhjShkc5wtX7PgcKS0nO3zZSdc3BrU6RKklDoh5Q6ieI4St7io502LBF8wT_rybHQZyC40bsdMTlzSbqpHHwVwV26v8BKKy_-ku4hBQF-6opSD_42UsaK1G8p1vOF_BiehVH-pdUa5OrnxZ0wmAf2OmAu4Z71tt-iqGXruBGIaf0R9Z0tHiJ7tpf7s9J9jcr-hJcv3iToJyK8ao3lBcf3OAW_eAA"
+        self.director_tokenid = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IkJpc1RBYmdXS1YtXzEyeXpkNE1PVSJ9.eyJodHRwczovL2Nhc3QtYXBwLmhlcm9rdWFwcC5jb20vcm9sZXMiOlsiZGlyZWN0b3IiXSwibmlja25hbWUiOiJkaXJlY3Rvci5jYXN0LmFwcCIsIm5hbWUiOiJkaXJlY3Rvci5jYXN0LmFwcEBnbWFpbC5jb20iLCJwaWN0dXJlIjoiaHR0cHM6Ly9zLmdyYXZhdGFyLmNvbS9hdmF0YXIvNmNkOTFjZmVjZjBmNzRjOTUyOGFhZDdmNTQyODM0ZTU_cz00ODAmcj1wZyZkPWh0dHBzJTNBJTJGJTJGY2RuLmF1dGgwLmNvbSUyRmF2YXRhcnMlMkZkaS5wbmciLCJ1cGRhdGVkX2F0IjoiMjAyMS0wNy0xMVQxMDoyMDo0Mi4wMjBaIiwiZW1haWwiOiJkaXJlY3Rvci5jYXN0LmFwcEBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiaXNzIjoiaHR0cHM6Ly9hdXR1bW4tdm9pY2UtMDY2Ni51cy5hdXRoMC5jb20vIiwic3ViIjoiYXV0aDB8NjBiMTI2NDg5MjNmZTIwMDZmMDgwOWZlIiwiYXVkIjoiZjdaTFUyRG1XZVJjTHVpa3lFS2pxazA4OTNLQTJNYmoiLCJpYXQiOjE2MjU5OTg4NDMsImV4cCI6MTYyNjQzMDg0Mywibm9uY2UiOiJNMmRQZUY5UWMzTm9NbmR1YWtJeVdXOVFkazQzYzJ4dGVtWnJTa0pwY201MGVFeHBSSDVwVW1wVWRRPT0ifQ.gHhq1_OLZ39_pckZBJkGs9DrIjVE1qucgZV6P7zF59bvvrcdgBMPBAYsvsHaKGiKZC4fNtJcQsUFvAyecD_8HGYeRmp7GSaPFQrka0T14XCWQC2pP28oYMCWCd7QfEy_dMTz7BHFTFPOdYQldIAS_sy1KlS7RuCpHcrTTG1C27i3GVti_fI2TiR5gZ_-6qKdgpS2h2Jjjy2kgw6Cs86Xkh1nbb4zSFGorDYkBlPEeIsySAgfc3NkNhXmk9oGUgPpWsWe-orBC81C7Xe6muA6oiQtx01BPnwx0YyPmkD4uMMia0D-ETwLg5zarPRxzX-bp4cl3bXsDxDpdjZvIWo5fQ"
+        self.director_accesstoken = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IkJpc1RBYmdXS1YtXzEyeXpkNE1PVSJ9.eyJodHRwczovL2Nhc3QtYXBwLmhlcm9rdWFwcC5jb20vcm9sZXMiOlsiZGlyZWN0b3IiXSwiaXNzIjoiaHR0cHM6Ly9hdXR1bW4tdm9pY2UtMDY2Ni51cy5hdXRoMC5jb20vIiwic3ViIjoiYXV0aDB8NjBiMTI2NDg5MjNmZTIwMDZmMDgwOWZlIiwiYXVkIjpbImh0dHBzOi8vY2FzdC1hcHAuaGVyb2t1YXBwLmNvbS9hcGkiLCJodHRwczovL2F1dHVtbi12b2ljZS0wNjY2LnVzLmF1dGgwLmNvbS91c2VyaW5mbyJdLCJpYXQiOjE2MjU5OTg4NDMsImV4cCI6MTYyNjA4NTI0MywiYXpwIjoiZjdaTFUyRG1XZVJjTHVpa3lFS2pxazA4OTNLQTJNYmoiLCJzY29wZSI6Im9wZW5pZCBwcm9maWxlIGVtYWlsIiwicGVybWlzc2lvbnMiOlsiZGVsZXRlOmFjdG9ycyIsImRlbGV0ZTptb3ZpZXMiLCJnZXQ6YWN0b3ItaWQiLCJnZXQ6bW92aWUtaWQiLCJwb3N0OmFjdG9ycyIsInBvc3Q6bW92aWVzIl19.r9wFhvCuvnKwVvz4tWiPyBiQItERyfGLGVBZwwSgIDk6LbWV3jc2_h_7tjpSL3ANED_vJpWyzL2OzVyjFYok1r9HDfWI-nF_aTByn4hDKw3unQ9qYFiu7uj7sQhIlN8l4aJDzj29NAWbZe3Hq1ktmr1cK38xwQEkxFNBKyaKzQiXEAFHtLh4s8zd5WU38x2jjCU1rA4ZN23RzPGrYGHhcFFtx5LwzGgdw717xKZ7v_c-yRDd8J8miKslOE7AJgCQbfZDMMFomAE8l4bGOB_LKbZmcBAPmORbfFViX5PzTX4bLBhyxe-maAg7leKHzI1Y3vFGxukEh-mWueegripVsg"
         self.database_name = "castapp_test"
         self.database_path = settings.LOCAL_DATABASE_PATH
         
@@ -90,12 +92,40 @@ class CastingAppPublicTestCase(unittest.TestCase):
 
 
 
-    def test_200_get_movies_two_success(self):
+    def test_200_get_movies_two_success_director_tokenid(self):
         print("*** Test '/api/movies/<ind:id>' GET success ***")
         res = self.client().get('/api/movies/2', 
-             headers={"Authorization": "Bearer {}".format(self.assistant_token)})
+            headers={"Authorization": "Bearer {}".format(self.director_tokenid)})
         data = json.loads(res.data)
         self.assertEqual(res.status_code, 200)
+
+    def test_200_get_movies_two_success_director_accesstoken(self):
+        print("*** Test '/api/movies/<ind:id>' GET success ***")
+        res = self.client().get('/api/movies/2',
+            headers={"Authorization": "Bearer {}".format(self.director_accesstoken)})
+        data = json.loads(res.data)
+        self.assertEqual(res.status_code, 200)
+
+    def test_delete_movie_director_accesstoken(self):
+        print("*** Test '/api/movies/<int:id>' DELETE success***")
+        res = self.client().get('/api/movies/2',
+            headers={"Authorization": "Bearer {}".format(self.director_accesstoken)})
+        # insert movie to delete
+        self.test_post_movies()
+
+        # get id from object of inserted question to be deleted
+        selected = Movie.query.order_by(desc(Movie.id)).limit(1)
+        selected_id = [id.format() for id in selected]
+        dict = selected_id[0]
+        delete_id = dict['id']
+
+        # pass parameter into url
+        param = {'id': delete_id}
+        res = self.client().delete('/api/movies/{id}'.format(**param))
+        data = json.loads(res.data)
+        self.assertEqual(res.status_code, 200)
+    
+    
 
 
     def test_post_movies(self):
