@@ -47,7 +47,7 @@ def get_token_auth_header():
         raise AuthError({"code": "authorization_header_missing",
                         "description":
                             "Authorization header is expected"}, 401)
-                            
+
     parts = auth.split()
 
     if parts[0].lower() != "bearer":
@@ -150,16 +150,18 @@ def requires_role(required_role):
     def decorator(f):
         def wrapper(**args):
             token = get_token_auth_header()
-            print("**** token = ", token)
+            # print("**** token = ", token)
             unverified_claims = jwt.get_unverified_claims(token)
-            print("**** under unverified_claims =", unverified_claims)
+            # print("**** under unverified_claims =", unverified_claims)
             # search current token for the expected role
+            ROLES_URI = "https://cast-app.herokuapp.com/roles"
             if unverified_claims.get(ROLES_URI):
-                print("**** get roles ")
+                # print("**** ROLES_URI = ", ROLES_URI)
                 roles = unverified_claims[ROLES_URI]
+                # print("**** get roles = ", roles)
                 for role in roles:
                     if role in required_role:
-                        print("**** role identified")
+                        # print("**** role identified")
                         return f(**args)
 
             raise AuthError({
@@ -176,5 +178,3 @@ def requires_role(required_role):
 
 
 print("**** requires_role complete ****")
-
-

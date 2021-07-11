@@ -13,7 +13,7 @@ import settings
 from backend.src.database.models import setup_db, Movie, Actor, db
 
 
-print("**** test_app.py ****")
+print("**** test_app.py - disable Roles prior to running ****")
 print(" ")
 
 
@@ -188,7 +188,7 @@ class CastingAppTestCase(unittest.TestCase):
         self.assertFalse(movie['movie_publish'], "movie is not published")
 
     def test_movies_toggle_publish_patch(self):
-        print("*** Test '/api/movies/<int:id>' Toggle Publish PATCH success ***")
+        print("*** Test '/api/movies/<int:id>' Publish PATCH success ***")
         res1 = self.client().get('/api/movies/2')
         data1 = json.loads(res1.data)
 
@@ -368,7 +368,7 @@ class CastingAppTestCase(unittest.TestCase):
         self.assertFalse(actor['actor_publish'], "actor is not published")
 
     def test_actors_toggle_publish_patch(self):
-        print("*** Test '/api/actors/<int:id>' Toggle Publish PATCH success ***")
+        print("*** Test '/api/actors/<int:id>' Publish PATCH success ***")
         res1 = self.client().get('/api/actors/2')
         data1 = json.loads(res1.data)
 
